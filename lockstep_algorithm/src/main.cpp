@@ -29,3 +29,11 @@ int main() {
     return 0;
 }
 
+sylvan::Bdd testFunction() {
+    sylvan::Bdd t = sylvan::Bdd::bddOne();
+    sylvan::Bdd f = sylvan::Bdd::bddZero();
+    return t.And(f);
+}
+
+
+
