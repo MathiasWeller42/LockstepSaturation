@@ -1,9 +1,10 @@
-// Your First C++ Program
+#include <iostream>
+
 #include <sylvan.h>
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
-#include <iostream>
+#include "lockstep.h"
 
 int main() {
 
@@ -13,26 +14,23 @@ int main() {
     const size_t memory_bytes = 128u * 1024u * 1024u;
 
     // Init Sylvan
-    sylvan::sylvan_set_limits(memory_bytes,      // Set memory limit
-                              6,                 // Set (exponent) of cache ratio
-                              0);                // Initialise unique node table to full size
+    sylvan::sylvan_set_limits(memory_bytes,    // Set memory limit
+                            6,                 // Set (exponent) of cache ratio
+                            0);                // Initialise unique node table to full size
     sylvan::sylvan_set_granularity(1);
     sylvan::sylvan_init_package();
     sylvan::sylvan_init_bdd();
 
 
-    std::cout << "Hello World!";
+    std::cout << "Hello World!" << std::endl;
 
+    std::cout << "Result: " << testFunction() << std::endl;
+
+    std::cout << "Goodbye :)" << std::endl;
 
     sylvan::sylvan_quit();
     lace_stop();
     return 0;
-}
-
-sylvan::Bdd testFunction() {
-    sylvan::Bdd t = sylvan::Bdd::bddOne();
-    sylvan::Bdd f = sylvan::Bdd::bddZero();
-    return t.And(f);
 }
 
 
