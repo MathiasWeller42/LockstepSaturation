@@ -1,0 +1,3 @@
+[submodule "lockstep_algorithm/sylvan"]
+	path = lockstep_algorithm/sylvan
+	url = ../../trolando/sylvan.git
