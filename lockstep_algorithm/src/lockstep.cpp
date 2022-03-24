@@ -7,6 +7,8 @@
 #include "lockstep.h"
 #include "utilities.h"
 
+
+
 bool testFunction() {
   sylvan::Bdd t = leaf_true();
   sylvan::Bdd f = leaf_false();
@@ -112,16 +114,24 @@ void test3() {
   sylvan::Bdd nodeAB = nodeA.And(nodeB);
 }
 
-void printBdd(sylvan::Bdd bdd) {
-    if(bdd.isTerminal()) {
-      std::cout << "terminal: " << bdd.isOne() << std::endl;
-    } else {
-      std::cout << "variable x" << bdd.TopVar() << std::endl;
-      std::cout << "going left from x" << bdd.TopVar() << std::endl;
-      printBdd(bdd.Else());
-      std::cout << "going right from x" << bdd.TopVar() << std::endl;
-      printBdd(bdd.Then());
-      std::cout << std::endl;
-    }
 
+void printBdd(std::string prefix, sylvan::Bdd bdd, bool isLeft) {
+  std::cout << prefix;
+
+  std::cout << (isLeft ? "├──" : "└──" );
+
+  if(bdd.isTerminal()){
+    std::cout << bdd.isOne() << std::endl;
+    return;
+  } else {
+    std::cout << "x" << bdd.TopVar() << std::endl;
+  }
+  std::string newString = isLeft ? "│   " : "    ";
+  // enter the next tree level - left and right branch
+  printBdd( prefix + newString, bdd.Then(), true);
+  printBdd( prefix + newString, bdd.Else(), false);
+}
+
+void printBdd(sylvan::Bdd bdd) {
+  printBdd(" ", bdd, false);
 }

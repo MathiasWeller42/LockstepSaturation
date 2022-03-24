@@ -11,5 +11,6 @@ sylvan::Bdd testFunction2();
 void makeGraph();
 void test3();
 void printBdd(sylvan::Bdd bdd);
+void printBddv2(sylvan::Bdd bdd);
 
 #endif  //LOCKSTEP_H
