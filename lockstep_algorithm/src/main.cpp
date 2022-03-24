@@ -8,30 +8,30 @@
 
 int main() {
 
-    // Init LACE
-    lace_start(1, 1000000);
+  // Init LACE
+  lace_start(1, 1000000);
 
-    const size_t memory_bytes = 128u * 1024u * 1024u;
+  const size_t memory_bytes = 128u * 1024u * 1024u;
 
-    // Init Sylvan
-    sylvan::sylvan_set_limits(memory_bytes,    // Set memory limit
-                            6,                 // Set (exponent) of cache ratio
-                            0);                // Initialise unique node table to full size
-    sylvan::sylvan_set_granularity(1);
-    sylvan::sylvan_init_package();
-    sylvan::sylvan_init_bdd();
+  // Init Sylvan
+  sylvan::sylvan_set_limits(memory_bytes, // Set memory limit
+                            6,            // Set (exponent) of cache ratio
+                            0);           // Initialise unique node table to full size
+  sylvan::sylvan_set_granularity(1);
+  sylvan::sylvan_init_package();
+  sylvan::sylvan_init_bdd();
+
+  std::cout << "Hello World!" << std::endl;
 
 
-    std::cout << "Hello World!" << std::endl;
+  makeGraph();
+  sylvan::Bdd res = testFunction2();
+  test3();
 
-    std::cout << "Result: " << testFunction() << std::endl;
 
-    std::cout << "Goodbye :)" << std::endl;
+  std::cout << "Goodbye :)" << std::endl;
 
-    sylvan::sylvan_quit();
-    lace_stop();
-    return 0;
+  sylvan::sylvan_quit();
+  lace_stop();
+  return 0;
 }
-
-
-
