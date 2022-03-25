@@ -24,7 +24,7 @@ int main() {
   std::cout << "Hello World!" << std::endl;
 
 
-  makeGraph();
+  makeGraphGreatAgain();
   sylvan::Bdd res = testFunction2();
   test3();
 

@@ -9,6 +9,7 @@
 bool testFunction();
 sylvan::Bdd testFunction2();
 void makeGraph();
+void makeGraphGreatAgain();
 void test3();
 void printBdd(sylvan::Bdd bdd);
 void printBddv2(sylvan::Bdd bdd);

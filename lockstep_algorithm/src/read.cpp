@@ -19,7 +19,7 @@ int main() {
    int noArcs = 0;
 
    // Use a while loop together with the getline() function to read the file line by line
-   while (getline (MyReadFile, myText)) {
+    while (getline (MyReadFile, myText)) {
       if(myText.rfind("<place ", 0) == 0) {
          noPlaces++;
          placeList.push_back(myText);

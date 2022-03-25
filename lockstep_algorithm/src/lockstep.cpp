@@ -7,8 +7,6 @@
 #include "lockstep.h"
 #include "utilities.h"
 
-
-
 bool testFunction() {
   sylvan::Bdd t = leaf_true();
   sylvan::Bdd f = leaf_false();
@@ -21,62 +19,67 @@ sylvan::Bdd testFunction2() {
   return x42.Or(x69);
 }
 
-/*
-  A --> B --> D
-  |
-  v
-  C
+sylvan::Bdd makePlace(std::string &bitstring) {
+  sylvan::Bdd resBdd = leaf_true();
 
-A: 00
-B: 01
-C: 10
-D: 11
-*/
+  bool currentBit;
+  sylvan::Bdd currentBdd;
+  int n = bitstring.length();
+  for (int i = n - 1; i >= 0; i--) {
+    currentBit = bitstring[i] == '1';
+    if(currentBit) {
+      currentBdd = ithvar(2*(n-1-i));
+    } else {
+      currentBdd = nithvar(2*(n-1-i));
+    }
+    resBdd = resBdd.And(currentBdd);
+  }
+  return resBdd;
+}
 
-sylvan::Bdd twoBitEdge(bool bit1, bool bit2, bool bit3, bool bit4) {
-  sylvan::Bdd bdd1;
-  sylvan::Bdd bdd2;
-  sylvan::Bdd bdd3;
-  sylvan::Bdd bdd4;
+sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo) {
+  sylvan::Bdd resBdd = leaf_true();
 
-  if(bit1) {
-    bdd1 = ithvar(0);
-  } else {
-    bdd1 = nithvar(0);
+  bool currentBitFrom;
+  sylvan::Bdd currentBddFrom;
+  int currentIFrom;
+  bool currentBitTo;
+  sylvan::Bdd currentBddTo;
+  int currentITo;
+  int nFrom = bitstringFrom.length();
+  for (int i = nFrom - 1; i >= 0; i--) {
+    currentBitFrom = bitstringFrom[i] == '1';
+    currentBitTo = bitstringTo[i] == '1';
+    currentIFrom = 2*(nFrom-1-i);
+    currentITo = currentIFrom + 1;
+    if(currentBitFrom) {
+      currentBddFrom = ithvar(currentIFrom);
+    } else {
+      currentBddFrom = nithvar(currentIFrom);
+    }
+    if(currentBitTo) {
+      currentBddTo = ithvar(currentITo);
+    } else {
+      currentBddTo = nithvar(currentITo);
+    }
+    resBdd = resBdd.And(currentBddFrom).And(currentBddTo);
   }
-  if(bit2) {
-    bdd2 = ithvar(1);
-  } else {
-    bdd2 = nithvar(1);
-  }
-  if(bit3) {
-    bdd3 = ithvar(2);
-  } else {
-    bdd3 = nithvar(2);
-  }
-  if(bit4) {
-    bdd4 = ithvar(3);
-  } else {
-    bdd4 = nithvar(3);
-  }
-  return bdd1.And(bdd2).And(bdd3).And(bdd4);
+  return resBdd;
 }
 
 void makeGraph() {
-  sylvan::Bdd nodeA = nithvar(0).And(nithvar(1));
-  sylvan::Bdd nodeB = nithvar(0).And(ithvar(1));
-  sylvan::Bdd nodeC = ithvar(0).And(nithvar(1));
-  sylvan::Bdd nodeD = ithvar(0).And(ithvar(1));
-  sylvan::Bdd nodeSet = nodeA.Or(nodeB).Or(nodeC).Or(nodeD);
+  std::string aString = "00";
+  sylvan::Bdd nodeA = makePlace(aString);
+  std::string bString = "01";
+  sylvan::Bdd nodeB = makePlace(bString);
+  sylvan::Bdd nodeSet = nodeA.Or(nodeB);
 
   std::cout << "Printing nodeSet:" << std::endl;
   printBdd(nodeSet);
   std::cout << std::endl;
 
-  sylvan::Bdd edgeAB = twoBitEdge(false, false, false, true);
-  sylvan::Bdd edgeAC = twoBitEdge(false, true, false, false);
-  sylvan::Bdd edgeBD = twoBitEdge(false, true, true, true);
-  sylvan::Bdd edgeSet = edgeAB.Or(edgeAC).Or(edgeBD);
+  sylvan::Bdd edgeAB = makeArc(aString, bString);
+  sylvan::Bdd edgeSet = edgeAB;
 
   std::cout << "Printing edgeSet:" << std::endl;
   printBdd(edgeSet);
@@ -84,9 +87,9 @@ void makeGraph() {
 
   sylvan::BddSet cube = sylvan::BddSet();
   cube.add(0);
-  cube.add(1);
+  //cube.add(1);
   cube.add(2);
-  cube.add(3);
+  //cube.add(3);
 
   sylvan::Bdd relnextA = nodeA.RelNext(edgeSet, cube);
   std::cout << "Printing relNextA:" << std::endl;
@@ -96,6 +99,49 @@ void makeGraph() {
   sylvan::Bdd relnextB = nodeB.RelNext(edgeSet, cube);
   std::cout << "Printing relNextB:" << std::endl;
   printBdd(relnextB);
+  std::cout << std::endl;
+}
+
+//Vote Blume
+void makeGraphGreatAgain() {
+  std::string aString = "00";
+  sylvan::Bdd nodeA = makePlace(aString);
+  std::string bString = "01";
+  sylvan::Bdd nodeB = makePlace(bString);
+  std::string cString = "10";
+  sylvan::Bdd nodeC = makePlace(cString);
+  std::string dString = "11";
+  sylvan::Bdd nodeD = makePlace(dString);
+  sylvan::Bdd nodeSet = nodeA.Or(nodeB).Or(nodeC).Or(nodeD);
+
+  std::cout << "Printing nodeSet:" << std::endl;
+  printBdd(nodeSet);
+  std::cout << std::endl;
+
+  sylvan::Bdd edgeAB = makeArc(aString, bString);
+  sylvan::Bdd edgeAC = makeArc(aString, cString);
+  sylvan::Bdd edgeBD = makeArc(bString, dString);
+  sylvan::Bdd edgeSet = edgeAB.Or(edgeAC).Or(edgeBD);
+
+  std::cout << "Printing edgeSet:" << std::endl;
+  printBdd(edgeSet);
+  std::cout << std::endl;
+
+  sylvan::BddSet cube = sylvan::BddSet();
+  cube.add(0);
+  //cube.add(1);
+  cube.add(2);
+  //cube.add(3);
+
+  sylvan::Bdd relnextA = nodeA.RelNext(edgeSet, cube);
+  std::cout << "Printing relNextA:" << std::endl;
+  printBdd(relnextA);
+  std::cout << std::endl;
+
+  sylvan::Bdd relnextB = nodeB.RelNext(edgeSet, cube);
+  std::cout << "Printing relNextB:" << std::endl;
+  printBdd(relnextB);
+  std::cout << std::endl;
 
   sylvan::Bdd relnextC = nodeC.RelNext(edgeSet, cube);
   std::cout << "Printing relNextC:" << std::endl;
@@ -118,7 +164,7 @@ void test3() {
 void printBdd(std::string prefix, sylvan::Bdd bdd, bool isLeft) {
   std::cout << prefix;
 
-  std::cout << (isLeft ? "├──" : "└──" );
+  std::cout << (isLeft ? "├─T─" : "└─F─" );
 
   if(bdd.isTerminal()){
     std::cout << bdd.isOne() << std::endl;
@@ -135,3 +181,18 @@ void printBdd(std::string prefix, sylvan::Bdd bdd, bool isLeft) {
 void printBdd(sylvan::Bdd bdd) {
   printBdd(" ", bdd, false);
 }
+
+/*
+TODO : Automatiser edgeset + nodeset creation og flyt til anden fil
+TODO : Første udkast til lockstep
+TODO : Lave relativt simpelt eksempel vi kan afprøve vores lockstep på
+TODO : PNML pain
+
+TODO : Græd
+TODO : #Forskning
+TODO : Græd i Jacos skød
+
+TODO : ???
+TODO : Profit
+TODO : Søvn
+*/
