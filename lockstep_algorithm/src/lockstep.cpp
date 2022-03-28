@@ -9,9 +9,9 @@
 #include "lockstep.h"
 #include "utilities.h"
 
-sylvan::Bdd pick(sylvan::Bdd nodeSet) {
+sylvan::Bdd pick(sylvan::Bdd nodeSet, sylvan::BddSet cube) {
 	//Find path in BDD that evaluates to true, and evaluate the decisions into new node
-	return leaf_false();
+	return pickAssignment(nodeSet, cube);
 }
 
 void lockstepSaturation(Graph graph) {
@@ -23,7 +23,7 @@ void lockstepSaturation(Graph graph) {
     return;
   }
 
-  sylvan::Bdd v = pick(nodeSet);
+  sylvan::Bdd v = pick(nodeSet, cube);
   sylvan::Bdd forwardSet = v;
 	sylvan::Bdd backwardSet = v;
 
@@ -62,7 +62,7 @@ void lockstepSaturation(Graph graph) {
   sylvan::Bdd converged = (relFrontI == relationDeque.size()) ? forwardSet : backwardSet;
 
   while(relFrontI < relationDeque.size() || relBackI < relationDeque.size()) {
-	//Find images
+	  //Find images
     sylvan::Bdd relResultFront = differenceBdd(forwardSet.RelNext(relFront, cube), forwardSet);
     sylvan::Bdd relResultBack = differenceBdd(backwardSet.RelPrev(relBack, cube), backwardSet);
 
@@ -89,14 +89,23 @@ void lockstepSaturation(Graph graph) {
     backwardSet = unionBdd(backwardSet, relResultBack);
   }
 
-  sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+  /*std::cout << "Printing forward" << std::endl;
+  printBdd(forwardSet);
+  std::cout << "Printing backward" << std::endl;
+  printBdd(backwardSet);*/
 
+  sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+  std::cout << "Printing SCC" << std::endl;
   printBdd(scc);
 
-  Graph recursiveGraph1 = {differenceBdd(converged, scc), graph.cube, graph.relations};
+  sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
+  //printBdd(recBdd1);
+  Graph recursiveGraph1 = {recBdd1, graph.cube, graph.relations};
   lockstepSaturation(recursiveGraph1);
 
-  Graph recursiveGraph2 = {differenceBdd(nodeSet, converged), graph.cube, graph.relations};
+  sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
+  //printBdd(recBdd2);
+  Graph recursiveGraph2 = {recBdd2, graph.cube, graph.relations};
   lockstepSaturation(recursiveGraph2);
 }
 
@@ -144,5 +153,4 @@ void lockstepSaturation(Graph graph) {
 	report(SCC)
 	LockStepSaturation(Converged \ SCC)
   LockStepSaturation(V \ Converged)
-
 }*/

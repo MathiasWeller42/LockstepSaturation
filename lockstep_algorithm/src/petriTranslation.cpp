@@ -145,6 +145,16 @@ sylvan::Bdd makeTransition(std::list<std::pair<std::string, std::string>> &bitst
   return resultBdd;
 }
 
+std::deque<sylvan::Bdd> makeTransitions(std::list<std::list<std::pair<std::string, std::string>>> &bitstrings) {
+  std::deque<sylvan::Bdd> transitions;
+  sylvan::Bdd currentBdd;
+  for(std::list<std::pair<std::string, std::string>> currentBitstringList : bitstrings) {
+    currentBdd = makeTransition(currentBitstringList);
+    transitions.push_front(currentBdd);
+  }
+  return transitions;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 /// Pretty printing
 ////////////////////////////////////////////////////////////////////////////////

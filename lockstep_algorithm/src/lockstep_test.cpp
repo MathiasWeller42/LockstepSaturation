@@ -12,8 +12,8 @@
 #include "petriTranslation.h"
 
 void simpleTest(){
-    Graph graph = smallGraph1();
+    Graph graph = smallGraph2Relations();
     sylvan::Bdd nodes = graph.nodes;
     printBdd(nodes);
-    //lockstepSaturation(graph);
+    lockstepSaturation(graph);
 }
