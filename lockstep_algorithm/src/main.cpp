@@ -1,3 +1,4 @@
+
 #include <iostream>
 
 #include <sylvan.h>
@@ -5,6 +6,9 @@
 #include <sylvan_obj.hpp>
 
 #include "lockstep.h"
+#include "petriTranslation.h"
+#include "set_test.h"
+#include "lockstep_test.h"
 
 int main() {
 
@@ -23,11 +27,14 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
+  /*makeGraphGreatAgain();
+  PNMLtoStringLists();*/
 
-  makeGraphGreatAgain();
-  sylvan::Bdd res = testFunction2();
-  test3();
-
+  //testUnion();
+  //testIntersect();
+  //testDifference();
+  //testPick();
+  simpleTest();
 
   std::cout << "Goodbye :)" << std::endl;
 

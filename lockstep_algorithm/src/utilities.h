@@ -1,6 +1,10 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#include <vector>
+#include <algorithm>
+
+#include "petriTranslation.h"
 
 //from adapter.h in bdd-benchmarks (tak til Steffan ;) )
   inline sylvan::Bdd leaf_true()
@@ -15,19 +19,30 @@
   inline sylvan::Bdd nithvar(int label)
   { return ~sylvan::Bdd::bddVar(label); }
 
-  /*inline sylvan::Bdd relNext(const sylvan::Bdd &relation, const sylvan::BddSet &cube)
-  { return sylvan::Bdd::RelNext(relation, cube); }
+  inline sylvan::Bdd unionBdd(sylvan::Bdd lhs, sylvan::Bdd rhs)
+  { return lhs.Or(rhs); }
 
-  inline sylvan::Bdd relPrev(const sylvan::Bdd &relation, const sylvan::BddSet &cube)
-  { return sylvan::Bdd::RelPrev(relation, cube); }*/
+  inline sylvan::Bdd intersectBdd(sylvan::Bdd lhs, sylvan::Bdd rhs)
+  { return lhs.And(rhs); }
 
-  /*inline sylvan::Bdd ite(const sylvan::Bdd &f, const sylvan::Bdd &g, const sylvan::Bdd &h)
-  { return f.Ite(g,h); }
+  inline sylvan::Bdd differenceBdd(sylvan::Bdd lhs, sylvan::Bdd rhs)
+  { return lhs.And(!rhs); }
 
-  inline sylvan::Bdd negate(const sylvan::Bdd &b)
-  { return ~b; }
-
-  inline sylvan::Bdd exists(const sylvan::Bdd &b, int label)
-  { return b.ExistAbstract(sylvan::Bdd::bddVar(label)); }*/
+  inline sylvan::Bdd pickAssignment(sylvan::Bdd bdd, sylvan::BddSet cube) {
+    std::vector<bool> realPath = bdd.PickOneCube(cube);
+    std::reverse(realPath.begin(), realPath.end());
+    for(bool b : realPath) {
+      std::cout << b << std::endl;
+    }
+    std::string bitString = "";
+    for(bool b : realPath) {
+      if(b){
+        bitString = bitString + '1';
+      } else {
+        bitString = bitString + '0';
+      }
+    }
+    return makePlace(bitString);
+  }
 
   #endif //UTILITIES_H

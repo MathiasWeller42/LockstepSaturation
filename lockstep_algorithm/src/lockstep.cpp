@@ -1,4 +1,6 @@
 #include <iostream>
+#include <list>
+#include <deque>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
@@ -7,192 +9,140 @@
 #include "lockstep.h"
 #include "utilities.h"
 
-bool testFunction() {
-  sylvan::Bdd t = leaf_true();
-  sylvan::Bdd f = leaf_false();
-  return t.Or(f).isZero();
+sylvan::Bdd pick(sylvan::Bdd nodeSet) {
+	//Find path in BDD that evaluates to true, and evaluate the decisions into new node
+	return leaf_false();
 }
 
-sylvan::Bdd testFunction2() {
-  sylvan::Bdd x42 = ithvar(42);
-  sylvan::Bdd x69 = ithvar(69);
-  return x42.Or(x69);
-}
+void lockstepSaturation(Graph graph) {
+  sylvan::Bdd nodeSet = graph.nodes;
+  sylvan::BddSet cube = graph.cube;
+  std::deque<sylvan::Bdd> relationDeque = graph.relations;
 
-sylvan::Bdd makePlace(std::string &bitstring) {
-  sylvan::Bdd resBdd = leaf_true();
-
-  bool currentBit;
-  sylvan::Bdd currentBdd;
-  int n = bitstring.length();
-  for (int i = n - 1; i >= 0; i--) {
-    currentBit = bitstring[i] == '1';
-    if(currentBit) {
-      currentBdd = ithvar(2*(n-1-i));
-    } else {
-      currentBdd = nithvar(2*(n-1-i));
-    }
-    resBdd = resBdd.And(currentBdd);
-  }
-  return resBdd;
-}
-
-sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo) {
-  sylvan::Bdd resBdd = leaf_true();
-
-  bool currentBitFrom;
-  sylvan::Bdd currentBddFrom;
-  int currentIFrom;
-  bool currentBitTo;
-  sylvan::Bdd currentBddTo;
-  int currentITo;
-  int nFrom = bitstringFrom.length();
-  for (int i = nFrom - 1; i >= 0; i--) {
-    currentBitFrom = bitstringFrom[i] == '1';
-    currentBitTo = bitstringTo[i] == '1';
-    currentIFrom = 2*(nFrom-1-i);
-    currentITo = currentIFrom + 1;
-    if(currentBitFrom) {
-      currentBddFrom = ithvar(currentIFrom);
-    } else {
-      currentBddFrom = nithvar(currentIFrom);
-    }
-    if(currentBitTo) {
-      currentBddTo = ithvar(currentITo);
-    } else {
-      currentBddTo = nithvar(currentITo);
-    }
-    resBdd = resBdd.And(currentBddFrom).And(currentBddTo);
-  }
-  return resBdd;
-}
-
-void makeGraph() {
-  std::string aString = "00";
-  sylvan::Bdd nodeA = makePlace(aString);
-  std::string bString = "01";
-  sylvan::Bdd nodeB = makePlace(bString);
-  sylvan::Bdd nodeSet = nodeA.Or(nodeB);
-
-  std::cout << "Printing nodeSet:" << std::endl;
-  printBdd(nodeSet);
-  std::cout << std::endl;
-
-  sylvan::Bdd edgeAB = makeArc(aString, bString);
-  sylvan::Bdd edgeSet = edgeAB;
-
-  std::cout << "Printing edgeSet:" << std::endl;
-  printBdd(edgeSet);
-  std::cout << std::endl;
-
-  sylvan::BddSet cube = sylvan::BddSet();
-  cube.add(0);
-  //cube.add(1);
-  cube.add(2);
-  //cube.add(3);
-
-  sylvan::Bdd relnextA = nodeA.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextA:" << std::endl;
-  printBdd(relnextA);
-  std::cout << std::endl;
-
-  sylvan::Bdd relnextB = nodeB.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextB:" << std::endl;
-  printBdd(relnextB);
-  std::cout << std::endl;
-}
-
-//Vote Blume
-void makeGraphGreatAgain() {
-  std::string aString = "00";
-  sylvan::Bdd nodeA = makePlace(aString);
-  std::string bString = "01";
-  sylvan::Bdd nodeB = makePlace(bString);
-  std::string cString = "10";
-  sylvan::Bdd nodeC = makePlace(cString);
-  std::string dString = "11";
-  sylvan::Bdd nodeD = makePlace(dString);
-  sylvan::Bdd nodeSet = nodeA.Or(nodeB).Or(nodeC).Or(nodeD);
-
-  std::cout << "Printing nodeSet:" << std::endl;
-  printBdd(nodeSet);
-  std::cout << std::endl;
-
-  sylvan::Bdd edgeAB = makeArc(aString, bString);
-  sylvan::Bdd edgeAC = makeArc(aString, cString);
-  sylvan::Bdd edgeBD = makeArc(bString, dString);
-  sylvan::Bdd edgeSet = edgeAB.Or(edgeAC).Or(edgeBD);
-
-  std::cout << "Printing edgeSet:" << std::endl;
-  printBdd(edgeSet);
-  std::cout << std::endl;
-
-  sylvan::BddSet cube = sylvan::BddSet();
-  cube.add(0);
-  //cube.add(1);
-  cube.add(2);
-  //cube.add(3);
-
-  sylvan::Bdd relnextA = nodeA.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextA:" << std::endl;
-  printBdd(relnextA);
-  std::cout << std::endl;
-
-  sylvan::Bdd relnextB = nodeB.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextB:" << std::endl;
-  printBdd(relnextB);
-  std::cout << std::endl;
-
-  sylvan::Bdd relnextC = nodeC.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextC:" << std::endl;
-  printBdd(relnextC);
-  std::cout << std::endl;
-
-  sylvan::Bdd relnextD = nodeD.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextD:" << std::endl;
-  printBdd(relnextD);
-  std::cout << std::endl;
-}
-
-void test3() {
-  sylvan::Bdd nodeA = nithvar(0);
-  sylvan::Bdd nodeB = ithvar(0);
-  sylvan::Bdd nodeAB = nodeA.And(nodeB);
-}
-
-
-void printBdd(std::string prefix, sylvan::Bdd bdd, bool isLeft) {
-  std::cout << prefix;
-
-  std::cout << (isLeft ? "├─T─" : "└─F─" );
-
-  if(bdd.isTerminal()){
-    std::cout << bdd.isOne() << std::endl;
+  if(nodeSet == leaf_false()) {
     return;
-  } else {
-    std::cout << "x" << bdd.TopVar() << std::endl;
   }
-  std::string newString = isLeft ? "│   " : "    ";
-  // enter the next tree level - left and right branch
-  printBdd( prefix + newString, bdd.Then(), true);
-  printBdd( prefix + newString, bdd.Else(), false);
+
+  sylvan::Bdd v = pick(nodeSet);
+  sylvan::Bdd forwardSet = v;
+	sylvan::Bdd backwardSet = v;
+
+  int relFrontI = 0;
+  sylvan::Bdd relFront = relationDeque[relFrontI];
+  int relBackI = 0;
+  sylvan::Bdd relBack = relationDeque[relBackI];
+
+  while(relFrontI < relationDeque.size() && relBackI < relationDeque.size()) {
+    //Find images
+    sylvan::Bdd relResultFront = differenceBdd(forwardSet.RelNext(relFront, cube), forwardSet);
+    sylvan::Bdd relResultBack = differenceBdd(backwardSet.RelPrev(relBack, cube), backwardSet);
+
+    //Update relations
+    if(relResultFront == leaf_false()) {
+      relFrontI++;
+      relFront = relationDeque[relFrontI];
+    } else {
+      relFrontI = 0;
+      relFront = relationDeque[relFrontI];
+    }
+    if(relResultBack == leaf_false()) {
+      relBackI++;
+      relBack = relationDeque[relBackI];
+    } else {
+      relBackI = 0;
+      relBack = relationDeque[relBackI];
+    }
+
+	  //Add to the forward and backward sets
+    forwardSet = unionBdd(forwardSet, relResultFront);
+    backwardSet = unionBdd(backwardSet, relResultBack);
+  }
+
+  //Save the set that has converged
+  sylvan::Bdd converged = (relFrontI == relationDeque.size()) ? forwardSet : backwardSet;
+
+  while(relFrontI < relationDeque.size() || relBackI < relationDeque.size()) {
+	//Find images
+    sylvan::Bdd relResultFront = differenceBdd(forwardSet.RelNext(relFront, cube), forwardSet);
+    sylvan::Bdd relResultBack = differenceBdd(backwardSet.RelPrev(relBack, cube), backwardSet);
+
+    //Update relations
+    if(intersectBdd(relResultFront, backwardSet) == leaf_false()) {
+      relFrontI++;
+      relFront = relationDeque[relFrontI];
+    } else {
+      relFrontI = 0;
+      relFront = relationDeque[relFrontI];
+	  forwardSet = unionBdd(forwardSet, intersectBdd(relResultFront, backwardSet));
+    }
+    if(intersectBdd(relResultBack, forwardSet) == leaf_false()) {
+      relBackI++;
+      relBack = relationDeque[relBackI];
+    } else {
+      relBackI = 0;
+      relBack = relationDeque[relBackI];
+	  backwardSet = unionBdd(backwardSet, intersectBdd(relResultBack, forwardSet));
+    }
+
+	  //Add to the forward and backward sets
+    forwardSet = unionBdd(forwardSet, relResultFront);
+    backwardSet = unionBdd(backwardSet, relResultBack);
+  }
+
+  sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+
+  printBdd(scc);
+
+  Graph recursiveGraph1 = {differenceBdd(converged, scc), graph.cube, graph.relations};
+  lockstepSaturation(recursiveGraph1);
+
+  Graph recursiveGraph2 = {differenceBdd(nodeSet, converged), graph.cube, graph.relations};
+  lockstepSaturation(recursiveGraph2);
 }
 
-void printBdd(sylvan::Bdd bdd) {
-  printBdd(" ", bdd, false);
-}
+/*void lockstepSaturation(V) {
+  Set F, B, SCC, Converged = Ø
+	if(V == Ø) return
+	Node v = pick(V)
+	F = B = {v}
 
-/*
-TODO : Automatiser edgeset + nodeset creation og flyt til anden fil
-TODO : Første udkast til lockstep
-TODO : Lave relativt simpelt eksempel vi kan afprøve vores lockstep på
-TODO : PNML pain
+	Relation RelFront, RelBack = R1;		//Rk+1 means all levels are saturated
+	while(RelFront < = Rk && RelBack <= Rk):
+		RelResultFront = Img(F, RelFront) \ F       	//find image and preimage
+		RelResultBack = PreImg(B, RelBack) \ B
 
-TODO : Græd
-TODO : #Forskning
-TODO : Græd i Jacos skød
+		if(RelResultFront == Ø):    			//update relations
+			RelFront = nextRelation(RelFront)
+		else:
+			RelFront = R1
+		if(RelResultBack == Ø):
+			RelBack = nextRelation(RelBack)
+		else:
+			RelBack = R1
 
-TODO : ???
-TODO : Profit
-TODO : Søvn
-*/
+		F = F U RelResultFront			//update sets with results
+		B = B U RelResultBack
+
+  Converged = (RelFront == Rk+1) ? F : B
+
+	while(RelFront <= Rk || RelBack <= Rk):
+		RelResultFront = Img(F, RelFront) \ F	//find image and preimage
+		RelResultBack = PreImg(B, RelBack) \ B	//only one is necessary
+
+		if(RelResultFront  B == Ø):			//update relations and sets
+			RelFront = nextRelation(RelFront)
+		else:
+			F = F U (RelResultFront  B)
+			RelFront = R1
+		if(RelResultBack  F == Ø):
+			RelBack = nextRelation(RelBack)
+		else:
+			B = B U (RelResultBack  F)
+			RelBack = R1
+
+	SCC = F  B // Move this up ^^
+	report(SCC)
+	LockStepSaturation(Converged \ SCC)
+  LockStepSaturation(V \ Converged)
+
+}*/
