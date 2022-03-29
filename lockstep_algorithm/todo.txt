@@ -1,18 +1,13 @@
 Den mest dank-swaggern todo-liste #WØRF
----------------------------------------
-
-TODO 1 : Automatiser edgeset + nodeset creation
-TODO 2 : Hvordan virker union, intersect, set diff, etc.?
-
-TODO 4 : Første udkast til lockstep
-TODO 4a: hvordan laver vi pick?
-TODO 4b: hvordan giver vi relationer med/finder næste relation?
+-----------------------------------------------
 
 TODO 5 : Lav relativt simpelt eksempel vi kan afprøve vores lockstep på
+TODO 5c: Opdater relations før rekursive kald
+
+TODO i : Husk at tests er en ting...
 
 TODO 6 : PNML pain
 TODO 7 : relative path masochisme
-TODO 8 : Bitlængde på places
 TODO 9 : Forstå Petri nets
 
 TODO : Græd

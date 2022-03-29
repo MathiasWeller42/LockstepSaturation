@@ -9,6 +9,7 @@
 #include "petriTranslation.h"
 #include "set_test.h"
 #include "lockstep_test.h"
+#include "graph_examples.h"
 
 int main() {
 
@@ -27,14 +28,7 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  /*makeGraphGreatAgain();
-  PNMLtoStringLists();*/
-
-  //testUnion();
-  //testIntersect();
-  //testDifference();
-  //testPick();
-  simpleTest();
+  simpleTestGraph(graphExample1oneRel());
 
   std::cout << "Goodbye :)" << std::endl;
 

@@ -1,10 +1,11 @@
 #ifndef LOCKSTEP_H
 #define LOCKSTEP_H
+#include <deque>
+#include<list>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
-#include <deque>
 
 struct Graph {
   sylvan::Bdd nodes;
@@ -12,6 +13,6 @@ struct Graph {
   std::deque<sylvan::Bdd> relations;
 };
 
-void lockstepSaturation(Graph graph);
+std::list<sylvan::Bdd> lockstepSaturation(Graph graph);
 
 #endif  //LOCKSTEP_H

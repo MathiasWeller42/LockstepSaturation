@@ -14,13 +14,36 @@ sylvan::Bdd pick(sylvan::Bdd nodeSet, sylvan::BddSet cube) {
 	return pickAssignment(nodeSet, cube);
 }
 
-void lockstepSaturation(Graph graph) {
+/*
+sylvan::Bdd shiftNodes(sylvan::Bdd nodeSet) {
+  return leaf_false();
+}
+
+sylvan::Bdd updateRelation(sylvan::Bdd currentRelation, sylvan::Bdd nodeSet) {
+  sylvan::Bdd newRelation = intersectBdd(intersectBdd(currentRelation, nodeSet), shiftNodes(nodeSet));
+  return newRelation;
+}
+
+std::deque<sylvan::Bdd> updateRelations(std::deque<sylvan::Bdd> currentRelations, sylvan::Bdd nodeSet) {
+  std::deque<sylvan::Bdd> newRelations;
+  for(sylvan::Bdd currentRelation : currentRelations) {
+    sylvan::Bdd newCurrentRelation = updateRelation(currentRelation, nodeSet);
+    newRelations.push_back(newCurrentRelation);
+  }
+  return newRelations;
+}*/
+
+std::list<sylvan::Bdd> lockstepSaturation(Graph graph) {
   sylvan::Bdd nodeSet = graph.nodes;
   sylvan::BddSet cube = graph.cube;
   std::deque<sylvan::Bdd> relationDeque = graph.relations;
 
+  //TEST
+  std::cout << "Running lockstep";
+  printBddAsString2(4, nodeSet);
+
   if(nodeSet == leaf_false()) {
-    return;
+    return {};
   }
 
   sylvan::Bdd v = pick(nodeSet, cube);
@@ -89,68 +112,34 @@ void lockstepSaturation(Graph graph) {
     backwardSet = unionBdd(backwardSet, relResultBack);
   }
 
-  /*std::cout << "Printing forward" << std::endl;
-  printBdd(forwardSet);
-  std::cout << "Printing backward" << std::endl;
-  printBdd(backwardSet);*/
-
+  //Create SCC
   sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
-  std::cout << "Printing SCC" << std::endl;
-  printBdd(scc);
+  std::list<sylvan::Bdd> sccList = {scc};
 
+  //TEST
+  std::cout << "Found SCC" << std::endl;
+  printBddAsString(scc);
+
+  std::cout << "Printing converged" << std::endl;
+  printBddAsString(converged);
+
+  //Recursive calls
   sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
-  //printBdd(recBdd1);
-  Graph recursiveGraph1 = {recBdd1, graph.cube, graph.relations};
-  lockstepSaturation(recursiveGraph1);
+  Graph recursiveGraph1 = {recBdd1, cube, relationDeque};
+  //TEST
+  std::cout << "Making recursive call 1" << std::endl;
+  printBddAsString(recBdd1);
+  std::list<sylvan::Bdd> recursiveResult1 = lockstepSaturation(recursiveGraph1);
+  sccList.splice(sccList.end(), recursiveResult1);
 
   sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
-  //printBdd(recBdd2);
-  Graph recursiveGraph2 = {recBdd2, graph.cube, graph.relations};
-  lockstepSaturation(recursiveGraph2);
+  Graph recursiveGraph2 = {recBdd2, cube, relationDeque};
+  //TEST
+  std::cout << "Making recursive call 2" << std::endl;
+  printBddAsString2(4, recBdd2);
+  std::list<sylvan::Bdd> recursiveResult2 = lockstepSaturation(recursiveGraph2);
+  sccList.splice(sccList.end(), recursiveResult2);
+
+  //Return SCC list
+  return sccList;
 }
-
-/*void lockstepSaturation(V) {
-  Set F, B, SCC, Converged = Ø
-	if(V == Ø) return
-	Node v = pick(V)
-	F = B = {v}
-
-	Relation RelFront, RelBack = R1;		//Rk+1 means all levels are saturated
-	while(RelFront < = Rk && RelBack <= Rk):
-		RelResultFront = Img(F, RelFront) \ F       	//find image and preimage
-		RelResultBack = PreImg(B, RelBack) \ B
-
-		if(RelResultFront == Ø):    			//update relations
-			RelFront = nextRelation(RelFront)
-		else:
-			RelFront = R1
-		if(RelResultBack == Ø):
-			RelBack = nextRelation(RelBack)
-		else:
-			RelBack = R1
-
-		F = F U RelResultFront			//update sets with results
-		B = B U RelResultBack
-
-  Converged = (RelFront == Rk+1) ? F : B
-
-	while(RelFront <= Rk || RelBack <= Rk):
-		RelResultFront = Img(F, RelFront) \ F	//find image and preimage
-		RelResultBack = PreImg(B, RelBack) \ B	//only one is necessary
-
-		if(RelResultFront  B == Ø):			//update relations and sets
-			RelFront = nextRelation(RelFront)
-		else:
-			F = F U (RelResultFront  B)
-			RelFront = R1
-		if(RelResultBack  F == Ø):
-			RelBack = nextRelation(RelBack)
-		else:
-			B = B U (RelResultBack  F)
-			RelBack = R1
-
-	SCC = F  B // Move this up ^^
-	report(SCC)
-	LockStepSaturation(Converged \ SCC)
-  LockStepSaturation(V \ Converged)
-}*/

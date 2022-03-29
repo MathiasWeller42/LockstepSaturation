@@ -12,136 +12,60 @@
 #include "utilities.h"
 
 Graph noGraph() {
-  Graph graph = {};
-
-  //Nodes
-  std::list<std::string> nodeStrings = {};
-  sylvan::Bdd nodeSet = makePlaces(nodeStrings);
-
-  //Cube
-  sylvan::BddSet cube = sylvan::BddSet();
-  cube.add(0);
-  cube.add(2);
-
-  //Arcs
-  std::list<std::pair<std::string, std::string>> arcStrings = {};
-  sylvan::Bdd edgeSet = makeTransition(arcStrings);
-
-  //Relation
-  std::deque<sylvan::Bdd> relations;
-  relations.push_front(edgeSet);
-
-  graph.nodes = nodeSet;
-  graph.relations = relations;
-  graph.cube = cube;
-  return graph;
+ std::list<std::pair<int, int>> r1 = {};
+  return makeGraph(0, {r1});
 }
 
 Graph oneNodeGraph() {
-  Graph graph = {};
-
-  //Nodes
-  std::string aString = "00";
-  std::list<std::string> nodeStrings = {aString};
-  sylvan::Bdd nodeSet = makePlaces(nodeStrings);
-
-  //Cube
-  sylvan::BddSet cube = sylvan::BddSet();
-  cube.add(0);
-  cube.add(2);
-
-  //Arcs
-  std::list<std::pair<std::string, std::string>> arcStrings = {};
-  sylvan::Bdd edgeSet = makeTransition(arcStrings);
-
-  //Relation
-  std::deque<sylvan::Bdd> relations;
-  relations.push_front(edgeSet);
-
-  graph.nodes = nodeSet;
-  graph.relations = relations;
-  graph.cube = cube;
-  return graph;
+  std::list<std::pair<int, int>> r1 = {};
+  return makeGraph(1, {r1});
 }
 
-Graph smallGraph1() {
-  Graph graph = {};
-
-  //Nodes
-  std::string aString = "00";
-  std::string bString = "01";
-  std::list<std::string> nodeStrings = {aString,bString};
-  sylvan::Bdd nodeSet = makePlaces(nodeStrings);
-
-  //Cube
-  sylvan::BddSet cube = sylvan::BddSet();
-  cube.add(0);
-  cube.add(2);
-
-  //Arcs
-  std::list<std::pair<std::string, std::string>> arcStrings = {{aString, bString}};
-  sylvan::Bdd edgeSet = makeTransition(arcStrings);
-
-  //Relation
-  std::deque<sylvan::Bdd> relations;
-  relations.push_front(edgeSet);
-
-  graph.nodes = nodeSet;
-  graph.relations = relations;
-  graph.cube = cube;
-  return graph;
+Graph twoNodeGraphTwoSCCs() {
+  std::list<std::pair<int, int>> r1 =
+    {{0,1}};
+  return makeGraph(2, {r1});
 }
 
-Graph smallGraph2() {
-  Graph graph = {};
-
-  //Nodes
-  std::string aString = "00";
-  std::string bString = "01";
-  std::list<std::string> nodeStrings = {aString,bString};
-  sylvan::Bdd nodeSet = makePlaces(nodeStrings);
-
-  //Cube
-  sylvan::BddSet cube = sylvan::BddSet();
-  cube.add(0);
-  cube.add(2);
-
-  //Arcs
-  std::list<std::pair<std::string, std::string>> arcStrings = {{aString, bString},{bString,aString}};
-  sylvan::Bdd edgeSet = makeTransition(arcStrings);
-
-  //Relation
-  std::deque<sylvan::Bdd> relations;
-  relations.push_front(edgeSet);
-
-  graph.nodes = nodeSet;
-  graph.relations = relations;
-  graph.cube = cube;
-  return graph;
+Graph twoNodeGraphOneSCC() {
+  std::list<std::pair<int, int>> r1 =
+    {{0,1},{1,0}};
+  return makeGraph(2, {r1});
 }
 
-Graph smallGraph2Relations() {
-  Graph graph = {};
 
-  //Nodes
-  std::string aString = "00";
-  std::string bString = "01";
-  std::list<std::string> nodeStrings = {aString,bString};
-  sylvan::Bdd nodeSet = makePlaces(nodeStrings);
-
-  //Cube
-  sylvan::BddSet cube = sylvan::BddSet();
-  cube.add(0);
-  cube.add(2);
-
-  //Arcs & relations
-  std::list<std::pair<std::string, std::string>> arcStrings1 = {{aString, bString}};
-  std::list<std::pair<std::string, std::string>> arcStrings2 = {{bString, aString}};
-  std::list<std::list<std::pair<std::string, std::string>>> transList = {arcStrings1, arcStrings2};
-  std::deque<sylvan::Bdd> relations = makeTransitions(transList);
-
-  graph.nodes = nodeSet;
-  graph.relations = relations;
-  graph.cube = cube;
-  return graph;
+Graph twoNodeGraphTwoRelations() {
+  std::list<std::pair<int, int>> r1 =
+    {{0,1}};
+  std::list<std::pair<int, int>> r2 =
+    {{1,0}};
+  return makeGraph(2, {r1, r2});
 }
+
+Graph fourNodesOneRelation() {
+  std::list<std::pair<int, int>> r1 =
+    {{0,1}, {0,2}, {1,3}, {3,0}};
+  return makeGraph(4, {r1});
+}
+
+Graph nonConnectedGraph() {
+  std::list<std::pair<int, int>> r1 = {};
+  return makeGraph(2, {r1});
+}
+
+Graph graphExample1oneRel() {
+  std::list<std::pair<int, int>> r1 =
+    {{0,1},{1,0},{0,2},{2,1},{1,3},{2,4},{4,3},{4,5},{4,6},{4,7},{5,6},{6,7},{7,5},{7,8}};
+  return makeGraph(9, {r1});
+}
+
+Graph graphExample1multRel() {
+  std::list<std::pair<int, int>> r1 =
+    {{0,1},{1,0},{0,2},{4,5},{4,6},{4,7},{5,6}};
+  std::list<std::pair<int, int>> r2 =
+    {{2,4},{4,3},{6,7}};
+  std::list<std::pair<int, int>> r3 =
+    {{2,1},{1,3},{7,5},{7,8}};
+  return makeGraph(9, {r1,r2,r3});
+}
+

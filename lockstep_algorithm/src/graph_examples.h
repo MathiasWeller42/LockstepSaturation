@@ -11,8 +11,12 @@
 
 Graph noGraph();
 Graph oneNodeGraph();
-Graph smallGraph1();
-Graph smallGraph2();
-Graph smallGraph2Relations();
+Graph twoNodeGraphTwoSCCs();
+Graph twoNodeGraphOneSCC();
+Graph twoNodeGraphTwoRelations();
+Graph fourNodesOneRelation();
+Graph nonConnectedGraph();
 
+Graph graphExample1oneRel();
+Graph graphExample1multRel();
 #endif //GRAPH_EXAMPLES_H
