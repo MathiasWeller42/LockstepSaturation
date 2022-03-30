@@ -28,8 +28,7 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  simpleTestGraph(oneNodeGraphSelfLoop());
-  simpleTestGraph(oneNodeGraph());
+  simpleTestGraph(twoNodeGraphTwoSCCs());
 
   std::cout << "Goodbye :)" << std::endl;
 

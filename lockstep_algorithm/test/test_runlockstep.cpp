@@ -16,10 +16,13 @@ bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs) {
 
   std::list<sylvan::Bdd> result = lockstepSaturation(graph);
   if(result.size() != expectedSCCs.size()){
+    std::cout << "Too many or too few SCCs" << std::endl;
+    std::cout << "Result amount: " << result.size() << std::endl;
+    std::cout << "Expected amount: " << expectedSCCs.size() << std::endl;
       return false;
   }
   std::list<sylvan::Bdd>::iterator it1 = result.begin();
-  std::list<sylvan::Bdd>::iterator it2 = expectedSCCs.begin();
+  std::list<sylvan::Bdd>::const_iterator it2 = expectedSCCs.begin();
   for(; it1 != result.end() && it2 != expectedSCCs.end(); ++it1, ++it2) {
     std::cout << "skrrr";
   }
@@ -53,4 +56,19 @@ bool testOneNodeGraphSelfLoop() {
   sylvan::Bdd result_scc = result.front();
 
   return expected_scc == result_scc;
+}
+
+
+bool testTwoNodeGraphTwoSCCs() {
+  std::string a = "0";
+  std::string b = "1";
+  
+  sylvan::Bdd scc1 = makeNode(a);
+  sylvan::Bdd scc2 = makeNode(b);
+
+  std::list<sylvan::Bdd> expectedSccList = {scc1,scc2};
+  std::cout << "Da size: " << expectedSccList.size()  << std::endl;
+
+  const Graph graph = twoNodeGraphTwoSCCs();
+  return testGraph(graph, expectedSccList);
 }

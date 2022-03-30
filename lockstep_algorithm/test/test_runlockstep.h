@@ -16,6 +16,7 @@
 bool testNoGraph();
 bool testOneNodeGraph();
 bool testOneNodeGraphSelfLoop();
+bool testTwoNodeGraphTwoSCCs();
 bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> expectedSCCs);
 
 #endif //TEST_RUNLOCKSTEP_H

@@ -19,6 +19,10 @@ void runAllTests() {
   if(!testOneNodeGraphSelfLoop()) {
     std::cout << "testOneNodeGraphSelfLoop failed" << std::endl;
   }
+  if(!testTwoNodeGraphTwoSCCs()) {
+    std::cout << "testTwoNodeGraphTwoSCCs failed" << std::endl;
+  }
+
 
   if(!testShiftOneNode()) {
     std::cout << "testShiftOneNode failed" << std::endl;
