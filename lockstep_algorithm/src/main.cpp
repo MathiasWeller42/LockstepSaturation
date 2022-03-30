@@ -28,7 +28,7 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  simpleTestGraph(twoNodeGraphTwoSCCs());
+  simpleTestGraph(oneNodeGraph());
 
   std::cout << "Goodbye :)" << std::endl;
 

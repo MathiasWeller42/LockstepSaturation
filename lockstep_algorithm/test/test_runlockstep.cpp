@@ -19,19 +19,18 @@ bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs) {
     std::cout << "Too many or too few SCCs" << std::endl;
     std::cout << "Result amount: " << result.size() << std::endl;
     std::cout << "Expected amount: " << expectedSCCs.size() << std::endl;
-      return false;
+    return false;
   }
   std::list<sylvan::Bdd>::iterator it1 = result.begin();
   std::list<sylvan::Bdd>::const_iterator it2 = expectedSCCs.begin();
   for(; it1 != result.end() && it2 != expectedSCCs.end(); ++it1, ++it2) {
     std::cout << "skrrr";
   }
-  return res; //TODO fix - does not work (yet)
+  return res; //TODO for loop not completed yet, but works.
 }
 
 bool testNoGraph() {
-  sylvan::Bdd expected_scc = leaf_false();
-  std::list<sylvan::Bdd> expectedSCCs = {expected_scc};
+  std::list<sylvan::Bdd> expectedSCCs = {};
   const Graph graph = noGraph();
 
   return testGraph(graph, expectedSCCs);
