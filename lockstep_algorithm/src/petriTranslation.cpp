@@ -13,10 +13,6 @@
 
 #include "utilities.h"
 
-using std::cout; using std::cin;
-using std::endl; using std::string;
-
-
 void PNMLtoStringLists() {
   std::string myText;
 
@@ -74,7 +70,7 @@ void PNMLtoStringLists() {
   MyReadFile.close();
 }
 
-sylvan::Bdd makePlace(std::string &bitstring) {
+sylvan::Bdd makeNode(std::string &bitstring) {
   sylvan::Bdd resultBdd = leaf_true();
   bool currentBit;
   sylvan::Bdd currentBdd;
@@ -93,13 +89,13 @@ sylvan::Bdd makePlace(std::string &bitstring) {
   return resultBdd;
 }
 
-sylvan::Bdd makePlaces(std::list<std::string> &bitstrings) {
+sylvan::Bdd makeNodes(std::list<std::string> &bitstrings) {
   int n = bitstrings.size();
   std::string currentBitstring;
   sylvan::Bdd currentBdd;
   sylvan::Bdd resultBdd = leaf_false();
   for(std::string currentBitstring : bitstrings) {
-    currentBdd = makePlace(currentBitstring);
+    currentBdd = makeNode(currentBitstring);
     resultBdd = resultBdd.Or(currentBdd);
   }
   return resultBdd;
@@ -173,7 +169,7 @@ Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> 
   Graph graph {};
 
   //Byte translation
-  int nodeBytes = ceil(log2(nodes));
+  int nodeBytes = nodes == 1 ? 1 : ceil(log2(nodes));
 
   std::list<std::string> placeList = {};
   std::string iInBinary;
@@ -183,7 +179,7 @@ Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> 
     iInBinary = decimalToBinaryString(i, nodeBytes);
     placeList.push_back(iInBinary);
   }
-  sylvan::Bdd places = makePlaces(placeList);
+  sylvan::Bdd places = makeNodes(placeList);
 
   //Make the cube
   sylvan::BddSet cube = sylvan::BddSet();

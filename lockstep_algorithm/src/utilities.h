@@ -39,7 +39,7 @@
         bitString = bitString + '0';
       }
     }
-    return makePlace(bitString);
+    return makeNode(bitString);
   }
 
   #endif //UTILITIES_H

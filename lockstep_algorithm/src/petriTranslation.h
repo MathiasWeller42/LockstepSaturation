@@ -16,8 +16,8 @@ struct Graph {
   std::deque<sylvan::Bdd> relations;
 };
 
-sylvan::Bdd makePlace(std::string &bitstring);
-sylvan::Bdd makePlaces(std::list<std::string> &bitstrings);
+sylvan::Bdd makeNode(std::string &bitstring);
+sylvan::Bdd makeNodes(std::list<std::string> &bitstrings);
 sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo);
 sylvan::Bdd makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings);
 std::deque<sylvan::Bdd> makeRelations(std::list<std::list<std::pair<std::string, std::string>>> &bitstrings);

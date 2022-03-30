@@ -1,4 +1,6 @@
 add_executable(test test_lockstep.cpp
+               test_runlockstep.cpp
+               test_shift.cpp
                ../src/lockstep.cpp
                ../src/petriTranslation.cpp
                ../src/set_test.cpp

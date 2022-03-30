@@ -37,6 +37,7 @@ std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
 
   //TEST
   /*std::cout << "Running lockstep" << std::endl;
+  std::cout << "cube size:" << cube.size() << std::endl;
   printBddAsString(cube.size(), nodeSet);*/
 
   if(nodeSet == leaf_false()) {

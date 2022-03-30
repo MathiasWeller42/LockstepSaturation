@@ -9,7 +9,6 @@
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
-void simpleTest();
 void simpleTestGraph(Graph graph);
 
 #endif //LOCKSTEP_TEST_H

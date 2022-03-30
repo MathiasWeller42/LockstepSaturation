@@ -22,9 +22,9 @@ void testUnion() {
   std::string f = "101";
 
   std::list<std::string> placeList1 = {a,b,c,d};
-  sylvan::Bdd bdd1 = makePlaces(placeList1);
+  sylvan::Bdd bdd1 = makeNodes(placeList1);
   std::list<std::string> placeList2 = {c,d,e,f};
-  sylvan::Bdd bdd2 = makePlaces(placeList2);
+  sylvan::Bdd bdd2 = makeNodes(placeList2);
 
   sylvan::Bdd res = unionBdd(bdd1, bdd2);
   printBdd(res);
@@ -39,9 +39,9 @@ void testIntersect() {
   std::string f = "101";
 
   std::list<std::string> placeList1 = {a,b,c,d};
-  sylvan::Bdd bdd1 = makePlaces(placeList1);
+  sylvan::Bdd bdd1 = makeNodes(placeList1);
   std::list<std::string> placeList2 = {c,d,e,f};
-  sylvan::Bdd bdd2 = makePlaces(placeList2);
+  sylvan::Bdd bdd2 = makeNodes(placeList2);
 
   sylvan::Bdd res = intersectBdd(bdd1, bdd2);
   printBdd(res);
@@ -56,9 +56,9 @@ void testDifference() {
   std::string f = "101";
 
   std::list<std::string> placeList1 = {a,b,c,d};
-  sylvan::Bdd bdd1 = makePlaces(placeList1);
+  sylvan::Bdd bdd1 = makeNodes(placeList1);
   std::list<std::string> placeList2 = {c,d,e,f};
-  sylvan::Bdd bdd2 = makePlaces(placeList2);
+  sylvan::Bdd bdd2 = makeNodes(placeList2);
 
   sylvan::Bdd res = differenceBdd(bdd1, bdd2);
   printBdd(res);
@@ -73,11 +73,11 @@ void testPick() {
   std::string f = "101";
 
   std::list<std::string> placeList1 = {a,b,c,d};
-  sylvan::Bdd bdd1 = makePlaces(placeList1);
+  sylvan::Bdd bdd1 = makeNodes(placeList1);
   std::list<std::string> placeList2 = {c,d,e,f};
-  sylvan::Bdd bdd2 = makePlaces(placeList2);
+  sylvan::Bdd bdd2 = makeNodes(placeList2);
 
-  sylvan::Bdd bdd3 = makePlace(a);
+  sylvan::Bdd bdd3 = makeNode(a);
 
   sylvan::BddSet cube = sylvan::BddSet();
   cube.add(0);
