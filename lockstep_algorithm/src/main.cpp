@@ -28,7 +28,7 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  simpleTestGraph(graphExample1oneRel());
+  simpleTestGraph(graphExample1multRel());
 
   std::cout << "Goodbye :)" << std::endl;
 

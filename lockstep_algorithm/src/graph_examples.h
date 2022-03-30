@@ -19,4 +19,5 @@ Graph nonConnectedGraph();
 
 Graph graphExample1oneRel();
 Graph graphExample1multRel();
+
 #endif //GRAPH_EXAMPLES_H

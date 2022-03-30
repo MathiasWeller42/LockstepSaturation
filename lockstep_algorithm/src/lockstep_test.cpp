@@ -29,6 +29,6 @@ void simpleTestGraph(Graph graph) {
   std::list<sylvan::Bdd> sccList = lockstepSaturation(graph);
   std::cout << "Printing SCCs" << std::endl;
   for(sylvan::Bdd scc : sccList) {
-    printBddAsString(scc);
+    printBddAsString(graph.cube.size(), scc);
   }
 }

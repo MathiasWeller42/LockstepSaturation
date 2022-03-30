@@ -154,8 +154,22 @@ std::deque<sylvan::Bdd> makeRelations(std::list<std::list<std::pair<std::string,
   return transitions;
 }
 
-//Main function for making graphs
-Graph makeGraph(const int nodes, std::list<std::list<std::pair<int,int>>> relations) {
+std::string decimalToBinaryString(int number, int bytes) {
+  std::string binary = "";
+  int mask = 1;
+  for(int i = 0; i < bytes; i++) {
+    if((mask & number) >= 1) {
+      binary = "1" + binary;
+    } else {
+      binary = "0" + binary;
+    }
+    mask <<= 1;
+  }
+  return binary;
+}
+
+//Main function for making graphs, takes as input (noOfNodes, relations={{(0,1),(1,0),(2,0)}, {(2,3)}})
+Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> &relations) {
   Graph graph {};
 
   //Byte translation
@@ -198,24 +212,59 @@ Graph makeGraph(const int nodes, std::list<std::list<std::pair<int,int>>> relati
   return graph;
 }
 
-std::string decimalToBinaryString(int number, int bytes) {
-  std::string binary = "";
-  int mask = 1;
-  for(int i = 0; i < bytes; i++) {
-    if((mask & number) >= 1) {
-      binary = "1" + binary;
-    } else {
-      binary = "0" + binary;
+//Returns each of the true paths in the BDD as a list of pairs of the form {{x0,0},{x2,1},...,}
+std::list<std::list<std::pair<int, bool>>> bddAsList(std::list<std::pair<int, bool>> &currentPath,
+                                                     const sylvan::Bdd &bdd) {
+  std::list<std::list<std::pair<int, bool>>> nodeList = {};
+  if(bdd.isTerminal()) {
+    if(bdd.isOne()) {
+      nodeList.push_front(currentPath);
     }
-    mask <<= 1;
+    return nodeList;
   }
-  return binary;
+
+  std::list<std::pair<int, bool>> recPath1(currentPath);
+  recPath1.push_back({bdd.TopVar(), true});
+  std::list<std::list<std::pair<int, bool>>> recResult1 = bddAsList(recPath1, bdd.Then());
+  nodeList.splice(nodeList.end(), recResult1);
+
+  std::list<std::pair<int, bool>> recPath2(currentPath);
+  recPath2.push_back({bdd.TopVar(), false});
+  std::list<std::list<std::pair<int, bool>>> recResult2 = bddAsList(recPath2, bdd.Else());
+  nodeList.splice(nodeList.end(), recResult2);
+
+  return nodeList;
 }
+
+//Uses list of pairs of the form {{x0,0},{x2,1},...,{xn,0}}, makes it into {{x1,0},{x3,1},...,{xn+1,0}} and reconstructs the BDD from this
+sylvan::Bdd shiftBdd(const sylvan::Bdd &bdd) {
+  sylvan::Bdd shiftedBdd = leaf_false();
+  std::list<std::pair<int, bool>> startPath = {};
+  std::list<std::list<std::pair<int, bool>>> nodeList = bddAsList(startPath, bdd);
+  for(std::list<std::pair<int, bool>> node : nodeList) {
+    sylvan::Bdd currentNode = leaf_true();
+    for(std::pair<int, bool> variable : node) {
+      sylvan::Bdd currentBdd;
+      if(variable.second) {
+        currentBdd = ithvar(variable.first+1);
+      } else {
+        currentBdd = nithvar(variable.first+1);
+      }
+      currentNode = currentNode.And(currentBdd);
+    }
+    shiftedBdd = shiftedBdd.Or(currentNode);
+  }
+  return shiftedBdd;
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Pretty printing
 ////////////////////////////////////////////////////////////////////////////////
-void __printBdd(std::string prefix, sylvan::Bdd bdd, bool isLeft) {
+
+//HELPER workhorse function for printing the bdd diagram
+void __printBdd(const std::string &prefix, const sylvan::Bdd &bdd, bool isLeft) {
   std::cout << prefix;
 
   std::cout << (isLeft ? "├─T─" : "└─F─" );
@@ -232,7 +281,13 @@ void __printBdd(std::string prefix, sylvan::Bdd bdd, bool isLeft) {
   __printBdd( prefix + newString, bdd.Else(), false);
 }
 
-std::list<std::string> __printBddAsString(std::string currentPath, sylvan::Bdd bdd) {
+//Main function for printing the binary BDD tree
+void printBdd(const sylvan::Bdd &bdd) {
+  __printBdd(" ", bdd, false);
+}
+
+//HELPER work horse function for printing the nodes of the bdd via the true paths
+std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd) {
    std::list<std::string> nodeList = {};
    if(bdd.isTerminal()){
     if(bdd.isOne()) {
@@ -249,57 +304,17 @@ std::list<std::string> __printBddAsString(std::string currentPath, sylvan::Bdd b
   return nodeList;
 }
 
-/*
-std::list<std::list<std::pair<std::int, bool>>> bddAsStringList(std::list<std::pair<std::int, bool>> currentPath, sylvan::Bdd bdd) {
-  std::list<std::list<std::pair<std::int, bool>>> nodeList = {};
-   if(bdd.isTerminal()){
-    if(bdd.isOne()) {
-      nodeList.push_front(currentPath);
-    }
-    return nodeList;
-   }
-  
-  std::list<std::string> recResult1 = bddAsStringList(std::to_string(bdd.TopVar()) + "1" + currentPath, bdd.Then());
-  nodeList.splice(nodeList.end(), recResult1);
-  std::list<std::string> recResult2 = bddAsStringList(std::to_string(bdd.TopVar()) + "0" + currentPath, bdd.Else());
-  nodeList.splice(nodeList.end(), recResult2);
 
-  return nodeList;
-}
-
-sylvan::Bdd shiftBdd(sylvan::Bdd bdd) {
-  sylvan::Bdd shiftedBdd = leaf_false();
-  std::list<std::string> nodeList = bddAsStringList(bdd);
-  for(std::string nodeString : nodeList) {
-    sylvan::Bdd currentNode = leaf_true();
-    for(int i = 0; i < nodeString.length() / 2 ; i++) {
-      std::string currentVar = nodeString[i];
-      std::string currentBool = nodeString[i + 1];
-
-    }
-  }
-  return shiftedBdd;
-}
-*/
-
-void printBddAsString(sylvan::Bdd bdd) {
+//Prints the true-paths of the BDD on the form "01x1", where x means either 0 or 1.  
+void printBddAsString(int nodes, const sylvan::Bdd &bdd) {
     std::list<std::string> result = __printBddAsString("", bdd);
     std::cout << "Nodes: ";
-    for(std::string node : result) {
-      std::cout << node << ", ";
-    }
-    std::cout << std::endl << std::endl;
-}
-
-void printBddAsString2(int nodes, sylvan::Bdd bdd) {
-    std::list<std::string> result = __printBddAsString("", bdd);
-    std::cout << "Nodes new new new new: ";
 
     std::list<std::string> newNodes;
     for(std::string node : result) {
       std::string arr [nodes];
       for (int i = 0; i < nodes*2; i = i+2) {
-        std::string searchString = "x" + std::to_string(i); 
+        std::string searchString = "x" + std::to_string(i);
         int exists = node.find(searchString);
         if(exists == -1){
           arr[nodes-1 - i/2] = "x";
@@ -307,136 +322,11 @@ void printBddAsString2(int nodes, sylvan::Bdd bdd) {
           arr[nodes-1 - i/2] = node.substr(exists+3, 1);
         }
       }
-      std::cout << " Node: ";
+      std::cout << "  ";
       for(std::string str : arr ) {
         std::cout << str << "";
       }
     }
-    
     std::cout << std::endl << std::endl;
 }
 
-
-void printBdd(sylvan::Bdd bdd) {
-  __printBdd(" ", bdd, false);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-/// Examples
-////////////////////////////////////////////////////////////////////////////////
-void makeGraph() {
-  std::string aString = "00";
-  sylvan::Bdd nodeA = makePlace(aString);
-  std::string bString = "01";
-  sylvan::Bdd nodeB = makePlace(bString);
-
-  std::list<std::string> nodeStrings = {aString,bString};
-  sylvan::Bdd nodeSet = makePlaces(nodeStrings);
-
-  std::cout << "Printing nodeSet:" << std::endl;
-  printBdd(nodeSet);
-  std::cout << std::endl;
-
-  std::list<std::pair<std::string, std::string>> arcStrings =
-    {{aString, bString}};
-  sylvan::Bdd edgeSet = makeRelation(arcStrings);
-
-  std::cout << "Printing edgeSet:" << std::endl;
-  printBdd(edgeSet);
-  std::cout << std::endl;
-
-  sylvan::BddSet cube = sylvan::BddSet();
-  cube.add(0);
-  cube.add(2);
-
-  sylvan::Bdd relnextA = nodeA.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextA:" << std::endl;
-  printBdd(relnextA);
-  std::cout << std::endl;
-
-  sylvan::Bdd relprevA = nodeA.RelPrev(edgeSet, cube);
-  std::cout << "Printing relPrevA:" << std::endl;
-  printBdd(relprevA);
-  std::cout << std::endl;
-
-  sylvan::Bdd relnextB = nodeB.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextB:" << std::endl;
-  printBdd(relnextB);
-  std::cout << std::endl;
-
-  sylvan::Bdd relprevB = nodeB.RelPrev(edgeSet, cube);
-  std::cout << "Printing relPrevB:" << std::endl;
-  printBdd(relprevB);
-  std::cout << std::endl;
-}
-
-//Vote Blume
-void makeGraphGreatAgain() {
-  std::string aString = "00";
-  sylvan::Bdd nodeA = makePlace(aString);
-  std::string bString = "01";
-  sylvan::Bdd nodeB = makePlace(bString);
-  std::string cString = "10";
-  sylvan::Bdd nodeC = makePlace(cString);
-  std::string dString = "11";
-  sylvan::Bdd nodeD = makePlace(dString);
-
-  std::list<std::string> nodeStrings = {aString,bString,cString,dString};
-  sylvan::Bdd nodeSet = makePlaces(nodeStrings);
-
-  std::cout << "Printing nodeSet:" << std::endl;
-  printBdd(nodeSet);
-  std::cout << std::endl;
-
-  std::list<std::pair<std::string, std::string>> arcStrings =
-    {{aString, bString}, {aString, cString}, {bString, dString}};
-  sylvan::Bdd edgeSet = makeRelation(arcStrings);
-
-  std::cout << "Printing edgeSet:" << std::endl;
-  printBdd(edgeSet);
-  std::cout << std::endl;
-
-  sylvan::BddSet cube = sylvan::BddSet();
-  cube.add(0);
-  cube.add(2);
-
-  sylvan::Bdd relnextA = nodeA.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextA:" << std::endl;
-  printBdd(relnextA);
-  std::cout << std::endl;
-
-  sylvan::Bdd relprevA = nodeA.RelPrev(edgeSet, cube);
-  std::cout << "Printing relPrevA:" << std::endl;
-  printBdd(relprevA);
-  std::cout << std::endl;
-
-  sylvan::Bdd relnextB = nodeB.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextB:" << std::endl;
-  printBdd(relnextB);
-  std::cout << std::endl;
-
-  sylvan::Bdd relprevB = nodeB.RelPrev(edgeSet, cube);
-  std::cout << "Printing relPrevB:" << std::endl;
-  printBdd(relprevB);
-  std::cout << std::endl;
-
-  sylvan::Bdd relnextC = nodeC.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextC:" << std::endl;
-  printBdd(relnextC);
-  std::cout << std::endl;
-
-  sylvan::Bdd relprevC = nodeC.RelPrev(edgeSet, cube);
-  std::cout << "Printing relPrevC:" << std::endl;
-  printBdd(relprevC);
-  std::cout << std::endl;
-
-  sylvan::Bdd relnextD = nodeD.RelNext(edgeSet, cube);
-  std::cout << "Printing relNextD:" << std::endl;
-  printBdd(relnextD);
-  std::cout << std::endl;
-
-  sylvan::Bdd relprevD = nodeD.RelPrev(edgeSet, cube);
-  std::cout << "Printing relPrevD:" << std::endl;
-  printBdd(relprevD);
-  std::cout << std::endl;
-}

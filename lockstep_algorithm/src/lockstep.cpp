@@ -8,39 +8,36 @@
 
 #include "lockstep.h"
 #include "utilities.h"
+#include "petriTranslation.h"
 
-sylvan::Bdd pick(sylvan::Bdd nodeSet, sylvan::BddSet cube) {
+sylvan::Bdd pick(const sylvan::Bdd &nodeSet, const sylvan::BddSet &cube) {
 	//Find path in BDD that evaluates to true, and evaluate the decisions into new node
 	return pickAssignment(nodeSet, cube);
 }
 
-/*
-sylvan::Bdd shiftNodes(sylvan::Bdd nodeSet) {
-  return leaf_false();
-}
-
-sylvan::Bdd updateRelation(sylvan::Bdd currentRelation, sylvan::Bdd nodeSet) {
-  sylvan::Bdd newRelation = intersectBdd(intersectBdd(currentRelation, nodeSet), shiftNodes(nodeSet));
+sylvan::Bdd updateRelation(const sylvan::Bdd &currentRelation, const sylvan::Bdd &nodeSet) {
+  sylvan::Bdd newRelation = intersectBdd(intersectBdd(currentRelation, nodeSet), shiftBdd(nodeSet));
   return newRelation;
 }
 
-std::deque<sylvan::Bdd> updateRelations(std::deque<sylvan::Bdd> currentRelations, sylvan::Bdd nodeSet) {
+std::deque<sylvan::Bdd> updateRelations(const std::deque<sylvan::Bdd> &currentRelations,
+                                        const sylvan::Bdd &nodeSet) {
   std::deque<sylvan::Bdd> newRelations;
   for(sylvan::Bdd currentRelation : currentRelations) {
     sylvan::Bdd newCurrentRelation = updateRelation(currentRelation, nodeSet);
     newRelations.push_back(newCurrentRelation);
   }
   return newRelations;
-}*/
+}
 
-std::list<sylvan::Bdd> lockstepSaturation(Graph graph) {
-  sylvan::Bdd nodeSet = graph.nodes;
-  sylvan::BddSet cube = graph.cube;
-  std::deque<sylvan::Bdd> relationDeque = graph.relations;
+std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
+  const sylvan::Bdd nodeSet = graph.nodes;
+  const sylvan::BddSet cube = graph.cube;
+  const std::deque<sylvan::Bdd> relationDeque = graph.relations;
 
   //TEST
-  std::cout << "Running lockstep";
-  printBddAsString2(4, nodeSet);
+  /*std::cout << "Running lockstep" << std::endl;
+  printBddAsString(cube.size(), nodeSet);*/
 
   if(nodeSet == leaf_false()) {
     return {};
@@ -117,26 +114,27 @@ std::list<sylvan::Bdd> lockstepSaturation(Graph graph) {
   std::list<sylvan::Bdd> sccList = {scc};
 
   //TEST
-  std::cout << "Found SCC" << std::endl;
-  printBddAsString(scc);
-
+  /*std::cout << "Found SCC" << std::endl;
+  printBddAsString(cube.size(), scc);
   std::cout << "Printing converged" << std::endl;
-  printBddAsString(converged);
+  printBddAsString(cube.size(), converged);*/
 
   //Recursive calls
   sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
-  Graph recursiveGraph1 = {recBdd1, cube, relationDeque};
+  std::deque<sylvan::Bdd> recRelations1 = updateRelations(relationDeque, recBdd1);
+  Graph recursiveGraph1 = {recBdd1, cube, recRelations1};
   //TEST
-  std::cout << "Making recursive call 1" << std::endl;
-  printBddAsString(recBdd1);
+  /*std::cout << "Making recursive call 1" << std::endl;
+  printBddAsString(cube.size(), recBdd1);*/
   std::list<sylvan::Bdd> recursiveResult1 = lockstepSaturation(recursiveGraph1);
   sccList.splice(sccList.end(), recursiveResult1);
 
   sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
-  Graph recursiveGraph2 = {recBdd2, cube, relationDeque};
+  std::deque<sylvan::Bdd> recRelations2 = updateRelations(relationDeque, recBdd2);
+  Graph recursiveGraph2 = {recBdd2, cube, recRelations2};
   //TEST
-  std::cout << "Making recursive call 2" << std::endl;
-  printBddAsString2(4, recBdd2);
+  /*std::cout << "Making recursive call 2" << std::endl;
+  printBddAsString(cube.size(), recBdd2);*/
   std::list<sylvan::Bdd> recursiveResult2 = lockstepSaturation(recursiveGraph2);
   sccList.splice(sccList.end(), recursiveResult2);
 

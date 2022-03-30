@@ -7,12 +7,8 @@
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
-struct Graph {
-  sylvan::Bdd nodes;
-  sylvan::BddSet cube;
-  std::deque<sylvan::Bdd> relations;
-};
+#include "petriTranslation.h"
 
-std::list<sylvan::Bdd> lockstepSaturation(Graph graph);
+std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph);
 
 #endif  //LOCKSTEP_H
