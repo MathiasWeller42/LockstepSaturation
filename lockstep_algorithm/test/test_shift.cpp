@@ -23,8 +23,8 @@ bool testShiftTwoNodes() {
     return shiftBdd(nodes) == expected;
 }
 
-bool testShiftThreeNodes() {
-    sylvan::Bdd nodes = threeNodesOneRelation().nodes;
+bool testShiftFourNodes() {
+    sylvan::Bdd nodes = fourNodesOneRelation().nodes;
     sylvan::Bdd expected = leaf_true().Or(nithvar(3)).Or(nithvar(1));
     return shiftBdd(nodes) == expected;
 }

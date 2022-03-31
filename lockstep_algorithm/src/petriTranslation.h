@@ -16,6 +16,12 @@ struct Graph {
   std::deque<sylvan::Bdd> relations;
 };
 
+struct Arc {
+  std::string id;
+  std::string source;
+  std::string target;
+};
+
 sylvan::Bdd makeNode(std::string &bitstring);
 sylvan::Bdd makeNodes(std::list<std::string> &bitstrings);
 sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo);

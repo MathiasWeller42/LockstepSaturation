@@ -15,7 +15,6 @@ Graph oneNodeGraphSelfLoop();
 Graph twoNodeGraphTwoSCCs();
 Graph twoNodeGraphOneSCC();
 Graph twoNodeGraphTwoRelations();
-Graph threeNodesOneRelation();
 Graph fourNodesOneRelation();
 Graph nonConnectedGraph();
 

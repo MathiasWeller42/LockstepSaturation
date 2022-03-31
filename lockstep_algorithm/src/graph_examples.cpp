@@ -49,7 +49,6 @@ Graph twoNodeGraphOneSCC() {
   return result;
 }
 
-
 Graph twoNodeGraphTwoRelations() {
   std::list<std::pair<int, int>> r1 =
     {{0,1}};
@@ -57,14 +56,6 @@ Graph twoNodeGraphTwoRelations() {
     {{1,0}};
   const std::list<std::list<std::pair<int, int>>> relationList = {r1,r2};
   Graph result = makeGraph(2, relationList);
-  return result;
-}
-
-Graph threeNodesOneRelation() {
-  std::list<std::pair<int, int>> r1 =
-    {{0,1}, {0,2}, {1,3}, {3,0}};
-  const std::list<std::list<std::pair<int, int>>> relationList = {r1};
-  Graph result = makeGraph(4, relationList);
   return result;
 }
 

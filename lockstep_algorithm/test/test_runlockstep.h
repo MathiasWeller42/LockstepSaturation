@@ -16,7 +16,14 @@
 bool testNoGraph();
 bool testOneNodeGraph();
 bool testOneNodeGraphSelfLoop();
+bool testTwoNodeGraphOneSCC();
 bool testTwoNodeGraphTwoSCCs();
+bool testTwoNodeGraphTwoRelations();
+bool testNonConnectedGraph();
+bool testfourNodesOneRelation();
+bool testGraphExample1oneRel();
+bool testGraphExample1multRel();
+
 bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> expectedSCCs);
 
 #endif //TEST_RUNLOCKSTEP_H

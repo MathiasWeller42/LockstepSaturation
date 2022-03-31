@@ -13,9 +13,9 @@
 #include "../src/graph_examples.h"
 #include "../src/petriTranslation.h"
 
-bool testShiftOneNode(); 
+bool testShiftOneNode();
 bool testShiftTwoNodes();
-bool testShiftThreeNodes();
+bool testShiftFourNodes();
 bool testShiftNineNodes();
 
 #endif //TEST_SHIFT_H

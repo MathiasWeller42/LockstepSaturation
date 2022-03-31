@@ -10,31 +10,86 @@
 #include "test_shift.h"
 
 void runAllTests() {
+  bool success = true;
+  int fails = 0;
+  //Lockstep tests
   if(!testNoGraph()) {
     std::cout << "testNoGraph failed" << std::endl;
+    success = false;
+    fails++;
   }
   if(!testOneNodeGraph()) {
     std::cout << "testOneNodeGraph failed" << std::endl;
+    success = false;
+    fails++;
   }
   if(!testOneNodeGraphSelfLoop()) {
     std::cout << "testOneNodeGraphSelfLoop failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testTwoNodeGraphOneSCC()) {
+    std::cout << "testTwoNodeGraphOneSCC failed" << std::endl;
+    success = false;
+    fails++;
   }
   if(!testTwoNodeGraphTwoSCCs()) {
     std::cout << "testTwoNodeGraphTwoSCCs failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testTwoNodeGraphTwoRelations()) {
+    std::cout << "testTwoNodeGraphTwoRelations failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testNonConnectedGraph()) {
+    std::cout << "testNonConnectedGraph failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testfourNodesOneRelation()) {
+    std::cout << "testfourNodesOneRelation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample1oneRel()) {
+    std::cout << "testGraphExample1oneRel failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample1multRel()) {
+    std::cout << "testGraphExample1multRel failed" << std::endl;
+    success = false;
+    fails++;
   }
 
-
+  //Shift tests
   if(!testShiftOneNode()) {
     std::cout << "testShiftOneNode failed" << std::endl;
+    success = false;
+    fails++;
   }
   if(!testShiftTwoNodes()) {
     std::cout << "testShiftTwoNodes failed" << std::endl;
+    success = false;
+    fails++;
   }
-  if(!testShiftThreeNodes()) {
-    std::cout << "testShiftThreeNodes failed" << std::endl;
+  if(!testShiftFourNodes()) {
+    std::cout << "testShiftFourNodes failed" << std::endl;
+    success = false;
+    fails++;
   }
   if(!testShiftNineNodes()) {
     std::cout << "testShiftNineNodes failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  if(success) {
+    std::cout << "All tests passed!" << std::endl;
+  } else {
+    std::cout << "Number of fails: " << fails << std::endl;
   }
 }
 

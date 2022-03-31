@@ -28,7 +28,8 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  simpleTestGraph(oneNodeGraph());
+  //simpleTestGraph(graphExample1multRel());
+  PNMLtoStringLists();
 
   std::cout << "Goodbye :)" << std::endl;
 

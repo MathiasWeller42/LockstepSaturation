@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <map>
 #include <fstream>
 #include <filesystem>
 #include <bitset>
@@ -12,6 +13,8 @@
 #include <sylvan_obj.hpp>
 
 #include "utilities.h"
+#include "petriTranslation.h"
+
 
 void PNMLtoStringLists() {
   std::string myText;
@@ -19,55 +22,60 @@ void PNMLtoStringLists() {
   // Read from the text file
   std::ifstream MyReadFile("/mnt/c/Users/ablum/bachelorprojekt/PNMLFiles/HealthRecord/PT/hrec_01.pnml");
 
-  /*char tmp[256];
-  getcwd(tmp, 256);
-  cout << "Current working directory: " << tmp << endl;*/
+  std::map<std::string, int> placeMap = {};
+  int placeIndex = 0;
+  std::map<std::string, std::list<Arc>> transitionMap = {};
+  std::list<Arc> arcList = {};
 
-  std::list<std::string> placeList = {};
-  std::list<std::string> placeListDecimal = {};
-  std::list<std::string> placeListBinary = {};
-  int noPlaces = 0;
-  if(MyReadFile.is_open()) {
-    std::cout << "Opened successfully" << std::endl;
-  } else {
-    std::cout << "Bad file" << std::endl;
-  }
-
-  // Use a while loop together with the getline() function to read the file line by line
+  // Read the PNML file and create some data structures
   while (std::getline (MyReadFile, myText)) {
+    //Places
     if(myText.rfind("<place ", 0) == 0) {
-      noPlaces++;
-      placeList.push_back(myText);
-      std::string number = "";
-      for (int i = 0; i < myText.length(); i++) {
-        char currentChar = myText[i];
-        if(currentChar == '>') {
-          break;
-        }
-        if(std::isdigit(currentChar)) {
-          number += currentChar;
-        }
-      }
-      placeListDecimal.push_back(number);
-      int numberAsInt = std::stoi(number);
-      std::cout << "Number: " << numberAsInt << std::endl;
-      std::string numberInBinary = std::bitset<8>(numberAsInt).to_string();
-      std::cout << ".. As Binary: " << numberInBinary << std::endl;
-      placeListBinary.push_back(numberInBinary);
+      std::string id = "";
+      int startpos = myText.find("id=\"");
+      int endpos = myText.find("\">");
+      id = myText.substr(startpos + 4, endpos-(startpos+4));
+      placeMap[id] = placeIndex;
+      placeIndex = placeIndex+2;
     }
+    //Transitions
     if(myText.rfind("<transition ", 0) == 0) {
-         //noTransitions++;
-         //transitionList.push_back(myText);
+      std::string id = "";
+      int startpos = myText.find("id=\"");
+      int endpos = myText.find("\">");
+      id = myText.substr(startpos + 4, endpos-(startpos+4));
+      transitionMap[id] = {};
     }
-  }
-
-  std::cout << std::endl;
-  std::cout << "Number of places: " << noPlaces << std::endl;
-  for (std::string v : placeListDecimal) {
-    std::cout << v << "\n";
+    //Arcs
+    if(myText.rfind("<arc ", 0) == 0) {
+      Arc arc = {};
+      //find id
+      int startpos = myText.find("id=\"");
+      int endpos = myText.find("\" ");
+      std::string id = myText.substr(startpos + 4, endpos-(startpos+4));
+      arc.id = id;
+      //find source
+      startpos = myText.find("source=\"");
+      endpos = myText.find("\" t");
+      std::string source = myText.substr(startpos + 8, endpos-(startpos+8));
+      arc.source = source;
+      //find target
+      startpos = myText.find("target=\"");
+      endpos = myText.find("\"/>");
+      std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
+      arc.target = target
+      //push the arc
+      arcList.push_back(arc);
+    }
   }
   // Close the file
   MyReadFile.close();
+}
+
+void printMap(std::map<std::string, int> map) {
+  for(std::pair<std::string, int> place : map) {
+    std::cout << "key: " << place.first << ", value: " << place.second << std::endl;
+  }
 }
 
 sylvan::Bdd makeNode(std::string &bitstring) {
