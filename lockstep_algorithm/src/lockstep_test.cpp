@@ -18,6 +18,6 @@ void simpleTestGraph(Graph graph) {
   std::cout << "Printing SCCs" << std::endl;
   for(sylvan::Bdd scc : sccList) {
     printBdd(scc);
-    printBddAsString(graph.cube.size(), scc);
+    //printBddAsString(graph.cube.size(), scc);
   }
 }

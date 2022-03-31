@@ -1,13 +1,14 @@
 Den mest dank-swaggern todo-liste #WØRF
 -----------------------------------------------
-TODO 1 : Test bddToList
-TODO 2 : Test shiftBdd
-TODO 3 : Test UpdateRelation(s)
-TODO 5 : Lav relativt simpelt eksempel vi kan afprøve vores lockstep på
+TODO 1 : Test UpdateRelation(s)
+TODO 2 : Lav relativt simpelt 1-safe PNML eksempel vi kan afprøve vores lockstep på
+!!TODO 3 : Find ud af hvorfor vi segfaulter på Petri Net 
+!!TODO 4 : Få PNMLtoStringLists til at virke på mere end health records (evt. xml reader eller mere generel måde at læse på)
+
 
 TODO i : Husk at tests er en ting...
 
-TODO 6 : PNML pain
+TODO 6 : PNML PAIN
 TODO 7 : Relative path masochisme
 TODO 9 : Forstå Petri nets
 
