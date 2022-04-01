@@ -21,8 +21,8 @@ struct Arc {
   std::string id;
   std::string source;
   std::string target;
-  std::string toString() 
-  { 
+  std::string toString()
+  {
     return "Arc:   id: " + id + " from: " + source + " to: " + target;
   }
 };
@@ -31,12 +31,12 @@ struct Transition {
   std::string id;
   std::list<Arc> sources;
   std::list<Arc> targets;
-  
+
   Transition(std::string idString) : id(idString), sources({}), targets({}) {}
   Transition() {}
 
-  std::string toString() 
-  { 
+  std::string toString()
+  {
     int sourceNo = sources.size();
     int targetNo = targets.size();
     std::string sourceString = "Sources: \n";

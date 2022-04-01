@@ -2,9 +2,9 @@ Den mest dank-swaggern todo-liste #WØRF
 -----------------------------------------------
 TODO 1 : Test UpdateRelation(s)
 TODO 2 : Lav relativt simpelt 1-safe PNML eksempel vi kan afprøve vores lockstep på
-!!TODO 3 : Find ud af hvorfor vi segfaulter på Petri Net 
+!!TODO 3 : Find ud af hvorfor vi segfaulter på Petri Net
 !!TODO 4 : Få PNMLtoStringLists til at virke på mere end health records (evt. xml reader eller mere generel måde at læse på)
-
+TODO whatever : implementer almindelig lockstep
 
 TODO i : Husk at tests er en ting...
 
@@ -19,6 +19,12 @@ TODO : Græd i Jacos skød
 TODO : ???
 TODO : Profit
 TODO : Søvn
+
+----
+Ting vi skal snakke med Jaco og Andreas om:
+- order of relations
+- hvordan ved vi at vi returnerer de rigtige SCC'er
+- hastighed / plads på computeren (2^117 små BDD kan ikke være der)
 
 -------------------------------------------------
 *Made By Mathias Weller* (Han tager fuldt ansvar) M.I.S.

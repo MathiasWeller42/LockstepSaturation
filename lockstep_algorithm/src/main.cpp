@@ -16,7 +16,7 @@ int main() {
   // Init LACE
   lace_start(1, 1000000);
 
-  const size_t memory_bytes = 1024u * 1024u * 1024u;
+  const size_t memory_bytes = 128u * 1024u * 1024u;
 
   // Init Sylvan
   sylvan::sylvan_set_limits(memory_bytes, // Set memory limit
@@ -28,13 +28,11 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  //simpleTestGraph(graphExample1multRel());
   Graph bigGraph = PNMLtoStringLists();
+  //printRelationsAsString(bigGraph.relations);
   simpleTestGraph(bigGraph);
 
-
   std::cout << "Goodbye :)" << std::endl;
-
 
   sylvan::sylvan_quit();
   lace_stop();

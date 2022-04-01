@@ -77,48 +77,166 @@ std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
 	  //Add to the forward and backward sets
     forwardSet = unionBdd(forwardSet, relResultFront);
     backwardSet = unionBdd(backwardSet, relResultBack);
+
+    std::cout << relFrontI << " " << relBackI << std::endl;
   }
+
   std::cout << "3" << std::endl;
+
   //Save the set that has converged
-  sylvan::Bdd converged = (relFrontI == relationDeque.size()) ? forwardSet : backwardSet;
-  std::cout << "4" << std::endl;
+  bool frontConverged = relFrontI == relationDeque.size();
+  sylvan::Bdd converged = frontConverged ? forwardSet : backwardSet;
+
   while(relFrontI < relationDeque.size() || relBackI < relationDeque.size()) {
-    std::cout << "5" << std::endl;
-	  //Find images
+    if(frontConverged) { //Hvad hvis begge er converged???
+      sylvan::Bdd relResultBack = differenceBdd(backwardSet.RelPrev(relBack, cube), backwardSet);
+      if(intersectBdd(relResultBack, forwardSet) == leaf_false()) {
+        relBackI++;
+        relBack = relationDeque[relBackI];
+      } else {
+        relBackI = 0;
+        relBack = relationDeque[relBackI];
+        backwardSet = unionBdd(backwardSet, intersectBdd(relResultBack, forwardSet));
+      }
+    } else {
+      sylvan::Bdd relResultFront = differenceBdd(forwardSet.RelNext(relFront, cube), forwardSet);
+      if(intersectBdd(relResultFront, backwardSet) == leaf_false()) {
+        relFrontI++;
+        relFront = relationDeque[relFrontI];
+      } else {
+        relFrontI = 0;
+        relFront = relationDeque[relFrontI];
+        forwardSet = unionBdd(forwardSet, intersectBdd(relResultFront, backwardSet));
+      }
+    }
+  }
+  std::cout << "9" << std::endl;
+
+  //Create SCC
+  sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+  std::list<sylvan::Bdd> sccList = {scc};
+
+  //TEST
+  //std::cout << "Found SCC" << std::endl;
+  //printBdd(scc);
+  /*std::cout << "Printing converged" << std::endl;
+  printBddAsString(cube.size(), converged);*/
+
+  //Recursive calls
+  sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
+  std::deque<sylvan::Bdd> recRelations1 = updateRelations(relationDeque, recBdd1);
+  Graph recursiveGraph1 = {recBdd1, cube, recRelations1};
+  //TEST
+  /*std::cout << "Making recursive call 1" << std::endl;
+  printBddAsString(cube.size(), recBdd1);*/
+  std::list<sylvan::Bdd> recursiveResult1 = lockstepSaturation(recursiveGraph1);
+  sccList.splice(sccList.end(), recursiveResult1);
+
+  sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
+  std::deque<sylvan::Bdd> recRelations2 = updateRelations(relationDeque, recBdd2);
+  Graph recursiveGraph2 = {recBdd2, cube, recRelations2};
+  //TEST
+  /*std::cout << "Making recursive call 2" << std::endl;
+  printBddAsString(cube.size(), recBdd2);*/
+  std::list<sylvan::Bdd> recursiveResult2 = lockstepSaturation(recursiveGraph2);
+  sccList.splice(sccList.end(), recursiveResult2);
+
+  //Return SCC list
+  return sccList;
+}
+
+
+
+std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
+  const sylvan::Bdd nodeSet = graph.nodes;
+  const sylvan::BddSet cube = graph.cube;
+  const std::deque<sylvan::Bdd> relationDeque = graph.relations;
+
+  if(nodeSet == leaf_false()) {
+    return {};
+  }
+
+  sylvan::Bdd v = pick(nodeSet, cube);
+  sylvan::Bdd forwardSet = v;
+	sylvan::Bdd backwardSet = v;
+
+  //This is not right!!! Fix later!!!
+  sylvan::Bdd forwardFront = v;
+  sylvan::Bdd backwardFront = v;
+
+  sylvan::Bdd relFront;
+  sylvan::Bdd relBack;
+
+  while(relFrontI < relationDeque.size() && relBackI < relationDeque.size()) {
+    for(int i = 0 ; i < relationDeque.size(); i++) {
+      //This is probably not right either...
+      relFront = relationDeque[i];
+      relBack = relationDeque[i];
+      sylvan::Bdd relResultFront = differenceBdd(forwardSet.RelNext(relFront, cube), forwardSet);
+      sylvan::Bdd relResultBack = differenceBdd(backwardSet.RelPrev(relBack, cube), backwardSet);
+      forwardFront = unionBdd(forwardFront, relResultFront);
+      backwardFront = unionBdd(backwardFront, relResultBack);
+    }
+
+    //Find images
     sylvan::Bdd relResultFront = differenceBdd(forwardSet.RelNext(relFront, cube), forwardSet);
     sylvan::Bdd relResultBack = differenceBdd(backwardSet.RelPrev(relBack, cube), backwardSet);
-    std::cout << "6" << std::endl;
+
     //Update relations
-    if(intersectBdd(relResultFront, backwardSet) == leaf_false()) {
+    if(relResultFront == leaf_false()) {
       relFrontI++;
       relFront = relationDeque[relFrontI];
     } else {
       relFrontI = 0;
       relFront = relationDeque[relFrontI];
-	  forwardSet = unionBdd(forwardSet, intersectBdd(relResultFront, backwardSet));
     }
-    std::cout << "7" << std::endl;
-    if(intersectBdd(relResultBack, forwardSet) == leaf_false()) {
+    if(relResultBack == leaf_false()) {
       relBackI++;
       relBack = relationDeque[relBackI];
     } else {
       relBackI = 0;
       relBack = relationDeque[relBackI];
-	  backwardSet = unionBdd(backwardSet, intersectBdd(relResultBack, forwardSet));
     }
-    std::cout << "8" << std::endl;
 
 	  //Add to the forward and backward sets
     forwardSet = unionBdd(forwardSet, relResultFront);
     backwardSet = unionBdd(backwardSet, relResultBack);
-    std::cout << "9" << std::endl;
+
+    std::cout << relFrontI << " " << relBackI << std::endl;
   }
-  std::cout << "500" << std::endl;
+
+  //Save the set that has converged
+  bool frontConverged = relFrontI == relationDeque.size();
+  sylvan::Bdd converged = frontConverged ? forwardSet : backwardSet;
+
+  while(relFrontI < relationDeque.size() || relBackI < relationDeque.size()) {
+    if(frontConverged) { //Hvad hvis begge er converged???
+      sylvan::Bdd relResultBack = differenceBdd(backwardSet.RelPrev(relBack, cube), backwardSet);
+      if(intersectBdd(relResultBack, forwardSet) == leaf_false()) {
+        relBackI++;
+        relBack = relationDeque[relBackI];
+      } else {
+        relBackI = 0;
+        relBack = relationDeque[relBackI];
+        backwardSet = unionBdd(backwardSet, intersectBdd(relResultBack, forwardSet));
+      }
+    } else {
+      sylvan::Bdd relResultFront = differenceBdd(forwardSet.RelNext(relFront, cube), forwardSet);
+      if(intersectBdd(relResultFront, backwardSet) == leaf_false()) {
+        relFrontI++;
+        relFront = relationDeque[relFrontI];
+      } else {
+        relFrontI = 0;
+        relFront = relationDeque[relFrontI];
+        forwardSet = unionBdd(forwardSet, intersectBdd(relResultFront, backwardSet));
+      }
+    }
+  }
 
   //Create SCC
   sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
   std::list<sylvan::Bdd> sccList = {scc};
-  std::cout << "6" << std::endl;
+
   //TEST
   //std::cout << "Found SCC" << std::endl;
   //printBdd(scc);

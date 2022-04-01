@@ -15,8 +15,6 @@
 #include "utilities.h"
 #include "petriTranslation.h"
 
-
-//This crashes but gives what we need..
 std::string getPNMLFilePath(std::string file) {
   char tmp[256];
   std::string cwd = getcwd(tmp, 256);
@@ -24,18 +22,18 @@ std::string getPNMLFilePath(std::string file) {
   int chop = theString.find("lockstep");
 
   theString.erase(chop, std::string::npos);
-  std::string newPath = theString + "PNMLFiles/" + file; 
+  std::string newPath = theString + "PNMLFiles/" + file;
   std::cout << "Current working directory: " << newPath << std::endl;
   return newPath;
 }
 
 sylvan::Bdd makeRelationFromTransition(Transition transition, std::map<std::string, int> placeMap) {
-  sylvan::Bdd resultBdd = leaf_true(); 
+  sylvan::Bdd resultBdd = leaf_true();
   for(Arc arc : transition.sources) {
       //The source places have tokens before the transition
       sylvan::Bdd beforeSource = ithvar(placeMap[arc.source]);
       resultBdd = resultBdd.And(beforeSource);
-      
+
       //After the transition, the source places have no tokens
       sylvan::Bdd afterSource = nithvar(placeMap[arc.source] + 1);
       resultBdd = resultBdd.And(afterSource);
@@ -55,7 +53,7 @@ sylvan::Bdd makeRelationFromTransition(Transition transition, std::map<std::stri
 Graph PNMLtoStringLists() {
   std::string myText;
 
-  std::string path = getPNMLFilePath("HealthRecord/PT/hrec_02.pnml");
+  std::string path = getPNMLFilePath("HealthRecord/PT/hrec_01.pnml");
 
   //Anna computer:
   // /mnt/c/Users/ablum/bachelorprojekt/PNMLFiles/HealthRecord/PT/hrec_01.pnml
@@ -119,23 +117,21 @@ Graph PNMLtoStringLists() {
       std::cout << "Found arc id=" << arc.id << "which is not connected to transition" << std::endl;
     }
   }
-  std::deque<sylvan::Bdd> relations; 
-  for(std::pair<std::string, Transition> key_value : transitionMap) { 
-    sylvan::Bdd relation = makeRelationFromTransition(key_value.second, placeMap); 
-    relations.push_back(relation);
-  }/*
+
+  std::deque<sylvan::Bdd> relations;
   for(std::pair<std::string, Transition> key_value : transitionMap) {
-    std::cout << key_value.second.toString() << std::endl;
-  }*/
-  //TODO: Find numplaces
+    sylvan::Bdd relation = makeRelationFromTransition(key_value.second, placeMap);
+    relations.push_back(relation);
+  }
+
   int numPlaces = placeMap.size();
   std::cout << "numPlaces: " << std::to_string(numPlaces) << std::endl;
   sylvan::BddSet cube = makeCube(numPlaces);
-  
+
   Graph pnmlGraph;
   pnmlGraph.relations = relations;
   pnmlGraph.cube = cube;
-  pnmlGraph.nodes = leaf_true(); 
+  pnmlGraph.nodes = leaf_true();
   // Close the file
   MyReadFile.close();
 
@@ -144,10 +140,8 @@ Graph PNMLtoStringLists() {
   std::cout << "Number of relations:";
   printRelationsAsString(pnmlGraph.relations);
   printMap(placeMap);
-  return pnmlGraph; 
+  return pnmlGraph;
 }
-
-
 
 void printMap(std::map<std::string, int> map) {
   for(std::pair<std::string, int> place : map) {
@@ -254,20 +248,20 @@ Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> 
   Graph graph {};
 
   //Byte translation
-  int nodeBytes = nodes == 1 ? 1 : ceil(log2(nodes));
+  int nodeBits = nodes == 1 ? 1 : ceil(log2(nodes));
 
   std::list<std::string> placeList = {};
   std::string iInBinary;
 
   //Make the nodeset
   for(int i = 0; i < nodes; i++) {
-    iInBinary = decimalToBinaryString(i, nodeBytes);
+    iInBinary = decimalToBinaryString(i, nodeBits);
     placeList.push_back(iInBinary);
   }
   sylvan::Bdd places = makeNodes(placeList);
 
   //Make the cube
-  sylvan::BddSet cube = makeCube(nodeBytes);
+  sylvan::BddSet cube = makeCube(nodeBits);
 
   //Make the relationDeque
   std::list<std::list<std::pair<std::string,std::string>>> newRelations;
@@ -275,8 +269,8 @@ Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> 
     std::list<std::pair<std::string, std::string>> newRelation;
 
     for(std::pair<int,int> pair : relation) {
-      std::string first = decimalToBinaryString(pair.first, nodeBytes);
-      std::string second = decimalToBinaryString(pair.second, nodeBytes);
+      std::string first = decimalToBinaryString(pair.first, nodeBits);
+      std::string second = decimalToBinaryString(pair.second, nodeBits);
       std::pair<std::string, std::string> newPair(first,second);
       newRelation.push_back(newPair);
     }
@@ -290,14 +284,13 @@ Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> 
   return graph;
 }
 
-sylvan::BddSet makeCube(int nodeBytes) {
+sylvan::BddSet makeCube(int nodeBits) {
   sylvan::BddSet cube = sylvan::BddSet();
-  for(int i = 0; i < nodeBytes; i++) {
+  for(int i = 0; i < nodeBits; i++) {
     cube.add(2 * i);
   }
-  return cube;  
+  return cube;
 }
-
 
 //Returns each of the true paths in the BDD as a list of pairs of the form {{x0,0},{x2,1},...,}
 std::list<std::list<std::pair<int, bool>>> bddAsList(std::list<std::pair<int, bool>> &currentPath,
@@ -344,8 +337,6 @@ sylvan::Bdd shiftBdd(const sylvan::Bdd &bdd) {
   return shiftedBdd;
 }
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 /// Pretty printing
 ////////////////////////////////////////////////////////////////////////////////
@@ -391,9 +382,7 @@ std::list<std::string> __printBddAsString(const std::string &currentPath, const 
   return nodeList;
 }
 
-
-
-//Prints the true-paths of the BDD on the form "01x1", where x means either 0 or 1.  
+//Prints the true-paths of the BDD on the form "01x1", where x means either 0 or 1.
 void printBddAsString(int nodes, const sylvan::Bdd &bdd) {
     std::list<std::string> result = __printBddAsString("", bdd);
     std::cout << "Nodes: ";
@@ -427,28 +416,27 @@ std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pai
     }
     return nodeList;
    }
-  
+
   if(bdd.TopVar() % 2 == 0){
     std::string firstBefore = currentPath.first;
     currentPath.first = "x" + std::to_string(bdd.TopVar()) +"=1 " + firstBefore;
     std::list<std::pair<std::string, std::string>> recResult1 =  __printRelationsAsString(currentPath, bdd.Then());
     nodeList.splice(nodeList.end(), recResult1);
-  
+
     currentPath.first = "x" + std::to_string(bdd.TopVar()) +"=0 " + firstBefore;
     std::list<std::pair<std::string, std::string>> recResult2 =  __printRelationsAsString(currentPath, bdd.Else());
     nodeList.splice(nodeList.end(), recResult2);
   } else if(bdd.TopVar() % 2 == 1){
-    
-    std::string secondBefore = currentPath.second; 
+
+    std::string secondBefore = currentPath.second;
     currentPath.second = "x" + std::to_string(bdd.TopVar()-1) +"=1 " + secondBefore;
     std::list<std::pair<std::string, std::string>> recResult1 =  __printRelationsAsString(currentPath, bdd.Then());
     nodeList.splice(nodeList.end(), recResult1);
-  
+
     currentPath.second = "x" + std::to_string(bdd.TopVar()-1) +"=0 " + secondBefore;
     std::list<std::pair<std::string, std::string>> recResult2 =  __printRelationsAsString(currentPath, bdd.Else());
     nodeList.splice(nodeList.end(), recResult2);
   }
-
   return nodeList;
 }
 

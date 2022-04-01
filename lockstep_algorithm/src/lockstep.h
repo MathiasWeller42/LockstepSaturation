@@ -10,5 +10,6 @@
 #include "petriTranslation.h"
 
 std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph);
+std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph);
 
 #endif  //LOCKSTEP_H
