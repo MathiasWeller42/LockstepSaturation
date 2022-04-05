@@ -6,9 +6,9 @@
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
+#include "graph_examples.h"
 #include "../src/lockstep.h"
 #include "../src/utilities.h"
-#include "../src/graph_examples.h"
 #include "../src/petriTranslation.h"
 
 bool testShiftOneNode() {

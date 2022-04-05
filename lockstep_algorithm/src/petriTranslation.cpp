@@ -29,23 +29,45 @@ std::string getPNMLFilePath(std::string file) {
 
 sylvan::Bdd makeRelationFromTransition(Transition transition, std::map<std::string, int> placeMap) {
   sylvan::Bdd resultBdd = leaf_true();
+
+  std::cout << std::endl << std::endl;
+  std::cout << "New relation from transition " << transition.id << std::endl;
+  std::cout << "True";
+
   for(Arc arc : transition.sources) {
-      //The source places have tokens before the transition
-      sylvan::Bdd beforeSource = ithvar(placeMap[arc.source]);
-      resultBdd = resultBdd.And(beforeSource);
+      if(placeMap.count(arc.source)) {
+        //The source places have tokens before the transition
+        int placeNum = placeMap[arc.source];
+        std::cout << " and " << placeNum;
+        sylvan::Bdd beforeSource = ithvar(placeNum);
+        resultBdd = resultBdd.And(beforeSource);
 
-      //After the transition, the source places have no tokens
-      sylvan::Bdd afterSource = nithvar(placeMap[arc.source] + 1);
-      resultBdd = resultBdd.And(afterSource);
+        //After the transition, the source places have no tokens
+        std::cout << " and !" << placeNum+1;
+        sylvan::Bdd afterSource = nithvar(placeNum + 1);
+        resultBdd = resultBdd.And(afterSource);
+      } else {
+        std::cout << "Place " << arc.source << " not found in PlaceMap" << std::endl;
+        std::cout << arc.source << " should be source to transition " << transition.id << std::endl;
+      }
   }
-  for(Arc arc : transition.targets) {
-    //The target places have no tokens before the transition
-    sylvan::Bdd beforeTarget = nithvar(placeMap[arc.target]);
-    resultBdd = resultBdd.And(beforeTarget);
 
-    //After the transition, the target places now have tokens
-    sylvan::Bdd afterTarget = ithvar(placeMap[arc.target] + 1);
-    resultBdd = resultBdd.And(afterTarget);
+  for(Arc arc : transition.targets) {
+    if(placeMap.count(arc.target)) {
+      //The target places have no tokens before the transition
+      int placeNum = placeMap[arc.target];
+      /*std::cout << " and !" << placeNum;
+      sylvan::Bdd beforeTarget = nithvar(placeNum);
+      resultBdd = resultBdd.And(beforeTarget);*/
+
+      //After the transition, the target places now have tokens
+      std::cout << " and " << placeNum+1;
+      sylvan::Bdd afterTarget = ithvar(placeNum + 1);
+      resultBdd = resultBdd.And(afterTarget);
+    } else {
+      std::cout << "Place " << arc.target << " not found in PlaceMap" << std::endl;
+      std::cout << arc.target << " should be target of transition " << transition.id << std::endl;
+    }
   }
   return resultBdd;
 }
@@ -53,7 +75,7 @@ sylvan::Bdd makeRelationFromTransition(Transition transition, std::map<std::stri
 Graph PNMLtoStringLists() {
   std::string myText;
 
-  std::string path = getPNMLFilePath("HealthRecord/PT/hrec_01.pnml");
+  std::string path = getPNMLFilePath("SimpleLoadBal/PT/simple_lbs-2.pnml");
 
   //Anna computer:
   // /mnt/c/Users/ablum/bachelorprojekt/PNMLFiles/HealthRecord/PT/hrec_01.pnml
@@ -100,27 +122,51 @@ Graph PNMLtoStringLists() {
       arc.source = source;
       //find target
       startpos = myText.find("target=\"");
-      endpos = myText.find("\"/>");
+      endpos = myText.find("\">");
       std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
       arc.target = target;
       //push the arc
       arcList.push_back(arc);
+
+      /*
+       startpos = myText.find("target=\"");
+      endpos = myText.find("\"/>");
+      std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
+      arc.target = target;
+      */
     }
   }
+
   //Distribute arcs to the different transitions
   for(Arc arc : arcList) {
     if(transitionMap.count(arc.source)) {
       transitionMap[arc.source].targets.push_back(arc);
+      if(! placeMap.count(arc.target)) {
+        std::cout << "no place found for arc: " << arc.toString() << std::endl;
+      }
     } else if(transitionMap.count(arc.target)) {
       transitionMap[arc.target].sources.push_back(arc);
+      if(! placeMap.count(arc.source)) {
+        std::cout << "no place found for arc: " << arc.toString() << std::endl;
+      }
     } else {
-      std::cout << "Found arc id=" << arc.id << "which is not connected to transition" << std::endl;
+      std::cout << "Found arc which is not connected to transition" << std::endl;
+      std::cout << "id: " << std::endl;
+      std::cout << arc.id << std::endl;
+      std::cout << "source: " << std::endl;
+      std::cout << arc.source << std::endl;
+      std::cout << "target: " << std::endl;
+      std::cout << arc.target << std::endl;
+      break;
     }
   }
 
   std::deque<sylvan::Bdd> relations;
   for(std::pair<std::string, Transition> key_value : transitionMap) {
+    //std::cout << key_value.second.toString() << std::endl;
     sylvan::Bdd relation = makeRelationFromTransition(key_value.second, placeMap);
+    //printSingleRelationAsString(relation);
+    //printBdd(relation);
     relations.push_back(relation);
   }
 
@@ -135,11 +181,11 @@ Graph PNMLtoStringLists() {
   // Close the file
   MyReadFile.close();
 
-  std::cout << "All states in the graph:" << std::endl;
-  printBddAsString(pnmlGraph.cube.size(), pnmlGraph.nodes);
-  std::cout << "Number of relations:";
-  printRelationsAsString(pnmlGraph.relations);
-  printMap(placeMap);
+  //std::cout << "All states in the graph:" << std::endl;
+  //printBddAsString(pnmlGraph.cube.size(), pnmlGraph.nodes);
+  std::cout << "Number of relations: " << pnmlGraph.relations.size() << std::endl;
+  //printRelationsAsString(pnmlGraph.relations);
+  //printMap(placeMap);
   return pnmlGraph;
 }
 
@@ -440,15 +486,18 @@ std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pai
   return nodeList;
 }
 
-
-void printRelationsAsString(std::deque<sylvan::Bdd> relations) {
-  for(sylvan::Bdd relation : relations) {
+void printSingleRelationAsString(sylvan::Bdd relation) {
     std::cout << "Here is a relation: " << std::endl;
     std::pair<std::string, std::string> pair("","");
     std::list<std::pair<std::string, std::string>> pathList = __printRelationsAsString(pair, relation);
     for(std::pair<std::string, std::string> path : pathList) {
       std::cout <<"Before "<< path.first << std::endl;
       std::cout <<"After  "<< path.second << std::endl;
-    } 
+    }
+}
+
+void printRelationsAsString(std::deque<sylvan::Bdd> relations) {
+  for(sylvan::Bdd relation : relations) {
+    printSingleRelationAsString(relation);
   }
 }

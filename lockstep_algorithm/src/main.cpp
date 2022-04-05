@@ -9,7 +9,7 @@
 #include "petriTranslation.h"
 #include "set_test.h"
 #include "lockstep_test.h"
-#include "graph_examples.h"
+#include "../test/graph_examples.h"
 
 int main() {
 
@@ -29,8 +29,7 @@ int main() {
   std::cout << "Hello World!" << std::endl;
 
   Graph bigGraph = PNMLtoStringLists();
-  //printRelationsAsString(bigGraph.relations);
-  simpleTestGraph(bigGraph);
+  printBddAsString(bigGraph.cube.size(), bigGraph.nodes);
 
   std::cout << "Goodbye :)" << std::endl;
 

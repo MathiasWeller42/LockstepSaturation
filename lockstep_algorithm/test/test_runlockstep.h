@@ -8,21 +8,25 @@
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
+#include "graph_examples.h"
 #include "../src/lockstep.h"
 #include "../src/utilities.h"
-#include "../src/graph_examples.h"
 #include "../src/petriTranslation.h"
 
-bool testNoGraph();
-bool testOneNodeGraph();
-bool testOneNodeGraphSelfLoop();
-bool testTwoNodeGraphOneSCC();
-bool testTwoNodeGraphTwoSCCs();
-bool testTwoNodeGraphTwoRelations();
-bool testNonConnectedGraph();
-bool testfourNodesOneRelation();
-bool testGraphExample1oneRel();
-bool testGraphExample1multRel();
+bool testNoGraph(bool saturation);
+bool testOneNodeGraph(bool saturation);
+bool testOneNodeGraphSelfLoop(bool saturation);
+bool testTwoNodeGraphOneSCC(bool saturation);
+bool testTwoNodeGraphTwoSCCs(bool saturation);
+bool testTwoNodeGraphTwoRelations(bool saturation);
+bool testNonConnectedGraph(bool saturation);
+bool testfourNodesOneRelation(bool saturation);
+bool testGraphExample1oneRel(bool saturation);
+bool testGraphExample1multRel(bool saturation);
+bool testGraphExample2oneRel(bool saturation);
+bool testGraphExample2multRel(bool saturation);
+bool testGraphExample3oneRel(bool saturation);
+bool testGraphExample3multRel(bool saturation);
 
 bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> expectedSCCs);
 

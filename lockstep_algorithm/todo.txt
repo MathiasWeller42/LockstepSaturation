@@ -1,30 +1,28 @@
 Den mest dank-swaggern todo-liste #WØRF
 -----------------------------------------------
-TODO 1 : Test UpdateRelation(s)
 TODO 2 : Lav relativt simpelt 1-safe PNML eksempel vi kan afprøve vores lockstep på
-!!TODO 3 : Find ud af hvorfor vi segfaulter på Petri Net
-!!TODO 4 : Få PNMLtoStringLists til at virke på mere end health records (evt. xml reader eller mere generel måde at læse på)
-TODO whatever : implementer almindelig lockstep
+TODO j : Skal vi køre image/preimage på hele forward-sættet eller kun på front?
 
 TODO i : Husk at tests er en ting...
 
-TODO 6 : PNML PAIN
-TODO 7 : Relative path masochisme
-TODO 9 : Forstå Petri nets
+TODO 9000 : Forstå Petri nets
 
-TODO : Græd
-TODO : #Forskning
-TODO : Græd i Jacos skød
+TODO x : Græd
+TODO y : #Forskning
+TODO z : Græd i Jacos skød
 
-TODO : ???
-TODO : Profit
-TODO : Søvn
+TODO w : ???
+TODO phi : Profit
+TODO omega : Søvn
+TODO CLXXXVII : Få et liv
 
 ----
 Ting vi skal snakke med Jaco og Andreas om:
 - order of relations
 - hvordan ved vi at vi returnerer de rigtige SCC'er
-- hastighed / plads på computeren (2^117 små BDD kan ikke være der)
+- hastighed / plads på computeren (2^117 små BDD'er kan ikke være der)
+- hvad er vi HELT PRÆCIST garanteret når et PN er 1-safe?
+- hvad gør vi med self-loops?
 
 -------------------------------------------------
 *Made By Mathias Weller* (Han tager fuldt ansvar) M.I.S.

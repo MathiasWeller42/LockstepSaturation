@@ -70,6 +70,7 @@ sylvan::BddSet makeCube(int nodeBytes);
 void printBdd(const sylvan::Bdd &bdd);
 void printBddAsString2(const sylvan::Bdd &bdd);
 void printBddAsString(int nodes, const sylvan::Bdd &bdd);
+void printSingleRelationAsString(sylvan::Bdd relation);
 
 sylvan::Bdd shiftBdd(const sylvan::Bdd &bdd);
 
