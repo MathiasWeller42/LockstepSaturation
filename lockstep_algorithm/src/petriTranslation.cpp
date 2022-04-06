@@ -506,30 +506,35 @@ std::list<std::string> __printBddAsString(const std::string &currentPath, const 
   return nodeList;
 }
 
-//Prints the true-paths of the BDD on the form "01x1", where x means either 0 or 1.
+//Prints the true-paths of the BDD on the form "01x1", where x means either 0 or 1, and the total number of nodes the BDD represents
 void printBddAsString(int nodes, const sylvan::Bdd &bdd) {
     std::list<std::string> result = __printBddAsString("", bdd);
     std::cout << "Nodes: ";
-
+    int totalNoOfNodes = 0;
     std::list<std::string> newNodes;
     for(std::string node : result) {
+      int noOfNodes = 1;
       std::string arr [nodes];
       for (int i = 0; i < nodes*2; i = i+2) {
         std::string theString = std::to_string(i);
-        std::string searchString = "x" + theString;
+        std::string searchString = "x" + theString + "=";
         int exists = node.find(searchString);
         if(exists == -1){
           arr[nodes-1 - i/2] = "x";
+          noOfNodes = noOfNodes * 2;
         } else {
           int len = searchString.length();
-          arr[nodes-1 - i/2] = node.substr(exists+len+1, 1);
+          arr[nodes-1 - i/2] = node.substr(exists+len, 1);
         }
       }
+      totalNoOfNodes = totalNoOfNodes + noOfNodes;
       std::cout << "  ";
       for(std::string str : arr ) {
         std::cout << str << "";
       }
     }
+    //Måske ikke relevant med mængden af nodes -  kan fjernes nemt. 
+    std::cout << std::endl << "Number of nodes: " << std::to_string(totalNoOfNodes);
     std::cout << std::endl << std::endl;
 }
 

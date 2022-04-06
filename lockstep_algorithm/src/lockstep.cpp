@@ -125,7 +125,7 @@ std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
   //Create SCC
   sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
   std::list<sylvan::Bdd> sccList = {scc};
-  std::cout << "Found an SCC bros! XD" << std::endl;
+  std::cout << "New SCC:" << std::endl;
   printBddAsString(32, scc);
   /*std::list<std::string> stringList = __printBddAsString("", scc);
     for(std::string s : stringList) {
@@ -134,16 +134,25 @@ std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
   //printBdd(scc);
 
   //Recursive calls
+
+  //Call 1
   sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
   std::deque<Relation> recRelations1 = updateRelations(relationDeque, recBdd1);
   Graph recursiveGraph1 = {recBdd1, fullCube, recRelations1};
 
+  std::cout << std::endl << "Rec Call 1 graph nodes: " << std::endl;
+  printBddAsString(32, recursiveGraph1.nodes);
+
   std::list<sylvan::Bdd> recursiveResult1 = lockstepSaturation(recursiveGraph1);
   sccList.splice(sccList.end(), recursiveResult1);
 
+  //Call 2
   sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
   std::deque<Relation> recRelations2 = updateRelations(relationDeque, recBdd2);
   Graph recursiveGraph2 = {recBdd2, fullCube, recRelations2};
+
+  std::cout << std::endl << "Rec Call 2 graph nodes: " << std::endl;
+  printBddAsString(32, recursiveGraph2.nodes);
 
   std::list<sylvan::Bdd> recursiveResult2 = lockstepSaturation(recursiveGraph2);
   sccList.splice(sccList.end(), recursiveResult2);
@@ -239,6 +248,8 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
   std::list<sylvan::Bdd> sccList = {scc};
 
   //Recursive calls
+
+  //Call 1
   sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
   std::deque<Relation> recRelations1 = updateRelations(relationDeque, recBdd1);
   Graph recursiveGraph1 = {recBdd1, fullCube, recRelations1};
@@ -246,6 +257,7 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
   std::list<sylvan::Bdd> recursiveResult1 = lockstepSaturation(recursiveGraph1);
   sccList.splice(sccList.end(), recursiveResult1);
 
+  //Call 2
   sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
   std::deque<Relation> recRelations2 = updateRelations(relationDeque, recBdd2);
   Graph recursiveGraph2 = {recBdd2, fullCube, recRelations2};
