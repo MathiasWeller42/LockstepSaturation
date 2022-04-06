@@ -2,6 +2,7 @@ Den mest dank-swaggern todo-liste #WØRF
 -----------------------------------------------
 TODO 2 : Lav relativt simpelt 1-safe PNML eksempel vi kan afprøve vores lockstep på
 TODO j : Skal vi køre image/preimage på hele forward-sættet eller kun på front?
+TODO 7 : Fix så vi ikke skal udkommentere kode i petriTranslation hele tiden
 
 TODO i : Husk at tests er en ting...
 
@@ -9,20 +10,21 @@ TODO 9000 : Forstå Petri nets
 
 TODO x : Græd
 TODO y : #Forskning
-TODO z : Græd i Jacos skød
+TODO z : Græd i Jaco-raklets skød
 
 TODO w : ???
 TODO phi : Profit
 TODO omega : Søvn
-TODO CLXXXVII : Få et liv
+TODO CXXXVII : Få et liv
 
 ----
 Ting vi skal snakke med Jaco og Andreas om:
-- order of relations
+- order of relations - try to do something reasonable
 - hvordan ved vi at vi returnerer de rigtige SCC'er
-- hastighed / plads på computeren (2^117 små BDD'er kan ikke være der)
-- hvad er vi HELT PRÆCIST garanteret når et PN er 1-safe?
-- hvad gør vi med self-loops?
+- hastighed / plads på computeren (2^117 små BDD'er kan ikke være der) - pruning for at fjerne de helt små SCC'er, måske noget specifikt for saturation
+- hvad er vi HELT PRÆCIST garanteret når et PN er 1-safe? behøver ikke tjekke at targets er tomme
+- hvad gør vi med self-loops? (vi har et nemt fix - tjek)
+- how to enforce at vi ikke ændrer andre ting når vi tager en transition? (XNOR på resten - hvordan gør andre? det er et generelt problem, kan det fikses med cube?)
 
 -------------------------------------------------
 *Made By Mathias Weller* (Han tager fuldt ansvar) M.I.S.

@@ -28,8 +28,10 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
+
   Graph bigGraph = PNMLtoStringLists();
   printBddAsString(bigGraph.cube.size(), bigGraph.nodes);
+  simpleTestGraph(bigGraph);
 
   std::cout << "Goodbye :)" << std::endl;
 

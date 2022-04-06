@@ -74,4 +74,9 @@ void printSingleRelationAsString(sylvan::Bdd relation);
 
 sylvan::Bdd shiftBdd(const sylvan::Bdd &bdd);
 
+
+//List operations
+std::list<int> union_lists(std::list<int> &list1, std::list<int> &list2);
+std::list<int> intersect_lists(std::list<int> &list1, std::list<int> &list2);
+std::list<int> difference_lists(std::list<int> &list1, std::list<int> &list2);
 #endif //PETRI_TRANSLATION_H

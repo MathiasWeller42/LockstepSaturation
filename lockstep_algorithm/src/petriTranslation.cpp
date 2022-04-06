@@ -6,7 +6,9 @@
 #include <bitset>
 #include <unistd.h>
 #include <math.h>
+#include <algorithm>
 #include <string>
+#include <functional>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
@@ -15,7 +17,7 @@
 #include "utilities.h"
 #include "petriTranslation.h"
 
-std::string getPNMLFilePath(std::string file) {
+inline std::string getPNMLFilePath(std::string file) {
   char tmp[256];
   std::string cwd = getcwd(tmp, 256);
   std::string theString(tmp);
@@ -27,55 +29,126 @@ std::string getPNMLFilePath(std::string file) {
   return newPath;
 }
 
-sylvan::Bdd makeRelationFromTransition(Transition transition, std::map<std::string, int> placeMap) {
+std::list<int> union_lists(std::list<int> &list1, std::list<int> &list2) {
+  list1.sort();
+  list2.sort();
+  std::list<int> out;
+  std::set_union(list1.begin(), list1.end(), list2.begin(), list2.end(), std::back_inserter(out));
+  return out;
+}
+  
+
+/*
+std::sort(list1.begin(), list1.end());
+std::sort(list2.begin(), list2.end());
+return std::set_union(list1.begin(), list1.end(), list2.begin(), list2.end(), std::less);
+*/
+
+std::list<int> intersect_lists(std::list<int> &list1, std::list<int> &list2) {
+  list1.sort();
+  list2.sort();
+  std::list<int> out;
+  std::set_intersection(list1.begin(), list1.end(), list2.begin(), list2.end(), std::back_inserter(out));
+  return out;
+}
+
+std::list<int> difference_lists(std::list<int> &list1, std::list<int> &list2) {
+  list1.sort();
+  list2.sort();
+  std::list<int> out;
+  std::set_difference(list1.begin(), list1.end(), list2.begin(), list2.end(), std::back_inserter(out));
+  return out;
+}
+
+inline sylvan::Bdd makeRelationFromTransition(Transition transition, std::map<std::string, int> placeMap) {
   sylvan::Bdd resultBdd = leaf_true();
+
+  //The set of vars included in the transition
+  std::list<int> sources = {};
+  std::list<int> targets = {};
 
   std::cout << std::endl << std::endl;
   std::cout << "New relation from transition " << transition.id << std::endl;
   std::cout << "True";
 
+  //Handeling selfie-loopsickleszzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
   for(Arc arc : transition.sources) {
-      if(placeMap.count(arc.source)) {
-        //The source places have tokens before the transition
-        int placeNum = placeMap[arc.source];
-        std::cout << " and " << placeNum;
-        sylvan::Bdd beforeSource = ithvar(placeNum);
-        resultBdd = resultBdd.And(beforeSource);
-
-        //After the transition, the source places have no tokens
-        std::cout << " and !" << placeNum+1;
-        sylvan::Bdd afterSource = nithvar(placeNum + 1);
-        resultBdd = resultBdd.And(afterSource);
-      } else {
-        std::cout << "Place " << arc.source << " not found in PlaceMap" << std::endl;
-        std::cout << arc.source << " should be source to transition " << transition.id << std::endl;
-      }
+    if(placeMap.count(arc.source)) {
+      int placeNum = placeMap[arc.source];
+      sources.push_back(placeNum);
+    } else {
+      std::cout << "Place " << arc.source << " not found in PlaceMap" << std::endl;
+      std::cout << arc.source << " should be source to transition " << transition.id << std::endl;
+      std::exit(-1);
+    }
   }
-
   for(Arc arc : transition.targets) {
     if(placeMap.count(arc.target)) {
-      //The target places have no tokens before the transition
       int placeNum = placeMap[arc.target];
-      /*std::cout << " and !" << placeNum;
-      sylvan::Bdd beforeTarget = nithvar(placeNum);
-      resultBdd = resultBdd.And(beforeTarget);*/
-
-      //After the transition, the target places now have tokens
-      std::cout << " and " << placeNum+1;
-      sylvan::Bdd afterTarget = ithvar(placeNum + 1);
-      resultBdd = resultBdd.And(afterTarget);
+      targets.push_back(placeNum);
     } else {
       std::cout << "Place " << arc.target << " not found in PlaceMap" << std::endl;
       std::cout << arc.target << " should be target of transition " << transition.id << std::endl;
+      std::exit(-1);
     }
   }
+
+  std::list<int> selfLoops = intersect_lists(sources, targets);
+  std::list<int> newSources = difference_lists(sources, targets);
+  std::list<int> newTargets = difference_lists(targets, sources);
+
+  for(int placeNum : selfLoops) {
+    sylvan::Bdd beforeSource = ithvar(placeNum);
+    resultBdd = resultBdd.And(beforeSource);
+    std::cout << " and x" << placeNum;
+
+    sylvan::Bdd afterSource = ithvar(placeNum+1);
+    resultBdd = resultBdd.And(afterSource);
+    std::cout << " and x" << placeNum+1;
+  }
+
+  for(int placeNum : newSources) {
+    //The source places have tokens before the transition
+    std::cout << " and x" << placeNum;
+    sylvan::Bdd beforeSource = ithvar(placeNum);
+    resultBdd = resultBdd.And(beforeSource);
+
+    //After the transition, the source places have no tokens
+    std::cout << " and !x" << placeNum+1;
+    sylvan::Bdd afterSource = nithvar(placeNum + 1);
+    resultBdd = resultBdd.And(afterSource);
+  }
+
+  for(int placeNum : newTargets) {
+    //The target places have no tokens before the transition
+    //TODO: Overvej om det kan fjerererererernes.
+    std::cout << " and !x" << placeNum;
+    sylvan::Bdd beforeTarget = nithvar(placeNum);
+    resultBdd = resultBdd.And(beforeTarget);
+
+    //After the transition, the target places now have tokens
+    std::cout << " and x" << placeNum+1;
+    sylvan::Bdd afterTarget = ithvar(placeNum + 1);
+    resultBdd = resultBdd.And(afterTarget);
+  }
+
+  //The vars not in the transition should be fixed in place in the relation
+  /*for(std::pair<std::string, int> place : placeMap) {
+    int currentVar = place.second;
+    bool varInTransition = std::find(varSet.begin(), varSet.end(), currentVar) != varSet.end();
+    if(!varInTransition) {
+      std::cout << " and (x" << currentVar << " XNOR x" << currentVar+1 <<")";
+      resultBdd = resultBdd.And(ithvar(currentVar).Xnor(ithvar(currentVar + 1)));
+    }
+  }*/
+
   return resultBdd;
 }
 
 Graph PNMLtoStringLists() {
   std::string myText;
 
-  std::string path = getPNMLFilePath("SimpleLoadBal/PT/simple_lbs-2.pnml");
+  std::string path = getPNMLFilePath("HealthRecord/PT/hrec_userdef.pnml");
 
   //Anna computer:
   // /mnt/c/Users/ablum/bachelorprojekt/PNMLFiles/HealthRecord/PT/hrec_01.pnml
@@ -115,25 +188,26 @@ Graph PNMLtoStringLists() {
       int endpos = myText.find("\" ");
       std::string id = myText.substr(startpos + 4, endpos-(startpos+4));
       arc.id = id;
+
       //find source
       startpos = myText.find("source=\"");
       endpos = myText.find("\" t");
       std::string source = myText.substr(startpos + 8, endpos-(startpos+8));
       arc.source = source;
+
       //find target
-      startpos = myText.find("target=\"");
+      /*startpos = myText.find("target=\"");
       endpos = myText.find("\">");
       std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
-      arc.target = target;
-      //push the arc
-      arcList.push_back(arc);
+      arc.target = target;*/
 
-      /*
-       startpos = myText.find("target=\"");
+      startpos = myText.find("target=\"");
       endpos = myText.find("\"/>");
       std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
       arc.target = target;
-      */
+
+      //push the arc
+      arcList.push_back(arc);
     }
   }
 
@@ -141,12 +215,12 @@ Graph PNMLtoStringLists() {
   for(Arc arc : arcList) {
     if(transitionMap.count(arc.source)) {
       transitionMap[arc.source].targets.push_back(arc);
-      if(! placeMap.count(arc.target)) {
+      if(!placeMap.count(arc.target)) {
         std::cout << "no place found for arc: " << arc.toString() << std::endl;
       }
     } else if(transitionMap.count(arc.target)) {
       transitionMap[arc.target].sources.push_back(arc);
-      if(! placeMap.count(arc.source)) {
+      if(!placeMap.count(arc.source)) {
         std::cout << "no place found for arc: " << arc.toString() << std::endl;
       }
     } else {
@@ -157,7 +231,7 @@ Graph PNMLtoStringLists() {
       std::cout << arc.source << std::endl;
       std::cout << "target: " << std::endl;
       std::cout << arc.target << std::endl;
-      break;
+      std::exit(-1);
     }
   }
 
@@ -165,12 +239,13 @@ Graph PNMLtoStringLists() {
   for(std::pair<std::string, Transition> key_value : transitionMap) {
     //std::cout << key_value.second.toString() << std::endl;
     sylvan::Bdd relation = makeRelationFromTransition(key_value.second, placeMap);
-    //printSingleRelationAsString(relation);
-    //printBdd(relation);
+    printSingleRelationAsString(relation);
+    printBdd(relation);
     relations.push_back(relation);
   }
 
   int numPlaces = placeMap.size();
+  std::cout << std::endl << std::endl;
   std::cout << "numPlaces: " << std::to_string(numPlaces) << std::endl;
   sylvan::BddSet cube = makeCube(numPlaces);
 
@@ -189,7 +264,7 @@ Graph PNMLtoStringLists() {
   return pnmlGraph;
 }
 
-void printMap(std::map<std::string, int> map) {
+inline void printMap(std::map<std::string, int> map) {
   for(std::pair<std::string, int> place : map) {
     std::cout << "key: " << place.first << ", value: " << place.second << std::endl;
   }
@@ -226,7 +301,7 @@ sylvan::Bdd makeNodes(std::list<std::string> &bitstrings) {
   return resultBdd;
 }
 
-sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo) {
+inline sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo) {
   int nFrom = bitstringFrom.length();
   bool currentBitFrom;
   sylvan::Bdd currentBddFrom;
@@ -255,7 +330,7 @@ sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo) {
   return resultBdd;
 }
 
-sylvan::Bdd makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings) {
+inline sylvan::Bdd makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings) {
   sylvan::Bdd currentBdd;
   sylvan::Bdd resultBdd = leaf_false();
   for(std::pair<std::string, std::string> currentPair : bitstrings) {
@@ -265,7 +340,7 @@ sylvan::Bdd makeRelation(std::list<std::pair<std::string, std::string>> &bitstri
   return resultBdd;
 }
 
-std::deque<sylvan::Bdd> makeRelations(std::list<std::list<std::pair<std::string, std::string>>> &bitstrings) {
+inline std::deque<sylvan::Bdd> makeRelations(std::list<std::list<std::pair<std::string, std::string>>> &bitstrings) {
   std::deque<sylvan::Bdd> transitions;
   sylvan::Bdd currentBdd;
   for(std::list<std::pair<std::string, std::string>> currentBitstringList : bitstrings) {
@@ -275,7 +350,7 @@ std::deque<sylvan::Bdd> makeRelations(std::list<std::list<std::pair<std::string,
   return transitions;
 }
 
-std::string decimalToBinaryString(int number, int bytes) {
+inline std::string decimalToBinaryString(int number, int bytes) {
   std::string binary = "";
   int mask = 1;
   for(int i = 0; i < bytes; i++) {
@@ -290,7 +365,7 @@ std::string decimalToBinaryString(int number, int bytes) {
 }
 
 //Main function for making graphs, takes as input (noOfNodes, relations={{(0,1),(1,0),(2,0)}, {(2,3)}})
-Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> &relations) {
+inline Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> &relations) {
   Graph graph {};
 
   //Byte translation
@@ -330,7 +405,7 @@ Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> 
   return graph;
 }
 
-sylvan::BddSet makeCube(int nodeBits) {
+inline sylvan::BddSet makeCube(int nodeBits) {
   sylvan::BddSet cube = sylvan::BddSet();
   for(int i = 0; i < nodeBits; i++) {
     cube.add(2 * i);
@@ -339,7 +414,7 @@ sylvan::BddSet makeCube(int nodeBits) {
 }
 
 //Returns each of the true paths in the BDD as a list of pairs of the form {{x0,0},{x2,1},...,}
-std::list<std::list<std::pair<int, bool>>> bddAsList(std::list<std::pair<int, bool>> &currentPath,
+inline std::list<std::list<std::pair<int, bool>>> bddAsList(std::list<std::pair<int, bool>> &currentPath,
                                                      const sylvan::Bdd &bdd) {
   std::list<std::list<std::pair<int, bool>>> nodeList = {};
   if(bdd.isTerminal()) {
@@ -388,7 +463,7 @@ sylvan::Bdd shiftBdd(const sylvan::Bdd &bdd) {
 ////////////////////////////////////////////////////////////////////////////////
 
 //HELPER workhorse function for printing the bdd diagram
-void __printBdd(const std::string &prefix, const sylvan::Bdd &bdd, bool isLeft) {
+inline void __printBdd(const std::string &prefix, const sylvan::Bdd &bdd, bool isLeft) {
   std::cout << prefix;
 
   std::cout << (isLeft ? "├─T─" : "└─F─" );
@@ -411,7 +486,7 @@ void printBdd(const sylvan::Bdd &bdd) {
 }
 
 //HELPER work horse function for printing the nodes of the bdd via the true paths
-std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd) {
+inline std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd) {
    std::list<std::string> nodeList = {};
    if(bdd.isTerminal()){
     if(bdd.isOne()) {
@@ -454,7 +529,7 @@ void printBddAsString(int nodes, const sylvan::Bdd &bdd) {
 }
 
 //HELPER work horse function for printing the nodes of the bdd via the true paths
-std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pair<std::string, std::string> currentPath, const sylvan::Bdd &bdd) {
+inline std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pair<std::string, std::string> currentPath, const sylvan::Bdd &bdd) {
    std::list<std::pair<std::string, std::string>> nodeList = {};
    if(bdd.isTerminal()){
     if(bdd.isOne()) {
@@ -486,7 +561,7 @@ std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pai
   return nodeList;
 }
 
-void printSingleRelationAsString(sylvan::Bdd relation) {
+inline void printSingleRelationAsString(sylvan::Bdd relation) {
     std::cout << "Here is a relation: " << std::endl;
     std::pair<std::string, std::string> pair("","");
     std::list<std::pair<std::string, std::string>> pathList = __printRelationsAsString(pair, relation);
@@ -496,7 +571,7 @@ void printSingleRelationAsString(sylvan::Bdd relation) {
     }
 }
 
-void printRelationsAsString(std::deque<sylvan::Bdd> relations) {
+inline void printRelationsAsString(std::deque<sylvan::Bdd> relations) {
   for(sylvan::Bdd relation : relations) {
     printSingleRelationAsString(relation);
   }

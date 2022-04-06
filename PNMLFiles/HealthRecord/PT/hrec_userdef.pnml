@@ -6,12 +6,12 @@
 <place id="p0"><name><text>p0</text></name></place>
 <place id="p1"><name><text>p1</text></name></place>
 <place id="p2"><name><text>p2</text></name></place>
-<place id="p3"><name><text>p3</text></name></place>
 
 <transition id="t0"><name><text>t0</text></name></transition>
 <arc id="a0" source="p0" target="t0"/>
 <arc id="a1" source="t0" target="p1"/>
+<arc id="a1" source="t0" target="p0"/>
 
 <transition id="t1"><name><text>t1</text></name></transition>
-<arc id="a2" source="p2" target="t0"/>
-<arc id="a3" source="t1" target="p3"/>
+<arc id="a2" source="p1" target="t1"/>
+<arc id="a3" source="t1" target="p2"/>
