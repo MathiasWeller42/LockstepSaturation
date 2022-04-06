@@ -5,5 +5,6 @@
 
 void simpleTestGraph(Graph graph);
 void union_test();
+void testCubes();
 
 #endif //LOCKSTEP_TEST_H

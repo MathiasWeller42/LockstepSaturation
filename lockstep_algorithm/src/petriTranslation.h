@@ -11,10 +11,16 @@
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
+struct Relation {
+  sylvan::Bdd relationBdd;
+  sylvan::BddSet cube;
+  int top;
+};
+
 struct Graph {
   sylvan::Bdd nodes;
   sylvan::BddSet cube;
-  std::deque<sylvan::Bdd> relations;
+  std::deque<Relation> relations;
 };
 
 struct Arc {
@@ -49,34 +55,31 @@ struct Transition {
     }
     return "I'm a transition id: " + id + "\n" + std::to_string(sourceNo) + " " + sourceString + std::to_string(targetNo) + " " + targetString;
   }
-
 };
 
 sylvan::Bdd makeNode(std::string &bitstring);
 sylvan::Bdd makeNodes(std::list<std::string> &bitstrings);
 sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo);
-sylvan::Bdd makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings);
-std::deque<sylvan::Bdd> makeRelations(std::list<std::list<std::pair<std::string, std::string>>> &bitstrings);
+Relation makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings, sylvan::BddSet cube);
+std::deque<Relation> makeRelations(std::list<std::list<std::pair<std::string, std::string>>> &bitstrings, sylvan::BddSet cube);
 
 void printMap(std::map<std::string, int> map);
 
-Graph PNMLtoStringLists();
-void printRelationsAsString(std::deque<sylvan::Bdd> relations);
+Graph PNMLtoGraph();
 std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pair<std::string, std::string> currentPath, const sylvan::Bdd &bdd);
 
 Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> &relations);
 sylvan::BddSet makeCube(int nodeBytes);
 
 void printBdd(const sylvan::Bdd &bdd);
-void printBddAsString2(const sylvan::Bdd &bdd);
 void printBddAsString(int nodes, const sylvan::Bdd &bdd);
 void printSingleRelationAsString(sylvan::Bdd relation);
+void printRelationsAsString(std::deque<sylvan::Bdd> relations);
 
 sylvan::Bdd shiftBdd(const sylvan::Bdd &bdd);
 
-
 //List operations
-std::list<int> union_lists(std::list<int> &list1, std::list<int> &list2);
-std::list<int> intersect_lists(std::list<int> &list1, std::list<int> &list2);
-std::list<int> difference_lists(std::list<int> &list1, std::list<int> &list2);
+std::list<int> list_union(std::list<int> &list1, std::list<int> &list2);
+std::list<int> list_intersect(std::list<int> &list1, std::list<int> &list2);
+std::list<int> list_difference(std::list<int> &list1, std::list<int> &list2);
 #endif //PETRI_TRANSLATION_H

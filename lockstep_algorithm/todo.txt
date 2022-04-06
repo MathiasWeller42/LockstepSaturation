@@ -1,11 +1,12 @@
 Den mest dank-swaggern todo-liste #WØRF
 -----------------------------------------------
-TODO 2 : Lav relativt simpelt 1-safe PNML eksempel vi kan afprøve vores lockstep på
+TODO 1 : Update relations i Lockstep bør evt. også opdatere cube og top for vores relation
 TODO j : Skal vi køre image/preimage på hele forward-sættet eller kun på front?
 TODO 7 : Fix så vi ikke skal udkommentere kode i petriTranslation hele tiden
+TODO 8 : Lav en orden for relations
+
 
 TODO i : Husk at tests er en ting...
-
 TODO 9000 : Forstå Petri nets
 
 TODO x : Græd
@@ -17,8 +18,12 @@ TODO phi : Profit
 TODO omega : Søvn
 TODO CXXXVII : Få et liv
 
+
+
+
+
 ----
-Ting vi skal snakke med Jaco og Andreas om:
+Ting vi skal snakke med Jaco og Andreas om 5/4:
 - order of relations - try to do something reasonable
 - hvordan ved vi at vi returnerer de rigtige SCC'er
 - hastighed / plads på computeren (2^117 små BDD'er kan ikke være der) - pruning for at fjerne de helt små SCC'er, måske noget specifikt for saturation
