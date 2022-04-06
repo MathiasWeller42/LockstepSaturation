@@ -3,6 +3,8 @@
 #include <string>
 #include <deque>
 #include <iostream>
+#include <deque>
+#include <algorithm>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
@@ -16,10 +18,15 @@
 void simpleTestGraph(Graph graph) {
   sylvan::Bdd nodes = graph.nodes;
   std::list<sylvan::Bdd> sccList = lockstepSaturation(graph);
+  std::cout << std::endl << "Found " << sccList.size() << " SCCs" << std::endl;
   std::cout << "Printing SCCs" << std::endl;
   for(sylvan::Bdd scc : sccList) {
     //printBdd(scc);
     printBddAsString(graph.cube.size(), scc);
+    std::list<std::string> stringList = __printBddAsString("", scc);
+    for(std::string s : stringList) {
+      std::cout << s << std::endl; 
+    }
   }
 }
 
@@ -58,5 +65,27 @@ void testCubes() {
   std::cout << "Printing result on nodes 0 and 1 with cubeRel:" << std::endl;
   printBddAsString(4,resultRel);
 }
+
+void testRelationSorting() {
+  Relation rel1 = {};
+  rel1.top = 25;
+  Relation rel2 = {};
+  rel2.top = 30;
+  Relation rel3 = {};
+  rel3.top = 38;
+  Relation rel4 = {};
+  rel4.top = 10;
+  Relation rel5 = {};
+  rel5.top = 42;
+
+  std::deque<Relation> relations = {rel1, rel2, rel3, rel4, rel5};
+  std::sort(relations.begin(),relations.end());
+  std::reverse(relations.begin(), relations.end());
+  for(Relation rel : relations) {
+    std::cout << rel.top << std::endl;
+  }
+
+}
+
 
 

@@ -125,6 +125,13 @@ std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
   //Create SCC
   sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
   std::list<sylvan::Bdd> sccList = {scc};
+  std::cout << "Found an SCC bros! XD" << std::endl;
+  printBddAsString(32, scc);
+  /*std::list<std::string> stringList = __printBddAsString("", scc);
+    for(std::string s : stringList) {
+      std::cout << s << std::endl;
+    }*/
+  //printBdd(scc);
 
   //Recursive calls
   sylvan::Bdd recBdd1 = differenceBdd(converged, scc);

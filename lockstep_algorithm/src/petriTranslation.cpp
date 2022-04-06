@@ -146,7 +146,7 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
 Graph PNMLtoGraph() {
   std::string myText;
 
-  std::string path = getPNMLFilePath("HealthRecord/PT/hrec_userdef.pnml");
+  std::string path = getPNMLFilePath("SimpleLoadBal/PT/simple_lbs-2.pnml");
 
   //Anna computer:
   // /mnt/c/Users/ablum/bachelorprojekt/PNMLFiles/HealthRecord/PT/hrec_01.pnml
@@ -194,16 +194,17 @@ Graph PNMLtoGraph() {
       arc.source = source;
 
       //find target
-      /*startpos = myText.find("target=\"");
+      startpos = myText.find("target=\"");
       endpos = myText.find("\">");
       std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
-      arc.target = target;*/
+      arc.target = target;
 
+      /*
       startpos = myText.find("target=\"");
       endpos = myText.find("\"/>");
       std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
       arc.target = target;
-
+      */
       //push the arc
       arcList.push_back(arc);
     }
@@ -238,6 +239,9 @@ Graph PNMLtoGraph() {
     printBdd(relationObj.relationBdd);
     relations.push_back(relationObj);
   }
+  //Sort relations in reverse order of top (largest top first)
+  std::sort(relations.begin(),relations.end());
+  std::reverse(relations.begin(),relations.end());
 
   int numPlaces = placeMap.size();
   std::cout << std::endl << std::endl;
@@ -485,7 +489,7 @@ void printBdd(const sylvan::Bdd &bdd) {
 }
 
 //HELPER work horse function for printing the nodes of the bdd via the true paths
-inline std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd) {
+std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd) {
    std::list<std::string> nodeList = {};
    if(bdd.isTerminal()){
     if(bdd.isOne()) {
@@ -511,12 +515,14 @@ void printBddAsString(int nodes, const sylvan::Bdd &bdd) {
     for(std::string node : result) {
       std::string arr [nodes];
       for (int i = 0; i < nodes*2; i = i+2) {
-        std::string searchString = "x" + std::to_string(i);
+        std::string theString = std::to_string(i);
+        std::string searchString = "x" + theString;
         int exists = node.find(searchString);
         if(exists == -1){
           arr[nodes-1 - i/2] = "x";
         } else {
-          arr[nodes-1 - i/2] = node.substr(exists+3, 1);
+          int len = searchString.length();
+          arr[nodes-1 - i/2] = node.substr(exists+len+1, 1);
         }
       }
       std::cout << "  ";

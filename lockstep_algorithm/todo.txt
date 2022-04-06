@@ -3,8 +3,6 @@ Den mest dank-swaggern todo-liste #WØRF
 TODO 1 : Update relations i Lockstep bør evt. også opdatere cube og top for vores relation
 TODO j : Skal vi køre image/preimage på hele forward-sættet eller kun på front?
 TODO 7 : Fix så vi ikke skal udkommentere kode i petriTranslation hele tiden
-TODO 8 : Lav en orden for relations
-
 
 TODO i : Husk at tests er en ting...
 TODO 9000 : Forstå Petri nets
@@ -19,9 +17,6 @@ TODO omega : Søvn
 TODO CXXXVII : Få et liv
 
 
-
-
-
 ----
 Ting vi skal snakke med Jaco og Andreas om 5/4:
 - order of relations - try to do something reasonable
@@ -30,6 +25,12 @@ Ting vi skal snakke med Jaco og Andreas om 5/4:
 - hvad er vi HELT PRÆCIST garanteret når et PN er 1-safe? behøver ikke tjekke at targets er tomme
 - hvad gør vi med self-loops? (vi har et nemt fix - tjek)
 - how to enforce at vi ikke ændrer andre ting når vi tager en transition? (XNOR på resten - hvordan gør andre? det er et generelt problem, kan det fikses med cube?)
+
+---
+Nye ting vi skal snakke med Jaco og Andreas om (efter påske):
+- giv os en nem artikel om petri nets plz
+- ...
+
 
 -------------------------------------------------
 *Made By Mathias Weller* (Han tager fuldt ansvar) M.I.S.

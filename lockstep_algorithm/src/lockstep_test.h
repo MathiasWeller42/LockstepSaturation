@@ -6,5 +6,6 @@
 void simpleTestGraph(Graph graph);
 void union_test();
 void testCubes();
+void testRelationSorting();
 
 #endif //LOCKSTEP_TEST_H

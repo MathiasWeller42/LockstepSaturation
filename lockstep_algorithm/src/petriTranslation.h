@@ -15,6 +15,10 @@ struct Relation {
   sylvan::Bdd relationBdd;
   sylvan::BddSet cube;
   int top;
+  bool operator <(const Relation &relation) const
+  {
+    return top < relation.top;
+  }
 };
 
 struct Graph {
@@ -72,6 +76,7 @@ Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> 
 sylvan::BddSet makeCube(int nodeBytes);
 
 void printBdd(const sylvan::Bdd &bdd);
+std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd);
 void printBddAsString(int nodes, const sylvan::Bdd &bdd);
 void printSingleRelationAsString(sylvan::Bdd relation);
 void printRelationsAsString(std::deque<sylvan::Bdd> relations);

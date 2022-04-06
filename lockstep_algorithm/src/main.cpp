@@ -31,7 +31,8 @@ int main() {
   Graph bigGraph = PNMLtoGraph();
   //printBddAsString(bigGraph.cube.size(), bigGraph.nodes);
   simpleTestGraph(bigGraph);
-  testCubes();
+  //testCubes();
+  //testRelationSorting();
 
   std::cout << "Goodbye :)" << std::endl;
 
