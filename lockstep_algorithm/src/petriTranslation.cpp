@@ -146,7 +146,7 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
 Graph PNMLtoGraph() {
   std::string myText;
 
-  std::string path = getPNMLFilePath("SimpleLoadBal/PT/simple_lbs-2.pnml");
+  std::string path = getPNMLFilePath("HealthRecord/PT/hrec_userdef.pnml");
 
   //Anna computer:
   // /mnt/c/Users/ablum/bachelorprojekt/PNMLFiles/HealthRecord/PT/hrec_01.pnml
@@ -194,17 +194,16 @@ Graph PNMLtoGraph() {
       arc.source = source;
 
       //find target
-      startpos = myText.find("target=\"");
+      /*startpos = myText.find("target=\"");
       endpos = myText.find("\">");
       std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
-      arc.target = target;
+      arc.target = target;*/
 
-      /*
       startpos = myText.find("target=\"");
       endpos = myText.find("\"/>");
       std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
       arc.target = target;
-      */
+
       //push the arc
       arcList.push_back(arc);
     }
@@ -416,6 +415,53 @@ inline sylvan::BddSet makeCube(int nodeBits) {
   return cube;
 }
 
+bool sccListContains(sylvan::Bdd target, std::list<sylvan::Bdd> sccList) {
+  for(sylvan::Bdd scc : sccList) {
+    if(scc == target) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool containsDuplicateSccs(std::list<sylvan::Bdd> sccList) {
+  for(sylvan::Bdd scc1 : sccList) {
+    int duplicates = 0; 
+    for(sylvan::Bdd scc2 : sccList) {
+      if(scc1 == scc2) {
+        duplicates++;
+      }
+    }
+    if(duplicates > 1) {
+      return true; 
+    }
+  }
+  return false; 
+}
+
+
+bool sccListCorrectness(std::list<sylvan::Bdd> sccList1, std::list<sylvan::Bdd> sccList2) {
+  
+  if(sccList1.size() != sccList2.size()) {
+    std::cout << "sccLists were of different size" << std::endl;
+    return false;
+  }
+  if(containsDuplicateSccs(sccList1) || containsDuplicateSccs(sccList2)) {
+    std::cout << "sccLists contained duplicates" << std::endl;
+    return false;
+  }
+  for(sylvan::Bdd scc : sccList1) {
+    if(!sccListContains(scc, sccList2)) {
+      std::cout << "sccList2 didn't contain this scc: " << std::endl;
+      printBdd(scc); 
+      return false;
+    }
+  }
+  
+
+  return true;
+}
+
 //Returns each of the true paths in the BDD as a list of pairs of the form {{x0,0},{x2,1},...,}
 inline std::list<std::list<std::pair<int, bool>>> bddAsList(std::list<std::pair<int, bool>> &currentPath,
                                                      const sylvan::Bdd &bdd) {
@@ -460,6 +506,42 @@ sylvan::Bdd shiftBdd(const sylvan::Bdd &bdd) {
   }
   return shiftedBdd;
 }
+
+
+std::list<int> __getVars(const sylvan::Bdd &bdd) {
+  std::list<int> varList = {};
+  if(bdd.isTerminal()){
+    return varList;
+  }
+  varList.push_back(bdd.TopVar());
+  sylvan::Bdd bddThen = bdd.Then();
+  std::list<int> recResult1 = getVars(bddThen);
+  varList.splice(varList.end(), recResult1);
+
+  sylvan::Bdd bddElse = bdd.Else();
+  std::list<int> recResult2 = getVars(bddElse);
+  varList.splice(varList.end(), recResult2);
+
+  return varList;
+}
+
+std::list<int> getVars(const sylvan::Bdd &bdd) {
+  std::list<int> varList = __getVars(bdd);
+  varList.sort(); 
+  return varList; 
+}
+
+bool hasOddVars(sylvan::Bdd bdd) {
+  std::list<int> varList = getVars(bdd);
+  for(int i : varList) {
+    if(i % 2 == 1) {
+      return true;
+    }
+  }
+  return false;
+  }
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Pretty printing
@@ -533,10 +615,45 @@ void printBddAsString(int nodes, const sylvan::Bdd &bdd) {
         std::cout << str << "";
       }
     }
-    //Måske ikke relevant med mængden af nodes -  kan fjernes nemt. 
+    //Måske ikke relevant med mængden af nodes -  kan fjernes nemt.
     std::cout << std::endl << "Number of nodes: " << std::to_string(totalNoOfNodes);
     std::cout << std::endl << std::endl;
 }
+
+void printBigBddAsString(int nodes, const sylvan::Bdd &bdd) {
+  std::list<std::string> result = __printBddAsString("", bdd);
+  int totalNoOfNodes = 0;
+  std::string output = "";
+  std::list<std::string> newNodes;
+  for(std::string node : result) {
+    int noOfNodes = 1;
+    std::string arr [nodes];
+    for (int i = 0; i < nodes*2; i = i+2) {
+      std::string theString = std::to_string(i);
+      std::string searchString = "x" + theString + "=";
+      int exists = node.find(searchString);
+      if(exists == -1){
+        arr[nodes-1 - i/2] = "x";
+        noOfNodes = noOfNodes * 2;
+      } else {
+        int len = searchString.length();
+        arr[nodes-1 - i/2] = node.substr(exists+len, 1);
+      }
+    }
+    totalNoOfNodes = totalNoOfNodes + noOfNodes;
+    for(std::string str : arr ) {
+      output = output + str + "";
+    }
+    output = output + "   ";
+  }
+  if(totalNoOfNodes >= 2) {
+    //std::cout << "Nodes:  ";
+    //std::cout << output;
+    std::cout << std::endl << "Number of nodes: " << std::to_string(totalNoOfNodes);
+    std::cout << std::endl << std::endl;
+  }
+}
+
 
 //HELPER work horse function for printing the nodes of the bdd via the true paths
 inline std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pair<std::string, std::string> currentPath, const sylvan::Bdd &bdd) {

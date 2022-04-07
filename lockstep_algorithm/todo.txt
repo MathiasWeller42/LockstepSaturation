@@ -3,9 +3,12 @@ Den mest dank-swaggern todo-liste #WØRF
 TODO 1 : Update relations i Lockstep bør evt. også opdatere cube og top for vores relation
 TODO j : Skal vi køre image/preimage på hele forward-sættet eller kun på front?
 TODO 7 : Fix så vi ikke skal udkommentere kode i petriTranslation hele tiden
+TODO 8 : How to time stuffs
+TODO 9 : asserts i lockstep
 
 TODO i : Husk at tests er en ting...
 TODO 9000 : Forstå Petri nets
+TODO 9001 : Initial marking..?
 
 TODO x : Græd
 TODO y : #Forskning

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <deque>
 #include <algorithm>
+#include <chrono>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
@@ -16,18 +17,32 @@
 #include "../test/graph_examples.h"
 
 void simpleTestGraph(Graph graph) {
-  sylvan::Bdd nodes = graph.nodes;
-  std::list<sylvan::Bdd> sccList = lockstepSaturation(graph);
-  std::cout << std::endl << "Found " << sccList.size() << " SCCs" << std::endl;
-  std::cout << "Printing SCCs" << std::endl;
+  auto start1 = std::chrono::high_resolution_clock::now();
+  std::list<sylvan::Bdd> sccList1 = lockstepSaturation(graph);
+  auto stop1 = std::chrono::high_resolution_clock::now();
+  auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(stop1 - start1);
+  std::cout << "Time elapsed (saturation): " << duration1.count() << " milliseconds" << std::endl;
+  std::cout << std::endl << "Found " << sccList1.size() << " SCCs" << std::endl;
+
+  auto start2 = std::chrono::high_resolution_clock::now();
+  std::list<sylvan::Bdd> sccList2 = lockstepRelationUnion(graph);
+  auto stop2 = std::chrono::high_resolution_clock::now();
+  auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(stop2 - start2);
+  std::cout << "Time elapsed (relation union): " << duration2.count() << " milliseconds" << std::endl;
+  std::cout << std::endl << "Found " << sccList2.size() << " SCCs" << std::endl;
+
+  if(!sccListCorrectness(sccList1, sccList2)) {
+    std::cout << "scc lists did not contain the same bdds" << std::endl;
+  }
+  /*std::cout << "Printing SCCs" << std::endl;
   for(sylvan::Bdd scc : sccList) {
     //printBdd(scc);
     printBddAsString(graph.cube.size(), scc);
     std::list<std::string> stringList = __printBddAsString("", scc);
     for(std::string s : stringList) {
-      std::cout << s << std::endl; 
+      std::cout << s << std::endl;
     }
-  }
+  }*/
 }
 
 void testCubes() {
@@ -89,3 +104,41 @@ void testRelationSorting() {
 
 
 
+void testCubeOperations() {
+    sylvan::BddSet cube1 = sylvan::BddSet();
+    cube1.add(0);
+    cube1.add(2);
+    cube1.add(100);
+    cube1.add(116);
+    std::vector<uint32_t> cubeVec1 = cube1.toVector();
+    std::cout << "Printing cube as vector:" << std::endl;
+    for (uint32_t i : cubeVec1) {
+
+      std::cout << std::to_string(i) << ' ';
+    }
+    std::cout << std::endl;
+
+    sylvan::BddSet cube2 = sylvan::BddSet();
+    cube2.add(0);
+    cube2.add(2);
+    cube2.add(101);
+    cube2.add(117);
+    //You can use remove and add on a cube with another cube, performing union and difference
+    cube1.remove(cube2);
+    std::vector<uint32_t> cubeVec2 = cube1.toVector();
+    std::cout << "Printing cube1 union cube2 as vector:" << std::endl;
+    for (uint32_t i : cubeVec2) {
+      std::cout << std::to_string(i) << ' ';
+    }
+    std::cout << std::endl;
+
+
+    Graph graph = fourNodesOneRelation();
+
+    sylvan::Bdd nodes = graph.nodes;
+    printBddAsString(8, nodes);
+    //nodes.UnionCube(cube2);
+    printBddAsString(8, nodes);
+
+
+}

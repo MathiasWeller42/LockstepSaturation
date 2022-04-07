@@ -16,7 +16,7 @@ int main() {
   // Init LACE
   lace_start(1, 1000000);
 
-  const size_t memory_bytes = 128u * 1024u * 1024u;
+  const size_t memory_bytes = 1024u * 1024u * 1024u;
 
   // Init Sylvan
   sylvan::sylvan_set_limits(memory_bytes, // Set memory limit
@@ -34,7 +34,10 @@ int main() {
   //testCubes();
   //testRelationSorting();
 
-  std::cout << "Goodbye :)" << std::endl;
+  //std::cout << "Testing cubes: " << std::endl;
+  //testCubeOperations();
+
+  std::cout << "Goodbye :) - hilsen hyggelige helterotte hoppe-loppe hepatitis herpes Herbert Hans Handanovic " << std::endl;
 
   sylvan::sylvan_quit();
   lace_stop();

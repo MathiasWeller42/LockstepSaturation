@@ -38,8 +38,15 @@ bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs, b
       res = false;
     }
   }
+  if(!sccListCorrectness(result, expectedSCCs) == res) {
+    std::cout << "sccEquality reported a different result in testGraph" << std::endl;
+        
+    exit(-1);
+  }
   return res;
 }
+
+
 
 bool testNoGraph(bool saturation) {
   std::list<sylvan::Bdd> expectedSCCs = {};

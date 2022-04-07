@@ -72,12 +72,17 @@ void printMap(std::map<std::string, int> map);
 Graph PNMLtoGraph();
 std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pair<std::string, std::string> currentPath, const sylvan::Bdd &bdd);
 
+bool hasOddVars(sylvan::Bdd bdd);
+std::list<int> getVars(const sylvan::Bdd &bdd);
+bool sccListCorrectness(std::list<sylvan::Bdd> sccList1, std::list<sylvan::Bdd> sccList2);
+
 Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> &relations);
 sylvan::BddSet makeCube(int nodeBytes);
 
 void printBdd(const sylvan::Bdd &bdd);
 std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd);
 void printBddAsString(int nodes, const sylvan::Bdd &bdd);
+void printBigBddAsString(int nodes, const sylvan::Bdd &bdd);
 void printSingleRelationAsString(sylvan::Bdd relation);
 void printRelationsAsString(std::deque<sylvan::Bdd> relations);
 
