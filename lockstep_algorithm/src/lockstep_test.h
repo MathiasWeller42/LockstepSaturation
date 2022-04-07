@@ -3,10 +3,11 @@
 
 #include "petriTranslation.h"
 
-void simpleTestGraph(Graph graph);
-void union_test();
-void testCubes();
-void testRelationSorting();
-void testCubeOperations();
+void timeSaturation(Graph &graph);
+
+bool sccListCorrectness(std::list<sylvan::Bdd> sccList1, std::list<sylvan::Bdd> sccList2);
+bool sccListContainsDifferentSccsWithDuplicateNodes(const std::list<sylvan::Bdd> sccList);
+bool sccUnionIsWholeBdd(const std::list<sylvan::Bdd> sccList, const sylvan::Bdd nodes);
+bool containsDuplicateSccs(const std::list<sylvan::Bdd> sccList);
 
 #endif //LOCKSTEP_TEST_H

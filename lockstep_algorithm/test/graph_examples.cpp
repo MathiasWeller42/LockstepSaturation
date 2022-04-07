@@ -9,7 +9,8 @@
 
 #include "../src/lockstep.h"
 #include "../src/petriTranslation.h"
-#include "../src/utilities.h"
+#include "../src/bdd_utilities.h"
+#include "../src/graph_creation.h"
 
 Graph noGraph() {
   std::list<std::pair<int, int>> r1 = {};

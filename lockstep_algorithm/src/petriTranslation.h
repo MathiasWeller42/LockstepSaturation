@@ -11,21 +11,7 @@
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
-struct Relation {
-  sylvan::Bdd relationBdd;
-  sylvan::BddSet cube;
-  int top;
-  bool operator <(const Relation &relation) const
-  {
-    return top < relation.top;
-  }
-};
-
-struct Graph {
-  sylvan::Bdd nodes;
-  sylvan::BddSet cube;
-  std::deque<Relation> relations;
-};
+#include "graph_creation.h"
 
 struct Arc {
   std::string id;
@@ -61,35 +47,6 @@ struct Transition {
   }
 };
 
-sylvan::Bdd makeNode(std::string &bitstring);
-sylvan::Bdd makeNodes(std::list<std::string> &bitstrings);
-sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo);
-Relation makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings, sylvan::BddSet cube);
-std::deque<Relation> makeRelations(std::list<std::list<std::pair<std::string, std::string>>> &bitstrings, sylvan::BddSet cube);
+Graph PNMLtoGraph(std::string fileString);
 
-void printMap(std::map<std::string, int> map);
-
-Graph PNMLtoGraph();
-std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pair<std::string, std::string> currentPath, const sylvan::Bdd &bdd);
-
-bool hasOddVars(sylvan::Bdd bdd);
-std::list<int> getVars(const sylvan::Bdd &bdd);
-bool sccListCorrectness(std::list<sylvan::Bdd> sccList1, std::list<sylvan::Bdd> sccList2);
-
-Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> &relations);
-sylvan::BddSet makeCube(int nodeBytes);
-
-void printBdd(const sylvan::Bdd &bdd);
-std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd);
-void printBddAsString(int nodes, const sylvan::Bdd &bdd);
-void printBigBddAsString(int nodes, const sylvan::Bdd &bdd);
-void printSingleRelationAsString(sylvan::Bdd relation);
-void printRelationsAsString(std::deque<sylvan::Bdd> relations);
-
-sylvan::Bdd shiftBdd(const sylvan::Bdd &bdd);
-
-//List operations
-std::list<int> list_union(std::list<int> &list1, std::list<int> &list2);
-std::list<int> list_intersect(std::list<int> &list1, std::list<int> &list2);
-std::list<int> list_difference(std::list<int> &list1, std::list<int> &list2);
 #endif //PETRI_TRANSLATION_H

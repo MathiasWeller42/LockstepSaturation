@@ -10,7 +10,7 @@
 
 #include "graph_examples.h"
 #include "../src/lockstep.h"
-#include "../src/utilities.h"
+#include "../src/bdd_utilities.h"
 #include "../src/petriTranslation.h"
 
 bool testNoGraph(bool saturation);
@@ -27,6 +27,8 @@ bool testGraphExample2oneRel(bool saturation);
 bool testGraphExample2multRel(bool saturation);
 bool testGraphExample3oneRel(bool saturation);
 bool testGraphExample3multRel(bool saturation);
+bool testSccCorrectnessNeg1Len();
+
 
 bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> expectedSCCs);
 

@@ -8,12 +8,11 @@
 
 #include "graph_examples.h"
 #include "../src/lockstep.h"
-#include "../src/utilities.h"
+#include "../src/bdd_utilities.h"
 #include "../src/petriTranslation.h"
+#include "../src/graph_creation.h"
 
 bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs, bool saturation) {
-  bool res = true;
-
   std::list<sylvan::Bdd> result;
   if(saturation) {
     result = lockstepSaturation(graph);
@@ -26,27 +25,8 @@ bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs, b
     std::cout << "Expected amount: " << expectedSCCs.size() << std::endl;
     return false;
   }
-  std::list<sylvan::Bdd>::iterator it1 = result.begin();
-  std::list<sylvan::Bdd>::const_iterator it2 = expectedSCCs.begin();
-  for(; it1 != result.end() && it2 != expectedSCCs.end(); ++it1, ++it2) {
-    if(!(*it1 == *it2)) {
-      std::cout << "SCC's were not equal" << std::endl;
-      std::cout << "Result: " << std::endl;
-      printBddAsString(graph.cube.size(),*it1);
-      std::cout << "Expected: " << std::endl;
-      printBddAsString(graph.cube.size(),*it2);
-      res = false;
-    }
-  }
-  if(!sccListCorrectness(result, expectedSCCs) == res) {
-    std::cout << "sccEquality reported a different result in testGraph" << std::endl;
-        
-    exit(-1);
-  }
-  return res;
+  return sccListCorrectness(result, expectedSCCs);
 }
-
-
 
 bool testNoGraph(bool saturation) {
   std::list<sylvan::Bdd> expectedSCCs = {};
@@ -233,9 +213,9 @@ bool testGraphExample2multRel(bool saturation) {
   sylvan::Bdd scc4 = makeNodes(nodeList4);
   sylvan::Bdd scc5 = makeNodes(nodeList5);
   sylvan::Bdd scc6 = makeNodes(nodeList6);
-  std::list<sylvan::Bdd> expectedSccList = {scc1, scc6, scc4, scc5, scc3, scc2};
+  std::list<sylvan::Bdd> expectedSccList = {scc1, scc6, scc4, scc3, scc2, scc5};
 
-  const Graph graph = graphExample2oneRel();
+  const Graph graph = graphExample2multRel();
   return testGraph(graph, expectedSccList, saturation);
 }
 
@@ -260,3 +240,4 @@ bool testGraphExample3multRel(bool saturation) {
   const Graph graph = graphExample3multRel();
   return testGraph(graph, expectedSccList, saturation);
 }
+

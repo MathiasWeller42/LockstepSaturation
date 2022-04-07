@@ -7,8 +7,8 @@
 
 #include "lockstep.h"
 #include "petriTranslation.h"
-#include "set_test.h"
 #include "lockstep_test.h"
+#include "print.h"
 #include "../test/graph_examples.h"
 
 int main() {
@@ -28,14 +28,9 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  Graph bigGraph = PNMLtoGraph();
-  //printBddAsString(bigGraph.cube.size(), bigGraph.nodes);
-  simpleTestGraph(bigGraph);
-  //testCubes();
-  //testRelationSorting();
-
-  //std::cout << "Testing cubes: " << std::endl;
-  //testCubeOperations();
+  Graph bigGraph = PNMLtoGraph("HealthRecord/PT/hrec_userdef.pnml");
+  timeSaturation(bigGraph);
+  //testRelNext();
 
   std::cout << "Goodbye :) - hilsen hyggelige helterotte hoppe-loppe hepatitis herpes Herbert Hans Handanovic " << std::endl;
 

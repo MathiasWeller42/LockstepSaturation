@@ -9,15 +9,17 @@
 #include <algorithm>
 #include <string>
 #include <functional>
-#include <limits>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
-#include "utilities.h"
 #include "petriTranslation.h"
+#include "bdd_utilities.h"
+#include "graph_creation.h"
+#include "print.h"
 
+//Gets the local filePath to the file given as argument
 inline std::string getPNMLFilePath(std::string file) {
   char tmp[256];
   std::string cwd = getcwd(tmp, 256);
@@ -30,7 +32,8 @@ inline std::string getPNMLFilePath(std::string file) {
   return newPath;
 }
 
-std::list<int> list_union(std::list<int> &list1, std::list<int> &list2) {
+//List1 ∪ List2
+inline std::list<int> list_union(std::list<int> &list1, std::list<int> &list2) {
   list1.sort();
   list2.sort();
   std::list<int> out;
@@ -38,7 +41,9 @@ std::list<int> list_union(std::list<int> &list1, std::list<int> &list2) {
   return out;
 }
 
-std::list<int> list_intersect(std::list<int> &list1, std::list<int> &list2) {
+
+//List1 ∩ List2
+inline std::list<int> list_intersect(std::list<int> &list1, std::list<int> &list2) {
   list1.sort();
   list2.sort();
   std::list<int> out;
@@ -46,7 +51,8 @@ std::list<int> list_intersect(std::list<int> &list1, std::list<int> &list2) {
   return out;
 }
 
-std::list<int> list_difference(std::list<int> &list1, std::list<int> &list2) {
+// List1 - List2
+inline std::list<int> list_difference(std::list<int> &list1, std::list<int> &list2) {
   list1.sort();
   list2.sort();
   std::list<int> out;
@@ -54,12 +60,18 @@ std::list<int> list_difference(std::list<int> &list1, std::list<int> &list2) {
   return out;
 }
 
+//Takes a petri-net transition and makes it into a relation
+//The transition has sources and targets
+//- The sources go from having a mark to not having a mark
+//- The targets go from not having a mark to having a mark
+// The relation then is all configurations in which it flips these bits defining this transition
+// Example: P1 -> | -> P2 would be 01 -> 10 while keeping all other places in the petri net fixed (these define several nodes in the "graph")
 inline Relation makeRelationFromTransition(Transition transition, std::map<std::string, int> placeMap) {
   Relation result = {};
 
   sylvan::Bdd resultBdd = leaf_true();
 
-  //The set of vars included in the transition
+  //The sets of vars included in the sources and targets in the transition
   std::list<int> sources = {};
   std::list<int> targets = {};
 
@@ -67,7 +79,7 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
   std::cout << "New relation from transition " << transition.id << std::endl;
   std::cout << "True";
 
-  //Handeling selfie-loopsickleszzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+  //Handling self-loops
   for(Arc arc : transition.sources) {
     if(placeMap.count(arc.source)) {
       int placeNum = placeMap[arc.source];
@@ -143,24 +155,24 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
   return result;
 }
 
-Graph PNMLtoGraph() {
-  std::string myText;
 
-  std::string path = getPNMLFilePath("HealthRecord/PT/hrec_userdef.pnml");
-
-  //Anna computer:
-  // /mnt/c/Users/ablum/bachelorprojekt/PNMLFiles/HealthRecord/PT/hrec_01.pnml
+// Takes a PNML file defining a petri net and converts it into a Graph
+// A node in the resulting graph is a configuration of markings in the petri net
+// A relation is a transition from marking to some other marking
+Graph PNMLtoGraph(std::string fileString) {
+  std::string path = getPNMLFilePath(fileString);
 
   // Read from the text file
-  std::ifstream MyReadFile(path);
+  std::ifstream readFile(path);
 
-  std::map<std::string, int> placeMap = {};
   int placeIndex = 0;
+  std::map<std::string, int> placeMap = {};
   std::map<std::string, Transition> transitionMap = {};
   std::list<Arc> arcList = {};
 
+  std::string myText;
   // Read the PNML file and create some data structures
-  while (std::getline (MyReadFile, myText)) {
+  while (std::getline (readFile, myText)) {
     //Places
     if(myText.rfind("<place ", 0) == 0) {
       std::string id = "";
@@ -170,6 +182,7 @@ Graph PNMLtoGraph() {
       placeMap[id] = placeIndex;
       placeIndex = placeIndex+2;
     }
+
     //Transitions
     if(myText.rfind("<transition ", 0) == 0) {
       std::string id = "";
@@ -178,6 +191,7 @@ Graph PNMLtoGraph() {
       id = myText.substr(startpos + 4, endpos-(startpos+4));
       transitionMap[id] = Transition(id);
     }
+
     //Arcs
     if(myText.rfind("<arc ", 0) == 0) {
       Arc arc = {};
@@ -193,21 +207,30 @@ Graph PNMLtoGraph() {
       std::string source = myText.substr(startpos + 8, endpos-(startpos+8));
       arc.source = source;
 
-      //find target
-      /*startpos = myText.find("target=\"");
-      endpos = myText.find("\">");
-      std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
-      arc.target = target;*/
-
-      startpos = myText.find("target=\"");
-      endpos = myText.find("\"/>");
-      std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
-      arc.target = target;
+      //Target format varies
+      std::string searchString = "SimpleLoadBal";
+      int exists = fileString.find(searchString);
+      if(exists == -1){
+        //It is a HealthRecord (or other)
+        startpos = myText.find("target=\"");
+        endpos = myText.find("\"/>");
+        std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
+        arc.target = target;
+      } else {
+        //It is a SimpleLoadBal
+        startpos = myText.find("target=\"");
+        endpos = myText.find("\">");
+        std::string target = myText.substr(startpos + 8, endpos-(startpos+8));
+        arc.target = target;
+      }
 
       //push the arc
       arcList.push_back(arc);
     }
   }
+
+  // Close the file
+  readFile.close();
 
   //Distribute arcs to the different transitions
   for(Arc arc : arcList) {
@@ -238,9 +261,6 @@ Graph PNMLtoGraph() {
     printBdd(relationObj.relationBdd);
     relations.push_back(relationObj);
   }
-  //Sort relations in reverse order of top (largest top first)
-  std::sort(relations.begin(),relations.end());
-  std::reverse(relations.begin(),relations.end());
 
   int numPlaces = placeMap.size();
   std::cout << std::endl << std::endl;
@@ -251,455 +271,7 @@ Graph PNMLtoGraph() {
   pnmlGraph.relations = relations;
   pnmlGraph.cube = cube;
   pnmlGraph.nodes = leaf_true();
-  // Close the file
-  MyReadFile.close();
 
-  //std::cout << "All states in the graph:" << std::endl;
-  //printBddAsString(pnmlGraph.cube.size(), pnmlGraph.nodes);
   std::cout << "Number of relations: " << pnmlGraph.relations.size() << std::endl;
-  //printRelationsAsString(pnmlGraph.relations);
-  //printMap(placeMap);
   return pnmlGraph;
-}
-
-inline void printMap(std::map<std::string, int> map) {
-  for(std::pair<std::string, int> place : map) {
-    std::cout << "key: " << place.first << ", value: " << place.second << std::endl;
-  }
-}
-
-sylvan::Bdd makeNode(std::string &bitstring) {
-  sylvan::Bdd resultBdd = leaf_true();
-  bool currentBit;
-  sylvan::Bdd currentBdd;
-  int currentI;
-  int n = bitstring.length();
-  for (int i = n - 1; i >= 0; i--) {
-    currentBit = bitstring[i] == '1';
-    currentI = 2*(n-1-i);
-    if(currentBit) {
-      currentBdd = ithvar(currentI);
-    } else {
-      currentBdd = nithvar(currentI);
-    }
-    resultBdd = resultBdd.And(currentBdd);
-  }
-  return resultBdd;
-}
-
-sylvan::Bdd makeNodes(std::list<std::string> &bitstrings) {
-  int n = bitstrings.size();
-  std::string currentBitstring;
-  sylvan::Bdd currentBdd;
-  sylvan::Bdd resultBdd = leaf_false();
-  for(std::string currentBitstring : bitstrings) {
-    currentBdd = makeNode(currentBitstring);
-    resultBdd = resultBdd.Or(currentBdd);
-  }
-  return resultBdd;
-}
-
-inline sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo) {
-  int nFrom = bitstringFrom.length();
-  bool currentBitFrom;
-  sylvan::Bdd currentBddFrom;
-  int currentIFrom;
-  bool currentBitTo;
-  sylvan::Bdd currentBddTo;
-  int currentITo;
-  sylvan::Bdd resultBdd = leaf_true();
-  for (int i = nFrom - 1; i >= 0; i--) {
-    currentBitFrom = bitstringFrom[i] == '1';
-    currentBitTo = bitstringTo[i] == '1';
-    currentIFrom = 2*(nFrom-1-i);
-    currentITo = currentIFrom + 1;
-    if(currentBitFrom) {
-      currentBddFrom = ithvar(currentIFrom);
-    } else {
-      currentBddFrom = nithvar(currentIFrom);
-    }
-    if(currentBitTo) {
-      currentBddTo = ithvar(currentITo);
-    } else {
-      currentBddTo = nithvar(currentITo);
-    }
-    resultBdd = resultBdd.And(currentBddFrom).And(currentBddTo);
-  }
-  return resultBdd;
-}
-
-Relation makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings, sylvan::BddSet cube) {
-  sylvan::Bdd currentBdd;
-  sylvan::Bdd resultBdd = leaf_false();
-  for(std::pair<std::string, std::string> currentPair : bitstrings) {
-    currentBdd = makeArc(currentPair.first, currentPair.second);
-    resultBdd = resultBdd.Or(currentBdd);
-  }
-  Relation resultRelation = {};
-  resultRelation.relationBdd = resultBdd;
-  resultRelation.top = 0;
-  resultRelation.cube = cube;
-  return resultRelation;
-}
-
-inline std::deque<Relation> makeRelations(std::list<std::list<std::pair<std::string, std::string>>> &bitstrings, sylvan::BddSet cube) {
-  std::deque<Relation> transitions;
-  Relation currentRelation;
-  for(std::list<std::pair<std::string, std::string>> currentBitstringList : bitstrings) {
-    currentRelation = makeRelation(currentBitstringList, cube);
-    transitions.push_back(currentRelation);
-  }
-  return transitions;
-}
-
-inline std::string decimalToBinaryString(int number, int bytes) {
-  std::string binary = "";
-  int mask = 1;
-  for(int i = 0; i < bytes; i++) {
-    if((mask & number) >= 1) {
-      binary = "1" + binary;
-    } else {
-      binary = "0" + binary;
-    }
-    mask <<= 1;
-  }
-  return binary;
-}
-
-//Main function for making graphs, takes as input (noOfNodes, relations={{(0,1),(1,0),(2,0)}, {(2,3)}})
-Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> &relations) {
-  Graph graph {};
-
-  //Byte translation
-  int nodeBits = nodes == 1 ? 1 : ceil(log2(nodes));
-
-  std::list<std::string> placeList = {};
-  std::string iInBinary;
-
-  //Make the nodeset
-  for(int i = 0; i < nodes; i++) {
-    iInBinary = decimalToBinaryString(i, nodeBits);
-    placeList.push_back(iInBinary);
-  }
-  sylvan::Bdd places = makeNodes(placeList);
-
-  //Make the cube
-  sylvan::BddSet cube = makeCube(nodeBits);
-
-  //Make the relationDeque
-  std::list<std::list<std::pair<std::string,std::string>>> newRelations;
-  for(std::list<std::pair<int,int>> relation : relations) {
-    std::list<std::pair<std::string, std::string>> newRelation;
-
-    for(std::pair<int,int> pair : relation) {
-      std::string first = decimalToBinaryString(pair.first, nodeBits);
-      std::string second = decimalToBinaryString(pair.second, nodeBits);
-      std::pair<std::string, std::string> newPair(first,second);
-      newRelation.push_back(newPair);
-    }
-    newRelations.push_back(newRelation);
-  }
-  std::deque<Relation> realRelations = makeRelations(newRelations, cube);
-
-  graph.nodes = places;
-  graph.relations = realRelations;
-  graph.cube = cube;
-  return graph;
-}
-
-inline sylvan::BddSet makeCube(int nodeBits) {
-  sylvan::BddSet cube = sylvan::BddSet();
-  for(int i = 0; i < nodeBits; i++) {
-    cube.add(2 * i);
-  }
-  return cube;
-}
-
-bool sccListContains(sylvan::Bdd target, std::list<sylvan::Bdd> sccList) {
-  for(sylvan::Bdd scc : sccList) {
-    if(scc == target) {
-      return true;
-    }
-  }
-  return false;
-}
-
-bool containsDuplicateSccs(std::list<sylvan::Bdd> sccList) {
-  for(sylvan::Bdd scc1 : sccList) {
-    int duplicates = 0; 
-    for(sylvan::Bdd scc2 : sccList) {
-      if(scc1 == scc2) {
-        duplicates++;
-      }
-    }
-    if(duplicates > 1) {
-      return true; 
-    }
-  }
-  return false; 
-}
-
-
-bool sccListCorrectness(std::list<sylvan::Bdd> sccList1, std::list<sylvan::Bdd> sccList2) {
-  
-  if(sccList1.size() != sccList2.size()) {
-    std::cout << "sccLists were of different size" << std::endl;
-    return false;
-  }
-  if(containsDuplicateSccs(sccList1) || containsDuplicateSccs(sccList2)) {
-    std::cout << "sccLists contained duplicates" << std::endl;
-    return false;
-  }
-  for(sylvan::Bdd scc : sccList1) {
-    if(!sccListContains(scc, sccList2)) {
-      std::cout << "sccList2 didn't contain this scc: " << std::endl;
-      printBdd(scc); 
-      return false;
-    }
-  }
-  
-
-  return true;
-}
-
-//Returns each of the true paths in the BDD as a list of pairs of the form {{x0,0},{x2,1},...,}
-inline std::list<std::list<std::pair<int, bool>>> bddAsList(std::list<std::pair<int, bool>> &currentPath,
-                                                     const sylvan::Bdd &bdd) {
-  std::list<std::list<std::pair<int, bool>>> nodeList = {};
-  if(bdd.isTerminal()) {
-    if(bdd.isOne()) {
-      nodeList.push_front(currentPath);
-    }
-    return nodeList;
-  }
-
-  std::list<std::pair<int, bool>> recPath1(currentPath);
-  recPath1.push_back({bdd.TopVar(), true});
-  std::list<std::list<std::pair<int, bool>>> recResult1 = bddAsList(recPath1, bdd.Then());
-  nodeList.splice(nodeList.end(), recResult1);
-
-  std::list<std::pair<int, bool>> recPath2(currentPath);
-  recPath2.push_back({bdd.TopVar(), false});
-  std::list<std::list<std::pair<int, bool>>> recResult2 = bddAsList(recPath2, bdd.Else());
-  nodeList.splice(nodeList.end(), recResult2);
-
-  return nodeList;
-}
-
-//Uses list of pairs of the form {{x0,0},{x2,1},...,{xn,0}}, makes it into {{x1,0},{x3,1},...,{xn+1,0}} and reconstructs the BDD from this
-sylvan::Bdd shiftBdd(const sylvan::Bdd &bdd) {
-  sylvan::Bdd shiftedBdd = leaf_false();
-  std::list<std::pair<int, bool>> startPath = {};
-  std::list<std::list<std::pair<int, bool>>> nodeList = bddAsList(startPath, bdd);
-  for(std::list<std::pair<int, bool>> node : nodeList) {
-    sylvan::Bdd currentNode = leaf_true();
-    for(std::pair<int, bool> variable : node) {
-      sylvan::Bdd currentBdd;
-      if(variable.second) {
-        currentBdd = ithvar(variable.first+1);
-      } else {
-        currentBdd = nithvar(variable.first+1);
-      }
-      currentNode = currentNode.And(currentBdd);
-    }
-    shiftedBdd = shiftedBdd.Or(currentNode);
-  }
-  return shiftedBdd;
-}
-
-
-std::list<int> __getVars(const sylvan::Bdd &bdd) {
-  std::list<int> varList = {};
-  if(bdd.isTerminal()){
-    return varList;
-  }
-  varList.push_back(bdd.TopVar());
-  sylvan::Bdd bddThen = bdd.Then();
-  std::list<int> recResult1 = getVars(bddThen);
-  varList.splice(varList.end(), recResult1);
-
-  sylvan::Bdd bddElse = bdd.Else();
-  std::list<int> recResult2 = getVars(bddElse);
-  varList.splice(varList.end(), recResult2);
-
-  return varList;
-}
-
-std::list<int> getVars(const sylvan::Bdd &bdd) {
-  std::list<int> varList = __getVars(bdd);
-  varList.sort(); 
-  return varList; 
-}
-
-bool hasOddVars(sylvan::Bdd bdd) {
-  std::list<int> varList = getVars(bdd);
-  for(int i : varList) {
-    if(i % 2 == 1) {
-      return true;
-    }
-  }
-  return false;
-  }
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-/// Pretty printing
-////////////////////////////////////////////////////////////////////////////////
-
-//HELPER workhorse function for printing the bdd diagram
-inline void __printBdd(const std::string &prefix, const sylvan::Bdd &bdd, bool isLeft) {
-  std::cout << prefix;
-
-  std::cout << (isLeft ? "├─T─" : "└─F─" );
-
-  if(bdd.isTerminal()){
-    std::cout << bdd.isOne() << std::endl;
-    return;
-  } else {
-    std::cout << "x" << bdd.TopVar() << std::endl;
-  }
-  std::string newString = isLeft ? "│   " : "    ";
-  // enter the next tree level - left and right branch
-  __printBdd( prefix + newString, bdd.Then(), true);
-  __printBdd( prefix + newString, bdd.Else(), false);
-}
-
-//Main function for printing the binary BDD tree
-void printBdd(const sylvan::Bdd &bdd) {
-  __printBdd(" ", bdd, false);
-}
-
-//HELPER work horse function for printing the nodes of the bdd via the true paths
-std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd) {
-   std::list<std::string> nodeList = {};
-   if(bdd.isTerminal()){
-    if(bdd.isOne()) {
-      nodeList.push_front(currentPath);
-    }
-    return nodeList;
-   }
-  std::list<std::string> recResult1 = __printBddAsString("x" + std::to_string(bdd.TopVar()) +"=1 " + currentPath, bdd.Then());
-  nodeList.splice(nodeList.end(), recResult1);
-
-  std::list<std::string> recResult2 = __printBddAsString("x" + std::to_string(bdd.TopVar()) + "=0 " + currentPath, bdd.Else());
-  nodeList.splice(nodeList.end(), recResult2);
-
-  return nodeList;
-}
-
-//Prints the true-paths of the BDD on the form "01x1", where x means either 0 or 1, and the total number of nodes the BDD represents
-void printBddAsString(int nodes, const sylvan::Bdd &bdd) {
-    std::list<std::string> result = __printBddAsString("", bdd);
-    std::cout << "Nodes: ";
-    int totalNoOfNodes = 0;
-    std::list<std::string> newNodes;
-    for(std::string node : result) {
-      int noOfNodes = 1;
-      std::string arr [nodes];
-      for (int i = 0; i < nodes*2; i = i+2) {
-        std::string theString = std::to_string(i);
-        std::string searchString = "x" + theString + "=";
-        int exists = node.find(searchString);
-        if(exists == -1){
-          arr[nodes-1 - i/2] = "x";
-          noOfNodes = noOfNodes * 2;
-        } else {
-          int len = searchString.length();
-          arr[nodes-1 - i/2] = node.substr(exists+len, 1);
-        }
-      }
-      totalNoOfNodes = totalNoOfNodes + noOfNodes;
-      std::cout << "  ";
-      for(std::string str : arr ) {
-        std::cout << str << "";
-      }
-    }
-    //Måske ikke relevant med mængden af nodes -  kan fjernes nemt.
-    std::cout << std::endl << "Number of nodes: " << std::to_string(totalNoOfNodes);
-    std::cout << std::endl << std::endl;
-}
-
-void printBigBddAsString(int nodes, const sylvan::Bdd &bdd) {
-  std::list<std::string> result = __printBddAsString("", bdd);
-  int totalNoOfNodes = 0;
-  std::string output = "";
-  std::list<std::string> newNodes;
-  for(std::string node : result) {
-    int noOfNodes = 1;
-    std::string arr [nodes];
-    for (int i = 0; i < nodes*2; i = i+2) {
-      std::string theString = std::to_string(i);
-      std::string searchString = "x" + theString + "=";
-      int exists = node.find(searchString);
-      if(exists == -1){
-        arr[nodes-1 - i/2] = "x";
-        noOfNodes = noOfNodes * 2;
-      } else {
-        int len = searchString.length();
-        arr[nodes-1 - i/2] = node.substr(exists+len, 1);
-      }
-    }
-    totalNoOfNodes = totalNoOfNodes + noOfNodes;
-    for(std::string str : arr ) {
-      output = output + str + "";
-    }
-    output = output + "   ";
-  }
-  if(totalNoOfNodes >= 2) {
-    //std::cout << "Nodes:  ";
-    //std::cout << output;
-    std::cout << std::endl << "Number of nodes: " << std::to_string(totalNoOfNodes);
-    std::cout << std::endl << std::endl;
-  }
-}
-
-
-//HELPER work horse function for printing the nodes of the bdd via the true paths
-inline std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pair<std::string, std::string> currentPath, const sylvan::Bdd &bdd) {
-   std::list<std::pair<std::string, std::string>> nodeList = {};
-   if(bdd.isTerminal()){
-    if(bdd.isOne()) {
-      nodeList.push_front(currentPath);
-    }
-    return nodeList;
-   }
-
-  if(bdd.TopVar() % 2 == 0){
-    std::string firstBefore = currentPath.first;
-    currentPath.first = "x" + std::to_string(bdd.TopVar()) +"=1 " + firstBefore;
-    std::list<std::pair<std::string, std::string>> recResult1 =  __printRelationsAsString(currentPath, bdd.Then());
-    nodeList.splice(nodeList.end(), recResult1);
-
-    currentPath.first = "x" + std::to_string(bdd.TopVar()) +"=0 " + firstBefore;
-    std::list<std::pair<std::string, std::string>> recResult2 =  __printRelationsAsString(currentPath, bdd.Else());
-    nodeList.splice(nodeList.end(), recResult2);
-  } else if(bdd.TopVar() % 2 == 1){
-
-    std::string secondBefore = currentPath.second;
-    currentPath.second = "x" + std::to_string(bdd.TopVar()-1) +"=1 " + secondBefore;
-    std::list<std::pair<std::string, std::string>> recResult1 =  __printRelationsAsString(currentPath, bdd.Then());
-    nodeList.splice(nodeList.end(), recResult1);
-
-    currentPath.second = "x" + std::to_string(bdd.TopVar()-1) +"=0 " + secondBefore;
-    std::list<std::pair<std::string, std::string>> recResult2 =  __printRelationsAsString(currentPath, bdd.Else());
-    nodeList.splice(nodeList.end(), recResult2);
-  }
-  return nodeList;
-}
-
-void printSingleRelationAsString(sylvan::Bdd relation) {
-    std::cout << "Here is a relation: " << std::endl;
-    std::pair<std::string, std::string> pair("","");
-    std::list<std::pair<std::string, std::string>> pathList = __printRelationsAsString(pair, relation);
-    for(std::pair<std::string, std::string> path : pathList) {
-      std::cout <<"Before "<< path.first << std::endl;
-      std::cout <<"After  "<< path.second << std::endl;
-    }
-}
-
-inline void printRelationsAsString(std::deque<sylvan::Bdd> relations) {
-  for(sylvan::Bdd relation : relations) {
-    printSingleRelationAsString(relation);
-  }
 }

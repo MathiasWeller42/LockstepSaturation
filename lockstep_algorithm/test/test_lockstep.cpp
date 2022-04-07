@@ -8,6 +8,7 @@
 
 #include "test_runlockstep.h"
 #include "test_shift.h"
+#include "test_sccListCorrectness.h"
 
 void runAllTests() {
   bool saturation = true;
@@ -178,6 +179,33 @@ void runAllTests() {
     success = false;
     fails++;
   }
+
+  
+
+
+
+  //SCC List Correctness
+  if(testSccCorrectnessLen()) {
+    std::cout << "testSccCorrectnessLen failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(testSccCorrectnessDuplicates()) {
+    std::cout << "testSccCorrectnessDuplicates failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(testSccCorrectnessNegSameLenNoDuplicates()) {
+    std::cout << "testSccCorrectnessNegSameLenNoDuplicates failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testSccCorrectnessPosPermutation()) {
+    std::cout << "testSccCorrectnessPosPermutation" << std::endl;
+    success = false;
+    fails++;
+  }
+
 
   if(success) {
     std::cout << "All tests passed!" << std::endl;

@@ -8,7 +8,7 @@
 
 #include "graph_examples.h"
 #include "../src/lockstep.h"
-#include "../src/utilities.h"
+#include "../src/bdd_utilities.h"
 #include "../src/petriTranslation.h"
 
 bool testShiftOneNode() {
