@@ -10,6 +10,7 @@
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
+#include "graph_creation.h"
 #include "bdd_utilities.h"
 #include "petriTranslation.h"
 #include "print.h"
@@ -180,14 +181,75 @@ Graph pruneGraph(const Graph &graph) {
   }
 
   sylvan::Bdd nodesWithoutSomeSingletonSccs = intersectBdd(frontRes, backRes);
-  sylvan::Bdd singletonNodes = !nodesWithoutSomeSingletonSccs;
+  sylvan::Bdd singletonNodes = intersectBdd(!nodesWithoutSomeSingletonSccs, nodes);
 
   std::cout << "Pruning" << std::endl;
-  printBigBddAsString(15, singletonNodes);
+  printBigBddAsString(cube.size(), singletonNodes);
 
   resultGraph.nodes = nodesWithoutSomeSingletonSccs;
   resultGraph.cube = cube;
   resultGraph.relations = relations;
+
+  return resultGraph;
+}
+
+//Virker ikke!!!
+Graph pruneGraphSaturationStyle(const Graph &graph) {
+  sylvan::Bdd nodes = graph.nodes;
+  sylvan::BddSet cube = graph.cube;
+  std::deque<Relation> relationDeque = graph.relations;
+
+  sylvan::Bdd frontRes = leaf_false();
+  sylvan::Bdd backRes = leaf_false();
+
+  int relFrontI = 0;
+  sylvan::Bdd relFront = relationDeque[relFrontI].relationBdd;
+  sylvan::BddSet relFrontCube = relationDeque[relFrontI].cube;
+
+  int relBackI = 0;
+  sylvan::Bdd relBack = relationDeque[relBackI].relationBdd;
+  sylvan::BddSet relBackCube = relationDeque[relBackI].cube;
+
+  while(relFrontI < relationDeque.size() || relBackI < relationDeque.size()) {
+    if(relFrontI < relationDeque.size()) {
+      sylvan::Bdd relResultFront = nodes.RelNext(relFront, relFrontCube);
+      if(relResultFront == leaf_false()) {
+        relFrontI++;
+        relFront = relationDeque[relFrontI].relationBdd;
+        relFrontCube = relationDeque[relFrontI].cube;
+      } else {
+        relFrontI = 0;
+        relFront = relationDeque[relFrontI].relationBdd;
+        relFrontCube = relationDeque[relFrontI].cube;
+        frontRes = unionBdd(frontRes, relResultFront);
+      }
+    }
+    if(relBackI < relationDeque.size()) {
+      sylvan::Bdd relResultBack = nodes.RelPrev(relBack, relBackCube);
+      if(relResultBack == leaf_false()) {
+        relBackI++;
+        relBack = relationDeque[relBackI].relationBdd;
+        relBackCube = relationDeque[relBackI].cube;
+      } else {
+        relBackI = 0;
+        relBack = relationDeque[relBackI].relationBdd;
+        relBackCube = relationDeque[relBackI].cube;
+        backRes = unionBdd(backRes, relResultBack);
+      }
+    }
+    nodes = intersectBdd(frontRes, backRes);
+  }
+
+  sylvan::Bdd nodesWithoutSomeSingletonSccs = intersectBdd(frontRes, backRes);
+  sylvan::Bdd singletonNodes = intersectBdd(!nodesWithoutSomeSingletonSccs, graph.nodes);
+
+  std::cout << "Pruning" << std::endl;
+  printBigBddAsString(cube.size(), singletonNodes);
+
+  Graph resultGraph = {};
+  resultGraph.nodes = nodesWithoutSomeSingletonSccs;
+  resultGraph.cube = cube;
+  resultGraph.relations = relationDeque;
 
   return resultGraph;
 }

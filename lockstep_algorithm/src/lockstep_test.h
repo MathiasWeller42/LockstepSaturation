@@ -4,6 +4,9 @@
 #include "petriTranslation.h"
 
 void timeSaturation(Graph &graph);
+void timeSaturationIterative(Graph &graph);
+
+Graph graphPreprocessing(const Graph &graph);
 
 bool sccListCorrectness(std::list<sylvan::Bdd> sccList1, std::list<sylvan::Bdd> sccList2);
 bool sccListContainsDifferentSccsWithDuplicateNodes(const std::list<sylvan::Bdd> sccList);

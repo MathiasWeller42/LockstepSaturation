@@ -7,6 +7,7 @@
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
 
+#include "graph_examples.h"
 #include "../src/lockstep.h"
 #include "../src/petriTranslation.h"
 #include "../src/bdd_utilities.h"

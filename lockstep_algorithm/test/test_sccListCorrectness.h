@@ -14,5 +14,9 @@ bool testSccCorrectnessLen();
 bool testSccCorrectnessDuplicates();
 bool testSccCorrectnessNegSameLenNoDuplicates();
 bool testSccCorrectnessPosPermutation();
+bool testsccListContainsDifferentSccsWithDuplicateNodesNeg();
+bool testsccListContainsDifferentSccsWithDuplicateNodesPos();
+bool testUnionIsWholeBddPos();
+bool testUnionIsWholeBddNeg();
 
 #endif

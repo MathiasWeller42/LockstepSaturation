@@ -7,7 +7,6 @@
 #include <sylvan_obj.hpp>
 
 #include "test_runlockstep.h"
-#include "test_shift.h"
 #include "test_sccListCorrectness.h"
 
 void runAllTests() {
@@ -158,32 +157,6 @@ void runAllTests() {
     fails++;
   }
 
-  //Shift tests
-  if(!testShiftOneNode()) {
-    std::cout << "testShiftOneNode failed" << std::endl;
-    success = false;
-    fails++;
-  }
-  if(!testShiftTwoNodes()) {
-    std::cout << "testShiftTwoNodes failed" << std::endl;
-    success = false;
-    fails++;
-  }
-  if(!testShiftFourNodes()) {
-    std::cout << "testShiftFourNodes failed" << std::endl;
-    success = false;
-    fails++;
-  }
-  if(!testShiftNineNodes()) {
-    std::cout << "testShiftNineNodes failed" << std::endl;
-    success = false;
-    fails++;
-  }
-
-  
-
-
-
   //SCC List Correctness
   if(testSccCorrectnessLen()) {
     std::cout << "testSccCorrectnessLen failed" << std::endl;
@@ -201,7 +174,27 @@ void runAllTests() {
     fails++;
   }
   if(!testSccCorrectnessPosPermutation()) {
-    std::cout << "testSccCorrectnessPosPermutation" << std::endl;
+    std::cout << "testSccCorrectnessPosPermutation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(testsccListContainsDifferentSccsWithDuplicateNodesNeg()) {
+    std::cout << "testsccListContainsDifferentSccsWithDuplicateNodesNeg failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testsccListContainsDifferentSccsWithDuplicateNodesPos()) {
+    std::cout << "testsccListContainsDifferentSccsWithDuplicateNodesPos failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testUnionIsWholeBddPos()) {
+    std::cout << "testUnionIsWholeBddPos failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(testUnionIsWholeBddNeg()) {
+    std::cout << "testUnionIsWholeBddNeg failed" << std::endl;
     success = false;
     fails++;
   }

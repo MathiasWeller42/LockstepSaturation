@@ -1,6 +1,5 @@
 add_executable(test test_lockstep.cpp
                test_runlockstep.cpp
-               test_shift.cpp
                test_sccListCorrectness.cpp
                graph_examples.cpp
                ../src/lockstep.cpp

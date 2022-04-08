@@ -1,0 +1,505 @@
+<?xml version="1.0"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="CloudOpsManagement-PT-02560by01280" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <page id="page0">
+      <name>
+        <text>DefaultPage</text>
+      </name>
+      <place id="ContainerDown">
+        <name>
+          <text>ContainerDown</text>
+        </name>
+        <initialMarking>
+          <text>1280</text>
+        </initialMarking>
+      </place>
+      <place id="ContainerUp">
+        <name>
+          <text>ContainerUp</text>
+        </name>
+      </place>
+      <place id="Container">
+        <name>
+          <text>Container</text>
+        </name>
+      </place>
+      <place id="OsContainer">
+        <name>
+          <text>OsContainer</text>
+        </name>
+      </place>
+      <place id="OsAvailable">
+        <name>
+          <text>OsAvailable</text>
+        </name>
+      </place>
+      <place id="OsRunning">
+        <name>
+          <text>OsRunning</text>
+        </name>
+      </place>
+      <place id="OsNotInstalled">
+        <name>
+          <text>OsNotInstalled</text>
+        </name>
+        <initialMarking>
+          <text>1280</text>
+        </initialMarking>
+      </place>
+      <place id="SwContainer">
+        <name>
+          <text>SwContainer</text>
+        </name>
+      </place>
+      <place id="ServerContainer">
+        <name>
+          <text>ServerContainer</text>
+        </name>
+      </place>
+      <place id="ScStopped">
+        <name>
+          <text>ScStopped</text>
+        </name>
+      </place>
+      <place id="ScUnavailable">
+        <name>
+          <text>ScUnavailable</text>
+        </name>
+        <initialMarking>
+          <text>1280</text>
+        </initialMarking>
+      </place>
+      <place id="ScWorking">
+        <name>
+          <text>ScWorking</text>
+        </name>
+      </place>
+      <place id="WebAppRuntime">
+        <name>
+          <text>WebAppRuntime</text>
+        </name>
+      </place>
+      <place id="WSRuntime2">
+        <name>
+          <text>WSRuntime2</text>
+        </name>
+      </place>
+      <place id="Wsr2Started">
+        <name>
+          <text>Wsr2Started</text>
+        </name>
+      </place>
+      <place id="Wsr2Deployed">
+        <name>
+          <text>Wsr2Deployed</text>
+        </name>
+      </place>
+      <place id="Wsr2NotDeployed">
+        <name>
+          <text>Wsr2NotDeployed</text>
+        </name>
+        <initialMarking>
+          <text>2560</text>
+        </initialMarking>
+      </place>
+      <place id="WSRuntime1">
+        <name>
+          <text>WSRuntime1</text>
+        </name>
+      </place>
+      <place id="Wsr1Deployed">
+        <name>
+          <text>Wsr1Deployed</text>
+        </name>
+      </place>
+      <place id="Wsr1NotDeployed">
+        <name>
+          <text>Wsr1NotDeployed</text>
+        </name>
+        <initialMarking>
+          <text>2560</text>
+        </initialMarking>
+      </place>
+      <place id="Wsr1Started">
+        <name>
+          <text>Wsr1Started</text>
+        </name>
+      </place>
+      <place id="WsRuntime3">
+        <name>
+          <text>WsRuntime3</text>
+        </name>
+      </place>
+      <place id="Wsr3Deployed">
+        <name>
+          <text>Wsr3Deployed</text>
+        </name>
+      </place>
+      <place id="Wsr3NotDeployed">
+        <name>
+          <text>Wsr3NotDeployed</text>
+        </name>
+        <initialMarking>
+          <text>2560</text>
+        </initialMarking>
+      </place>
+      <place id="Wsr3Started">
+        <name>
+          <text>Wsr3Started</text>
+        </name>
+      </place>
+      <place id="Bounder1">
+        <name>
+          <text>Bounder1</text>
+        </name>
+        <initialMarking>
+          <text>2560</text>
+        </initialMarking>
+      </place>
+      <place id="Bounder2">
+        <name>
+          <text>Bounder2</text>
+        </name>
+        <initialMarking>
+          <text>2560</text>
+        </initialMarking>
+      </place>
+      <transition id="StopWsr3">
+        <name>
+          <text>StopWsr3</text>
+        </name>
+      </transition>
+      <transition id="DeployWsr3">
+        <name>
+          <text>DeployWsr3</text>
+        </name>
+      </transition>
+      <transition id="StartWsr3">
+        <name>
+          <text>StartWsr3</text>
+        </name>
+      </transition>
+      <transition id="StopContainer">
+        <name>
+          <text>StopContainer</text>
+        </name>
+      </transition>
+      <transition id="StartContainer">
+        <name>
+          <text>StartContainer</text>
+        </name>
+      </transition>
+      <transition id="tlink0">
+        <name>
+          <text>tlink0</text>
+        </name>
+      </transition>
+      <transition id="tlink1">
+        <name>
+          <text>tlink1</text>
+        </name>
+      </transition>
+      <transition id="UninstallOs">
+        <name>
+          <text>UninstallOs</text>
+        </name>
+      </transition>
+      <transition id="ShutdownOs">
+        <name>
+          <text>ShutdownOs</text>
+        </name>
+      </transition>
+      <transition id="InstallOs">
+        <name>
+          <text>InstallOs</text>
+        </name>
+      </transition>
+      <transition id="StartOs">
+        <name>
+          <text>StartOs</text>
+        </name>
+      </transition>
+      <transition id="tlink3">
+        <name>
+          <text>tlink3</text>
+        </name>
+      </transition>
+      <transition id="tlink2">
+        <name>
+          <text>tlink2</text>
+        </name>
+      </transition>
+      <transition id="UninstallSc">
+        <name>
+          <text>UninstallSc</text>
+        </name>
+      </transition>
+      <transition id="StopSc">
+        <name>
+          <text>StopSc</text>
+        </name>
+      </transition>
+      <transition id="RunSc">
+        <name>
+          <text>RunSc</text>
+        </name>
+      </transition>
+      <transition id="ConfigureSc">
+        <name>
+          <text>ConfigureSc</text>
+        </name>
+      </transition>
+      <transition id="SetupSc">
+        <name>
+          <text>SetupSc</text>
+        </name>
+      </transition>
+      <transition id="tlink5">
+        <name>
+          <text>tlink5</text>
+        </name>
+      </transition>
+      <transition id="tlink4">
+        <name>
+          <text>tlink4</text>
+        </name>
+      </transition>
+      <transition id="UndeployWsr2">
+        <name>
+          <text>UndeployWsr2</text>
+        </name>
+      </transition>
+      <transition id="StopWsr2">
+        <name>
+          <text>StopWsr2</text>
+        </name>
+      </transition>
+      <transition id="DeployWsr2">
+        <name>
+          <text>DeployWsr2</text>
+        </name>
+      </transition>
+      <transition id="StartWsr2">
+        <name>
+          <text>StartWsr2</text>
+        </name>
+      </transition>
+      <transition id="UndeployWsr1">
+        <name>
+          <text>UndeployWsr1</text>
+        </name>
+      </transition>
+      <transition id="StopWsr1">
+        <name>
+          <text>StopWsr1</text>
+        </name>
+      </transition>
+      <transition id="DeployWsr1">
+        <name>
+          <text>DeployWsr1</text>
+        </name>
+      </transition>
+      <transition id="StartWsr1">
+        <name>
+          <text>StartWsr1</text>
+        </name>
+      </transition>
+      <transition id="UndeployWsr3">
+        <name>
+          <text>UndeployWsr3</text>
+        </name>
+      </transition>
+      <arc id="cId62102699734598934957" source="WSRuntime2" target="tlink5">
+      </arc>
+      <arc id="cId66399157815964586258" source="tlink4" target="WSRuntime2">
+      </arc>
+      <arc id="cId66399157815964586259" source="UndeployWsr2" target="WSRuntime2">
+      </arc>
+      <arc id="cId66399157815964586260" source="UndeployWsr2" target="Wsr2NotDeployed">
+      </arc>
+      <arc id="cId66399157815964586261" source="Wsr2Deployed" target="UndeployWsr2">
+      </arc>
+      <arc id="cId66399157815964586262" source="StopWsr2" target="Wsr2Deployed">
+      </arc>
+      <arc id="cId66399157815964586263" source="StartWsr2" target="Wsr2Started">
+      </arc>
+      <arc id="cId66399157815964586264" source="Wsr2Started" target="StopWsr2">
+      </arc>
+      <arc id="cId66399157815964586265" source="Wsr2Deployed" target="StartWsr2">
+      </arc>
+      <arc id="cId66399157815964586266" source="DeployWsr2" target="Wsr2Deployed">
+      </arc>
+      <arc id="cId66399157815964586267" source="Wsr2NotDeployed" target="DeployWsr2">
+      </arc>
+      <arc id="cId66399157815964586268" source="WSRuntime2" target="DeployWsr2">
+      </arc>
+      <arc id="cId66399157815964586269" source="UninstallOs" target="OsContainer">
+      </arc>
+      <arc id="cId66399157815964586270" source="ServerContainer" target="UninstallSc">
+      </arc>
+      <arc id="cId66399157815964586271" source="tlink4" target="WSRuntime1">
+      </arc>
+      <arc id="cId66399157815964586272" source="WSRuntime1" target="tlink5">
+      </arc>
+      <arc id="cId66894903210466554273" source="UndeployWsr1" target="WSRuntime1">
+      </arc>
+      <arc id="cId66894903210466554274" source="WSRuntime1" target="DeployWsr1">
+      </arc>
+      <arc id="cId66894903210466554275" source="Wsr1NotDeployed" target="DeployWsr1">
+      </arc>
+      <arc id="cId66894903210466554276" source="UndeployWsr1" target="Wsr1NotDeployed">
+      </arc>
+      <arc id="cId66894903210466554277" source="DeployWsr1" target="Wsr1Deployed">
+      </arc>
+      <arc id="cId66894903210466554278" source="Wsr1Deployed" target="StartWsr1">
+      </arc>
+      <arc id="cId66894903210466554279" source="StartWsr1" target="Wsr1Started">
+      </arc>
+      <arc id="cId66894903210466554280" source="Wsr1Started" target="StopWsr1">
+      </arc>
+      <arc id="cId66894903210466554281" source="StopWsr1" target="Wsr1Deployed">
+      </arc>
+      <arc id="cId66894903210466554282" source="Wsr1Deployed" target="UndeployWsr1">
+      </arc>
+      <arc id="cId66894903210466554283" source="tlink4" target="WsRuntime3">
+      </arc>
+      <arc id="cId66894903210466554284" source="WsRuntime3" target="tlink5">
+      </arc>
+      <arc id="cId66894903210466554285" source="UndeployWsr3" target="WsRuntime3">
+      </arc>
+      <arc id="cId66894903210466554286" source="WsRuntime3" target="DeployWsr3">
+      </arc>
+      <arc id="cId66894903210466554287" source="DeployWsr3" target="Wsr3Deployed">
+      </arc>
+      <arc id="cId66894903210466554288" source="Wsr3NotDeployed" target="DeployWsr3">
+      </arc>
+      <arc id="cId66894903210466554289" source="UndeployWsr3" target="Wsr3NotDeployed">
+      </arc>
+      <arc id="cId66894903210466554290" source="Wsr3Deployed" target="UndeployWsr3">
+      </arc>
+      <arc id="cId66894903210466554291" source="Wsr3Deployed" target="StartWsr3">
+      </arc>
+      <arc id="cId66894903210466554292" source="StartWsr3" target="Wsr3Started">
+      </arc>
+      <arc id="cId66894903210466554293" source="Wsr3Started" target="StopWsr3">
+      </arc>
+      <arc id="cId66894903210466554294" source="StopWsr3" target="Wsr3Deployed">
+      </arc>
+      <arc id="cId66894903210466554295" source="StopContainer" target="ContainerDown">
+      </arc>
+      <arc id="cId66894903210466554296" source="ContainerDown" target="StartContainer">
+      </arc>
+      <arc id="cId66894903210466554297" source="StartContainer" target="ContainerUp">
+      </arc>
+      <arc id="cId66894903210466554298" source="Container" target="StopContainer">
+      </arc>
+      <arc id="cId66894903210466554299" source="ContainerUp" target="StopContainer">
+      </arc>
+      <arc id="cId668949032104665542100" source="StartContainer" target="Container">
+      </arc>
+      <arc id="cId668949032104665542101" source="tlink1" target="Container">
+      </arc>
+      <arc id="cId668949032104665542102" source="Container" target="tlink0">
+      </arc>
+      <arc id="cId668949032104665542103" source="tlink0" target="OsContainer">
+      </arc>
+      <arc id="cId668949032104665542104" source="OsContainer" target="UninstallOs">
+      </arc>
+      <arc id="cId667296548887981414105" source="ShutdownOs" target="OsContainer">
+      </arc>
+      <arc id="cId667296548887981414106" source="UninstallOs" target="OsNotInstalled">
+      </arc>
+      <arc id="cId667296548887981414107" source="ShutdownOs" target="OsAvailable">
+      </arc>
+      <arc id="cId667296548887981414108" source="OsRunning" target="ShutdownOs">
+      </arc>
+      <arc id="cId667296548887981414109" source="StartOs" target="OsRunning">
+      </arc>
+      <arc id="cId667296548887981414110" source="OsContainer" target="StartOs">
+      </arc>
+      <arc id="cId667296548887981414111" source="OsAvailable" target="StartOs">
+      </arc>
+      <arc id="cId667296548887981414112" source="InstallOs" target="OsAvailable">
+      </arc>
+      <arc id="cId667296548887981414113" source="OsNotInstalled" target="InstallOs">
+      </arc>
+      <arc id="cId667296548887981414114" source="SwContainer" target="ShutdownOs">
+      </arc>
+      <arc id="cId667296548887981414115" source="StartOs" target="SwContainer">
+      </arc>
+      <arc id="cId667296548887981414116" source="OsAvailable" target="UninstallOs">
+      </arc>
+      <arc id="cId667296548887981414117" source="InstallOs" target="OsContainer">
+      </arc>
+      <arc id="cId667296548887981414118" source="OsContainer" target="tlink1">
+      </arc>
+      <arc id="cId667296548887981414119" source="SwContainer" target="tlink2">
+      </arc>
+      <arc id="cId667296548887981414120" source="tlink3" target="SwContainer">
+      </arc>
+      <arc id="cId667296548887981414121" source="ServerContainer" target="tlink3">
+      </arc>
+      <arc id="cId667296548887981414122" source="tlink2" target="ServerContainer">
+      </arc>
+      <arc id="cId667296548887981414123" source="UninstallSc" target="ServerContainer">
+      </arc>
+      <arc id="cId667296548887981414124" source="StopSc" target="ServerContainer">
+      </arc>
+      <arc id="cId667296548887981414125" source="StopSc" target="ScStopped">
+      </arc>
+      <arc id="cId667296548887981414126" source="ScStopped" target="UninstallSc">
+      </arc>
+      <arc id="cId667296548887981414127" source="UninstallSc" target="ScUnavailable">
+      </arc>
+      <arc id="cId667296548887981414128" source="ScUnavailable" target="SetupSc">
+      </arc>
+      <arc id="cId667296548887981414129" source="SetupSc" target="ScStopped">
+      </arc>
+      <arc id="cId667296548887981414130" source="ScStopped" target="RunSc">
+      </arc>
+      <arc id="cId667296548887981414131" source="ServerContainer" target="RunSc">
+      </arc>
+      <arc id="cId667296548887981414132" source="SetupSc" target="ServerContainer">
+      </arc>
+      <arc id="cId667296548887981414133" source="ScWorking" target="StopSc">
+      </arc>
+      <arc id="cId667296548887981414134" source="ScWorking" target="ConfigureSc">
+      </arc>
+      <arc id="cId659034132804560774135" source="RunSc" target="ScWorking">
+      </arc>
+      <arc id="cId659034132804560774136" source="ConfigureSc" target="ScWorking">
+      </arc>
+      <arc id="cId659034132804560774137" source="RunSc" target="WebAppRuntime">
+      </arc>
+      <arc id="cId659034132804560774138" source="WebAppRuntime" target="StopSc">
+      </arc>
+      <arc id="cId659034132804560774139" source="WebAppRuntime" target="tlink4">
+      </arc>
+      <arc id="cId659034132804560774140" source="tlink5" target="WebAppRuntime">
+      </arc>
+      <arc id="cId659034132804560774170" source="Bounder1" target="StopSc">
+      </arc>
+      <arc id="cId659034132804560774171" source="Bounder1" target="SetupSc">
+      </arc>
+      <arc id="cId659034132804560774172" source="RunSc" target="Bounder1">
+      </arc>
+      <arc id="cId659034132804560774174" source="tlink2" target="Bounder1">
+      </arc>
+      <arc id="cId659034132804560774175" source="Bounder1" target="tlink3">
+      </arc>
+      <arc id="cId659034132804560774183" source="Bounder2" target="ShutdownOs">
+      </arc>
+      <arc id="cId659034132804560774184" source="Bounder2" target="StartContainer">
+      </arc>
+      <arc id="cId659034132804560774185" source="StopContainer" target="Bounder2">
+      </arc>
+      <arc id="cId659034132804560774187" source="Bounder2" target="InstallOs">
+      </arc>
+      <arc id="cId659034132804560774188" source="StartOs" target="Bounder2">
+      </arc>
+    </page>
+    <name>
+      <text>CloudOpsManagement-PT-02560by01280</text>
+    </name>
+  </net>
+</pnml>

@@ -28,8 +28,8 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  Graph bigGraph = PNMLtoGraph("HealthRecord/PT/hrec_userdef.pnml");
-  timeSaturation(bigGraph);
+  Graph bigGraph = PNMLtoGraph("ShieldRVt/PT/shield_t_rv_002_a.pnml");
+  timeSaturationIterative(bigGraph);
   //testRelNext();
 
   std::cout << "Goodbye :) - hilsen hyggelige helterotte hoppe-loppe hepatitis herpes Herbert Hans Handanovic " << std::endl;

@@ -3,6 +3,7 @@ Den mest dank-swaggern todo-liste #WØRF uWu *tips fedora*
 TODO 9 : asserts i lockstep
 TODO 10 : tail calls
 TODO 13 : Pruning? (Aka find noder med indgrad eller udgrad <=1 og YEET dem)
+TODO 14 : Luk program hvis fil ikke fundet
 
 TODO i : Husk at tests er en ting...
 TODO 9000 : Forstå Petri nets

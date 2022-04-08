@@ -36,6 +36,7 @@ sylvan::BddSet makeCube(int nodeBytes);
 Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> &relations);
 
 Graph pruneGraph(const Graph &graph);
+Graph pruneGraphSaturationStyle(const Graph &graph);
 Graph sortRelations(const Graph &graph);
 
 

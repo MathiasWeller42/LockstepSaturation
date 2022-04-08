@@ -15,13 +15,12 @@
 #include "lockstep.h"
 #include "petriTranslation.h"
 #include "bdd_utilities.h"
+#include "graph_creation.h"
 #include "print.h"
 #include "../test/graph_examples.h"
-#include "graph_creation.h"
 
 void timeSaturation(Graph &graph) {
-  graph = pruneGraph(graph);
-  graph = sortRelations(graph);
+  graph = graphPreprocessing(graph);
 
   auto start1 = std::chrono::high_resolution_clock::now();
   std::list<sylvan::Bdd> sccList1 = lockstepSaturation(graph);
@@ -30,7 +29,7 @@ void timeSaturation(Graph &graph) {
   std::cout << "Time elapsed (saturation): " << duration1.count() << " milliseconds" << std::endl;
   std::cout << "Found " << sccList1.size() << " SCCs" << std::endl << std::endl;
 
-  bool hasDuplicates1 = containsDuplicateSccs(sccList1);
+  /*bool hasDuplicates1 = containsDuplicateSccs(sccList1);
   if(hasDuplicates1) {
     std::cout << "Lockstep saturation gave two or more equal SCCs" << std::endl;
   }
@@ -41,7 +40,7 @@ void timeSaturation(Graph &graph) {
   bool foundAllSCCs1 = sccUnionIsWholeBdd(sccList1, graph.nodes);
   if(!foundAllSCCs1) {
     std::cout << "Lockstep saturation did not find SCCs covering all nodes" << std::endl;
-  }
+  }*/
 
   auto start2 = std::chrono::high_resolution_clock::now();
   std::list<sylvan::Bdd> sccList2 = lockstepRelationUnion(graph);
@@ -50,7 +49,7 @@ void timeSaturation(Graph &graph) {
   std::cout << "Time elapsed (relation union): " << duration2.count() << " milliseconds" << std::endl;
   std::cout << "Found " << sccList2.size() << " SCCs" << std::endl << std::endl;
 
-  bool hasDuplicates2 = containsDuplicateSccs(sccList2);
+  /*bool hasDuplicates2 = containsDuplicateSccs(sccList2);
   if(hasDuplicates2) {
     std::cout << "Lockstep relation union gave two or more equal SCCs" << std::endl;
   }
@@ -65,7 +64,68 @@ void timeSaturation(Graph &graph) {
 
   if(!sccListCorrectness(sccList1, sccList2)) {
     std::cout << "SCC lists did not contain the same BDDs" << std::endl;
+  }*/
+}
+
+void timeSaturationIterative(Graph &graph) {
+  graph = graphPreprocessing(graph);
+
+  auto start1 = std::chrono::high_resolution_clock::now();
+  std::list<sylvan::Bdd> sccList1 = lockstepSaturationIterative(graph);
+  auto stop1 = std::chrono::high_resolution_clock::now();
+  auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(stop1 - start1);
+  std::cout << "Time elapsed (saturation): " << duration1.count() << " milliseconds" << std::endl;
+  std::cout << "Found " << sccList1.size() << " SCCs" << std::endl << std::endl;
+
+  /*bool hasDuplicates1 = containsDuplicateSccs(sccList1);
+  if(hasDuplicates1) {
+    std::cout << "Lockstep saturation gave two or more equal SCCs" << std::endl;
   }
+  bool hasOverlap1 = sccListContainsDifferentSccsWithDuplicateNodes(sccList1);
+  if(hasOverlap1) {
+    std::cout << "Lockstep saturation gave overlapping SCCs" << std::endl;
+  }
+  bool foundAllSCCs1 = sccUnionIsWholeBdd(sccList1, graph.nodes);
+  if(!foundAllSCCs1) {
+    std::cout << "Lockstep saturation did not find SCCs covering all nodes" << std::endl;
+  }*/
+
+  auto start2 = std::chrono::high_resolution_clock::now();
+  std::list<sylvan::Bdd> sccList2 = lockstepRelationUnionIterative(graph);
+  auto stop2 = std::chrono::high_resolution_clock::now();
+  auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(stop2 - start2);
+  std::cout << "Time elapsed (relation union): " << duration2.count() << " milliseconds" << std::endl;
+  std::cout << "Found " << sccList2.size() << " SCCs" << std::endl << std::endl;
+
+  /*bool hasDuplicates2 = containsDuplicateSccs(sccList2);
+  if(hasDuplicates2) {
+    std::cout << "Lockstep relation union gave two or more equal SCCs" << std::endl;
+  }
+  bool hasOverlap2 = sccListContainsDifferentSccsWithDuplicateNodes(sccList2);
+  if(hasOverlap2) {
+    std::cout << "Lockstep relation union gave overlapping SCCs" << std::endl;
+  }
+  bool foundAllSCCs2 = sccUnionIsWholeBdd(sccList2, graph.nodes);
+  if(!foundAllSCCs2) {
+    std::cout << "Lockstep relation union did not find SCCs covering all nodes" << std::endl;
+  }
+
+  if(!sccListCorrectness(sccList1, sccList2)) {
+    std::cout << "SCC lists did not contain the same BDDs" << std::endl;
+  }*/
+}
+
+Graph graphPreprocessing(const Graph &graph) {
+  Graph resultGraph = graph;
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+
+  resultGraph = sortRelations(resultGraph);
+
+  return resultGraph;
 }
 
 bool sccListContains(sylvan::Bdd target, std::list<sylvan::Bdd> sccList) {
