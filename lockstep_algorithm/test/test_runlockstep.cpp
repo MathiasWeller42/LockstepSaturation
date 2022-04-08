@@ -11,13 +11,22 @@
 #include "../src/bdd_utilities.h"
 #include "../src/petriTranslation.h"
 #include "../src/graph_creation.h"
+#include "../src/lockstep_test.h"
 
-bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs, bool saturation) {
+bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs, bool saturation, bool iterative) {
   std::list<sylvan::Bdd> result;
   if(saturation) {
-    result = lockstepSaturation(graph);
+    if(iterative) {
+      result = lockstepSaturationIterative(graph);
+    } else {
+      result = lockstepSaturation(graph);
+    }
   } else {
-    result = lockstepRelationUnion(graph);
+    if(iterative) {
+      result = lockstepRelationUnionIterative(graph);
+    } else {
+      result = lockstepRelationUnion(graph);
+    }
   }
   if(result.size() != expectedSCCs.size()){
     std::cout << "Too many or too few SCCs" << std::endl;
@@ -28,71 +37,71 @@ bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs, b
   return sccListCorrectness(result, expectedSCCs);
 }
 
-bool testNoGraph(bool saturation) {
+bool testNoGraph(bool saturation, bool iterative) {
   std::list<sylvan::Bdd> expectedSCCs = {};
   const Graph graph = noGraph();
-  return testGraph(graph, expectedSCCs, saturation);
+  return testGraph(graph, expectedSCCs, saturation, iterative);
 }
 
-bool testOneNodeGraph(bool saturation) {
+bool testOneNodeGraph(bool saturation, bool iterative) {
   std::string bitstring = "0";
   sylvan::Bdd scc1 = makeNode(bitstring);
   std::list<sylvan::Bdd> expectedSccList = {scc1};
 
   const Graph graph = oneNodeGraph();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testOneNodeGraphSelfLoop(bool saturation) {
+bool testOneNodeGraphSelfLoop(bool saturation, bool iterative) {
   std::string bitstring = "0";
   sylvan::Bdd scc1 = makeNode(bitstring);
   std::list<sylvan::Bdd> expectedSccList = {scc1};
 
   const Graph graph = oneNodeGraphSelfLoop();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testTwoNodeGraphOneSCC(bool saturation) {
+bool testTwoNodeGraphOneSCC(bool saturation, bool iterative) {
   std::string a = "0"; std::string b = "1";
   std::list<std::string> nodeList = {a,b};
   sylvan::Bdd scc1 = makeNodes(nodeList);
   std::list<sylvan::Bdd> expectedSccList = {scc1};
 
   const Graph graph = twoNodeGraphOneSCC();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testTwoNodeGraphTwoSCCs(bool saturation) {
+bool testTwoNodeGraphTwoSCCs(bool saturation, bool iterative) {
   std::string a = "0"; std::string b = "1";
   sylvan::Bdd scc1 = makeNode(a);
   sylvan::Bdd scc2 = makeNode(b);
   std::list<sylvan::Bdd> expectedSccList = {scc1,scc2};
 
   const Graph graph = twoNodeGraphTwoSCCs();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testTwoNodeGraphTwoRelations(bool saturation) {
+bool testTwoNodeGraphTwoRelations(bool saturation, bool iterative) {
   std::string a = "0"; std::string b = "1";
   std::list<std::string> nodeList = {a,b};
   sylvan::Bdd scc1 = makeNodes(nodeList);
   std::list<sylvan::Bdd> expectedSccList = {scc1};
 
   const Graph graph = twoNodeGraphTwoRelations();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testNonConnectedGraph(bool saturation) {
+bool testNonConnectedGraph(bool saturation, bool iterative) {
   std::string a = "0"; std::string b = "1";
   sylvan::Bdd scc1 = makeNode(a);
   sylvan::Bdd scc2 = makeNode(b);
   std::list<sylvan::Bdd> expectedSccList = {scc1,scc2};
 
   const Graph graph = nonConnectedGraph();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testfourNodesOneRelation(bool saturation) {
+bool testfourNodesOneRelation(bool saturation, bool iterative) {
   std::string a = "00"; std::string b = "01";
   std::string c = "10"; std::string d = "11";
   std::list<std::string> nodeList = {a,b,c,d};
@@ -100,10 +109,10 @@ bool testfourNodesOneRelation(bool saturation) {
   std::list<sylvan::Bdd> expectedSccList = {scc1};
 
   const Graph graph = twoNodeGraphTwoRelations();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testGraphExample1oneRel(bool saturation) {
+bool testGraphExample1oneRel(bool saturation, bool iterative) {
   std::string zero = "0000";
   std::string one =  "0001";
   std::string two =  "0010";
@@ -127,10 +136,10 @@ bool testGraphExample1oneRel(bool saturation) {
   std::list<sylvan::Bdd> expectedSccList = {scc1, scc5, scc3, scc4, scc2};
 
   const Graph graph = graphExample1oneRel();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testGraphExample1multRel(bool saturation) {
+bool testGraphExample1multRel(bool saturation, bool iterative) {
   std::string zero  = "0000";
   std::string one   = "0001";
   std::string two   = "0010";
@@ -154,10 +163,10 @@ bool testGraphExample1multRel(bool saturation) {
   std::list<sylvan::Bdd> expectedSccList = {scc1, scc5, scc3, scc4, scc2};
 
   const Graph graph = graphExample1multRel();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testGraphExample2oneRel(bool saturation) {
+bool testGraphExample2oneRel(bool saturation, bool iterative) {
   std::string n0 = "00000"; std::string n1 = "00001";
   std::string n2 = "00010"; std::string n3 = "00011";
   std::string n4 = "00100"; std::string n5 = "00101";
@@ -185,10 +194,10 @@ bool testGraphExample2oneRel(bool saturation) {
   std::list<sylvan::Bdd> expectedSccList = {scc1, scc6, scc4, scc5, scc3, scc2};
 
   const Graph graph = graphExample2oneRel();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testGraphExample2multRel(bool saturation) {
+bool testGraphExample2multRel(bool saturation, bool iterative) {
   std::string n0 = "00000"; std::string n1 = "00001";
   std::string n2 = "00010"; std::string n3 = "00011";
   std::string n4 = "00100"; std::string n5 = "00101";
@@ -216,10 +225,10 @@ bool testGraphExample2multRel(bool saturation) {
   std::list<sylvan::Bdd> expectedSccList = {scc1, scc6, scc4, scc3, scc2, scc5};
 
   const Graph graph = graphExample2multRel();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testGraphExample3oneRel(bool saturation) {
+bool testGraphExample3oneRel(bool saturation, bool iterative) {
   std::string a = "000"; std::string b = "001";
   std::string c = "010"; std::string d = "011"; std::string e = "100";
   std::list<std::string> nodeList = {a,b,c,d,e};
@@ -227,10 +236,10 @@ bool testGraphExample3oneRel(bool saturation) {
   std::list<sylvan::Bdd> expectedSccList = {scc1};
 
   const Graph graph = graphExample3oneRel();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 
-bool testGraphExample3multRel(bool saturation) {
+bool testGraphExample3multRel(bool saturation, bool iterative) {
   std::string a = "000"; std::string b = "001";
   std::string c = "010"; std::string d = "011"; std::string e = "100";
   std::list<std::string> nodeList = {a,b,c,d,e};
@@ -238,6 +247,6 @@ bool testGraphExample3multRel(bool saturation) {
   std::list<sylvan::Bdd> expectedSccList = {scc1};
 
   const Graph graph = graphExample3multRel();
-  return testGraph(graph, expectedSccList, saturation);
+  return testGraph(graph, expectedSccList, saturation, iterative);
 }
 

@@ -41,7 +41,6 @@ inline std::list<int> list_union(std::list<int> &list1, std::list<int> &list2) {
   return out;
 }
 
-
 //List1 ∩ List2
 inline std::list<int> list_intersect(std::list<int> &list1, std::list<int> &list2) {
   list1.sort();
@@ -65,7 +64,7 @@ inline std::list<int> list_difference(std::list<int> &list1, std::list<int> &lis
 //- The sources go from having a mark to not having a mark
 //- The targets go from not having a mark to having a mark
 // The relation then is all configurations in which it flips these bits defining this transition
-// Example: P1 -> | -> P2 would be 01 -> 10 while keeping all other places in the petri net fixed (these define several nodes in the "graph")
+// Example: P0 -> | -> P1 would be 01 -> 10 while keeping all other places in the petri net fixed (these define several nodes in the "graph")
 inline Relation makeRelationFromTransition(Transition transition, std::map<std::string, int> placeMap) {
   Relation result = {};
 
@@ -74,10 +73,6 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
   //The sets of vars included in the sources and targets in the transition
   std::list<int> sources = {};
   std::list<int> targets = {};
-
-  std::cout << std::endl << std::endl;
-  std::cout << "New relation from transition " << transition.id << std::endl;
-  std::cout << "True";
 
   //Handling self-loops
   for(Arc arc : transition.sources) {
@@ -118,21 +113,17 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
   for(int placeNum : selfLoops) {
     sylvan::Bdd beforeSource = ithvar(placeNum);
     resultBdd = resultBdd.And(beforeSource);
-    std::cout << " and x" << placeNum;
 
     sylvan::Bdd afterSource = ithvar(placeNum+1);
     resultBdd = resultBdd.And(afterSource);
-    std::cout << " and x" << placeNum+1;
   }
 
   for(int placeNum : newSources) {
     //The source places have tokens before the transition
-    std::cout << " and x" << placeNum;
     sylvan::Bdd beforeSource = ithvar(placeNum);
     resultBdd = resultBdd.And(beforeSource);
 
     //After the transition, the source places have no tokens
-    std::cout << " and !x" << placeNum+1;
     sylvan::Bdd afterSource = nithvar(placeNum + 1);
     resultBdd = resultBdd.And(afterSource);
   }
@@ -140,12 +131,10 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
   for(int placeNum : newTargets) {
     //The target places have no tokens before the transition
     //TODO: Overvej om det kan fjerererererernes.
-    std::cout << " and !x" << placeNum;
     sylvan::Bdd beforeTarget = nithvar(placeNum);
     resultBdd = resultBdd.And(beforeTarget);
 
     //After the transition, the target places now have tokens
-    std::cout << " and x" << placeNum+1;
     sylvan::Bdd afterTarget = ithvar(placeNum + 1);
     resultBdd = resultBdd.And(afterTarget);
   }
@@ -155,7 +144,6 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
   return result;
 }
 
-
 // Takes a PNML file defining a petri net and converts it into a Graph
 // A node in the resulting graph is a configuration of markings in the petri net
 // A relation is a transition from marking to some other marking
@@ -164,6 +152,11 @@ Graph PNMLtoGraph(std::string fileString) {
 
   // Read from the text file
   std::ifstream readFile(path);
+
+  if(!readFile) {
+    std::cout << "Invalid file name" << std::endl;
+    std::exit(-1);
+  } 
 
   int placeIndex = 0;
   std::map<std::string, int> placeMap = {};
@@ -237,12 +230,14 @@ Graph PNMLtoGraph(std::string fileString) {
     if(transitionMap.count(arc.source)) {
       transitionMap[arc.source].targets.push_back(arc);
       if(!placeMap.count(arc.target)) {
-        std::cout << "no place found for arc: " << arc.toString() << std::endl;
+        std::cout << "No place found for arc: " << arc.toString() << std::endl;
+        std::exit(-1);
       }
     } else if(transitionMap.count(arc.target)) {
       transitionMap[arc.target].sources.push_back(arc);
       if(!placeMap.count(arc.source)) {
-        std::cout << "no place found for arc: " << arc.toString() << std::endl;
+        std::cout << "No place found for arc: " << arc.toString() << std::endl;
+        std::exit(-1);
       }
     } else {
       std::cout << "Found arc which is not connected to transition" << std::endl;
@@ -257,14 +252,11 @@ Graph PNMLtoGraph(std::string fileString) {
   for(std::pair<std::string, Transition> key_value : transitionMap) {
     //std::cout << key_value.second.toString() << std::endl;
     Relation relationObj = makeRelationFromTransition(key_value.second, placeMap);
-    printSingleRelationAsString(relationObj.relationBdd);
-    printBdd(relationObj.relationBdd);
     relations.push_back(relationObj);
   }
 
   int numPlaces = placeMap.size();
-  std::cout << std::endl << std::endl;
-  std::cout << "numPlaces: " << std::to_string(numPlaces) << std::endl;
+  std::cout << "Number of places: " << std::to_string(numPlaces) << std::endl;
   sylvan::BddSet cube = makeCube(numPlaces);
 
   Graph pnmlGraph;
@@ -272,6 +264,6 @@ Graph PNMLtoGraph(std::string fileString) {
   pnmlGraph.cube = cube;
   pnmlGraph.nodes = leaf_true();
 
-  std::cout << "Number of relations: " << pnmlGraph.relations.size() << std::endl;
+  std::cout << "Number of relations: " << pnmlGraph.relations.size() << std::endl << std::endl;
   return pnmlGraph;
 }

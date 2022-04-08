@@ -28,7 +28,7 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  Graph bigGraph = PNMLtoGraph("ShieldRVt/PT/shield_t_rv_002_a.pnml");
+  Graph bigGraph = PNMLtoGraph("ShieldIIPt/PT/shield_t_iip_001_a.pnml");
   timeSaturationIterative(bigGraph);
   //testRelNext();
 

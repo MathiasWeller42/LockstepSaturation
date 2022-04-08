@@ -137,7 +137,7 @@ bool testSccCorrectnessPosPermutation() {
   return sccListCorrectness(sccList1, sccList2);
 }
 
- bool testsccListContainsDifferentSccsWithDuplicateNodesNeg() {
+ bool testsccListContainsDifferentSccsWithDuplicateNodesPos() {
   std::string n0 = "00000"; std::string n1 = "00001";
   std::string n2 = "00010"; std::string n3 = "00011";
   std::string n4 = "00100"; std::string n5 = "00101";
@@ -158,7 +158,7 @@ bool testSccCorrectnessPosPermutation() {
   return sccListContainsDifferentSccsWithDuplicateNodes(sccList);
  }
 
- bool testsccListContainsDifferentSccsWithDuplicateNodesPos() {
+ bool testsccListContainsDifferentSccsWithDuplicateNodesNeg() {
   std::string n0 = "00000"; std::string n1 = "00001";
   std::string n2 = "00010"; std::string n3 = "00011";
   std::string n4 = "00100"; std::string n5 = "00101";

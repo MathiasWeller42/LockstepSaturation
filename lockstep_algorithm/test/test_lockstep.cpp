@@ -12,147 +12,316 @@
 void runAllTests() {
   bool saturation = true;
   bool noSaturation = false;
+  bool iterative = true;
+  bool notIterative = false;
 
   bool success = true;
   int fails = 0;
   //Lockstep tests
-  if(!testNoGraph(saturation)) {
-    std::cout << "testNoGraph with saturation failed" << std::endl;
+  //testNoGraph
+  if(!testNoGraph(saturation, iterative)) {
+    std::cout << "testNoGraph iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testNoGraph(noSaturation)) {
-    std::cout << "testNoGraph without saturation failed" << std::endl;
+  if(!testNoGraph(noSaturation, iterative)) {
+    std::cout << "testNoGraph iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testOneNodeGraph(saturation)) {
-    std::cout << "testOneNodeGraph with saturation failed" << std::endl;
+  if(!testNoGraph(saturation, notIterative)) {
+    std::cout << "testNoGraph non-iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testOneNodeGraph(noSaturation)) {
-    std::cout << "testOneNodeGraph without saturation failed" << std::endl;
+  if(!testNoGraph(noSaturation, notIterative)) {
+    std::cout << "testNoGraph non-iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testOneNodeGraphSelfLoop(saturation)) {
-    std::cout << "testOneNodeGraphSelfLoop with saturation failed" << std::endl;
+
+  //testOneNodeGraph
+  if(!testOneNodeGraph(saturation, iterative)) {
+    std::cout << "testOneNodeGraph iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testOneNodeGraphSelfLoop(noSaturation)) {
-    std::cout << "testOneNodeGraphSelfLoop without saturation failed" << std::endl;
+  if(!testOneNodeGraph(noSaturation, iterative)) {
+    std::cout << "testOneNodeGraph iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testTwoNodeGraphOneSCC(saturation)) {
-    std::cout << "testTwoNodeGraphOneSCC with saturation failed" << std::endl;
+  if(!testOneNodeGraph(saturation, notIterative)) {
+    std::cout << "testOneNodeGraph non-iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testTwoNodeGraphOneSCC(noSaturation)) {
-    std::cout << "testTwoNodeGraphOneSCC without saturation failed" << std::endl;
+  if(!testOneNodeGraph(noSaturation, notIterative)) {
+    std::cout << "testOneNodeGraph non-iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testTwoNodeGraphTwoSCCs(saturation)) {
-    std::cout << "testTwoNodeGraphTwoSCCs with saturation failed" << std::endl;
+
+  //testOneNodeGraphSelfLoop
+  if(!testOneNodeGraphSelfLoop(saturation, iterative)) {
+    std::cout << "testOneNodeGraphSelfLoop iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testTwoNodeGraphTwoSCCs(noSaturation)) {
-    std::cout << "testTwoNodeGraphTwoSCCs without saturation failed" << std::endl;
+  if(!testOneNodeGraphSelfLoop(noSaturation, iterative)) {
+    std::cout << "testOneNodeGraphSelfLoop iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testTwoNodeGraphTwoRelations(saturation)) {
-    std::cout << "testTwoNodeGraphTwoRelations with saturation failed" << std::endl;
+  if(!testOneNodeGraphSelfLoop(saturation, notIterative)) {
+    std::cout << "testOneNodeGraphSelfLoop non-iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testTwoNodeGraphTwoRelations(noSaturation)) {
-    std::cout << "testTwoNodeGraphTwoRelations without saturation failed" << std::endl;
+  if(!testOneNodeGraphSelfLoop(noSaturation, notIterative)) {
+    std::cout << "testOneNodeGraphSelfLoop non-iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testNonConnectedGraph(saturation)) {
-    std::cout << "testNonConnectedGraph with saturation failed" << std::endl;
+
+  //testTwoNodeGraphOneSCC
+  if(!testTwoNodeGraphOneSCC(saturation, iterative)) {
+    std::cout << "testTwoNodeGraphOneSCC iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testNonConnectedGraph(noSaturation)) {
-    std::cout << "testNonConnectedGraph without saturation failed" << std::endl;
+  if(!testTwoNodeGraphOneSCC(noSaturation, iterative)) {
+    std::cout << "testTwoNodeGraphOneSCC iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testfourNodesOneRelation(saturation)) {
-    std::cout << "testfourNodesOneRelation with saturation failed" << std::endl;
+  if(!testTwoNodeGraphOneSCC(saturation, notIterative)) {
+    std::cout << "testTwoNodeGraphOneSCC non-iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testfourNodesOneRelation(noSaturation)) {
-    std::cout << "testfourNodesOneRelation without saturation failed" << std::endl;
+  if(!testTwoNodeGraphOneSCC(noSaturation, notIterative)) {
+    std::cout << "testTwoNodeGraphOneSCC non-iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample1oneRel(saturation)) {
-    std::cout << "testGraphExample1oneRel with saturation failed" << std::endl;
+
+  //testTwoNodeGraphTwoSCCs
+  if(!testTwoNodeGraphTwoSCCs(saturation, iterative)) {
+    std::cout << "testTwoNodeGraphTwoSCCs iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample1oneRel(noSaturation)) {
-    std::cout << "testGraphExample1oneRel without saturation failed" << std::endl;
+  if(!testTwoNodeGraphTwoSCCs(noSaturation, iterative)) {
+    std::cout << "testTwoNodeGraphTwoSCCs iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample1multRel(saturation)) {
-    std::cout << "testGraphExample1multRel with saturation failed" << std::endl;
+  if(!testTwoNodeGraphTwoSCCs(saturation, notIterative)) {
+    std::cout << "testTwoNodeGraphTwoSCCs non-iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample1multRel(noSaturation)) {
-    std::cout << "testGraphExample1multRel without saturation failed" << std::endl;
+  if(!testTwoNodeGraphTwoSCCs(noSaturation, notIterative)) {
+    std::cout << "testTwoNodeGraphTwoSCCs non-iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample2oneRel(saturation)) {
-    std::cout << "testGraphExample2oneRel with saturation failed" << std::endl;
+
+  //testTwoNodeGraphTwoRelations
+  if(!testTwoNodeGraphTwoRelations(saturation, iterative)) {
+    std::cout << "testTwoNodeGraphTwoRelations iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample2oneRel(noSaturation)) {
-    std::cout << "testGraphExample2oneRel without saturation failed" << std::endl;
+  if(!testTwoNodeGraphTwoRelations(noSaturation, iterative)) {
+    std::cout << "testTwoNodeGraphTwoRelations iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample2multRel(saturation)) {
-    std::cout << "testGraphExample2multRel with saturation failed" << std::endl;
+  if(!testTwoNodeGraphTwoRelations(saturation, notIterative)) {
+    std::cout << "testTwoNodeGraphTwoRelations non-iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample2multRel(noSaturation)) {
-    std::cout << "testGraphExample2multRel without saturation failed" << std::endl;
+  if(!testTwoNodeGraphTwoRelations(noSaturation, notIterative)) {
+    std::cout << "testTwoNodeGraphTwoRelations non-iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample3oneRel(saturation)) {
-    std::cout << "testGraphExample3oneRel with saturation failed" << std::endl;
+
+  //testNonConnectedGraph
+  if(!testNonConnectedGraph(saturation, iterative)) {
+    std::cout << "testNonConnectedGraph iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample3oneRel(noSaturation)) {
-    std::cout << "testGraphExample3oneRel without saturation failed" << std::endl;
+  if(!testNonConnectedGraph(noSaturation, iterative)) {
+    std::cout << "testNonConnectedGraph iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample3multRel(saturation)) {
-    std::cout << "testGraphExample3multRel with saturation failed" << std::endl;
+  if(!testNonConnectedGraph(saturation, notIterative)) {
+    std::cout << "testNonConnectedGraph non-iterative with saturation failed" << std::endl;
     success = false;
     fails++;
   }
-  if(!testGraphExample3multRel(noSaturation)) {
-    std::cout << "testGraphExample3multRel without saturation failed" << std::endl;
+  if(!testNonConnectedGraph(noSaturation, notIterative)) {
+    std::cout << "testNonConnectedGraph non-iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  //testfourNodesOneRelation
+  if(!testfourNodesOneRelation(saturation, iterative)) {
+    std::cout << "testfourNodesOneRelation iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testfourNodesOneRelation(noSaturation, iterative)) {
+    std::cout << "testfourNodesOneRelation iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testfourNodesOneRelation(saturation, notIterative)) {
+    std::cout << "testfourNodesOneRelation non-iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testfourNodesOneRelation(noSaturation, notIterative)) {
+    std::cout << "testfourNodesOneRelation non-iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  //testGraphExample1oneRel
+  if(!testGraphExample1oneRel(saturation, iterative)) {
+    std::cout << "testGraphExample1oneRel iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample1oneRel(noSaturation, iterative)) {
+    std::cout << "testGraphExample1oneRel iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample1oneRel(saturation, notIterative)) {
+    std::cout << "testGraphExample1oneRel non-iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample1oneRel(noSaturation, notIterative)) {
+    std::cout << "testGraphExample1oneRel non-iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  //testGraphExample1multRel
+  if(!testGraphExample1multRel(saturation, iterative)) {
+    std::cout << "testGraphExample1multRel iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample1multRel(noSaturation, iterative)) {
+    std::cout << "testGraphExample1multRel iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample1multRel(saturation, notIterative)) {
+    std::cout << "testGraphExample1multRel non-iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample1multRel(noSaturation, notIterative)) {
+    std::cout << "testGraphExample1multRel non-iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  //testGraphExample2oneRel
+  if(!testGraphExample2oneRel(saturation, iterative)) {
+    std::cout << "testGraphExample2oneRel iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample2oneRel(noSaturation, iterative)) {
+    std::cout << "testGraphExample2oneRel iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample2oneRel(saturation, notIterative)) {
+    std::cout << "testGraphExample2oneRel non-iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample2oneRel(noSaturation, notIterative)) {
+    std::cout << "testGraphExample2oneRel non-iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  //testGraphExample2multRel
+  if(!testGraphExample2multRel(saturation, iterative)) {
+    std::cout << "testGraphExample2multRel iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample2multRel(noSaturation, iterative)) {
+    std::cout << "testGraphExample2multRel iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample2multRel(saturation, notIterative)) {
+    std::cout << "testGraphExample2multRel non-iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample2multRel(noSaturation, notIterative)) {
+    std::cout << "testGraphExample2multRel non-iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  //testGraphExample3oneRel
+  if(!testGraphExample3oneRel(saturation, iterative)) {
+    std::cout << "testGraphExample3oneRel iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample3oneRel(noSaturation, iterative)) {
+    std::cout << "testGraphExample3oneRel iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample3oneRel(saturation, notIterative)) {
+    std::cout << "testGraphExample3oneRel non-iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample3oneRel(noSaturation, notIterative)) {
+    std::cout << "testGraphExample3oneRel non-iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  //testGraphExample3multRel
+  if(!testGraphExample3multRel(saturation, iterative)) {
+    std::cout << "testGraphExample3multRel iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample3multRel(noSaturation, iterative)) {
+    std::cout << "testGraphExample3multRel iterative without saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample3multRel(saturation, notIterative)) {
+    std::cout << "testGraphExample3multRel non-iterative with saturation failed" << std::endl;
+    success = false;
+    fails++;
+  }
+  if(!testGraphExample3multRel(noSaturation, notIterative)) {
+    std::cout << "testGraphExample3multRel non-iterative without saturation failed" << std::endl;
     success = false;
     fails++;
   }

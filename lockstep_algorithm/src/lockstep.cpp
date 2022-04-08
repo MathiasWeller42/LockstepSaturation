@@ -23,6 +23,10 @@ std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
   const sylvan::BddSet fullCube = graph.cube;
   const std::deque<Relation> relationDeque = graph.relations;
 
+  if(nodeSet == leaf_false()) {
+    return {};
+  }
+
   sylvan::Bdd v = pick(nodeSet, fullCube);
   sylvan::Bdd forwardSet = v;
 	sylvan::Bdd backwardSet = v;
@@ -108,19 +112,15 @@ std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
   sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
   Graph recursiveGraph1 = {recBdd1, fullCube, relationDeque};
 
-  if(recBdd1 != leaf_false()) {
-    std::list<sylvan::Bdd> recursiveResult1 = lockstepSaturation(recursiveGraph1);
-    sccList.splice(sccList.end(), recursiveResult1);
-  }
+  std::list<sylvan::Bdd> recursiveResult1 = lockstepSaturation(recursiveGraph1);
+  sccList.splice(sccList.end(), recursiveResult1);
 
   //Call 2
   sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
   Graph recursiveGraph2 = {recBdd2, fullCube, relationDeque};
 
-  if(recBdd2 != leaf_false()) {
-    std::list<sylvan::Bdd> recursiveResult2 = lockstepSaturation(recursiveGraph2);
-    sccList.splice(sccList.end(), recursiveResult2);
-  }
+  std::list<sylvan::Bdd> recursiveResult2 = lockstepSaturation(recursiveGraph2);
+  sccList.splice(sccList.end(), recursiveResult2);
 
   //Return SCC list
   return sccList;
@@ -141,6 +141,10 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
   const sylvan::Bdd nodeSet = graph.nodes;
   const sylvan::BddSet fullCube = graph.cube;
   const std::deque<Relation> relationDeque = graph.relations;
+
+  if(nodeSet == leaf_false()) {
+    return {};
+  }
 
   sylvan::Bdd v = pick(nodeSet, fullCube);
   sylvan::Bdd forwardSet = v;
@@ -250,19 +254,15 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
   sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
   Graph recursiveGraph1 = {recBdd1, fullCube, relationDeque};
 
-  if(recBdd1 != leaf_false()) {
-    std::list<sylvan::Bdd> recursiveResult1 = lockstepSaturation(recursiveGraph1);
-    sccList.splice(sccList.end(), recursiveResult1);
-  }
+  std::list<sylvan::Bdd> recursiveResult1 = lockstepSaturation(recursiveGraph1);
+  sccList.splice(sccList.end(), recursiveResult1);
 
   //Call 2
   sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
   Graph recursiveGraph2 = {recBdd2, fullCube, relationDeque};
 
-  if(recBdd2 != leaf_false()) {
-    std::list<sylvan::Bdd> recursiveResult2 = lockstepSaturation(recursiveGraph2);
-    sccList.splice(sccList.end(), recursiveResult2);
-  }
+  std::list<sylvan::Bdd> recursiveResult2 = lockstepSaturation(recursiveGraph2);
+  sccList.splice(sccList.end(), recursiveResult2);
 
   //Return SCC list
   return sccList;
@@ -279,6 +279,9 @@ std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
   callStack.push(fullGraph);
 
   std::list<sylvan::Bdd> sccList = {};
+  if(fullGraph.nodes == leaf_false()) {
+    return sccList;
+  }
 
   Graph graph;
 
@@ -394,15 +397,16 @@ std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
 
 
 
-std::list<sylvan::Bdd> lockstepRelationUnionIterative(Graph &fullGraph) {
+std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
   std::stack<Graph> callStack;
   callStack.push(fullGraph);
 
   std::list<sylvan::Bdd> sccList = {};
+  if(fullGraph.nodes == leaf_false()) {
+    return sccList;
+  }
 
   Graph graph;
-
-
   while(!callStack.empty()) {
     graph = callStack.top();
     callStack.pop();
@@ -530,8 +534,6 @@ std::list<sylvan::Bdd> lockstepRelationUnionIterative(Graph &fullGraph) {
     if(recBdd2 != leaf_false()) {
       callStack.push(recursiveGraph2);
     }
-
-
   }
 
   //Return SCC list
