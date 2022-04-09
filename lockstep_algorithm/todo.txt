@@ -1,9 +1,11 @@
 Den mest dank-swaggern todo-liste #WØRF uWu *tips fedora*
 -----------------------------------------------
 TODO 1 : asserts i lockstep
-TODO 2 : gør pruning hurtigere (måske noget saturation-agtigt)
+TODO 2 : hvor meget skal vi prune?
+TODO 2.5 : kunne tælle hvor mange noder der er i en BDD effektivt (kan det lade sig gøre?)
 TODO 3 : optimer iterative lockstep
-TODO 4 : faktorer kopieret kode ud i lockstep
+TODO 4 : faktorér kopieret kode ud i lockstep
+TODO 5 : Clean-up, **kommentarer** og læsbarhed
 
 TODO i : Husk at tests er en ting...
 TODO 9000 : Forstå Petri nets

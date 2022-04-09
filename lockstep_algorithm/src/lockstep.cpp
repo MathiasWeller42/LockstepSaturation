@@ -269,28 +269,27 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
 }
 
 
+//################################################## ITERATIVE ##############################################################
 
 
 
-
-//LOCKSTEP SATURATION ##########################################################################
+//LOCKSTEP SATURATION ITERATIVE ##########################################################################
 std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
-  std::stack<Graph> callStack;
-  callStack.push(fullGraph);
+  std::stack<sylvan::Bdd> callStack;
+  callStack.push(fullGraph.nodes);
 
   std::list<sylvan::Bdd> sccList = {};
   if(fullGraph.nodes == leaf_false()) {
     return sccList;
   }
 
-  Graph graph;
+  //Things pulled out from while-loop
+  const sylvan::BddSet fullCube = fullGraph.cube;
+  const std::deque<Relation> relationDeque = fullGraph.relations;
 
   while(!callStack.empty()) {
-    graph = callStack.top();
+    const sylvan::Bdd nodeSet = callStack.top();
     callStack.pop();
-    const sylvan::Bdd nodeSet = graph.nodes;
-    const sylvan::BddSet fullCube = graph.cube;
-    const std::deque<Relation> relationDeque = graph.relations;
 
     sylvan::Bdd v = pick(nodeSet, fullCube);
     sylvan::Bdd forwardSet = v;
@@ -373,21 +372,17 @@ std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
     //Add scc to scclist here:
     sccList.push_back(scc);
 
-    //Recursive calls
-    //Call 1
+    //Emulating recursive calls by pushing to the stack
+    //"Call" 1
     sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
-    Graph recursiveGraph1 = {recBdd1, fullCube, relationDeque};
-
     if(recBdd1 != leaf_false()) {
-      callStack.push(recursiveGraph1);
+      callStack.push(recBdd1);
     }
 
-    //Call 2
+    //"Call" 2
     sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
-    Graph recursiveGraph2 = {recBdd2, fullCube, relationDeque};
-
     if(recBdd2 != leaf_false()) {
-      callStack.push(recursiveGraph2);
+      callStack.push(recBdd2);
     }
   }
 
@@ -396,24 +391,23 @@ std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
 }
 
 
-
+//LOCKSTEP RELATION UNION ITERATIVE ##########################################################################
 std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
-  std::stack<Graph> callStack;
-  callStack.push(fullGraph);
+  std::stack<sylvan::Bdd> callStack;
+  callStack.push(fullGraph.nodes);
 
   std::list<sylvan::Bdd> sccList = {};
   if(fullGraph.nodes == leaf_false()) {
     return sccList;
   }
 
-  Graph graph;
-  while(!callStack.empty()) {
-    graph = callStack.top();
-    callStack.pop();
+  //Things pulled out from while-loop
+  const sylvan::BddSet fullCube = fullGraph.cube;
+  const std::deque<Relation> relationDeque = fullGraph.relations;
 
-    const sylvan::Bdd nodeSet = graph.nodes;
-    const sylvan::BddSet fullCube = graph.cube;
-    const std::deque<Relation> relationDeque = graph.relations;
+  while(!callStack.empty()) {
+    const sylvan::Bdd nodeSet = callStack.top();
+    callStack.pop();
 
     sylvan::Bdd v = pick(nodeSet, fullCube);
     sylvan::Bdd forwardSet = v;
@@ -516,23 +510,20 @@ std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
 
     //Create SCC
     sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+    //Add scc to SCC list
     sccList.push_back(scc);
 
-    //Recursive calls
-    //Call 1
+    //Emulating recursive calls by pushing to the stack
+    //"Call" 1
     sylvan::Bdd recBdd1 = differenceBdd(converged, scc);
-    Graph recursiveGraph1 = {recBdd1, fullCube, relationDeque};
-
     if(recBdd1 != leaf_false()) {
-      callStack.push(recursiveGraph1);
+      callStack.push(recBdd1);
     }
 
-    //Call 2
+    //"Call" 2
     sylvan::Bdd recBdd2 = differenceBdd(nodeSet, converged);
-    Graph recursiveGraph2 = {recBdd2, fullCube, relationDeque};
-
     if(recBdd2 != leaf_false()) {
-      callStack.push(recursiveGraph2);
+      callStack.push(recBdd2);
     }
   }
 

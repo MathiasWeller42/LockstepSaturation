@@ -112,12 +112,8 @@ void printBigBddAsString(const int nodes, const sylvan::Bdd &bdd) {
     }
     output = output + "   ";
   }
-  if(totalNoOfNodes >= 2) {
-    //std::cout << "Nodes:  ";
-    //std::cout << output;
-    std::cout << "Number of nodes: " << std::to_string(totalNoOfNodes);
-    std::cout << std::endl << std::endl;
-  }
+  std::cout << "Number of nodes: " << std::to_string(totalNoOfNodes);
+  std::cout << std::endl << std::endl;
 }
 
 //HELPER work horse function for printing the nodes of the bdd via the true paths

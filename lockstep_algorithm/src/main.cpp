@@ -28,8 +28,9 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  Graph bigGraph = PNMLtoGraph("ShieldIIPt/PT/shield_t_iip_001_a.pnml");
+  Graph bigGraph = PNMLtoGraph("GPUForwardProgress/PT/gpufp_04_a.pnml");
   timeSaturationIterative(bigGraph);
+  //timeSaturation(bigGraph);
   //testRelNext();
 
   std::cout << "Goodbye :) - hilsen hyggelige helterotte hoppe-loppe hepatitis herpes Herbert Hans Handanovic " << std::endl;

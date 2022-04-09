@@ -35,9 +35,7 @@ std::deque<Relation> makeRelations(std::list<std::list<std::pair<std::string, st
 sylvan::BddSet makeCube(int nodeBytes);
 Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> &relations);
 
-Graph pruneGraph(const Graph &graph);
-Graph pruneGraphSaturationStyle(const Graph &graph);
 Graph sortRelations(const Graph &graph);
-
+Graph pruneGraph(const Graph &graph);
 
 #endif //GRAPH_CREATION_H

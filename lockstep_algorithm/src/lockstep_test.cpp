@@ -19,11 +19,11 @@
 #include "print.h"
 #include "../test/graph_examples.h"
 
-void timeSaturation(Graph &graph) {
-  graph = graphPreprocessing(graph);
+void timeSaturation(const Graph &graph) {
+  Graph processedGraph = graphPreprocessing(graph);
 
   auto start1 = std::chrono::high_resolution_clock::now();
-  std::list<sylvan::Bdd> sccList1 = lockstepSaturation(graph);
+  std::list<sylvan::Bdd> sccList1 = lockstepSaturation(processedGraph);
   auto stop1 = std::chrono::high_resolution_clock::now();
   auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(stop1 - start1);
   std::cout << "Time elapsed (saturation): " << duration1.count() << " milliseconds" << std::endl;
@@ -37,13 +37,13 @@ void timeSaturation(Graph &graph) {
   if(hasOverlap1) {
     std::cout << "Lockstep saturation gave overlapping SCCs" << std::endl;
   }
-  bool foundAllSCCs1 = sccUnionIsWholeBdd(sccList1, graph.nodes);
+  bool foundAllSCCs1 = sccUnionIsWholeBdd(sccList1, processedGraph.nodes);
   if(!foundAllSCCs1) {
     std::cout << "Lockstep saturation did not find SCCs covering all nodes" << std::endl;
   }*/
 
   auto start2 = std::chrono::high_resolution_clock::now();
-  std::list<sylvan::Bdd> sccList2 = lockstepRelationUnion(graph);
+  std::list<sylvan::Bdd> sccList2 = lockstepRelationUnion(processedGraph);
   auto stop2 = std::chrono::high_resolution_clock::now();
   auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(stop2 - start2);
   std::cout << "Time elapsed (relation union): " << duration2.count() << " milliseconds" << std::endl;
@@ -57,7 +57,7 @@ void timeSaturation(Graph &graph) {
   if(hasOverlap2) {
     std::cout << "Lockstep relation union gave overlapping SCCs" << std::endl;
   }
-  bool foundAllSCCs2 = sccUnionIsWholeBdd(sccList2, graph.nodes);
+  bool foundAllSCCs2 = sccUnionIsWholeBdd(sccList2, processedGraph.nodes);
   if(!foundAllSCCs2) {
     std::cout << "Lockstep relation union did not find SCCs covering all nodes" << std::endl;
   }
@@ -67,14 +67,14 @@ void timeSaturation(Graph &graph) {
   }*/
 }
 
-void timeSaturationIterative(Graph &graph) {
-  graph = graphPreprocessing(graph);
+void timeSaturationIterative(const Graph &graph) {
+  Graph processedGraph = graphPreprocessing(graph);
 
   auto start1 = std::chrono::high_resolution_clock::now();
-  std::list<sylvan::Bdd> sccList1 = lockstepSaturationIterative(graph);
+  std::list<sylvan::Bdd> sccList1 = lockstepSaturationIterative(processedGraph);
   auto stop1 = std::chrono::high_resolution_clock::now();
   auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(stop1 - start1);
-  std::cout << "Time elapsed (saturation): " << duration1.count() << " milliseconds" << std::endl;
+  std::cout << "Time elapsed (iterative saturation): " << duration1.count() << " milliseconds" << std::endl;
   std::cout << "Found " << sccList1.size() << " SCCs" << std::endl << std::endl;
 
   /*bool hasDuplicates1 = containsDuplicateSccs(sccList1);
@@ -85,16 +85,16 @@ void timeSaturationIterative(Graph &graph) {
   if(hasOverlap1) {
     std::cout << "Lockstep saturation gave overlapping SCCs" << std::endl;
   }
-  bool foundAllSCCs1 = sccUnionIsWholeBdd(sccList1, graph.nodes);
+  bool foundAllSCCs1 = sccUnionIsWholeBdd(sccList1, processedGraph.nodes);
   if(!foundAllSCCs1) {
     std::cout << "Lockstep saturation did not find SCCs covering all nodes" << std::endl;
   }*/
 
   auto start2 = std::chrono::high_resolution_clock::now();
-  std::list<sylvan::Bdd> sccList2 = lockstepRelationUnionIterative(graph);
+  std::list<sylvan::Bdd> sccList2 = lockstepRelationUnionIterative(processedGraph);
   auto stop2 = std::chrono::high_resolution_clock::now();
   auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(stop2 - start2);
-  std::cout << "Time elapsed (relation union): " << duration2.count() << " milliseconds" << std::endl;
+  std::cout << "Time elapsed (iterative relation union): " << duration2.count() << " milliseconds" << std::endl;
   std::cout << "Found " << sccList2.size() << " SCCs" << std::endl << std::endl;
 
   /*bool hasDuplicates2 = containsDuplicateSccs(sccList2);
@@ -105,7 +105,7 @@ void timeSaturationIterative(Graph &graph) {
   if(hasOverlap2) {
     std::cout << "Lockstep relation union gave overlapping SCCs" << std::endl;
   }
-  bool foundAllSCCs2 = sccUnionIsWholeBdd(sccList2, graph.nodes);
+  bool foundAllSCCs2 = sccUnionIsWholeBdd(sccList2, processedGraph.nodes);
   if(!foundAllSCCs2) {
     std::cout << "Lockstep relation union did not find SCCs covering all nodes" << std::endl;
   }
@@ -117,13 +117,30 @@ void timeSaturationIterative(Graph &graph) {
 
 Graph graphPreprocessing(const Graph &graph) {
   Graph resultGraph = graph;
+  resultGraph = sortRelations(resultGraph);
+
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
+  resultGraph = pruneGraph(resultGraph);
   resultGraph = pruneGraph(resultGraph);
   resultGraph = pruneGraph(resultGraph);
   resultGraph = pruneGraph(resultGraph);
   resultGraph = pruneGraph(resultGraph);
   resultGraph = pruneGraph(resultGraph);
 
-  resultGraph = sortRelations(resultGraph);
+  std::cout << "Finished pre-processing of graph - calling lockstep" << std::endl;
 
   return resultGraph;
 }

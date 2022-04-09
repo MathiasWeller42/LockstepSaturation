@@ -3,8 +3,8 @@
 
 #include "petriTranslation.h"
 
-void timeSaturation(Graph &graph);
-void timeSaturationIterative(Graph &graph);
+void timeSaturation(const Graph &graph);
+void timeSaturationIterative(const Graph &graph);
 
 Graph graphPreprocessing(const Graph &graph);
 

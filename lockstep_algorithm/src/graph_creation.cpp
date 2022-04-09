@@ -175,81 +175,32 @@ Graph pruneGraph(const Graph &graph) {
   sylvan::Bdd frontRes = leaf_false();
   sylvan::Bdd backRes = leaf_false();
 
+  std::cout << "Starting pruning:" << std::endl;
+
+  int relationNumber = 1;
   for(Relation relation : relations) {
+    std::cout << "Pruning using relation #" << relationNumber << std::endl;
+    relationNumber++;
     frontRes = unionBdd(nodes.RelNext(relation.relationBdd, relation.cube), frontRes);
     backRes = unionBdd(nodes.RelPrev(relation.relationBdd, relation.cube), backRes);
   }
 
+  std::cout << "Creating new node set without pruned nodes" << std::endl;
   sylvan::Bdd nodesWithoutSomeSingletonSccs = intersectBdd(frontRes, backRes);
+
+  /*std::cout << "Creating singletonNodes" << std::endl;
   sylvan::Bdd singletonNodes = intersectBdd(!nodesWithoutSomeSingletonSccs, nodes);
 
-  std::cout << "Pruning" << std::endl;
-  printBigBddAsString(cube.size(), singletonNodes);
+  std::cout << "Printing size" << std::endl;
+  printBigBddAsString(cube.size(), singletonNodes);*/
+
+  std::cout << "Creating graph with new node set" << std::endl;
 
   resultGraph.nodes = nodesWithoutSomeSingletonSccs;
   resultGraph.cube = cube;
   resultGraph.relations = relations;
 
-  return resultGraph;
-}
-
-//Virker ikke!!!
-Graph pruneGraphSaturationStyle(const Graph &graph) {
-  sylvan::Bdd nodes = graph.nodes;
-  sylvan::BddSet cube = graph.cube;
-  std::deque<Relation> relationDeque = graph.relations;
-
-  sylvan::Bdd frontRes = leaf_false();
-  sylvan::Bdd backRes = leaf_false();
-
-  int relFrontI = 0;
-  sylvan::Bdd relFront = relationDeque[relFrontI].relationBdd;
-  sylvan::BddSet relFrontCube = relationDeque[relFrontI].cube;
-
-  int relBackI = 0;
-  sylvan::Bdd relBack = relationDeque[relBackI].relationBdd;
-  sylvan::BddSet relBackCube = relationDeque[relBackI].cube;
-
-  while(relFrontI < relationDeque.size() || relBackI < relationDeque.size()) {
-    if(relFrontI < relationDeque.size()) {
-      sylvan::Bdd relResultFront = nodes.RelNext(relFront, relFrontCube);
-      if(relResultFront == leaf_false()) {
-        relFrontI++;
-        relFront = relationDeque[relFrontI].relationBdd;
-        relFrontCube = relationDeque[relFrontI].cube;
-      } else {
-        relFrontI = 0;
-        relFront = relationDeque[relFrontI].relationBdd;
-        relFrontCube = relationDeque[relFrontI].cube;
-        frontRes = unionBdd(frontRes, relResultFront);
-      }
-    }
-    if(relBackI < relationDeque.size()) {
-      sylvan::Bdd relResultBack = nodes.RelPrev(relBack, relBackCube);
-      if(relResultBack == leaf_false()) {
-        relBackI++;
-        relBack = relationDeque[relBackI].relationBdd;
-        relBackCube = relationDeque[relBackI].cube;
-      } else {
-        relBackI = 0;
-        relBack = relationDeque[relBackI].relationBdd;
-        relBackCube = relationDeque[relBackI].cube;
-        backRes = unionBdd(backRes, relResultBack);
-      }
-    }
-    nodes = intersectBdd(frontRes, backRes);
-  }
-
-  sylvan::Bdd nodesWithoutSomeSingletonSccs = intersectBdd(frontRes, backRes);
-  sylvan::Bdd singletonNodes = intersectBdd(!nodesWithoutSomeSingletonSccs, graph.nodes);
-
-  std::cout << "Pruning" << std::endl;
-  printBigBddAsString(cube.size(), singletonNodes);
-
-  Graph resultGraph = {};
-  resultGraph.nodes = nodesWithoutSomeSingletonSccs;
-  resultGraph.cube = cube;
-  resultGraph.relations = relationDeque;
+  std::cout << "Finished pruning" << std::endl << std::endl;
 
   return resultGraph;
 }
@@ -259,17 +210,14 @@ Graph sortRelations(const Graph &graph) {
   sylvan::BddSet cube = graph.cube;
   std::deque<Relation> relations = graph.relations;
 
-  Graph resultGraph = {};
-
   //Sort relations in reverse order of top (largest top first)
   std::sort(relations.begin(),relations.end());
   std::reverse(relations.begin(),relations.end());
 
+  Graph resultGraph = {};
   resultGraph.nodes = nodes;
   resultGraph.cube = cube;
   resultGraph.relations = relations;
 
   return resultGraph;
 }
-
-
