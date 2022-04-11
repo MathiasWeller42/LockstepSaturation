@@ -175,32 +175,16 @@ Graph pruneGraph(const Graph &graph) {
   sylvan::Bdd frontRes = leaf_false();
   sylvan::Bdd backRes = leaf_false();
 
-  std::cout << "Starting pruning:" << std::endl;
-
-  int relationNumber = 1;
   for(Relation relation : relations) {
-    std::cout << "Pruning using relation #" << relationNumber << std::endl;
-    relationNumber++;
     frontRes = unionBdd(nodes.RelNext(relation.relationBdd, relation.cube), frontRes);
     backRes = unionBdd(nodes.RelPrev(relation.relationBdd, relation.cube), backRes);
   }
 
-  std::cout << "Creating new node set without pruned nodes" << std::endl;
   sylvan::Bdd nodesWithoutSomeSingletonSccs = intersectBdd(frontRes, backRes);
-
-  /*std::cout << "Creating singletonNodes" << std::endl;
-  sylvan::Bdd singletonNodes = intersectBdd(!nodesWithoutSomeSingletonSccs, nodes);
-
-  std::cout << "Printing size" << std::endl;
-  printBigBddAsString(cube.size(), singletonNodes);*/
-
-  std::cout << "Creating graph with new node set" << std::endl;
 
   resultGraph.nodes = nodesWithoutSomeSingletonSccs;
   resultGraph.cube = cube;
   resultGraph.relations = relations;
-
-  std::cout << "Finished pruning" << std::endl << std::endl;
 
   return resultGraph;
 }

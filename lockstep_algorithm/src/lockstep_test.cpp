@@ -19,8 +19,91 @@
 #include "print.h"
 #include "../test/graph_examples.h"
 
-void timeSaturation(const Graph &graph) {
-  Graph processedGraph = graphPreprocessing(graph);
+std::list<std::string> getPathStrings() {
+  std::list<std::string> resultList = {};
+
+  //resultList.push_back("ShieldRVt/PT/shield_t_rv_001_a_11place.pnml");      //11
+  //resultList.push_back("GPUForwardProgress/PT/userdef_15place.pnml");       //15
+  //resultList.push_back("ShieldRVs/PT/shield_s_rv_001_a_17place.pnml");      //17
+  //resultList.push_back("ShieldRVt/PT/shield_t_rv_002_a_19place.pnml");      //19
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_a_22place.pnml");    //22
+  //resultList.push_back("GPUForwardProgress/PT/gpufp_04_a_24place.pnml");  //24
+  //resultList.push_back("ShieldRVt/PT/shield_t_rv_003_a_27place.pnml");    //27
+
+  return resultList;
+}
+
+void timeAll(const Graph &graph) {
+  //Iterative saturation
+  auto start3 = std::chrono::high_resolution_clock::now();
+  std::list<sylvan::Bdd> sccList3 = lockstepSaturationIterative(graph);
+  auto stop3 = std::chrono::high_resolution_clock::now();
+  auto duration3 = std::chrono::duration_cast<std::chrono::milliseconds>(stop3 - start3);
+  std::cout << "Time elapsed (iterative saturation): " << duration3.count() << " milliseconds" << std::endl;
+  std::cout << "Found " << sccList3.size() << " SCCs" << std::endl << std::endl;
+
+  //Iterative relation union
+  auto start4 = std::chrono::high_resolution_clock::now();
+  std::list<sylvan::Bdd> sccList4 = lockstepRelationUnionIterative(graph);
+  auto stop4 = std::chrono::high_resolution_clock::now();
+  auto duration4 = std::chrono::duration_cast<std::chrono::milliseconds>(stop4 - start4);
+  std::cout << "Time elapsed (iterative relation union): " << duration4.count() << " milliseconds" << std::endl;
+  std::cout << "Found " << sccList4.size() << " SCCs" << std::endl << std::endl;
+
+  //Iterative LITERAL relation union
+  auto start5 = std::chrono::high_resolution_clock::now();
+  std::list<sylvan::Bdd> sccList5 = lockstepRelationUnionIterative(graph);
+  auto stop5 = std::chrono::high_resolution_clock::now();
+  auto duration5 = std::chrono::duration_cast<std::chrono::milliseconds>(stop5 - start5);
+  std::cout << "Time elapsed (LITERAL iterative relation union): " << duration5.count() << " milliseconds" << std::endl;
+  std::cout << "Found " << sccList5.size() << " SCCs" << std::endl << std::endl;
+}
+
+void experiment() {
+  std::list<std::string> pathStrings = getPathStrings();
+  for(std::string pathString : pathStrings) {
+    std::cout << "###### Running experiment on file at path: " << pathString << std::endl;
+    Graph graph = PNMLtoGraph(pathString);
+
+    std::cout << "### With pre-processing (32)" << std::endl;
+    Graph processedGraph1 = graphPreprocessing(graph, 32);
+    timeAll(processedGraph1);
+    std::cout << std::endl;
+
+    std::cout << "### With pre-processing (16)" << std::endl;
+    Graph processedGraph2 = graphPreprocessing(graph, 16);
+    timeAll(processedGraph2);
+    std::cout << std::endl;
+
+    std::cout << "### With pre-processing (8)" << std::endl;
+    Graph processedGraph3 = graphPreprocessing(graph, 8);
+    timeAll(processedGraph3);
+    std::cout << std::endl;
+
+    std::cout << "### With pre-processing (4)" << std::endl;
+    Graph processedGraph4 = graphPreprocessing(graph, 4);
+    timeAll(processedGraph4);
+    std::cout << std::endl;
+
+    std::cout << "### With pre-processing (2)" << std::endl;
+    Graph processedGraph5 = graphPreprocessing(graph, 2);
+    timeAll(processedGraph5);
+    std::cout << std::endl;
+
+    std::cout << "### With pre-processing (1)" << std::endl;
+    Graph processedGraph6 = graphPreprocessing(graph, 1);
+    timeAll(processedGraph6);
+    std::cout << std::endl;
+
+    std::cout << "### No pre-processing" << std::endl;
+    Graph processedGraph7 = graphPreprocessing(graph, 0);
+    timeAll(processedGraph7);
+    std::cout << std::endl;
+  }
+}
+
+void timeSaturation(const Graph &graph, int pruningSteps) {
+  Graph processedGraph = graphPreprocessing(graph, pruningSteps);
 
   auto start1 = std::chrono::high_resolution_clock::now();
   std::list<sylvan::Bdd> sccList1 = lockstepSaturation(processedGraph);
@@ -67,8 +150,8 @@ void timeSaturation(const Graph &graph) {
   }*/
 }
 
-void timeSaturationIterative(const Graph &graph) {
-  Graph processedGraph = graphPreprocessing(graph);
+void timeSaturationIterative(const Graph &graph, int pruningSteps) {
+  Graph processedGraph = graphPreprocessing(graph, pruningSteps);
 
   auto start1 = std::chrono::high_resolution_clock::now();
   std::list<sylvan::Bdd> sccList1 = lockstepSaturationIterative(processedGraph);
@@ -97,7 +180,7 @@ void timeSaturationIterative(const Graph &graph) {
   std::cout << "Time elapsed (iterative relation union): " << duration2.count() << " milliseconds" << std::endl;
   std::cout << "Found " << sccList2.size() << " SCCs" << std::endl << std::endl;
 
-  /*bool hasDuplicates2 = containsDuplicateSccs(sccList2);
+  bool hasDuplicates2 = containsDuplicateSccs(sccList2);
   if(hasDuplicates2) {
     std::cout << "Lockstep relation union gave two or more equal SCCs" << std::endl;
   }
@@ -110,38 +193,40 @@ void timeSaturationIterative(const Graph &graph) {
     std::cout << "Lockstep relation union did not find SCCs covering all nodes" << std::endl;
   }
 
-  if(!sccListCorrectness(sccList1, sccList2)) {
+  auto start3 = std::chrono::high_resolution_clock::now();
+  std::list<sylvan::Bdd> sccList3 = lockstepRelationUnionIterative(processedGraph);
+  auto stop3 = std::chrono::high_resolution_clock::now();
+  auto duration3 = std::chrono::duration_cast<std::chrono::milliseconds>(stop3 - start3);
+  std::cout << "Time elapsed (iterative literal relation union): " << duration3.count() << " milliseconds" << std::endl;
+  std::cout << "Found " << sccList3.size() << " SCCs" << std::endl << std::endl;
+
+  bool hasDuplicates3 = containsDuplicateSccs(sccList3);
+  if(hasDuplicates3) {
+    std::cout << "Lockstep literal relation union gave two or more equal SCCs" << std::endl;
+  }
+  bool hasOverlap3 = sccListContainsDifferentSccsWithDuplicateNodes(sccList3);
+  if(hasOverlap3) {
+    std::cout << "Lockstep literal relation union gave overlapping SCCs" << std::endl;
+  }
+  bool foundAllSCCs3 = sccUnionIsWholeBdd(sccList3, processedGraph.nodes);
+  if(!foundAllSCCs3) {
+    std::cout << "Lockstep literal relation union did not find SCCs covering all nodes" << std::endl;
+  }
+
+  if(!sccListCorrectness(sccList2, sccList3)) {
     std::cout << "SCC lists did not contain the same BDDs" << std::endl;
-  }*/
+  }
 }
 
-Graph graphPreprocessing(const Graph &graph) {
+Graph graphPreprocessing(const Graph &graph, int pruningSteps) {
   Graph resultGraph = graph;
   resultGraph = sortRelations(resultGraph);
 
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
-  resultGraph = pruneGraph(resultGraph);
+  for(int i = 0; i < pruningSteps; i++) {
+    resultGraph = pruneGraph(resultGraph);
+  }
 
-  std::cout << "Finished pre-processing of graph - calling lockstep" << std::endl;
-
+  std::cout << "Finished pre-processing of graph" << std::endl;
   return resultGraph;
 }
 

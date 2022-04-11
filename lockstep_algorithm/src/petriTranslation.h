@@ -49,4 +49,7 @@ struct Transition {
 
 Graph PNMLtoGraph(std::string fileString);
 
+std::list<int> list_union(std::list<int> &list1, std::list<int> &list2);
+std::list<uint32_t> list_union(std::list<uint32_t> &list1, std::list<uint32_t> &list2);
+
 #endif //PETRI_TRANSLATION_H

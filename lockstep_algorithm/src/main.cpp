@@ -14,7 +14,7 @@
 int main() {
 
   // Init LACE
-  lace_start(1, 1000000);
+  lace_start(1, 10000000);
 
   const size_t memory_bytes = 1024u * 1024u * 1024u;
 
@@ -28,12 +28,11 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  Graph bigGraph = PNMLtoGraph("GPUForwardProgress/PT/gpufp_04_a.pnml");
-  timeSaturationIterative(bigGraph);
-  //timeSaturation(bigGraph);
-  //testRelNext();
+  /*Graph graph = PNMLtoGraph("ShieldRVt/PT/shield_t_rv_001_a.pnml");
+  timeSaturationIterative(graph);*/
+  experiment();
 
-  std::cout << "Goodbye :) - hilsen hyggelige helterotte hoppe-loppe hepatitis herpes Herbert Hans Handanovic " << std::endl;
+  std::cout << "Goodbye :) - hilsen hyggelige helterotte hoppe-loppe hepatitis herpes Herbert Hans Handanovic" << std::endl;
 
   sylvan::sylvan_quit();
   lace_stop();

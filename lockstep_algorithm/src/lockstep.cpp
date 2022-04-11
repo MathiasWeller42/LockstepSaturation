@@ -2,6 +2,7 @@
 #include <list>
 #include <deque>
 #include <stack>
+#include <vector>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
@@ -417,7 +418,7 @@ std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
     sylvan::Bdd forwardFront = v;
     sylvan::Bdd backwardFront = v;
 
-    //This is the next ring including the previous ring
+    //This is the accumulator for the next ring
     sylvan::Bdd forwardAcc = leaf_false();
     sylvan::Bdd backwardAcc = leaf_false();
 
@@ -529,5 +530,43 @@ std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
 
   //Return SCC list
   return sccList;
+}
+
+//Wrapper function for lockstepRelationUnionIterative that makes a literal union of the relations before running the function
+std::list<sylvan::Bdd> lockstepRelationLiteralUnionIterative(const Graph &fullGraph) {
+  std::deque<Relation> relations = fullGraph.relations;
+  sylvan::Bdd resultBdd= leaf_false();
+  std::list<uint32_t> resultCubeVars = {};
+
+  //Making union of relations and the cube for the union
+  for(Relation rel : relations) {
+    //Relation union
+    resultBdd = unionBdd(resultBdd, rel.relationBdd);
+
+    //New cube vars
+    std::vector<uint32_t> varVector = rel.cube.toVector();
+    std::list<uint32_t> varList(varVector.begin(), varVector.end());
+    resultCubeVars = list_union(resultCubeVars, varList);
+  }
+
+  std::vector<uint32_t> resultCubeVarsVector(resultCubeVars.begin(), resultCubeVars.end());
+  sylvan::BddSet resultCube = sylvan::BddSet::fromVector(resultCubeVarsVector);
+
+  //Making new Relation object to store the union, new cube and arbitrary top value
+  Relation resultRelation = {};
+  resultRelation.relationBdd = resultBdd;
+  resultRelation.cube = resultCube;
+  resultRelation.top = 1;
+
+  //Making the new deque of size 1 with the relation union
+  std::deque<Relation> relationDeque = {};
+  relationDeque.push_back(resultRelation);
+
+  Graph newFullGraph = {};
+  newFullGraph.nodes = fullGraph.nodes;
+  newFullGraph.relations = relationDeque;
+  newFullGraph.cube = fullGraph.cube;
+
+  return lockstepRelationUnionIterative(newFullGraph);
 }
 

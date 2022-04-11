@@ -33,10 +33,19 @@ inline std::string getPNMLFilePath(std::string file) {
 }
 
 //List1 ∪ List2
-inline std::list<int> list_union(std::list<int> &list1, std::list<int> &list2) {
+std::list<int> list_union(std::list<int> &list1, std::list<int> &list2) {
   list1.sort();
   list2.sort();
   std::list<int> out;
+  std::set_union(list1.begin(), list1.end(), list2.begin(), list2.end(), std::back_inserter(out));
+  return out;
+}
+
+//Overload version with uint
+std::list<uint32_t> list_union(std::list<uint32_t> &list1, std::list<uint32_t> &list2) {
+  list1.sort();
+  list2.sort();
+  std::list<uint32_t> out;
   std::set_union(list1.begin(), list1.end(), list2.begin(), list2.end(), std::back_inserter(out));
   return out;
 }
@@ -156,7 +165,7 @@ Graph PNMLtoGraph(std::string fileString) {
   if(!readFile) {
     std::cout << "Invalid file name" << std::endl;
     std::exit(-1);
-  } 
+  }
 
   int placeIndex = 0;
   std::map<std::string, int> placeMap = {};

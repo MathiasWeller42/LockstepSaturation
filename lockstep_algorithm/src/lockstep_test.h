@@ -3,10 +3,12 @@
 
 #include "petriTranslation.h"
 
+void experiment();
+
 void timeSaturation(const Graph &graph);
 void timeSaturationIterative(const Graph &graph);
 
-Graph graphPreprocessing(const Graph &graph);
+Graph graphPreprocessing(const Graph &graph, int pruningSteps);
 
 bool sccListCorrectness(std::list<sylvan::Bdd> sccList1, std::list<sylvan::Bdd> sccList2);
 bool sccListContainsDifferentSccsWithDuplicateNodes(const std::list<sylvan::Bdd> sccList);

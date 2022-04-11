@@ -6,6 +6,7 @@ TODO 2.5 : kunne tælle hvor mange noder der er i en BDD effektivt (kan det lade
 TODO 3 : optimer iterative lockstep
 TODO 4 : faktorér kopieret kode ud i lockstep
 TODO 5 : Clean-up, **kommentarer** og læsbarhed
+TODO 6 : Output fra experiment i csv-fil
 
 TODO i : Husk at tests er en ting...
 TODO 9000 : Forstå Petri nets
@@ -30,7 +31,9 @@ Ting vi skal snakke med Jaco og Andreas om 5/4:
 ----
 Nye ting vi skal snakke med Jaco og Andreas om (efter påske):
 - giv os en nem artikel om petri nets plz
-- ...
+- skal vi implementere n^2 med/uden saturation?
+- hvem skal se vores kode? ift. clean-up
+- flere eksempler <- SKAL de være safe?
 
 -------------------------------------------------
 *Made By Mathias Weller* (Han tager fuldt ansvar) M.I.S.
