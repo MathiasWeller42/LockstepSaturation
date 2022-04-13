@@ -14,9 +14,12 @@ bool sccListCorrectness(std::list<sylvan::Bdd> sccList1, std::list<sylvan::Bdd> 
 bool sccListContainsDifferentSccsWithDuplicateNodes(const std::list<sylvan::Bdd> sccList);
 bool sccUnionIsWholeBdd(const std::list<sylvan::Bdd> sccList, const sylvan::Bdd nodes);
 bool containsDuplicateSccs(const std::list<sylvan::Bdd> sccList);
+void validateAlgoSccResults(Graph originalGraph, std::list<sylvan::Bdd> resultSccList);
 
 void writeToCSV(std::string fileName, std::vector<std::vector<std::string>> grid);
+std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs);
+
 std::vector<std::vector<std::string>> testAndPrintWithMax(Graph &graph, int maxPruning, std::vector<std::vector<std::string>> grid, std::string fileName, int row);
-std::vector<std::vector<std::string>> timeAll2(const Graph &graph, std::vector<std::vector<std::string>> grid, int row);
+std::vector<std::vector<std::string>> timeAll(const Graph &graph, std::vector<std::vector<std::string>> grid, int row);
 
 #endif //LOCKSTEP_TEST_H
