@@ -18,5 +18,12 @@ bool testsccListContainsDifferentSccsWithDuplicateNodesNeg();
 bool testsccListContainsDifferentSccsWithDuplicateNodesPos();
 bool testUnionIsWholeBddPos();
 bool testUnionIsWholeBddNeg();
+bool testNodeCountTerminalTrue();
+bool testNodeCountTerminalFalse();
+bool testNodeCountSingleNode();
+bool testNodeCountTwoNodes();
+bool testNodeCountFiveNodes();
+bool testNodeCountTenNodes();
+bool testNodeCountTwentyNodes();
 
 #endif

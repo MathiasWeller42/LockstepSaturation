@@ -6,6 +6,7 @@
 #include <sylvan.h>
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
+#include <math.h>           /* pow function*/
 
 #include "print.h"
 
@@ -147,6 +148,43 @@ inline std::list<std::pair<std::string, std::string>> __printRelationsAsString(s
     nodeList.splice(nodeList.end(), recResult2);
   }
   return nodeList;
+}
+
+inline int __countNodes(int prevTop, int maxVar, const sylvan::Bdd &bdd) {
+  if(bdd.isTerminal()){
+    if(bdd.isOne()) {
+      return (int) pow(2, (maxVar - prevTop) / 2);
+    } else {
+      return 0;
+    }
+  }
+
+  int currentTop = bdd.TopVar();
+  double factor;
+  if(prevTop == -1) {
+    factor = pow(2, (currentTop) / 2);
+  } else {
+    factor = pow(2, (currentTop - prevTop) / 2 - 1);
+  }
+
+  int recResult1 =  __countNodes(currentTop, maxVar, bdd.Then());
+
+  int recResult2 =  __countNodes(currentTop, maxVar, bdd.Else());
+
+  int result = (int) factor * (recResult1 + recResult2);
+
+  return result;
+}
+
+int countNodes(int numVars, const sylvan::Bdd &bdd) {
+  if(bdd.isTerminal()){
+    if(bdd.isOne()) {
+      return (int) pow(2, numVars);
+    } else {
+      return 0;
+    }
+  }
+  return __countNodes(-1, 2 * numVars - 2, bdd);
 }
 
 void printSingleRelationAsString(const sylvan::Bdd relation) {

@@ -140,8 +140,8 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
   for(int placeNum : newTargets) {
     //The target places have no tokens before the transition
     //TODO: Overvej om det kan fjerererererernes.
-    sylvan::Bdd beforeTarget = nithvar(placeNum);
-    resultBdd = resultBdd.And(beforeTarget);
+    /*sylvan::Bdd beforeTarget = nithvar(placeNum);
+    resultBdd = resultBdd.And(beforeTarget);*/
 
     //After the transition, the target places now have tokens
     sylvan::Bdd afterTarget = ithvar(placeNum + 1);

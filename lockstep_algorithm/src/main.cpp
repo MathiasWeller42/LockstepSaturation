@@ -32,7 +32,7 @@ int main() {
   timeSaturationIterative(graph);*/
   experiment();
 
-  std::cout << "Goodbye :) - hilsen hyggelige helterotte hoppe-loppe hepatitis herpes Herbert Hans Handanovic" << std::endl;
+  std::cout << "Goodbye :)" << std::endl;
 
   sylvan::sylvan_quit();
   lace_stop();

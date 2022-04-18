@@ -1,7 +1,0 @@
-Algorithm run;Places;Relations;SCC's;32 pruning steps (ms);SCC's;16 pruning steps (ms);SCC's;8 pruning steps (ms);SCC's;4 pruning steps (ms);SCC's;2 pruning steps (ms);SCC's;1 pruning steps (ms);SCC's;0 pruning steps (ms);SCC's;32 pruning steps (ms);SCC's;16 pruning steps (ms);SCC's;8 pruning steps (ms);SCC's;4 pruning steps (ms);SCC's;2 pruning steps (ms);SCC's;1 pruning steps (ms);SCC's;0 pruning steps (ms);
-Saturation;11;11;74;33;74;28;74;26;82;32;178;50;610;134;1610;306;
-Relation Union;11;11;74;57;74;54;74;57;82;60;178;85;610;186;1610;425;
-Literal relation union;11;11;74;51;74;56;74;57;82;64;178;83;610;168;1610;422;
-Saturation;15;15;1402;2586;1402;3461;1402;2914;1402;2740;1474;2858;2314;2829;3698;3878;
-Relation Union;15;15;1402;3757;1402;4442;1402;4011;1402;4333;1474;4090;2314;4125;3698;5197;
-Literal relation union;15;15;1402;3846;1402;4110;1402;4013;1402;4003;1474;3877;2314;4169;3698;4930;

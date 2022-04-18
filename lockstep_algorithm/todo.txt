@@ -1,12 +1,9 @@
 Den mest dank-swaggern todo-liste #WØRF uWu *tips fedora*
 -----------------------------------------------
 TODO 1 : asserts i lockstep
-TODO 2 : hvor meget skal vi prune?
-TODO 2.5 : kunne tælle hvor mange noder der er i en BDD effektivt (kan det lade sig gøre?)
 TODO 3 : optimer iterative lockstep
 TODO 4 : faktorér kopieret kode ud i lockstep
-TODO 5 : Clean-up, **kommentarer** og læsbarhed
-TODO 6 : Output fra experiment i csv-fil
+TODO 5 : clean-up, **kommentarer** og læsbarhed
 
 TODO i : Husk at tests er en ting...
 TODO 9000 : Forstå Petri nets
@@ -22,18 +19,18 @@ TODO omega : Søvn
 TODO CXXXVII : Få et liv
 TODO 1337420 : Kys hyggelige helterotte hoppe-loppe hepatitis herpes Herbert Hans Harald Hermannsen
 
-----
-Ting vi skal snakke med Jaco og Andreas om 5/4:
-- hvordan ved vi at vi returnerer de rigtige SCC'er
-- hastighed / plads på computeren (2^117 små BDD'er kan ikke være der) - pruning for at fjerne de helt små SCC'er, måske noget specifikt for saturation
+
 - hvad er vi HELT PRÆCIST garanteret når et PN er 1-safe? behøver ikke tjekke at targets er tomme
 
 ----
 Nye ting vi skal snakke med Jaco og Andreas om (efter påske):
 - giv os en nem artikel om petri nets plz
-- skal vi implementere n^2 med/uden saturation?
+- Hvor meget skal vi beskrive "processen"/implementationen?
+- skal vi implementere n^2 med/uden saturation? Xie-Beerel (XB)
 - hvem skal se vores kode? ift. clean-up
+
 - flere eksempler <- SKAL de være safe?
+- "scale" på eksperimentation - hvor mange resultater, etc.? Best practices... Generel diskussion omkring hvordan vi eksperimenterer
 
 -------------------------------------------------
 *Made By Mathias Weller* (Han tager fuldt ansvar) M.I.S.

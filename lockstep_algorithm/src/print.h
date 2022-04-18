@@ -11,5 +11,6 @@ void printBigBddAsString(const int nodes, const sylvan::Bdd &bdd);
 void printSingleRelationAsString(const sylvan::Bdd relation);
 void printRelationsAsString(const std::deque<sylvan::Bdd> relations);
 void printMap(std::map<std::string, int> map);
+int countNodes(int numVars, const sylvan::Bdd &bdd);
 
 #endif //PRINT_H

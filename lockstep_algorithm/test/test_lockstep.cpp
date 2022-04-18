@@ -368,6 +368,50 @@ void runAllTests() {
     fails++;
   }
 
+  if(!testNodeCountTerminalTrue()) {
+    std::cout << "testNodeCountTerminalTrue failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  if(!testNodeCountTerminalFalse()) {
+    std::cout << "testNodeCountTerminalTrue failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  if(!testNodeCountSingleNode()) {
+    std::cout << "testNodeCountSingleNode failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  if(!testNodeCountTwoNodes()) {
+    std::cout << "testNodeCountTwoNodes failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  if(!testNodeCountFiveNodes()) {
+    std::cout << "testNodeCountFiveNodes failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  if(!testNodeCountTenNodes()) {
+    std::cout << "testNodeCountTenNodes failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+  if(!testNodeCountTwentyNodes()) {
+    std::cout << "testNodeCountTwentyNodes failed" << std::endl;
+    success = false;
+    fails++;
+  }
+
+
+
 
   if(success) {
     std::cout << "All tests passed!" << std::endl;

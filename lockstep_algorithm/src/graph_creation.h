@@ -37,5 +37,7 @@ Graph makeGraph(const int nodes, const std::list<std::list<std::pair<int,int>>> 
 
 Graph sortRelations(const Graph &graph);
 Graph pruneGraph(const Graph &graph);
+Graph fixedPointPruning(const Graph &graph);
+std::pair<Graph, int> fixedPointPruningWithMax(const Graph &graph, int maxPruning);
 
 #endif //GRAPH_CREATION_H

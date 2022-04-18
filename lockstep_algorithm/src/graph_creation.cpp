@@ -164,7 +164,6 @@ sylvan::BddSet makeCube(int nodeBits) {
 
 //Removes (hopefully) most (some) 1-node SCC's from the graph
 //Removes the nodes that have in-degree or out-degree 0
-//TODO : remove those that have in-degree 1 NAND out-degree 1
 Graph pruneGraph(const Graph &graph) {
   sylvan::Bdd nodes = graph.nodes;
   sylvan::BddSet cube = graph.cube;
@@ -187,6 +186,39 @@ Graph pruneGraph(const Graph &graph) {
   resultGraph.relations = relations;
 
   return resultGraph;
+}
+
+Graph fixedPointPruning(const Graph &graph) {
+  sylvan::Bdd oldNodes = graph.nodes;
+
+  Graph resultGraph = pruneGraph(graph);
+  int pruningSteps = 1;
+
+  while(resultGraph.nodes != oldNodes) {
+    oldNodes = resultGraph.nodes;
+    resultGraph = pruneGraph(resultGraph);
+    pruningSteps++;
+  }
+
+  std::cout << "Finished fixed-point pruning after " << pruningSteps << " pruning steps" << std::endl;
+  return resultGraph;
+}
+
+std::pair<Graph, int> fixedPointPruningWithMax(const Graph &graph, int maxPruning) {
+  sylvan::Bdd oldNodes = graph.nodes;
+
+  Graph resultGraph = pruneGraph(graph);
+  int pruningSteps = 1;
+
+  while(resultGraph.nodes != oldNodes && pruningSteps <= maxPruning) {
+    oldNodes = resultGraph.nodes;
+    resultGraph = pruneGraph(resultGraph);
+    pruningSteps++;
+  }
+
+  std::cout << "Finished fixed-point pruning after " << pruningSteps << " pruning steps with max number of steps: " << maxPruning << std::endl;
+  std::pair<Graph, int> result = {resultGraph, pruningSteps};
+  return result;
 }
 
 Graph sortRelations(const Graph &graph) {
