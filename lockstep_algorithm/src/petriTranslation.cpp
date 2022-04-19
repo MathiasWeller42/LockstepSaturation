@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <map>
+#include <set>
 #include <fstream>
 #include <filesystem>
 #include <bitset>
@@ -156,7 +157,7 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
 // Takes a PNML file defining a petri net and converts it into a Graph
 // A node in the resulting graph is a configuration of markings in the petri net
 // A relation is a transition from marking to some other marking
-Graph PNMLtoGraph(std::string fileString) {
+Graph PNMLtoGraph(std::string fileString, bool useInitialMarking) {
   std::string path = getPNMLFilePath(fileString);
 
   // Read from the text file
@@ -171,6 +172,7 @@ Graph PNMLtoGraph(std::string fileString) {
   std::map<std::string, int> placeMap = {};
   std::map<std::string, Transition> transitionMap = {};
   std::list<Arc> arcList = {};
+  std::set<int> initialMarking = {};
 
   std::string myText;
   // Read the PNML file and create some data structures
@@ -181,6 +183,9 @@ Graph PNMLtoGraph(std::string fileString) {
       int startpos = myText.find("id=\"");
       int endpos = myText.find("\">");
       id = myText.substr(startpos + 4, endpos-(startpos+4));
+      if(myText.find("initialMarking") != std::string::npos) {
+        initialMarking.insert(placeIndex);
+      }
       placeMap[id] = placeIndex;
       placeIndex = placeIndex+2;
     }
@@ -268,10 +273,21 @@ Graph PNMLtoGraph(std::string fileString) {
   std::cout << "Number of places: " << std::to_string(numPlaces) << std::endl;
   sylvan::BddSet cube = makeCube(numPlaces);
 
+  sylvan::Bdd initialBdd = leaf_true();
+  for(int i = 0; i < numPlaces; i++) {
+    sylvan::Bdd placeMarking =  initialMarking.find(i) != initialMarking.end() ? ithvar(i) : nithvar(i);
+    initialBdd = initialBdd.And(placeMarking);
+  }
+
   Graph pnmlGraph;
   pnmlGraph.relations = relations;
   pnmlGraph.cube = cube;
-  pnmlGraph.nodes = leaf_true();
+
+  if(useInitialMarking) {
+    pnmlGraph.nodes = initialBdd;
+  } else {
+    pnmlGraph.nodes = leaf_true();
+  }
 
   std::cout << "Number of relations: " << pnmlGraph.relations.size() << std::endl << std::endl;
   return pnmlGraph;

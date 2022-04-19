@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <string>
 #include <limits>
+#include <chrono>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
@@ -14,6 +15,7 @@
 #include "bdd_utilities.h"
 #include "petriTranslation.h"
 #include "print.h"
+
 
 sylvan::Bdd makeNode(std::string &bitstring) {
   sylvan::Bdd resultBdd = leaf_true();
@@ -174,12 +176,30 @@ Graph pruneGraph(const Graph &graph) {
   sylvan::Bdd frontRes = leaf_false();
   sylvan::Bdd backRes = leaf_false();
 
+  auto start2 = std::chrono::high_resolution_clock::now();
   for(Relation relation : relations) {
     frontRes = unionBdd(nodes.RelNext(relation.relationBdd, relation.cube), frontRes);
     backRes = unionBdd(nodes.RelPrev(relation.relationBdd, relation.cube), backRes);
   }
 
   sylvan::Bdd nodesWithoutSomeSingletonSccs = intersectBdd(frontRes, backRes);
+
+  auto stop2 = std::chrono::high_resolution_clock::now();
+  auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(stop2 - start2);
+  std::cout << "Prune time: " << duration2.count() << " milisegundos" << std::endl;
+
+  //Is this slow?
+  sylvan::Bdd singletonSccs = differenceBdd(nodes, nodesWithoutSomeSingletonSccs);
+
+  auto start3 = std::chrono::high_resolution_clock::now();
+
+  int countSingletons = countNodes(cube.size(), singletonSccs);
+
+  auto stop3 = std::chrono::high_resolution_clock::now();
+  auto duration3 = std::chrono::duration_cast<std::chrono::milliseconds>(stop3 - start3);
+  std::cout << "Count node time: " << duration3.count() << " milisegundos" << std::endl;
+  std::cout << "Number of nodes pruned: " << countSingletons << std::endl << std::endl;
+
 
   resultGraph.nodes = nodesWithoutSomeSingletonSccs;
   resultGraph.cube = cube;
@@ -210,7 +230,7 @@ std::pair<Graph, int> fixedPointPruningWithMax(const Graph &graph, int maxPrunin
   Graph resultGraph = pruneGraph(graph);
   int pruningSteps = 1;
 
-  while(resultGraph.nodes != oldNodes && pruningSteps <= maxPruning) {
+  while(resultGraph.nodes != oldNodes && pruningSteps < maxPruning) {
     oldNodes = resultGraph.nodes;
     resultGraph = pruneGraph(resultGraph);
     pruningSteps++;

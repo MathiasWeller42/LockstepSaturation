@@ -1,0 +1,16 @@
+Algorithm run;Places;Relations;SCC's;0 pruning steps (ms);SCC/ms;
+Saturation;11;11;1610;793;2,030265;
+Relation Union;11;11;1610;962;1,673597;
+Literal relation union;11;11;1610;841;1,914388;
+
+Algorithm run;Places;Relations;SCC's;0 pruning steps (ms);SCC/ms;
+Saturation;15;15;3698;4637;0,797498;
+Relation Union;15;15;3698;6495;0,569361;
+Literal relation union;15;15;3698;6397;0,578083;
+
+Algorithm run;Places;Relations;SCC's;0 pruning steps (ms);SCC/ms;
+Saturation;17;22;114686;65011;1,764102;
+Relation Union;17;22;114686;99893;1,148088;
+Literal relation union;17;22;114686;110576;1,037169;
+
+Algorithm run;Places;Relations;

@@ -1,13 +1,17 @@
 Den mest dank-swaggern todo-liste #WØRF uWu *tips fedora*
 -----------------------------------------------
-TODO 1 : asserts i lockstep
-TODO 3 : optimer iterative lockstep
-TODO 4 : faktorér kopieret kode ud i lockstep
-TODO 5 : clean-up, **kommentarer** og læsbarhed
+TODO 1 : Reachability phase før pruning (find initial marking)
+TODO 2 : Implementer Xie-Beerel n^2-algoritme m/u saturation
+TODO 3 : Skriv til Jaco og bed om en PN-artikel
+TODO 4 : Find flere PN (ikke nødvendigvis safe - MCC + google)
+
+TODO 5 : clean-up, **kommentarer** og læsbarhed (lav et pænt interface)
+
+TODO 6 : asserts i lockstep??
+TODO 7 : optimer iterative lockstep
+TODO 8 : faktorér kopieret kode ud i lockstep
 
 TODO i : Husk at tests er en ting...
-TODO 9000 : Forstå Petri nets
-TODO 9001 : Initial marking..?
 
 TODO x : Græd
 TODO y : #Forskning
@@ -17,20 +21,24 @@ TODO w : ???
 TODO phi : Profit
 TODO omega : Søvn
 TODO CXXXVII : Få et liv
-TODO 1337420 : Kys hyggelige helterotte hoppe-loppe hepatitis herpes Herbert Hans Harald Hermannsen
 
 
 - hvad er vi HELT PRÆCIST garanteret når et PN er 1-safe? behøver ikke tjekke at targets er tomme
 
 ----
 Nye ting vi skal snakke med Jaco og Andreas om (efter påske):
-- giv os en nem artikel om petri nets plz
+- giv os en nem artikel 1-safe om petri nets plz (mail Jaco om det)
+- Når vi definerer Petri Nets skal der så kunne være flere edges fra et place til en transition?. (bare definer 1-safe PN)
+- skal vi implementere n^2 med/uden saturation? Xie-Beerel (XB) (hvis vi har tid)
+- hvem skal se vores kode? ift. clean-up (lav et pænt interface)
 - Hvor meget skal vi beskrive "processen"/implementationen?
-- skal vi implementere n^2 med/uden saturation? Xie-Beerel (XB)
-- hvem skal se vores kode? ift. clean-up
 
-- flere eksempler <- SKAL de være safe?
-- "scale" på eksperimentation - hvor mange resultater, etc.? Best practices... Generel diskussion omkring hvordan vi eksperimenterer
+- flere eksempler <- SKAL de være safe (nej - bare beskriv hvad vi gør)? (google)
+- "scale" på eksperimentation - hvor mange resultater, etc.? Best practices...
+- Generel diskussion omkring hvordan vi eksperimenterer
+- pruning - lav et separat eksperiment med pruning?
 
+- reachability phase first
+- MCC categories - kan vi løse nogle af dem?
 -------------------------------------------------
 *Made By Mathias Weller* (Han tager fuldt ansvar) M.I.S.

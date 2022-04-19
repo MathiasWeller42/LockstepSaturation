@@ -74,6 +74,16 @@ std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
   //Save the set that has converged
   bool frontConverged = relFrontI == relationDeque.size();
   sylvan::Bdd converged = frontConverged ? forwardSet : backwardSet;
+  sylvan::Bdd nonConverged = frontConverged ? backwardSet : forwardSet;
+
+    //Throw away the elements from the nonConverged set that won't be part of the SCC
+    nonConverged = intersectBdd(converged, nonConverged);
+    if(frontConverged) {
+      backwardSet = nonConverged;
+    } else {
+      forwardSet = nonConverged;
+    }
+  
 
   //Find where the non-converged overlaps the converged set
   while(relFrontI < relationDeque.size() || relBackI < relationDeque.size()) {
@@ -105,7 +115,7 @@ std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
   }
 
   //Create SCC
-  sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+  sylvan::Bdd scc = frontConverged ? backwardSet : forwardSet;
   std::list<sylvan::Bdd> sccList = {scc};
 
   //Recursive calls
@@ -204,6 +214,15 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
   //Save the set that has converged
   bool frontConverged = !somethingChangedFront;
   sylvan::Bdd converged = frontConverged ? forwardSet : backwardSet;
+  sylvan::Bdd nonConverged = frontConverged ? backwardSet : forwardSet;
+
+  //Throw away the elements from the nonConverged set that won't be part of the SCC
+  nonConverged = intersectBdd(converged, nonConverged);
+  if(frontConverged) {
+    backwardSet = nonConverged;
+  } else {
+    forwardSet = nonConverged;
+  }
 
   //Find where the non-converged overlaps the converged set
   while(somethingChangedFront || somethingChangedBack) {
@@ -247,7 +266,7 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
   }
 
   //Create SCC
-  sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+  sylvan::Bdd scc = frontConverged ? backwardSet : forwardSet;
   std::list<sylvan::Bdd> sccList = {scc};
 
   //Recursive calls
@@ -275,6 +294,7 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
 
 
 //LOCKSTEP SATURATION ITERATIVE ##########################################################################
+
 std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
   std::stack<sylvan::Bdd> callStack;
   callStack.push(fullGraph.nodes);
@@ -335,9 +355,18 @@ std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
       backwardSet = unionBdd(backwardSet, relResultBack);
     }
 
-    //Save the set that has converged
+    //Save the set that has converged and the one that didn't
     bool frontConverged = relFrontI == relationDeque.size();
     sylvan::Bdd converged = frontConverged ? forwardSet : backwardSet;
+    sylvan::Bdd nonConverged = frontConverged ? backwardSet : forwardSet;
+
+    //Throw away the elements from the nonConverged set that won't be part of the SCC
+    nonConverged = intersectBdd(converged, nonConverged);
+    if(frontConverged) {
+      backwardSet = nonConverged;
+    } else {
+      forwardSet = nonConverged;
+    }
 
     //Find where the non-converged overlaps the converged set
     while(relFrontI < relationDeque.size() || relBackI < relationDeque.size()) {
@@ -369,8 +398,8 @@ std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
     }
 
     //Create SCC
-    sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
-    //Add scc to scclist here:
+    sylvan::Bdd scc = frontConverged ? backwardSet : forwardSet;
+    //Add scc to scclist
     sccList.push_back(scc);
 
     //Emulating recursive calls by pushing to the stack
@@ -467,6 +496,15 @@ std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
     //Save the set that has converged
     bool frontConverged = !somethingChangedFront;
     sylvan::Bdd converged = frontConverged ? forwardSet : backwardSet;
+    sylvan::Bdd nonConverged = frontConverged ? backwardSet : forwardSet;
+
+    //Throw away the elements from the nonConverged set that won't be part of the SCC
+    nonConverged = intersectBdd(converged, nonConverged);
+    if(frontConverged) {
+      backwardSet = nonConverged;
+    } else {
+      forwardSet = nonConverged;
+    }
 
     //Find where the non-converged overlaps the converged set
     while(somethingChangedFront || somethingChangedBack) {
@@ -510,7 +548,7 @@ std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
     }
 
     //Create SCC
-    sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+    sylvan::Bdd scc = frontConverged ? backwardSet : forwardSet;
     //Add scc to SCC list
     sccList.push_back(scc);
 

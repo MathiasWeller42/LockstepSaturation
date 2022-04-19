@@ -268,7 +268,7 @@ bool testNodeCountFiveNodes() {
   std::string n2 = "00010"; std::string n3 = "00011";
   std::string n4 = "00100";
 
-  std::list<std::string> nodeList = {n0, n1, n2, n3,n4};
+  std::list<std::string> nodeList = {n0,n1,n2,n3,n4};
 
   sylvan::Bdd scc = makeNodes(nodeList);
 
@@ -284,7 +284,7 @@ bool testNodeCountTenNodes() {
   std::string n6 = "00110"; std::string n7 = "00111";
   std::string n8 = "01000"; std::string n9 = "01001";
 
-  std::list<std::string> nodeList = {n0, n1, n2, n3,n4,n5,n6,n7,n8,n9};
+  std::list<std::string> nodeList = {n0,n1,n2,n3,n4,n5,n6,n7,n8,n9};
 
   sylvan::Bdd scc = makeNodes(nodeList);
 
@@ -306,7 +306,7 @@ bool testNodeCountTwentyNodes() {
   std::string n18 = "10010"; std::string n19 = "10011";
   std::string n20 = "10100";
 
-  std::list<std::string> nodeList = {n0, n1, n2, n3,n4,n5,n6,n7,n8,n9, n10, n11, n12, n13, n14, n15, n16, n17, n18, n19, n20};
+  std::list<std::string> nodeList = {n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19,n20};
 
   sylvan::Bdd scc = makeNodes(nodeList);
 
@@ -314,6 +314,9 @@ bool testNodeCountTwentyNodes() {
 
   return result == 21;
 }
+
+
+
 
 
 
