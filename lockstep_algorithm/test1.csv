@@ -1,31 +1,29 @@
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);
-Saturation;31;41;1727;4817;0,358522;
-Relation Union;31;41;1727;5802;0,297656;
-Literal relation union;31;41;1727;5812;0,297144;
-
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);
-Saturation;32;45;0;0;-nan;
-Relation Union;32;45;0;0;-nan;
-Literal relation union;32;45;0;0;-nan;
-
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);
-Saturation;41;31;1;71;0,014085;
-Relation Union;41;31;1;630;0,001587;
-Literal relation union;41;31;1;566;0,001767;
-
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);
-Saturation;43;48;55;349;0,157593;
-Relation Union;43;48;55;381;0,144357;
-Literal relation union;43;48;55;174;0,316092;
-
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);
-Saturation;60;45;1;197;0,005076;
-Relation Union;60;45;1;41462;0,000024;
-Literal relation union;60;45;1;44265;0,000023;
-
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);
-Saturation;79;59;1;442;0,002262;
-Relation Union;79;59;1;754808;0,000001;
-Literal relation union;79;59;1;745633;0,000001;
+Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;
+Saturation;11;11;124;120.000000;1,033333;
+Relation Union;11;11;124;74.000000;1,675676;
+Literal relation union;11;11;124;73.000000;1,698630;
+124;161.000000;0,770186;
+Algorithm run;Places;Relations;1;1.000000;1,000000;
+SCC's;Fixed-point pruning steps (ms);SSC/ms;
+Saturation;15;15;1871;2451.000000;0,763362;
+Relation Union;15;15;1871;2307.000000;0,811010;
+Literal relation union;15;15;1871;2867.000000;0,652599;
+Algorithm run;Places;Relations;1871;5694.000000;0,328591;
+1;1.000000;1,000000;
+SCC's;Fixed-point pruning steps (ms);SSC/ms;
+Saturation;17;22;12486;9680.000000;1,289876;
+Relation Union;17;22;12486;11298.000000;1,105151;
+Algorithm run;Places;Relations;Literal relation union;17;22;12486;10556.000000;1,182834;
+12486;19221.000000;0,649602;
+1;2.000000;0,500000;
+SCC's;Fixed-point pruning steps (ms);SSC/ms;
+Saturation;19;19;21523;20759.000000;1,036803;
+Algorithm run;Places;Relations;Relation Union;19;19;21523;20945.000000;1,027596;
+Literal relation union;19;19;21523;33137.000000;0,649516;
+21523;47766.000000;0,450592;
+1;1.000000;1,000000;
 
 Algorithm run;Places;Relations;
+
+
+

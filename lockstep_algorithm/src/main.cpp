@@ -28,9 +28,11 @@ int main() {
 
   std::cout << "Hello World!" << std::endl;
 
-  /*Graph graph = PNMLtoGraph("ShieldRVt/PT/shield_t_rv_001_a.pnml");
-  timeSaturationIterative(graph);*/
-  experiment();
+  std::list<std::string> pathStrings = getPathStrings();
+  int maxPreprocess = -1;
+  int minPreprocess = 0;
+  std::list<algorithmType> runTypes = {xbSat, lockstepSat, xbRelUnion, lockstepRelUnion, lockstepLitRelUnion};
+  experiment(pathStrings, maxPreprocess, minPreprocess, runTypes);
 
   std::cout << "Goodbye :)" << std::endl;
 

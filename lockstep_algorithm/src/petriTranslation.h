@@ -48,7 +48,6 @@ struct Transition {
 };
 
 Graph PNMLtoGraph(std::string fileString, bool useInitialMarking);
-sylvan::Bdd reachability(const Graph &graph);
 
 std::list<int> list_union(std::list<int> &list1, std::list<int> &list2);
 std::list<uint32_t> list_union(std::list<uint32_t> &list1, std::list<uint32_t> &list2);

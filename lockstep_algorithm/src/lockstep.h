@@ -10,12 +10,19 @@
 #include "petriTranslation.h"
 
 //Recursive versions
-std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph);
-std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph);
+/*std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph);
+std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph);*/
 
 //Iterative versions
-std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph);
-std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph);
-std::list<sylvan::Bdd> lockstepRelationLiteralUnionIterative(const Graph &fullGraph);
+std::list<sylvan::Bdd> lockstepSaturation(const Graph &fullGraph);
+std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &fullGraph);
+std::list<sylvan::Bdd> lockstepLiteralRelationUnion(const Graph &fullGraph);
+std::list<sylvan::Bdd> xieBeerelSaturation(const Graph &fullGraph);
+std::list<sylvan::Bdd> xieBeerelRelationUnion(const Graph &fullGraph);
+
+sylvan::Bdd reachabilityForwardSaturation(const Graph &graph, sylvan::Bdd nodes);
+sylvan::Bdd reachabilityBackwardSaturation(const Graph &graph, sylvan::Bdd nodes);
+sylvan::Bdd reachabilityForwardRelationUnion(const Graph &graph, sylvan::Bdd nodes);
+sylvan::Bdd reachabilityBackwardRelationUnion(const Graph &graph, sylvan::Bdd nodes);
 
 #endif  //LOCKSTEP_H

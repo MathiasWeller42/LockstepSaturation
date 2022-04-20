@@ -19,6 +19,7 @@
 #include "bdd_utilities.h"
 #include "graph_creation.h"
 #include "print.h"
+#include "lockstep.h"
 
 //Gets the local filePath to the file given as argument
 inline std::string getPNMLFilePath(std::string file) {
@@ -284,8 +285,8 @@ Graph PNMLtoGraph(std::string fileString, bool useInitialMarking) {
   pnmlGraph.cube = cube;
 
   if(useInitialMarking) {
-    pnmlGraph.nodes = initialBdd;
-    pnmlGraph.nodes = reachability(pnmlGraph);
+    pnmlGraph.nodes = leaf_true();
+    pnmlGraph.nodes = reachabilityForwardSaturation(pnmlGraph, initialBdd);
   } else {
     pnmlGraph.nodes = leaf_true();
   }
@@ -293,34 +294,4 @@ Graph PNMLtoGraph(std::string fileString, bool useInitialMarking) {
   std::cout << "Number of relations: " << pnmlGraph.relations.size() << std::endl;
   //std::cout << "Size of graph: " << countNodes(pnmlGraph.cube.size(), pnmlGraph.nodes) << std::endl << std::endl;
   return pnmlGraph;
-}
-
-//Computes the nodes reachable from the node(s) in the Graph given
-sylvan::Bdd reachability(const Graph &graph) {
-  sylvan::BddSet cube = graph.cube;
-  std::deque<Relation> relationDeque = graph.relations;
-
-  sylvan::Bdd forwardSet = graph.nodes;
-  int relFrontI = 0;
-  sylvan::Bdd relFront = relationDeque[relFrontI].relationBdd;
-  sylvan::BddSet relFrontCube = relationDeque[relFrontI].cube;
-
-  while(relFrontI < relationDeque.size()) {
-    sylvan::Bdd relResultFront = differenceBdd(forwardSet.RelNext(relFront, relFrontCube), forwardSet);
-
-    if(relResultFront == leaf_false()) {
-      relFrontI++;
-      relFront = relationDeque[relFrontI].relationBdd;
-      relFrontCube = relationDeque[relFrontI].cube;
-    } else {
-      relFrontI = 0;
-      relFront = relationDeque[relFrontI].relationBdd;
-      relFrontCube = relationDeque[relFrontI].cube;
-    }
-
-	  //Add to the forward set
-    forwardSet = unionBdd(forwardSet, relResultFront);
-  }
-
-  return forwardSet;
 }

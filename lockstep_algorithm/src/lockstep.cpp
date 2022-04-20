@@ -19,7 +19,7 @@ sylvan::Bdd pick(const sylvan::Bdd &nodeSet, const sylvan::BddSet &cube) {
 }
 
 //LOCKSTEP SATURATION ##########################################################################
-std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
+/*std::list<sylvan::Bdd> lockstepSaturation(const Graph &graph) {
   const sylvan::Bdd nodeSet = graph.nodes;
   const sylvan::BddSet fullCube = graph.cube;
   const std::deque<Relation> relationDeque = graph.relations;
@@ -287,7 +287,7 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
   //Return SCC list
   return sccList;
 }
-
+*/
 
 //################################################## ITERATIVE ##############################################################
 
@@ -295,7 +295,7 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &graph) {
 
 //LOCKSTEP SATURATION ITERATIVE ##########################################################################
 
-std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
+std::list<sylvan::Bdd> lockstepSaturation(const Graph &fullGraph) {
   std::stack<sylvan::Bdd> callStack;
   callStack.push(fullGraph.nodes);
 
@@ -422,7 +422,7 @@ std::list<sylvan::Bdd> lockstepSaturationIterative(const Graph &fullGraph) {
 
 
 //LOCKSTEP RELATION UNION ITERATIVE ##########################################################################
-std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
+std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &fullGraph) {
   std::stack<sylvan::Bdd> callStack;
   callStack.push(fullGraph.nodes);
 
@@ -471,17 +471,18 @@ std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
         //Finds part of the next ring with the active relation
         sylvan::Bdd relResultFront = differenceBdd(intersectBdd(forwardFront.RelNext(currentRelation, currentRelationCube), nodeSet), forwardSet);
         sylvan::Bdd relResultBack = differenceBdd(intersectBdd(backwardFront.RelPrev(currentRelation, currentRelationCube), nodeSet), backwardSet);
-        if(relResultFront != leaf_false()) {
-          somethingChangedFront = true;
-        }
-        if(relResultBack != leaf_false()) {
-          somethingChangedBack = true;
-        }
+
         //We accumulate the entire ring by adding the partial rings from all relations
         forwardAcc = unionBdd(forwardAcc, relResultFront);
         backwardAcc = unionBdd(backwardAcc, relResultBack);
       }
 
+      if(forwardAcc != leaf_false()) {
+        somethingChangedFront = true;
+      }
+      if(backwardAcc != leaf_false()) {
+        somethingChangedBack = true;
+      }
       //Add everything to forward and backward sets
       forwardSet = unionBdd(forwardSet, forwardAcc);
       backwardSet = unionBdd(backwardSet, backwardAcc);
@@ -570,8 +571,8 @@ std::list<sylvan::Bdd> lockstepRelationUnionIterative(const Graph &fullGraph) {
   return sccList;
 }
 
-//Wrapper function for lockstepRelationUnionIterative that makes a literal union of the relations before running the function
-std::list<sylvan::Bdd> lockstepRelationLiteralUnionIterative(const Graph &fullGraph) {
+//Wrapper function for lockstepRelationUnion that makes a literal union of the relations before running the function
+std::list<sylvan::Bdd> lockstepLiteralRelationUnion(const Graph &fullGraph) {
   std::deque<Relation> relations = fullGraph.relations;
   sylvan::Bdd resultBdd= leaf_false();
   std::list<uint32_t> resultCubeVars = {};
@@ -605,6 +606,254 @@ std::list<sylvan::Bdd> lockstepRelationLiteralUnionIterative(const Graph &fullGr
   newFullGraph.relations = relationDeque;
   newFullGraph.cube = fullGraph.cube;
 
-  return lockstepRelationUnionIterative(newFullGraph);
+  return lockstepRelationUnion(newFullGraph);
 }
 
+std::list<sylvan::Bdd> xieBeerelSaturation(const Graph &fullGraph) {
+  std::stack<sylvan::Bdd> callStack;
+  callStack.push(fullGraph.nodes);
+
+  std::list<sylvan::Bdd> sccList = {};
+  if(fullGraph.nodes == leaf_false()) {
+    return sccList;
+  }
+
+  const sylvan::BddSet fullCube = fullGraph.cube;
+  const std::deque<Relation> relationDeque = fullGraph.relations;
+
+  Graph workingGraph;
+  workingGraph.cube = fullCube;
+  workingGraph.relations = relationDeque;
+  workingGraph.nodes = leaf_false();
+
+  while(!callStack.empty()) {
+    const sylvan::Bdd nodeSet = callStack.top();
+    callStack.pop();
+
+    sylvan::Bdd v = pick(nodeSet, fullCube);
+    sylvan::Bdd forwardSet = v;
+    sylvan::Bdd backwardSet = v;
+
+    workingGraph.nodes = nodeSet;
+    forwardSet = reachabilityForwardSaturation(workingGraph, forwardSet);
+    workingGraph.nodes = forwardSet;
+    backwardSet = reachabilityBackwardSaturation(workingGraph, backwardSet);
+
+    //Create SCC
+    sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+    //Add scc to scclist
+    sccList.push_back(scc);
+
+    //Emulating recursive calls by pushing to the stack
+    //"Call" 1
+    sylvan::Bdd recBdd1 = differenceBdd(forwardSet, scc);
+    if(recBdd1 != leaf_false()) {
+      callStack.push(recBdd1);
+    }
+
+    //"Call" 2
+    sylvan::Bdd recBdd2 = differenceBdd(nodeSet, forwardSet);
+    if(recBdd2 != leaf_false()) {
+      callStack.push(recBdd2);
+    }
+  }
+
+  return sccList;
+}
+
+std::list<sylvan::Bdd> xieBeerelRelationUnion(const Graph &fullGraph) {
+  std::stack<sylvan::Bdd> callStack;
+  callStack.push(fullGraph.nodes);
+
+  std::list<sylvan::Bdd> sccList = {};
+  if(fullGraph.nodes == leaf_false()) {
+    return sccList;
+  }
+
+  const sylvan::BddSet fullCube = fullGraph.cube;
+  const std::deque<Relation> relationDeque = fullGraph.relations;
+
+  Graph workingGraph;
+  workingGraph.cube = fullCube;
+  workingGraph.relations = relationDeque;
+  workingGraph.nodes = leaf_false();
+
+  while(!callStack.empty()) {
+    const sylvan::Bdd nodeSet = callStack.top();
+    callStack.pop();
+
+    sylvan::Bdd v = pick(nodeSet, fullCube);
+    sylvan::Bdd forwardSet = v;
+    sylvan::Bdd backwardSet = v;
+
+    workingGraph.nodes = nodeSet;
+    forwardSet = reachabilityForwardRelationUnion(workingGraph, forwardSet);
+    workingGraph.nodes = forwardSet;
+    backwardSet = reachabilityBackwardRelationUnion(workingGraph, backwardSet);
+
+    //Create SCC
+    sylvan::Bdd scc = intersectBdd(forwardSet, backwardSet);
+    //Add scc to scclist
+    sccList.push_back(scc);
+
+    //Emulating recursive calls by pushing to the stack
+    //"Call" 1
+    sylvan::Bdd recBdd1 = differenceBdd(forwardSet, scc);
+    if(recBdd1 != leaf_false()) {
+      callStack.push(recBdd1);
+    }
+
+    //"Call" 2
+    sylvan::Bdd recBdd2 = differenceBdd(nodeSet, forwardSet);
+    if(recBdd2 != leaf_false()) {
+      callStack.push(recBdd2);
+    }
+  }
+
+  return sccList;
+}
+
+//Computes the nodes reachable from the node(s) in the Graph given using saturation
+sylvan::Bdd reachabilityForwardSaturation(const Graph &graph, sylvan::Bdd nodes) {
+  sylvan::BddSet cube = graph.cube;
+  std::deque<Relation> relationDeque = graph.relations;
+
+  sylvan::Bdd forwardSet = nodes;
+  sylvan::Bdd nodeSet = graph.nodes;
+
+  int relFrontI = 0;
+  sylvan::Bdd relFront = relationDeque[relFrontI].relationBdd;
+  sylvan::BddSet relFrontCube = relationDeque[relFrontI].cube;
+
+  while(relFrontI < relationDeque.size()) {
+    sylvan::Bdd relResultFront = differenceBdd(intersectBdd(forwardSet.RelNext(relFront, relFrontCube), nodeSet), forwardSet);
+
+    if(relResultFront == leaf_false()) {
+      relFrontI++;
+      relFront = relationDeque[relFrontI].relationBdd;
+      relFrontCube = relationDeque[relFrontI].cube;
+    } else {
+      relFrontI = 0;
+      relFront = relationDeque[relFrontI].relationBdd;
+      relFrontCube = relationDeque[relFrontI].cube;
+    }
+
+	  //Add to the forward set
+    forwardSet = unionBdd(forwardSet, relResultFront);
+  }
+
+  return forwardSet;
+}
+
+//Computes the nodes reachable from the node(s) in the Graph given using saturation
+sylvan::Bdd reachabilityBackwardSaturation(const Graph &graph, sylvan::Bdd nodes) {
+  sylvan::BddSet cube = graph.cube;
+  std::deque<Relation> relationDeque = graph.relations;
+
+  sylvan::Bdd backwardSet = nodes;
+  sylvan::Bdd nodeSet = graph.nodes;
+
+  int relBackI = 0;
+  sylvan::Bdd relBack = relationDeque[relBackI].relationBdd;
+  sylvan::BddSet relBackCube = relationDeque[relBackI].cube;
+
+  while(relBackI < relationDeque.size()) {
+  //Find images
+    sylvan::Bdd relResultBack = differenceBdd(intersectBdd(backwardSet.RelPrev(relBack, relBackCube), nodeSet), backwardSet);
+
+    if(relResultBack == leaf_false()) {
+      relBackI++;
+      relBack = relationDeque[relBackI].relationBdd;
+      relBackCube = relationDeque[relBackI].cube;
+    } else {
+      relBackI = 0;
+      relBack = relationDeque[relBackI].relationBdd;
+      relBackCube = relationDeque[relBackI].cube;
+    }
+
+    //Add to the forward and backward sets
+    backwardSet = unionBdd(backwardSet, relResultBack);
+  }
+
+  return backwardSet;
+}
+
+//Computes the nodes reachable from the node(s) in the Graph given using relation union
+sylvan::Bdd reachabilityForwardRelationUnion(const Graph &graph, sylvan::Bdd nodes) {
+  sylvan::BddSet cube = graph.cube;
+  std::deque<Relation> relationDeque = graph.relations;
+
+  sylvan::Bdd forwardSet = nodes;
+  sylvan::Bdd nodeSet = graph.nodes;
+
+  sylvan::Bdd forwardFront = nodes;
+  sylvan::Bdd forwardAcc = leaf_false();
+  sylvan::Bdd relResultFront;
+
+  sylvan::Bdd currentRelation;
+  sylvan::BddSet currentRelationCube;
+
+  bool somethingChanged = true;
+  while(somethingChanged) {
+    somethingChanged = false;
+
+    for(int i = 0 ; i < relationDeque.size(); i++) {
+      currentRelation = relationDeque[i].relationBdd;
+      currentRelationCube = relationDeque[i].cube;
+
+      sylvan::Bdd relResultFront = differenceBdd(intersectBdd(forwardFront.RelNext(currentRelation, currentRelationCube), nodeSet), forwardSet);
+
+      forwardAcc = unionBdd(forwardAcc, relResultFront);
+    }
+
+    if(forwardAcc != leaf_false()) {
+      somethingChanged = true;
+    }
+    forwardSet = unionBdd(forwardSet, forwardAcc);
+
+    forwardFront = differenceBdd(forwardAcc, forwardFront);
+    forwardAcc = leaf_false();
+  }
+
+  return forwardSet;
+}
+
+//Computes the nodes reachable from the node(s) in the Graph given using relation union
+sylvan::Bdd reachabilityBackwardRelationUnion(const Graph &graph, sylvan::Bdd nodes) {
+  sylvan::BddSet cube = graph.cube;
+  std::deque<Relation> relationDeque = graph.relations;
+
+  sylvan::Bdd backwardSet = nodes;
+  sylvan::Bdd nodeSet = graph.nodes;
+
+  sylvan::Bdd backwardFront = nodes;
+  sylvan::Bdd backwardAcc = leaf_false();
+  sylvan::Bdd relResultFront;
+
+  sylvan::Bdd currentRelation;
+  sylvan::BddSet currentRelationCube;
+
+  bool somethingChanged = true;
+  while(somethingChanged) {
+    somethingChanged = false;
+
+    for(int i = 0 ; i < relationDeque.size(); i++) {
+      currentRelation = relationDeque[i].relationBdd;
+      currentRelationCube = relationDeque[i].cube;
+
+      sylvan::Bdd relResultFront = differenceBdd(intersectBdd(backwardFront.RelPrev(currentRelation, currentRelationCube), nodeSet), backwardSet);
+
+      backwardAcc = unionBdd(backwardAcc, relResultFront);
+    }
+
+    if(backwardAcc != leaf_false()) {
+      somethingChanged = true;
+    }
+    backwardSet = unionBdd(backwardSet, backwardAcc);
+
+    backwardFront = differenceBdd(backwardAcc, backwardFront);
+    backwardAcc = leaf_false();
+  }
+
+  return backwardSet;
+}

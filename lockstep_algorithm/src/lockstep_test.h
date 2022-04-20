@@ -3,10 +3,16 @@
 
 #include "petriTranslation.h"
 
-void experiment();
+enum algorithmType
+{
+  lockstepSat,
+  lockstepRelUnion,
+  lockstepLitRelUnion,
+  xbSat,
+  xbRelUnion,
+};
 
-void timeSaturation(const Graph &graph);
-void timeSaturationIterative(const Graph &graph);
+void experiment(std::list<std::string> pathStrings, int maxPreprocess, int minPreprocess, std::list<algorithmType> runTypes);
 
 Graph graphPreprocessing(const Graph &graph, int pruningSteps);
 Graph graphPreprocessingFixedPoint(const Graph &graph);
@@ -19,9 +25,11 @@ bool containsDuplicateSccs(const std::list<sylvan::Bdd> sccList);
 void validateAlgoSccResults(const std::list<sylvan::Bdd> resultSccList, const Graph originalGraph);
 
 void writeToCSV(std::string fileName, std::vector<std::vector<std::string>> grid);
-std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs);
+std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs, int noOfAlgorithms);
 
-std::vector<std::vector<std::string>> testAndPrintWithMax(const Graph &graph, int maxPruning, int minPruning, std::vector<std::vector<std::string>> grid, std::string fileName, int row);
-std::vector<std::vector<std::string>> timeAll(const Graph &graph, std::vector<std::vector<std::string>> grid, int row);
+std::vector<std::vector<std::string>> testAndPrintWithMax(const Graph &graph, int maxPruning, int minPruning, std::list<algorithmType> runTypes, std::vector<std::vector<std::string>> grid, std::string fileName, int row);
+std::vector<std::vector<std::string>> timeAll(const Graph &graph, std::list<algorithmType> runTypes, std::vector<std::vector<std::string>> grid, int row);
+
+std::list<std::string> getPathStrings();
 
 #endif //LOCKSTEP_TEST_H
