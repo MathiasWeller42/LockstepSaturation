@@ -26,27 +26,27 @@
 std::list<std::string> getPathStrings() {
   std::list<std::string> resultList = {};
 
+  /*
   resultList.push_back("ShieldRVt/PT/shield_t_rv_001_a_11place.pnml");                        //11
   resultList.push_back("GPUForwardProgress/PT/userdef_15place.pnml");                         //15
   resultList.push_back("ShieldRVs/PT/shield_s_rv_001_a_17place.pnml");                        //17
-  /*
   resultList.push_back("ShieldRVt/PT/shield_t_rv_002_a_19place.pnml");                        //19
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_a_22place.pnml");                      //22
   resultList.push_back("GPUForwardProgress/PT/gpufp_04_a_24place.pnml");                      //24
-  resultList.push_back("ShieldRVt/PT/shield_t_rv_003_a_27place.pnml");                        //27*/
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_003_a_27place.pnml");                        //27
   resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-00002by00001_27place.pnml"); //27
   resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-00005by00002_27place.pnml"); //27
-  /*
   resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-00080by00040_27place.pnml"); //27
   resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-01280by00640_27place.pnml"); //27
   resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-10240by05120_27place.pnml"); //27
-  resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-20480by10240_27place.pnml"); //27
+  resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-20480by10240_27place.pnml"); //27*/
+
   resultList.push_back("ShieldRVs/PT/shield_s_rv_002_a_31place.pnml");                        //31
   resultList.push_back("SimpleLoadBal/PT/simple_lbs-2_32place.pnml");                         //32
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_002_a_41place.pnml");                      //41
   resultList.push_back("ShieldRVs/PT/shield_s_rv_001_b_43place.pnml");                        //43
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_a_60place.pnml");                      //60
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79*/
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79
 
   return resultList;
 }
@@ -69,18 +69,18 @@ void experiment() {
   int csvRow = 0;
   for(std::string pathString : pathStrings) {
     std::cout << "###### Running experiment on file at path: " << pathString << std::endl;
-    Graph graph = PNMLtoGraph(pathString, false);
+    bool useInitialMarking = true;
+    Graph graph = PNMLtoGraph(pathString, useInitialMarking);
 
     std::string noOfPlaces = std::to_string(graph.cube.size());
     std::string noOfRelations = std::to_string(graph.relations.size());
-
     grid[csvRow+1].insert(grid[csvRow+1].end(), {"Saturation", noOfPlaces, noOfRelations});
     grid[csvRow+2].insert(grid[csvRow+2].end(), {"Relation Union", noOfPlaces, noOfRelations});
     grid[csvRow+3].insert(grid[csvRow+3].end(), {"Literal relation union", noOfPlaces, noOfRelations});
 
 
     //Preprocess every 2-factor between the limits, but not more than the fix-point
-    int maxPreProcess = 0;
+    int maxPreProcess = -1;
     int minPreProcess = 0;
     grid = testAndPrintWithMax(graph, maxPreProcess, minPreProcess, grid, csvFileName, csvRow);
     //Move three rows after an experiment since we have three methods to test on
@@ -196,6 +196,8 @@ Graph graphPreprocessing(const Graph &graph, int pruningSteps) {
     resultGraph = pruneGraph(resultGraph);
   }
 
+  int prunedNodes = countNodes(graph.cube.size(), differenceBdd(graph.nodes, resultGraph.nodes));
+  std::cout << "Pruned " << prunedNodes << " nodes" << std::endl;
   std::cout << "Finished pre-processing of graph" << std::endl;
   return resultGraph;
 }
@@ -207,6 +209,8 @@ Graph graphPreprocessingFixedPoint(const Graph &graph) {
 
   resultGraph = fixedPointPruning(resultGraph);
 
+  int prunedNodes = countNodes(graph.cube.size(), differenceBdd(graph.nodes, resultGraph.nodes));
+  std::cout << "Pruned " << prunedNodes << " nodes" << std::endl;
   std::cout << "Finished pre-processing of graph" << std::endl;
   return resultGraph;
 }
@@ -218,6 +222,8 @@ std::pair<Graph, int> graphPreprocessingFixedPointWithMax(const Graph &graph, in
 
   std::pair<Graph, int> result = fixedPointPruningWithMax(resultGraph, maxPruning);
 
+  int prunedNodes = countNodes(graph.cube.size(), differenceBdd(graph.nodes, resultGraph.nodes));
+  std::cout << "Pruned " << prunedNodes << " nodes" << std::endl;
   std::cout << "Finished pre-processing of graph" << std::endl;
   return result;
 }
@@ -302,6 +308,7 @@ std::vector<std::vector<std::string>> testAndPrintWithMax(const Graph &graph, in
       grid[row].insert(grid[row].end(), {"SCC's", std::to_string(0) + " pruning steps (ms)", "SCC/ms" });
     }
     else {
+      std::cout << "I'm here" << std::endl;
       std::cout << "### With pre-processing (" << std::to_string(maxPruning) << " or fixed-point) " << std::endl;
       std::pair<Graph, int> result = graphPreprocessingFixedPointWithMax(graph, maxPruning);
       Graph processedGraph = result.first;
@@ -352,7 +359,7 @@ void writeToCSV(std::string fileName, std::vector<std::vector<std::string>> grid
 //Initializes an empty csv grid with the appropriate amount of rows to insert into
 std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs) {
   int noOfAlgorithms = 3;
-  int noOfRows = (noOfExperimentGraphs+2) * noOfAlgorithms + 1;
+  int noOfRows = (noOfExperimentGraphs) * (noOfAlgorithms+2) + 1;
 
   std::vector<std::vector<std::string>> grid(noOfRows, std::vector<std::string>(0));
 
@@ -365,6 +372,7 @@ std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs) {
 
 //Finds Scc's on a graph with each algorithm, prints the timings and results, and appends them to the CSV-grid which is returned
 std::vector<std::vector<std::string>> timeAll(const Graph &graph, std::vector<std::vector<std::string>> grid, int row) {
+
   //Iterative saturation
   auto start3 = std::chrono::high_resolution_clock::now();
   std::list<sylvan::Bdd> sccList3 = lockstepSaturationIterative(graph);
@@ -403,6 +411,6 @@ std::vector<std::vector<std::string>> timeAll(const Graph &graph, std::vector<st
   std::replace( annoyingFloatString5.begin(), annoyingFloatString5.end(), '.', ',');
 
   grid[row+3].insert(grid[row+3].end(), {std::to_string(sccList5.size()), std::to_string(duration5.count()), annoyingFloatString5});
-
+  
   return grid;
 }

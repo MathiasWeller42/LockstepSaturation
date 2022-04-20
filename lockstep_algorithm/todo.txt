@@ -4,12 +4,14 @@ TODO 1 : Reachability phase før pruning (find initial marking)
 TODO 2 : Implementer Xie-Beerel n^2-algoritme m/u saturation
 TODO 3 : Skriv til Jaco og bed om en PN-artikel
 TODO 4 : Find flere PN (ikke nødvendigvis safe - MCC + google)
+TODO 5 : Figure out what goes wrong with CloudOpsManagement
+TODO 6 : Fix countNodes (long long)
 
-TODO 5 : clean-up, **kommentarer** og læsbarhed (lav et pænt interface)
+TODO i+1 : clean-up, **kommentarer** og læsbarhed (lav et pænt interface)
 
-TODO 6 : asserts i lockstep??
-TODO 7 : optimer iterative lockstep
-TODO 8 : faktorér kopieret kode ud i lockstep
+TODO j+2 : asserts i lockstep??
+TODO j+3 : optimer iterative lockstep
+TODO j+4 : faktorér kopieret kode ud i lockstep
 
 TODO i : Husk at tests er en ting...
 

@@ -184,23 +184,6 @@ Graph pruneGraph(const Graph &graph) {
 
   sylvan::Bdd nodesWithoutSomeSingletonSccs = intersectBdd(frontRes, backRes);
 
-  auto stop2 = std::chrono::high_resolution_clock::now();
-  auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(stop2 - start2);
-  std::cout << "Prune time: " << duration2.count() << " milisegundos" << std::endl;
-
-  //Is this slow?
-  sylvan::Bdd singletonSccs = differenceBdd(nodes, nodesWithoutSomeSingletonSccs);
-
-  auto start3 = std::chrono::high_resolution_clock::now();
-
-  int countSingletons = countNodes(cube.size(), singletonSccs);
-
-  auto stop3 = std::chrono::high_resolution_clock::now();
-  auto duration3 = std::chrono::duration_cast<std::chrono::milliseconds>(stop3 - start3);
-  std::cout << "Count node time: " << duration3.count() << " milisegundos" << std::endl;
-  std::cout << "Number of nodes pruned: " << countSingletons << std::endl << std::endl;
-
-
   resultGraph.nodes = nodesWithoutSomeSingletonSccs;
   resultGraph.cube = cube;
   resultGraph.relations = relations;

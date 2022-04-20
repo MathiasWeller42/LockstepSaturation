@@ -185,7 +185,11 @@ int countNodes(int numVars, const sylvan::Bdd &bdd) {
       return 0;
     }
   }
-  return __countNodes(-1, 2 * numVars - 2, bdd);
+  if(numVars <= 32) {
+    return __countNodes(-1, 2 * numVars - 2, bdd);
+  } else {
+    return -1;
+  }
 }
 
 void printSingleRelationAsString(const sylvan::Bdd relation) {

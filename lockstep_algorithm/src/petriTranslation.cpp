@@ -274,7 +274,7 @@ Graph PNMLtoGraph(std::string fileString, bool useInitialMarking) {
   sylvan::BddSet cube = makeCube(numPlaces);
 
   sylvan::Bdd initialBdd = leaf_true();
-  for(int i = 0; i < numPlaces; i++) {
+  for(int i = 0; i < 2*numPlaces; i=i+2) {
     sylvan::Bdd placeMarking =  initialMarking.find(i) != initialMarking.end() ? ithvar(i) : nithvar(i);
     initialBdd = initialBdd.And(placeMarking);
   }
@@ -285,10 +285,42 @@ Graph PNMLtoGraph(std::string fileString, bool useInitialMarking) {
 
   if(useInitialMarking) {
     pnmlGraph.nodes = initialBdd;
+    pnmlGraph.nodes = reachability(pnmlGraph);
   } else {
     pnmlGraph.nodes = leaf_true();
   }
 
-  std::cout << "Number of relations: " << pnmlGraph.relations.size() << std::endl << std::endl;
+  std::cout << "Number of relations: " << pnmlGraph.relations.size() << std::endl;
+  //std::cout << "Size of graph: " << countNodes(pnmlGraph.cube.size(), pnmlGraph.nodes) << std::endl << std::endl;
   return pnmlGraph;
+}
+
+//Computes the nodes reachable from the node(s) in the Graph given
+sylvan::Bdd reachability(const Graph &graph) {
+  sylvan::BddSet cube = graph.cube;
+  std::deque<Relation> relationDeque = graph.relations;
+
+  sylvan::Bdd forwardSet = graph.nodes;
+  int relFrontI = 0;
+  sylvan::Bdd relFront = relationDeque[relFrontI].relationBdd;
+  sylvan::BddSet relFrontCube = relationDeque[relFrontI].cube;
+
+  while(relFrontI < relationDeque.size()) {
+    sylvan::Bdd relResultFront = differenceBdd(forwardSet.RelNext(relFront, relFrontCube), forwardSet);
+
+    if(relResultFront == leaf_false()) {
+      relFrontI++;
+      relFront = relationDeque[relFrontI].relationBdd;
+      relFrontCube = relationDeque[relFrontI].cube;
+    } else {
+      relFrontI = 0;
+      relFront = relationDeque[relFrontI].relationBdd;
+      relFrontCube = relationDeque[relFrontI].cube;
+    }
+
+	  //Add to the forward set
+    forwardSet = unionBdd(forwardSet, relResultFront);
+  }
+
+  return forwardSet;
 }
