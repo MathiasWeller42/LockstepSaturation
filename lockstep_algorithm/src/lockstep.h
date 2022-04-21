@@ -19,6 +19,8 @@ std::list<sylvan::Bdd> lockstepRelationUnion(const Graph &fullGraph);
 std::list<sylvan::Bdd> lockstepLiteralRelationUnion(const Graph &fullGraph);
 std::list<sylvan::Bdd> xieBeerelSaturation(const Graph &fullGraph);
 std::list<sylvan::Bdd> xieBeerelRelationUnion(const Graph &fullGraph);
+std::list<sylvan::Bdd> xieBeerelLiteralRelationUnion(const Graph &fullGraph);
+std::list<sylvan::Bdd> literalRelationUnion(const Graph &fullGraph, bool lockstep);
 
 sylvan::Bdd reachabilityForwardSaturation(const Graph &graph, sylvan::Bdd nodes);
 sylvan::Bdd reachabilityBackwardSaturation(const Graph &graph, sylvan::Bdd nodes);

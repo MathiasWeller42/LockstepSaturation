@@ -8,6 +8,7 @@
 void printBdd(const sylvan::Bdd &bdd);
 void printBddAsString(const int nodes, const sylvan::Bdd &bdd);
 void printBigBddAsString(const int nodes, const sylvan::Bdd &bdd);
+void printBddListAsString(const int nodes, const std::list<sylvan::Bdd> bdds);
 void printSingleRelationAsString(const sylvan::Bdd relation);
 void printRelationsAsString(const std::deque<sylvan::Bdd> relations);
 void printMap(std::map<std::string, int> map);

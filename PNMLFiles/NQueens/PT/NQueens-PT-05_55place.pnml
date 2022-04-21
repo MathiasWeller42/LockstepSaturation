@@ -1,0 +1,1378 @@
+<?xml version="1.0"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+	<!-- Written by GreatSPN Editor. -->
+	<net id="NQueens-PT-05" type="http://www.pnml.org/version-2009/grammar/ptnet">
+		<name>
+			<text>NQueens-PT-05</text>
+		</name>
+		<page id="page0">
+			<name>
+				<text>DefaultPage</text>
+			</name>
+			<!-- List of places -->
+			<place id="P_0_0">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_0_0</text>
+				</name>
+				<graphics>
+					<position x="40" y="120"/>
+				</graphics>
+			</place>
+			<place id="P_0_1">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_0_1</text>
+				</name>
+				<graphics>
+					<position x="70" y="120"/>
+				</graphics>
+			</place>
+			<place id="P_0_2">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_0_2</text>
+				</name>
+				<graphics>
+					<position x="100" y="120"/>
+				</graphics>
+			</place>
+			<place id="P_0_3">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_0_3</text>
+				</name>
+				<graphics>
+					<position x="130" y="120"/>
+				</graphics>
+			</place>
+			<place id="P_0_4">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_0_4</text>
+				</name>
+				<graphics>
+					<position x="160" y="120"/>
+				</graphics>
+			</place>
+			<place id="P_1_0">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_1_0</text>
+				</name>
+				<graphics>
+					<position x="40" y="150"/>
+				</graphics>
+			</place>
+			<place id="P_1_1">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_1_1</text>
+				</name>
+				<graphics>
+					<position x="70" y="150"/>
+				</graphics>
+			</place>
+			<place id="P_1_2">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_1_2</text>
+				</name>
+				<graphics>
+					<position x="100" y="150"/>
+				</graphics>
+			</place>
+			<place id="P_1_3">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_1_3</text>
+				</name>
+				<graphics>
+					<position x="130" y="150"/>
+				</graphics>
+			</place>
+			<place id="P_1_4">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_1_4</text>
+				</name>
+				<graphics>
+					<position x="160" y="150"/>
+				</graphics>
+			</place>
+			<place id="P_2_0">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_2_0</text>
+				</name>
+				<graphics>
+					<position x="40" y="180"/>
+				</graphics>
+			</place>
+			<place id="P_2_1">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_2_1</text>
+				</name>
+				<graphics>
+					<position x="70" y="180"/>
+				</graphics>
+			</place>
+			<place id="P_2_2">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_2_2</text>
+				</name>
+				<graphics>
+					<position x="100" y="180"/>
+				</graphics>
+			</place>
+			<place id="P_2_3">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_2_3</text>
+				</name>
+				<graphics>
+					<position x="130" y="180"/>
+				</graphics>
+			</place>
+			<place id="P_2_4">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_2_4</text>
+				</name>
+				<graphics>
+					<position x="160" y="180"/>
+				</graphics>
+			</place>
+			<place id="P_3_0">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_3_0</text>
+				</name>
+				<graphics>
+					<position x="40" y="210"/>
+				</graphics>
+			</place>
+			<place id="P_3_1">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_3_1</text>
+				</name>
+				<graphics>
+					<position x="70" y="210"/>
+				</graphics>
+			</place>
+			<place id="P_3_2">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_3_2</text>
+				</name>
+				<graphics>
+					<position x="100" y="210"/>
+				</graphics>
+			</place>
+			<place id="P_3_3">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_3_3</text>
+				</name>
+				<graphics>
+					<position x="130" y="210"/>
+				</graphics>
+			</place>
+			<place id="P_3_4">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_3_4</text>
+				</name>
+				<graphics>
+					<position x="160" y="210"/>
+				</graphics>
+			</place>
+			<place id="P_4_0">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_4_0</text>
+				</name>
+				<graphics>
+					<position x="40" y="240"/>
+				</graphics>
+			</place>
+			<place id="P_4_1">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_4_1</text>
+				</name>
+				<graphics>
+					<position x="70" y="240"/>
+				</graphics>
+			</place>
+			<place id="P_4_2">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_4_2</text>
+				</name>
+				<graphics>
+					<position x="100" y="240"/>
+				</graphics>
+			</place>
+			<place id="P_4_3">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_4_3</text>
+				</name>
+				<graphics>
+					<position x="130" y="240"/>
+				</graphics>
+			</place>
+			<place id="P_4_4">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>P_4_4</text>
+				</name>
+				<graphics>
+					<position x="160" y="240"/>
+				</graphics>
+			</place>
+			<place id="cX_0">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cX_0</text>
+				</name>
+				<graphics>
+					<position x="170" y="50"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="cX_1">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cX_1</text>
+				</name>
+				<graphics>
+					<position x="170" y="80"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="cX_2">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cX_2</text>
+				</name>
+				<graphics>
+					<position x="170" y="110"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="cX_3">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cX_3</text>
+				</name>
+				<graphics>
+					<position x="170" y="140"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="cX_4">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cX_4</text>
+				</name>
+				<graphics>
+					<position x="170" y="170"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="cY_0">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cY_0</text>
+				</name>
+				<graphics>
+					<position x="330" y="50"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="cY_1">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cY_1</text>
+				</name>
+				<graphics>
+					<position x="330" y="80"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="cY_2">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cY_2</text>
+				</name>
+				<graphics>
+					<position x="330" y="110"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="cY_3">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cY_3</text>
+				</name>
+				<graphics>
+					<position x="330" y="140"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="cY_4">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>cY_4</text>
+				</name>
+				<graphics>
+					<position x="330" y="170"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_0">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_0</text>
+				</name>
+				<graphics>
+					<position x="220" y="30"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_1">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_1</text>
+				</name>
+				<graphics>
+					<position x="220" y="60"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_2">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_2</text>
+				</name>
+				<graphics>
+					<position x="220" y="90"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_3">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_3</text>
+				</name>
+				<graphics>
+					<position x="220" y="120"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_4">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_4</text>
+				</name>
+				<graphics>
+					<position x="220" y="150"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_5">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_5</text>
+				</name>
+				<graphics>
+					<position x="220" y="180"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_6">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_6</text>
+				</name>
+				<graphics>
+					<position x="220" y="210"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_7">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_7</text>
+				</name>
+				<graphics>
+					<position x="220" y="240"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_8">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_8</text>
+				</name>
+				<graphics>
+					<position x="220" y="270"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="L_9">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>L_9</text>
+				</name>
+				<graphics>
+					<position x="220" y="300"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_0">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_0</text>
+				</name>
+				<graphics>
+					<position x="280" y="30"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_1">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_1</text>
+				</name>
+				<graphics>
+					<position x="280" y="60"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_2">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_2</text>
+				</name>
+				<graphics>
+					<position x="280" y="90"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_3">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_3</text>
+				</name>
+				<graphics>
+					<position x="280" y="120"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_4">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_4</text>
+				</name>
+				<graphics>
+					<position x="280" y="150"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_5">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_5</text>
+				</name>
+				<graphics>
+					<position x="280" y="180"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_6">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_6</text>
+				</name>
+				<graphics>
+					<position x="280" y="210"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_7">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_7</text>
+				</name>
+				<graphics>
+					<position x="280" y="240"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_8">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_8</text>
+				</name>
+				<graphics>
+					<position x="280" y="270"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<place id="R_9">
+				<name>
+					<graphics>
+						<offset x="0" y="15"/>
+					</graphics>
+					<text>R_9</text>
+				</name>
+				<graphics>
+					<position x="280" y="300"/>
+				</graphics>
+				<initialMarking>
+					<text>1</text>
+				</initialMarking>
+			</place>
+			<!-- List of transitions -->
+			<transition id="T_0_5_0_4">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_0_5_0_4</text>
+				</name>
+				<graphics>
+					<position x="525" y="120"/>
+				</graphics>
+			</transition>
+			<transition id="T_1_4_0_3">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_1_4_0_3</text>
+				</name>
+				<graphics>
+					<position x="465" y="150"/>
+				</graphics>
+			</transition>
+			<transition id="T_1_6_1_4">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_1_6_1_4</text>
+				</name>
+				<graphics>
+					<position x="555" y="180"/>
+				</graphics>
+			</transition>
+			<transition id="T_2_3_0_2">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_2_3_0_2</text>
+				</name>
+				<graphics>
+					<position x="405" y="180"/>
+				</graphics>
+			</transition>
+			<transition id="T_2_5_1_3">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_2_5_1_3</text>
+				</name>
+				<graphics>
+					<position x="495" y="210"/>
+				</graphics>
+			</transition>
+			<transition id="T_2_7_2_4">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_2_7_2_4</text>
+				</name>
+				<graphics>
+					<position x="585" y="240"/>
+				</graphics>
+			</transition>
+			<transition id="T_3_2_0_1">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_3_2_0_1</text>
+				</name>
+				<graphics>
+					<position x="345" y="210"/>
+				</graphics>
+			</transition>
+			<transition id="T_3_4_1_2">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_3_4_1_2</text>
+				</name>
+				<graphics>
+					<position x="435" y="240"/>
+				</graphics>
+			</transition>
+			<transition id="T_3_6_2_3">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_3_6_2_3</text>
+				</name>
+				<graphics>
+					<position x="525" y="270"/>
+				</graphics>
+			</transition>
+			<transition id="T_3_8_3_4">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_3_8_3_4</text>
+				</name>
+				<graphics>
+					<position x="615" y="300"/>
+				</graphics>
+			</transition>
+			<transition id="T_4_1_0_0">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_4_1_0_0</text>
+				</name>
+				<graphics>
+					<position x="285" y="240"/>
+				</graphics>
+			</transition>
+			<transition id="T_4_3_1_1">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_4_3_1_1</text>
+				</name>
+				<graphics>
+					<position x="375" y="270"/>
+				</graphics>
+			</transition>
+			<transition id="T_4_5_2_2">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_4_5_2_2</text>
+				</name>
+				<graphics>
+					<position x="465" y="300"/>
+				</graphics>
+			</transition>
+			<transition id="T_4_7_3_3">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_4_7_3_3</text>
+				</name>
+				<graphics>
+					<position x="555" y="330"/>
+				</graphics>
+			</transition>
+			<transition id="T_4_9_4_4">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_4_9_4_4</text>
+				</name>
+				<graphics>
+					<position x="645" y="360"/>
+				</graphics>
+			</transition>
+			<transition id="T_5_2_1_0">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_5_2_1_0</text>
+				</name>
+				<graphics>
+					<position x="315" y="300"/>
+				</graphics>
+			</transition>
+			<transition id="T_5_4_2_1">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_5_4_2_1</text>
+				</name>
+				<graphics>
+					<position x="405" y="330"/>
+				</graphics>
+			</transition>
+			<transition id="T_5_6_3_2">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_5_6_3_2</text>
+				</name>
+				<graphics>
+					<position x="495" y="360"/>
+				</graphics>
+			</transition>
+			<transition id="T_5_8_4_3">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_5_8_4_3</text>
+				</name>
+				<graphics>
+					<position x="585" y="390"/>
+				</graphics>
+			</transition>
+			<transition id="T_6_3_2_0">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_6_3_2_0</text>
+				</name>
+				<graphics>
+					<position x="345" y="360"/>
+				</graphics>
+			</transition>
+			<transition id="T_6_5_3_1">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_6_5_3_1</text>
+				</name>
+				<graphics>
+					<position x="435" y="390"/>
+				</graphics>
+			</transition>
+			<transition id="T_6_7_4_2">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_6_7_4_2</text>
+				</name>
+				<graphics>
+					<position x="525" y="420"/>
+				</graphics>
+			</transition>
+			<transition id="T_7_4_3_0">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_7_4_3_0</text>
+				</name>
+				<graphics>
+					<position x="375" y="420"/>
+				</graphics>
+			</transition>
+			<transition id="T_7_6_4_1">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_7_6_4_1</text>
+				</name>
+				<graphics>
+					<position x="465" y="450"/>
+				</graphics>
+			</transition>
+			<transition id="T_8_5_4_0">
+				<name>
+					<graphics>
+						<offset x="0" y="-15"/>
+					</graphics>
+					<text>T_8_5_4_0</text>
+				</name>
+				<graphics>
+					<position x="405" y="480"/>
+				</graphics>
+			</transition>
+			<!-- List of arcs -->
+			<arc id="id1" source="T_0_5_0_4" target="P_0_4">
+			</arc>
+			<arc id="id2" source="cY_4" target="T_0_5_0_4">
+			</arc>
+			<arc id="id3" source="L_0" target="T_0_5_0_4">
+			</arc>
+			<arc id="id4" source="R_5" target="T_0_5_0_4">
+			</arc>
+			<arc id="id5" source="cX_0" target="T_0_5_0_4">
+			</arc>
+			<arc id="id6" source="T_1_4_0_3" target="P_0_3">
+			</arc>
+			<arc id="id7" source="cY_3" target="T_1_4_0_3">
+			</arc>
+			<arc id="id8" source="L_1" target="T_1_4_0_3">
+			</arc>
+			<arc id="id9" source="R_4" target="T_1_4_0_3">
+			</arc>
+			<arc id="id10" source="cX_0" target="T_1_4_0_3">
+			</arc>
+			<arc id="id11" source="T_1_6_1_4" target="P_1_4">
+			</arc>
+			<arc id="id12" source="cY_4" target="T_1_6_1_4">
+			</arc>
+			<arc id="id13" source="L_1" target="T_1_6_1_4">
+			</arc>
+			<arc id="id14" source="R_6" target="T_1_6_1_4">
+			</arc>
+			<arc id="id15" source="cX_1" target="T_1_6_1_4">
+			</arc>
+			<arc id="id16" source="T_2_3_0_2" target="P_0_2">
+			</arc>
+			<arc id="id17" source="cY_2" target="T_2_3_0_2">
+			</arc>
+			<arc id="id18" source="L_2" target="T_2_3_0_2">
+			</arc>
+			<arc id="id19" source="R_3" target="T_2_3_0_2">
+			</arc>
+			<arc id="id20" source="cX_0" target="T_2_3_0_2">
+			</arc>
+			<arc id="id21" source="T_2_5_1_3" target="P_1_3">
+			</arc>
+			<arc id="id22" source="cY_3" target="T_2_5_1_3">
+			</arc>
+			<arc id="id23" source="L_2" target="T_2_5_1_3">
+			</arc>
+			<arc id="id24" source="R_5" target="T_2_5_1_3">
+			</arc>
+			<arc id="id25" source="cX_1" target="T_2_5_1_3">
+			</arc>
+			<arc id="id26" source="T_2_7_2_4" target="P_2_4">
+			</arc>
+			<arc id="id27" source="cY_4" target="T_2_7_2_4">
+			</arc>
+			<arc id="id28" source="L_2" target="T_2_7_2_4">
+			</arc>
+			<arc id="id29" source="R_7" target="T_2_7_2_4">
+			</arc>
+			<arc id="id30" source="cX_2" target="T_2_7_2_4">
+			</arc>
+			<arc id="id31" source="T_3_2_0_1" target="P_0_1">
+			</arc>
+			<arc id="id32" source="cY_1" target="T_3_2_0_1">
+			</arc>
+			<arc id="id33" source="L_3" target="T_3_2_0_1">
+			</arc>
+			<arc id="id34" source="R_2" target="T_3_2_0_1">
+			</arc>
+			<arc id="id35" source="cX_0" target="T_3_2_0_1">
+			</arc>
+			<arc id="id36" source="T_3_4_1_2" target="P_1_2">
+			</arc>
+			<arc id="id37" source="cY_2" target="T_3_4_1_2">
+			</arc>
+			<arc id="id38" source="L_3" target="T_3_4_1_2">
+			</arc>
+			<arc id="id39" source="R_4" target="T_3_4_1_2">
+			</arc>
+			<arc id="id40" source="cX_1" target="T_3_4_1_2">
+			</arc>
+			<arc id="id41" source="T_3_6_2_3" target="P_2_3">
+			</arc>
+			<arc id="id42" source="cY_3" target="T_3_6_2_3">
+			</arc>
+			<arc id="id43" source="L_3" target="T_3_6_2_3">
+			</arc>
+			<arc id="id44" source="R_6" target="T_3_6_2_3">
+			</arc>
+			<arc id="id45" source="cX_2" target="T_3_6_2_3">
+			</arc>
+			<arc id="id46" source="T_3_8_3_4" target="P_3_4">
+			</arc>
+			<arc id="id47" source="cY_4" target="T_3_8_3_4">
+			</arc>
+			<arc id="id48" source="L_3" target="T_3_8_3_4">
+			</arc>
+			<arc id="id49" source="R_8" target="T_3_8_3_4">
+			</arc>
+			<arc id="id50" source="cX_3" target="T_3_8_3_4">
+			</arc>
+			<arc id="id51" source="T_4_1_0_0" target="P_0_0">
+			</arc>
+			<arc id="id52" source="cY_0" target="T_4_1_0_0">
+			</arc>
+			<arc id="id53" source="L_4" target="T_4_1_0_0">
+			</arc>
+			<arc id="id54" source="R_1" target="T_4_1_0_0">
+			</arc>
+			<arc id="id55" source="cX_0" target="T_4_1_0_0">
+			</arc>
+			<arc id="id56" source="T_4_3_1_1" target="P_1_1">
+			</arc>
+			<arc id="id57" source="cY_1" target="T_4_3_1_1">
+			</arc>
+			<arc id="id58" source="L_4" target="T_4_3_1_1">
+			</arc>
+			<arc id="id59" source="R_3" target="T_4_3_1_1">
+			</arc>
+			<arc id="id60" source="cX_1" target="T_4_3_1_1">
+			</arc>
+			<arc id="id61" source="T_4_5_2_2" target="P_2_2">
+			</arc>
+			<arc id="id62" source="cY_2" target="T_4_5_2_2">
+			</arc>
+			<arc id="id63" source="L_4" target="T_4_5_2_2">
+			</arc>
+			<arc id="id64" source="R_5" target="T_4_5_2_2">
+			</arc>
+			<arc id="id65" source="cX_2" target="T_4_5_2_2">
+			</arc>
+			<arc id="id66" source="T_4_7_3_3" target="P_3_3">
+			</arc>
+			<arc id="id67" source="cY_3" target="T_4_7_3_3">
+			</arc>
+			<arc id="id68" source="L_4" target="T_4_7_3_3">
+			</arc>
+			<arc id="id69" source="R_7" target="T_4_7_3_3">
+			</arc>
+			<arc id="id70" source="cX_3" target="T_4_7_3_3">
+			</arc>
+			<arc id="id71" source="T_4_9_4_4" target="P_4_4">
+			</arc>
+			<arc id="id72" source="cY_4" target="T_4_9_4_4">
+			</arc>
+			<arc id="id73" source="L_4" target="T_4_9_4_4">
+			</arc>
+			<arc id="id74" source="R_9" target="T_4_9_4_4">
+			</arc>
+			<arc id="id75" source="cX_4" target="T_4_9_4_4">
+			</arc>
+			<arc id="id76" source="T_5_2_1_0" target="P_1_0">
+			</arc>
+			<arc id="id77" source="cY_0" target="T_5_2_1_0">
+			</arc>
+			<arc id="id78" source="L_5" target="T_5_2_1_0">
+			</arc>
+			<arc id="id79" source="R_2" target="T_5_2_1_0">
+			</arc>
+			<arc id="id80" source="cX_1" target="T_5_2_1_0">
+			</arc>
+			<arc id="id81" source="T_5_4_2_1" target="P_2_1">
+			</arc>
+			<arc id="id82" source="cY_1" target="T_5_4_2_1">
+			</arc>
+			<arc id="id83" source="L_5" target="T_5_4_2_1">
+			</arc>
+			<arc id="id84" source="R_4" target="T_5_4_2_1">
+			</arc>
+			<arc id="id85" source="cX_2" target="T_5_4_2_1">
+			</arc>
+			<arc id="id86" source="T_5_6_3_2" target="P_3_2">
+			</arc>
+			<arc id="id87" source="cY_2" target="T_5_6_3_2">
+			</arc>
+			<arc id="id88" source="L_5" target="T_5_6_3_2">
+			</arc>
+			<arc id="id89" source="R_6" target="T_5_6_3_2">
+			</arc>
+			<arc id="id90" source="cX_3" target="T_5_6_3_2">
+			</arc>
+			<arc id="id91" source="T_5_8_4_3" target="P_4_3">
+			</arc>
+			<arc id="id92" source="cY_3" target="T_5_8_4_3">
+			</arc>
+			<arc id="id93" source="L_5" target="T_5_8_4_3">
+			</arc>
+			<arc id="id94" source="R_8" target="T_5_8_4_3">
+			</arc>
+			<arc id="id95" source="cX_4" target="T_5_8_4_3">
+			</arc>
+			<arc id="id96" source="T_6_3_2_0" target="P_2_0">
+			</arc>
+			<arc id="id97" source="cY_0" target="T_6_3_2_0">
+			</arc>
+			<arc id="id98" source="L_6" target="T_6_3_2_0">
+			</arc>
+			<arc id="id99" source="R_3" target="T_6_3_2_0">
+			</arc>
+			<arc id="id100" source="cX_2" target="T_6_3_2_0">
+			</arc>
+			<arc id="id101" source="T_6_5_3_1" target="P_3_1">
+			</arc>
+			<arc id="id102" source="cY_1" target="T_6_5_3_1">
+			</arc>
+			<arc id="id103" source="L_6" target="T_6_5_3_1">
+			</arc>
+			<arc id="id104" source="R_5" target="T_6_5_3_1">
+			</arc>
+			<arc id="id105" source="cX_3" target="T_6_5_3_1">
+			</arc>
+			<arc id="id106" source="T_6_7_4_2" target="P_4_2">
+			</arc>
+			<arc id="id107" source="cY_2" target="T_6_7_4_2">
+			</arc>
+			<arc id="id108" source="L_6" target="T_6_7_4_2">
+			</arc>
+			<arc id="id109" source="R_7" target="T_6_7_4_2">
+			</arc>
+			<arc id="id110" source="cX_4" target="T_6_7_4_2">
+			</arc>
+			<arc id="id111" source="T_7_4_3_0" target="P_3_0">
+			</arc>
+			<arc id="id112" source="cY_0" target="T_7_4_3_0">
+			</arc>
+			<arc id="id113" source="L_7" target="T_7_4_3_0">
+			</arc>
+			<arc id="id114" source="R_4" target="T_7_4_3_0">
+			</arc>
+			<arc id="id115" source="cX_3" target="T_7_4_3_0">
+			</arc>
+			<arc id="id116" source="T_7_6_4_1" target="P_4_1">
+			</arc>
+			<arc id="id117" source="cY_1" target="T_7_6_4_1">
+			</arc>
+			<arc id="id118" source="L_7" target="T_7_6_4_1">
+			</arc>
+			<arc id="id119" source="R_6" target="T_7_6_4_1">
+			</arc>
+			<arc id="id120" source="cX_4" target="T_7_6_4_1">
+			</arc>
+			<arc id="id121" source="T_8_5_4_0" target="P_4_0">
+			</arc>
+			<arc id="id122" source="cY_0" target="T_8_5_4_0">
+			</arc>
+			<arc id="id123" source="L_8" target="T_8_5_4_0">
+			</arc>
+			<arc id="id124" source="R_5" target="T_8_5_4_0">
+			</arc>
+			<arc id="id125" source="cX_4" target="T_8_5_4_0">
+			</arc>
+			<toolspecific tool="nupn" version="1.1">
+				<size places="55" transitions="25" arcs="125"/>
+				<structure units="32" root="u0" safe="true">
+					<unit id="u0">
+						<places/>
+						<subunits>u1 u2 u3 u4 u5 u6 u7 u8
+						 u9 u10 u11 u12 u13 u14 u15 u16 u17
+						 u18 u19 u20 u21 u22 u23 u24 u25
+						 u26 u27 u28 u29 u30 u31</subunits>
+					</unit>
+					<unit id="u1">
+						<places>P_0_4 P_1_3 P_2_2 P_3_1
+						 P_4_0 R_5</places>
+						<subunits/>
+					</unit>
+					<unit id="u2">
+						<places>P_1_4 P_2_3 P_3_2 P_4_1
+						 R_6</places>
+						<subunits/>
+					</unit>
+					<unit id="u3">
+						<places>P_0_3 P_1_2 P_2_1 P_3_0
+						 R_4</places>
+						<subunits/>
+					</unit>
+					<unit id="u4">
+						<places>P_0_0 P_1_1 P_3_3 P_4_4
+						 L_4</places>
+						<subunits/>
+					</unit>
+					<unit id="u5">
+						<places>P_0_2 P_2_0 P_2_4
+						 P_4_2</places>
+						<subunits/>
+					</unit>
+					<unit id="u6">
+						<places>P_3_4 P_4_3 R_8</places>
+						<subunits/>
+					</unit>
+					<unit id="u7">
+						<places>P_0_1 P_1_0 R_2</places>
+						<subunits/>
+					</unit>
+					<unit id="u8">
+						<places>cX_0</places>
+						<subunits/>
+					</unit>
+					<unit id="u9">
+						<places>cX_1</places>
+						<subunits/>
+					</unit>
+					<unit id="u10">
+						<places>cX_2</places>
+						<subunits/>
+					</unit>
+					<unit id="u11">
+						<places>cX_3</places>
+						<subunits/>
+					</unit>
+					<unit id="u12">
+						<places>cX_4</places>
+						<subunits/>
+					</unit>
+					<unit id="u13">
+						<places>cY_0</places>
+						<subunits/>
+					</unit>
+					<unit id="u14">
+						<places>cY_1</places>
+						<subunits/>
+					</unit>
+					<unit id="u15">
+						<places>cY_2</places>
+						<subunits/>
+					</unit>
+					<unit id="u16">
+						<places>cY_3</places>
+						<subunits/>
+					</unit>
+					<unit id="u17">
+						<places>cY_4</places>
+						<subunits/>
+					</unit>
+					<unit id="u18">
+						<places>L_0</places>
+						<subunits/>
+					</unit>
+					<unit id="u19">
+						<places>L_1</places>
+						<subunits/>
+					</unit>
+					<unit id="u20">
+						<places>L_2</places>
+						<subunits/>
+					</unit>
+					<unit id="u21">
+						<places>L_3</places>
+						<subunits/>
+					</unit>
+					<unit id="u22">
+						<places>L_5</places>
+						<subunits/>
+					</unit>
+					<unit id="u23">
+						<places>L_6</places>
+						<subunits/>
+					</unit>
+					<unit id="u24">
+						<places>L_7</places>
+						<subunits/>
+					</unit>
+					<unit id="u25">
+						<places>L_8</places>
+						<subunits/>
+					</unit>
+					<unit id="u26">
+						<places>L_9</places>
+						<subunits/>
+					</unit>
+					<unit id="u27">
+						<places>R_0</places>
+						<subunits/>
+					</unit>
+					<unit id="u28">
+						<places>R_1</places>
+						<subunits/>
+					</unit>
+					<unit id="u29">
+						<places>R_3</places>
+						<subunits/>
+					</unit>
+					<unit id="u30">
+						<places>R_7</places>
+						<subunits/>
+					</unit>
+					<unit id="u31">
+						<places>R_9</places>
+						<subunits/>
+					</unit>
+				</structure>
+			</toolspecific>
+		</page>
+	</net>
+</pnml>

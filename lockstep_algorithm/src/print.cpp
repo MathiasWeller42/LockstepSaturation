@@ -87,6 +87,12 @@ void printBddAsString(const int nodes, const sylvan::Bdd &bdd) {
     std::cout << std::endl << std::endl;
 }
 
+void printBddListAsString(const int nodes, const std::list<sylvan::Bdd> bdds) {
+  for(sylvan::Bdd bdd: bdds) {
+    printBddAsString(nodes, bdd);
+  }
+}
+
 //This puts the output string in a single output which then can be printed
 void printBigBddAsString(const int nodes, const sylvan::Bdd &bdd) {
   std::list<std::string> result = __printBddAsString("", bdd);

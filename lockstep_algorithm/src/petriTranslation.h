@@ -31,8 +31,7 @@ struct Transition {
   Transition(std::string idString) : id(idString), sources({}), targets({}) {}
   Transition() {}
 
-  std::string toString()
-  {
+  std::string toString() {
     int sourceNo = sources.size();
     int targetNo = targets.size();
     std::string sourceString = "Sources: \n";

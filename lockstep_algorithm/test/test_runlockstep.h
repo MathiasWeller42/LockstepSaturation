@@ -3,6 +3,7 @@
 #include <iostream>
 #include <list>
 #include <deque>
+#include <functional>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
@@ -12,22 +13,24 @@
 #include "../src/lockstep.h"
 #include "../src/bdd_utilities.h"
 #include "../src/petriTranslation.h"
+#include "../src/lockstep_test.h"
 
-bool testNoGraph(bool saturation, bool iterative);
-bool testOneNodeGraph(bool saturation, bool iterative);
-bool testOneNodeGraphSelfLoop(bool saturation, bool iterative);
-bool testTwoNodeGraphOneSCC(bool saturation, bool iterative);
-bool testTwoNodeGraphTwoSCCs(bool saturation, bool iterative);
-bool testTwoNodeGraphTwoRelations(bool saturation, bool iterative);
-bool testNonConnectedGraph(bool saturation, bool iterative);
-bool testfourNodesOneRelation(bool saturation, bool iterative);
-bool testGraphExample1oneRel(bool saturation, bool iterative);
-bool testGraphExample1multRel(bool saturation, bool iterative);
-bool testGraphExample2oneRel(bool saturation, bool iterative);
-bool testGraphExample2multRel(bool saturation, bool iterative);
-bool testGraphExample3oneRel(bool saturation, bool iterative);
-bool testGraphExample3multRel(bool saturation, bool iterative);
+bool testNoGraph(algorithmType algorithm);
+bool testOneNodeGraph(algorithmType algorithm);
+bool testOneNodeGraphSelfLoop(algorithmType algorithm);
+bool testTwoNodeGraphOneSCC(algorithmType algorithm);
+bool testTwoNodeGraphTwoSCCs(algorithmType algorithm);
+bool testTwoNodeGraphTwoRelations(algorithmType algorithm);
+bool testNonConnectedGraph(algorithmType algorithm);
+bool testfourNodesOneRelation(algorithmType algorithm);
+bool testGraphExample1oneRel(algorithmType algorithm);
+bool testGraphExample1multRel(algorithmType algorithm);
+bool testGraphExample2oneRel(algorithmType algorithm);
+bool testGraphExample2multRel(algorithmType algorithm);
+bool testGraphExample3oneRel(algorithmType algorithm);
+bool testGraphExample3multRel(algorithmType algorithm);
+int runWithAllAlgorithmTypes(std::string testFunctionString, std::function<bool(algorithmType)> testFunction);
 
-bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> expectedSCCs, bool saturation, bool iterative);
+bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> expectedSCCs, algorithmType algorithm);
 
 #endif //TEST_RUNLOCKSTEP_H

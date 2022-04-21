@@ -10,9 +10,30 @@ enum algorithmType
   lockstepLitRelUnion,
   xbSat,
   xbRelUnion,
+  xbLitRelUnion
 };
 
-void experiment(std::list<std::string> pathStrings, int maxPreprocess, int minPreprocess, std::list<algorithmType> runTypes);
+inline const std::string algoToString(algorithmType runType) {
+  switch (runType)
+  {
+    case lockstepSat:
+      return "Lockstep saturation";
+    case lockstepRelUnion:
+      return "Lockstep relation union";
+    case lockstepLitRelUnion:
+      return "Lockstep literal relation union";
+    case xbSat:
+      return "Xie-Beerel saturation";
+    case xbRelUnion:
+      return "Xie-Beerel relation union";
+    case xbLitRelUnion:
+      return "Xie-Beerel literal relation union";
+    default:
+      return "[Unknown Algorithm type]";
+  }
+}
+
+void experiment(std::list<std::string> pathStrings, int maxPreprocess, int minPreprocess, bool useInitialMarking, std::list<algorithmType> runTypes);
 
 Graph graphPreprocessing(const Graph &graph, int pruningSteps);
 Graph graphPreprocessingFixedPoint(const Graph &graph);

@@ -29,7 +29,7 @@ std::list<int> getVars(const sylvan::Bdd &bdd) {
   return varList;
 }
 
-bool hasOddVars(sylvan::Bdd bdd) {
+bool hasOddVars(const sylvan::Bdd &bdd) {
   std::list<int> varList = getVars(bdd);
   for(int i : varList) {
     if(i % 2 == 1) {
@@ -38,7 +38,6 @@ bool hasOddVars(sylvan::Bdd bdd) {
   }
   return false;
 }
-
 
 //Returns each of the true paths in the BDD as a list of pairs of the form {{x0,0},{x2,1},...,}
 //TODO: Har vi brug for den? Vi bruger den ingen steder

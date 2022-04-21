@@ -25,16 +25,16 @@ inline sylvan::Bdd ithvar(int label)
 inline sylvan::Bdd nithvar(int label)
 { return ~sylvan::Bdd::bddVar(label); }
 
-inline sylvan::Bdd unionBdd(sylvan::Bdd lhs, sylvan::Bdd rhs)
+inline sylvan::Bdd unionBdd(const sylvan::Bdd &lhs, const sylvan::Bdd &rhs)
 { return lhs.Or(rhs); }
 
-inline sylvan::Bdd intersectBdd(sylvan::Bdd lhs, sylvan::Bdd rhs)
+inline sylvan::Bdd intersectBdd(const sylvan::Bdd &lhs, const sylvan::Bdd &rhs)
 { return lhs.And(rhs); }
 
-inline sylvan::Bdd differenceBdd(sylvan::Bdd lhs, sylvan::Bdd rhs)
+inline sylvan::Bdd differenceBdd(const sylvan::Bdd &lhs, const sylvan::Bdd &rhs)
 { return lhs.And(!rhs); }
 
-inline sylvan::Bdd pickAssignment(sylvan::Bdd bdd, sylvan::BddSet cube) {
+inline sylvan::Bdd pickAssignment(const sylvan::Bdd &bdd, const sylvan::BddSet &cube) {
   std::vector<bool> realPath = bdd.PickOneCube(cube);
   std::reverse(realPath.begin(), realPath.end());
   std::string bitString = "";
@@ -48,7 +48,7 @@ inline sylvan::Bdd pickAssignment(sylvan::Bdd bdd, sylvan::BddSet cube) {
   return makeNode(bitString);
 }
 
-bool hasOddVars(sylvan::Bdd bdd);
+bool hasOddVars(const sylvan::Bdd &bdd);
 std::list<int> getVars(const sylvan::Bdd &bdd);
 
 #endif //BDD_UTILITIES_H

@@ -31,8 +31,9 @@ int main() {
   std::list<std::string> pathStrings = getPathStrings();
   int maxPreprocess = -1;
   int minPreprocess = 0;
-  std::list<algorithmType> runTypes = {xbSat, lockstepSat, xbRelUnion, lockstepRelUnion, lockstepLitRelUnion};
-  experiment(pathStrings, maxPreprocess, minPreprocess, runTypes);
+  bool useInitialMarking = false;
+  std::list<algorithmType> runTypes = {xbSat, /*lockstepSat, xbRelUnion, lockstepRelUnion,*/ xbLitRelUnion, lockstepLitRelUnion};
+  experiment(pathStrings, maxPreprocess, minPreprocess, useInitialMarking, runTypes);
 
   std::cout << "Goodbye :)" << std::endl;
 

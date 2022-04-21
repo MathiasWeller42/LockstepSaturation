@@ -25,36 +25,114 @@
 //These pathstrings were sorted with HumanSort *TM*
 std::list<std::string> getPathStrings() {
   std::list<std::string> resultList = {};
-
   resultList.push_back("ShieldRVt/PT/shield_t_rv_001_a_11place.pnml");                        //11
-  resultList.push_back("GPUForwardProgress/PT/userdef_15place.pnml");                         //15
-  resultList.push_back("ShieldRVs/PT/shield_s_rv_001_a_17place.pnml");                        //17
+/*  resultList.push_back("ShieldRVs/PT/shield_s_rv_001_a_17place.pnml");                        //17
   resultList.push_back("ShieldRVt/PT/shield_t_rv_002_a_19place.pnml");                        //19
-  /*
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_a_22place.pnml");                      //22
   resultList.push_back("GPUForwardProgress/PT/gpufp_04_a_24place.pnml");                      //24
   resultList.push_back("ShieldRVt/PT/shield_t_rv_003_a_27place.pnml");                        //27
-  resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-00002by00001_27place.pnml"); //27
-  resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-00005by00002_27place.pnml"); //27
-  resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-00080by00040_27place.pnml"); //27
-  resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-01280by00640_27place.pnml"); //27
-  resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-10240by05120_27place.pnml"); //27
-  resultList.push_back("CloudOpsManagement/PT/CloudOpsManagement-20480by10240_27place.pnml"); //27
-
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_001_a_28place.pnml");                      //28
   resultList.push_back("ShieldRVs/PT/shield_s_rv_002_a_31place.pnml");                        //31
   resultList.push_back("SimpleLoadBal/PT/simple_lbs-2_32place.pnml");                         //32
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_001_a_34place.pnml");                      //34
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_004_a_35place.pnml");                        //35
+  resultList.push_back("SmartHome/PT/smhome_01_38place.pnml");                                //38
+  resultList.push_back("GPUForwardProgress/PT/gpufp_08_a_40place.pnml");                      //40
+  //resultList.push_back("Egfr/PT/Egfr-020-1-0_40place.pnml");                                  //40
+  resultList.push_back("SmartHome/PT/smhome_02_41place.pnml");                                //41
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_002_a_41place.pnml");                      //41
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_005_a_43place.pnml");                        //43
   resultList.push_back("ShieldRVs/PT/shield_s_rv_001_b_43place.pnml");                        //43
+  resultList.push_back("SmartHome/PT/smhome_03_45place.pnml");                                //45
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_003_a_45place.pnml");                        //45
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_002_a_53place.pnml");                      //53
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_001_b_53place.pnml");                        //53
+  resultList.push_back("NQueens/PT/NQueens-PT-05_55place.pnml");                              //55
+  resultList.push_back("GPUForwardProgress/PT/gpufp_12_a_56place.pnml");                      //56
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_004_a_59place.pnml");                        //59
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_a_60place.pnml");                      //60
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79*/
 
+  resultList.push_back("DiscoveryGPU/PT/discovery_06_a_63place.pnml");                        //63
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_002_a_65place.pnml");                      //65
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_001_b_71place.pnml");                      //71
+  resultList.push_back("GPUForwardProgress/PT/gpufp_16_a_72place.pnml");                      //72
+  resultList.push_back("DiscoveryGPU/PT/discovery_07_a_73place.pnml");                        //73
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_b_73place.pnml");                      //73
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_005_a_73place.pnml");                        //73
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_003_a_78place.pnml");                      //78
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_001_b_81place.pnml");                      //81
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_010_a_83place.pnml");                        //83
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_002_b_83place.pnml");                        //83
+  resultList.push_back("DiscoveryGPU/PT/discovery_08_a_83place.pnml");                        //83
+  resultList.push_back("GPUForwardProgress/PT/gpufp_20_a_88place.pnml");                      //88
+  resultList.push_back("DiscoveryGPU/PT/discovery_09_a_93place.pnml");                        //93
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_003_a_96place.pnml");                      //96
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_98place.pnml");                      //98
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_002_b_102place.pnml");                       //102
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_004_a_103place.pnml");                     //103
+  resultList.push_back("DiscoveryGPU/PT/discovery_10_a_103place.pnml");                       //103
+  resultList.push_back("GPUForwardProgress/PT/gpufp_24_a_104place.pnml");                     //104
+  resultList.push_back("MAPKbis/PT/MAPKbis-53-1-0_106place.pnml");                            //106
+  resultList.push_back("MAPKbis/PT/MAPKbis-53-2-0_106place.pnml");                            //106
+  resultList.push_back("GPUForwardProgress/PT/gpufp_04_b_112place.pnml");                     //112
+  resultList.push_back("NQueens/PT/NQueens-PT-08_112place.pnml");                             //112
+  resultList.push_back("DiscoveryGPU/PT/discovery_11_a_113place.pnml");                       //113
+  resultList.push_back("HealthRecord/PT/hrec_01_117place.pnml");                              //117
+  resultList.push_back("HealthRecord/PT/hrec_02_119place.pnml");                              //119
+  resultList.push_back("GPUForwardProgress/PT/gpufp_28_a_120place.pnml");                     //120
+  resultList.push_back("HealthRecord/PT/hrec_03_121place.pnml");                              //121
+  resultList.push_back("HealthRecord/PT/hrec_04_123place.pnml");                              //123
+  resultList.push_back("DiscoveryGPU/PT/discovery_12_a_123place.pnml");                       //123
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_003_b_123place.pnml");                       //123
+  resultList.push_back("HealthRecord/PT/hrec_05_125place.pnml");                              //125
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_004_a_127place.pnml");                     //127
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_005_a_128place.pnml");                     //128
+  resultList.push_back("DiscoveryGPU/PT/discovery_13_a_133place.pnml");                       //133
+  resultList.push_back("GPUForwardProgress/PT/gpufp_32_a_136place.pnml");                     //136
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_002_b_139place.pnml");                     //139
+  resultList.push_back("SmartHome/PT/smhome_04_139place.pnml");                               //139
+  resultList.push_back("DiscoveryGPU/PT/discovery_14_a_143place.pnml");                       //143
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_002_b_143place.pnml");                     //143
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_010_a_143place.pnml");                       //143
+  resultList.push_back("GPUForwardProgress/PT/gpufp_36_a_152place.pnml");                     //152
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_003_b_153place.pnml");                       //153
+  resultList.push_back("DiscoveryGPU/PT/discovery_15_a_153place.pnml");                       //153
+  resultList.push_back("HealthRecord/PT/hrec_06_154place.pnml");                              //154
+  resultList.push_back("HealthRecord/PT/hrec_07_155place.pnml");                              //155
+  resultList.push_back("HealthRecord/PT/hrec_08_156place.pnml");                              //156
+  resultList.push_back("HealthRecord/PT/hrec_09_157place.pnml");                              //157
+  resultList.push_back("HealthRecord/PT/hrec_10_158place.pnml");                              //158
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_158place.pnml");                     //158
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_005_a_158place.pnml");                     //158
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_002_b_159place.pnml");                     //159
+  resultList.push_back("HealthRecord/PT/hrec_11_159place.pnml");                              //159
+  resultList.push_back("HealthRecord/PT/hrec_12_160place.pnml");                              //160
+  resultList.push_back("NQueens/PT/NQueens-PT-10_160place.pnml");                             //160
+  resultList.push_back("HealthRecord/PT/hrec_13_161place.pnml");                              //161
+  resultList.push_back("HealthRecord/PT/hrec_14_162place.pnml");                              //162
+  resultList.push_back("HealthRecord/PT/hrec_15_163place.pnml");                              //163
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_020_a_163place.pnml");                       //163
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_004_b_163place.pnml");                       //163
+  resultList.push_back("NoC3x3/PT/noc3x3_1_a_165place.pnml");                                 //165
+  resultList.push_back("GPUForwardProgress/PT/gpufp_40_a_168place.pnml");                     //168
+  resultList.push_back("DiscoveryGPU/PT/discovery_06_b_184place.pnml");                       //184
+  resultList.push_back("GPUForwardProgress/PT/gpufp_08_b_188place.pnml");                     //188
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_010_a_193place.pnml");                     //193
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_004_b_203place.pnml");                       //203
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_005_b_203place.pnml");                       //203
+  //resultList.push_back("Egfr/PT/Egfr-104-2-0_208place.pnml");                                 //208
+  //resultList.push_back("Egfr/PT/Egfr-104-2-1_208place.pnml");                                 //208
+  resultList.push_back("DiscoveryGPU/PT/discovery_07_b_212place.pnml");                       //212
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_b_213place.pnml");                     //213
+*/
   return resultList;
 }
 
 //Main experimentation function
 //Runs each algorithm on a list of graphs from PNML files with varying preprocessing amounts
 //Prints the results and writes them to a csv-file
-void experiment(std::list<std::string> pathStrings, int maxPreprocess, int minPreprocess, std::list<algorithmType> runTypes) {
+void experiment(std::list<std::string> pathStrings, int maxPreprocess, int minPreprocess, bool useInitialMarking, std::list<algorithmType> runTypes) {
   //The amount of files and algorithms to run experiments on - is used to init the size of the csv-file rows
   int noFiles = pathStrings.size();
   int noAlgorithms = runTypes.size();
@@ -67,19 +145,21 @@ void experiment(std::list<std::string> pathStrings, int maxPreprocess, int minPr
   int csvRow = 0;
   for(std::string pathString : pathStrings) {
     std::cout << "###### Running experiment on file at path: " << pathString << std::endl;
-    bool useInitialMarking = false;
     Graph graph = PNMLtoGraph(pathString, useInitialMarking);
 
     std::string noOfPlaces = std::to_string(graph.cube.size());
     std::string noOfRelations = std::to_string(graph.relations.size());
     /*TODO: fix below!*/
-    grid[csvRow+1].insert(grid[csvRow+1].end(), {"Saturation", noOfPlaces, noOfRelations});
-    grid[csvRow+2].insert(grid[csvRow+2].end(), {"Relation Union", noOfPlaces, noOfRelations});
-    grid[csvRow+3].insert(grid[csvRow+3].end(), {"Literal relation union", noOfPlaces, noOfRelations});
+
+    int i = 1;
+    for(algorithmType algo : runTypes) {
+      grid[csvRow+i].insert(grid[csvRow+i].end(), {algoToString(algo), noOfPlaces, noOfRelations});
+      i++;
+    }
 
     grid = testAndPrintWithMax(graph, maxPreprocess, minPreprocess, runTypes, grid, csvFileName, csvRow);
     //Move three rows after an experiment since we have three methods to test on
-    csvRow = csvRow+noAlgorithms+1;
+    csvRow = csvRow+noAlgorithms+2;
   }
   writeToCSV(csvFileName, grid);
 }
@@ -187,13 +267,16 @@ bool sccUnionIsWholeBdd(const std::list<sylvan::Bdd> sccList, const sylvan::Bdd 
 
 bool sccListCorrectness(const std::list<sylvan::Bdd> sccList1, const std::list<sylvan::Bdd> sccList2) {
   if(sccList1.size() != sccList2.size()) {
+    std::cout << "the size of the scc lists were different" << std::endl;
     return false;
   }
   if(containsDuplicateSccs(sccList1) || containsDuplicateSccs(sccList2)) {
+    std::cout << "One of the lists contained duplicate sccs" << std::endl;
     return false;
   }
   for(sylvan::Bdd scc : sccList1) {
     if(!sccListContains(scc, sccList2)) {
+      std::cout << "The lists didn't contain the same scc" << std::endl;
       return false;
     }
   }
@@ -272,44 +355,41 @@ std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs, int 
 
   std::vector<std::vector<std::string>> grid(noOfRows, std::vector<std::string>(0));
 
-  for(int i = 0; i < noOfRows; i = i+5) {
+  for(int i = 0; i < noOfRows; i = i+noOfAlgorithms+2) {
     grid[i].insert(grid[i].end(), {"Algorithm run", "Places", "Relations"});
   }
-  std::cout << "No of rows in new grid:" << std::to_string(noOfRows) << std::endl;
   return grid;
 }
 
-std::pair<std::list<sylvan::Bdd>, float> timeRun(const Graph &graph, algorithmType runType) {
-  auto start = std::chrono::high_resolution_clock::now();
+std::pair<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>> timeRun(const Graph &graph, algorithmType runType) {
   std::list<sylvan::Bdd> sccList;
-  std::string runTypeStr = "";
-
-  if(runType == lockstepSat) {
-    sccList = lockstepSaturation(graph);
-    runTypeStr = "lockstep saturation";
-  }
-  else if(runType == lockstepRelUnion) {
-    sccList = lockstepRelationUnion(graph);
-    runTypeStr = "lockstep relation union";
-  }
-  else if(runType == lockstepLitRelUnion) {
-    sccList = lockstepLiteralRelationUnion(graph);
-    runTypeStr = "lockstep literal relation union";
-  }
-  else if(runType == xbSat) {
-    sccList = xieBeerelSaturation(graph);
-    runTypeStr = "Xie-Beerel saturation";
-  }
-  else if(runType == xbRelUnion) {
-    sccList = xieBeerelRelationUnion(graph);
-    runTypeStr = "Xie-Beerel relation union";
+  auto start = std::chrono::high_resolution_clock::now();
+  switch(runType) {
+    case lockstepSat:
+      sccList = lockstepSaturation(graph);
+      break;
+    case lockstepRelUnion:
+      sccList = lockstepRelationUnion(graph);
+      break;
+    case lockstepLitRelUnion:
+      sccList = lockstepLiteralRelationUnion(graph);
+      break;
+    case xbSat:
+      sccList = xieBeerelSaturation(graph);
+      break;
+    case xbRelUnion:
+      sccList = xieBeerelRelationUnion(graph);
+      break;
+    case xbLitRelUnion:
+      sccList = xieBeerelLiteralRelationUnion(graph);
+      break;
   }
 
   auto stop = std::chrono::high_resolution_clock::now();
-  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-  std::cout << "Time elapsed (" << runTypeStr << "): " << duration.count() << " milliseconds" << std::endl;
+  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+  std::cout << "Time elapsed (" << algoToString(runType) << "): " << duration.count() << " milliseconds" << std::endl;
   std::cout << "Found " << sccList.size() << " SCCs" << std::endl << std::endl;
-  std::pair<std::list<sylvan::Bdd>, float> result = {sccList, (float) duration.count()};
+  std::pair<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>> result = {sccList, duration};
   return result;
 }
 
@@ -317,13 +397,14 @@ std::pair<std::list<sylvan::Bdd>, float> timeRun(const Graph &graph, algorithmTy
 std::vector<std::vector<std::string>> timeAll(const Graph &graph, std::list<algorithmType> runTypes, std::vector<std::vector<std::string>> grid, int row) {
   int i = 1;
   for(algorithmType runType : runTypes) {
-    std::pair<std::list<sylvan::Bdd>, float> runResults = timeRun(graph, runType);
+    std::cout << "Running on algorithm: " << algoToString(runType) << std::endl;
+    std::pair<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>> runResults = timeRun(graph, runType);
     std::list<sylvan::Bdd> sccList = runResults.first;
-    float duration = runResults.second;
+    std::chrono::duration<long, std::milli> duration = runResults.second;
 
-    std::string annoyingFloatString =  std::to_string((float)sccList.size() / duration);
+    std::string annoyingFloatString =  std::to_string((float)sccList.size() / duration.count());
     std::replace(annoyingFloatString.begin(), annoyingFloatString.end(), '.', ',');
-    grid[row+i].insert(grid[row+i].end(), {std::to_string(sccList.size()), std::to_string(duration), annoyingFloatString});
+    grid[row+i].insert(grid[row+i].end(), {std::to_string(sccList.size()), std::to_string(duration.count()), annoyingFloatString});
 
     i++;
   }

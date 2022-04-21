@@ -184,9 +184,11 @@ Graph PNMLtoGraph(std::string fileString, bool useInitialMarking) {
       int startpos = myText.find("id=\"");
       int endpos = myText.find("\">");
       id = myText.substr(startpos + 4, endpos-(startpos+4));
+
       if(myText.find("initialMarking") != std::string::npos) {
-        initialMarking.insert(placeIndex);
+      initialMarking.insert(placeIndex);
       }
+
       placeMap[id] = placeIndex;
       placeIndex = placeIndex+2;
     }
@@ -273,6 +275,7 @@ Graph PNMLtoGraph(std::string fileString, bool useInitialMarking) {
   int numPlaces = placeMap.size();
   std::cout << "Number of places: " << std::to_string(numPlaces) << std::endl;
   sylvan::BddSet cube = makeCube(numPlaces);
+  std::cout << "Number of relations: " << relations.size() << std::endl;
 
   sylvan::Bdd initialBdd = leaf_true();
   for(int i = 0; i < 2*numPlaces; i=i+2) {
@@ -285,13 +288,13 @@ Graph PNMLtoGraph(std::string fileString, bool useInitialMarking) {
   pnmlGraph.cube = cube;
 
   if(useInitialMarking) {
+    std::cout << "Using reachability from initial marking to limit state space" << std::endl;
     pnmlGraph.nodes = leaf_true();
     pnmlGraph.nodes = reachabilityForwardSaturation(pnmlGraph, initialBdd);
   } else {
+    std::cout << "Using the entire state space (ignoring initial marking)" << std::endl;
     pnmlGraph.nodes = leaf_true();
   }
 
-  std::cout << "Number of relations: " << pnmlGraph.relations.size() << std::endl;
-  //std::cout << "Size of graph: " << countNodes(pnmlGraph.cube.size(), pnmlGraph.nodes) << std::endl << std::endl;
   return pnmlGraph;
 }

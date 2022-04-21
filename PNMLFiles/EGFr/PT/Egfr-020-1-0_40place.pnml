@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+<net id="EGFr-PT-02010" type="http://www.pnml.org/version-2009/grammar/ptnet">
+<page id="page0"><name><text>DefaultPage</text></name><place id="AKT1_0"><name><text>AKT1_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="AKT1_equals_1"><name><text>AKT1_equals_1</text></name></place>
+<place id="CDK2_equals_0"><name><text>CDK2_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="CDK2_equals_1"><name><text>CDK2_equals_1</text></name></place>
+<place id="CDK4_equals_0"><name><text>CDK4_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="CDK4_equals_1"><name><text>CDK4_equals_1</text></name></place>
+<place id="CDK6_equals_0"><name><text>CDK6_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="CDK6_equals_1"><name><text>CDK6_equals_1</text></name></place>
+<place id="CyclinD1_equals_0"><name><text>CyclinD1_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="CyclinD1_equals_1"><name><text>CyclinD1_equals_1</text></name></place>
+<place id="CyclinE1_equals_0"><name><text>CyclinE1_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="CyclinE1_equals_1"><name><text>CyclinE1_equals_1</text></name></place>
+<place id="EGF_equals_0"><name><text>EGF_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="EGF_equals_1"><name><text>EGF_equals_1</text></name></place>
+<place id="ERBB1_equals_0"><name><text>ERBB1_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="ERBB1_equals_1"><name><text>ERBB1_equals_1</text></name></place>
+<place id="ERBB1_2_equals_0"><name><text>ERBB1_2_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="ERBB1_2_equals_1"><name><text>ERBB1_2_equals_1</text></name></place>
+<place id="ERBB1_3_equals_0"><name><text>ERBB1_3_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="ERBB1_3_equals_1"><name><text>ERBB1_3_equals_1</text></name></place>
+<place id="ERBB2_equals_0"><name><text>ERBB2_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="ERBB2_equals_1"><name><text>ERBB2_equals_1</text></name></place>
+<place id="ERBB2_3_equals_0"><name><text>ERBB2_3_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="ERBB2_3_equals_1"><name><text>ERBB2_3_equals_1</text></name></place>
+<place id="ERBB3_equals_0"><name><text>ERBB3_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="ERBB3_equals_1"><name><text>ERBB3_equals_1</text></name></place>
+<place id="ERalpha_equals_0"><name><text>ERalpha_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="ERalpha_equals_1"><name><text>ERalpha_equals_1</text></name></place>
+<place id="IGF1R_equals_0"><name><text>IGF1R_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="IGF1R_equals_1"><name><text>IGF1R_equals_1</text></name></place>
+<place id="MEK1_equals_0"><name><text>MEK1_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="MEK1_equals_1"><name><text>MEK1_equals_1</text></name></place>
+<place id="MYC_equals_0"><name><text>MYC_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="MYC_equals_1"><name><text>MYC_equals_1</text></name></place>
+<place id="p21_equals_0"><name><text>p21_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="p21_equals_1"><name><text>p21_equals_1</text></name></place>
+<place id="p27_equals_0"><name><text>p27_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="p27_equals_1"><name><text>p27_equals_1</text></name></place>
+<place id="pRB1_equals_0"><name><text>pRB1_equals_0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="pRB1_equals_1"><name><text>pRB1_equals_1</text></name></place>
+<transition id="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_equals_1"><name><text>AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_equals_1</text></name></transition>
+<transition id="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_2_equals_1"><name><text>AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_2_equals_1</text></name></transition>
+<transition id="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_3_equals_1"><name><text>AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_3_equals_1</text></name></transition>
+<transition id="AKT1_equals_0_to_AKT1_equals_1_when_ERBB2_3_equals_1"><name><text>AKT1_equals_0_to_AKT1_equals_1_when_ERBB2_3_equals_1</text></name></transition>
+<transition id="AKT1_equals_0_to_AKT1_equals_1_when_IGF1R_equals_1"><name><text>AKT1_equals_0_to_AKT1_equals_1_when_IGF1R_equals_1</text></name></transition>
+<transition id="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"><name><text>AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0</text></name></transition>
+<transition id="CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0"><name><text>CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0</text></name></transition>
+<transition id="CDK2_equals_1_to_CDK2_equals_0_when_CyclinE1_equals_0"><name><text>CDK2_equals_1_to_CDK2_equals_0_when_CyclinE1_equals_0</text></name></transition>
+<transition id="CDK2_equals_1_to_CDK2_equals_0_when_p21_equals_1"><name><text>CDK2_equals_1_to_CDK2_equals_0_when_p21_equals_1</text></name></transition>
+<transition id="CDK2_equals_1_to_CDK2_equals_0_when_p27_equals_1"><name><text>CDK2_equals_1_to_CDK2_equals_0_when_p27_equals_1</text></name></transition>
+<transition id="CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0"><name><text>CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0</text></name></transition>
+<transition id="CDK4_equals_1_to_CDK4_equals_0_when_CyclinD1_equals_0"><name><text>CDK4_equals_1_to_CDK4_equals_0_when_CyclinD1_equals_0</text></name></transition>
+<transition id="CDK4_equals_1_to_CDK4_equals_0_when_p21_equals_1"><name><text>CDK4_equals_1_to_CDK4_equals_0_when_p21_equals_1</text></name></transition>
+<transition id="CDK4_equals_1_to_CDK4_equals_0_when_p27_equals_1"><name><text>CDK4_equals_1_to_CDK4_equals_0_when_p27_equals_1</text></name></transition>
+<transition id="CDK6_equals_0_to_CDK6_equals_1_when_CyclinD1_equals_1"><name><text>CDK6_equals_0_to_CDK6_equals_1_when_CyclinD1_equals_1</text></name></transition>
+<transition id="CDK6_equals_1_to_CDK6_equals_0_when_CyclinD1_equals_0"><name><text>CDK6_equals_1_to_CDK6_equals_0_when_CyclinD1_equals_0</text></name></transition>
+<transition id="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1"><name><text>CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1</text></name></transition>
+<transition id="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1"><name><text>CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1</text></name></transition>
+<transition id="CyclinD1_equals_1_to_CyclinD1_equals_0_when_AKT1_equals_0_and_MEK1_equals_0"><name><text>CyclinD1_equals_1_to_CyclinD1_equals_0_when_AKT1_equals_0_and_MEK1_equals_0</text></name></transition>
+<transition id="CyclinD1_equals_1_to_CyclinD1_equals_0_when_ERalpha_equals_0"><name><text>CyclinD1_equals_1_to_CyclinD1_equals_0_when_ERalpha_equals_0</text></name></transition>
+<transition id="CyclinD1_equals_1_to_CyclinD1_equals_0_when_MYC_equals_0"><name><text>CyclinD1_equals_1_to_CyclinD1_equals_0_when_MYC_equals_0</text></name></transition>
+<transition id="CyclinE1_equals_0_to_CyclinE1_equals_1_when_MYC_equals_1"><name><text>CyclinE1_equals_0_to_CyclinE1_equals_1_when_MYC_equals_1</text></name></transition>
+<transition id="CyclinE1_equals_1_to_CyclinE1_equals_0_when_MYC_equals_0"><name><text>CyclinE1_equals_1_to_CyclinE1_equals_0_when_MYC_equals_0</text></name></transition>
+<transition id="EGF_equals_0_to_EGF_equals_1"><name><text>EGF_equals_0_to_EGF_equals_1</text></name></transition>
+<transition id="ERBB1_equals_0_to_ERBB1_equals_1_when_EGF_equals_1"><name><text>ERBB1_equals_0_to_ERBB1_equals_1_when_EGF_equals_1</text></name></transition>
+<transition id="ERBB1_equals_1_to_ERBB1_equals_0_when_EGF_equals_0"><name><text>ERBB1_equals_1_to_ERBB1_equals_0_when_EGF_equals_0</text></name></transition>
+<transition id="ERBB1_2_equals_0_to_ERBB1_2_equals_1_when_ERBB1_equals_1_and_ERBB2_equals_1"><name><text>ERBB1_2_equals_0_to_ERBB1_2_equals_1_when_ERBB1_equals_1_and_ERBB2_equals_1</text></name></transition>
+<transition id="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB1_equals_0"><name><text>ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB1_equals_0</text></name></transition>
+<transition id="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB2_equals_0"><name><text>ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB2_equals_0</text></name></transition>
+<transition id="ERBB1_3_equals_0_to_ERBB1_3_equals_1_when_ERBB1_equals_1_and_ERBB3_equals_1"><name><text>ERBB1_3_equals_0_to_ERBB1_3_equals_1_when_ERBB1_equals_1_and_ERBB3_equals_1</text></name></transition>
+<transition id="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB1_equals_0"><name><text>ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB1_equals_0</text></name></transition>
+<transition id="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB3_equals_0"><name><text>ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB3_equals_0</text></name></transition>
+<transition id="ERBB2_equals_0_to_ERBB2_equals_1_when_EGF_equals_1"><name><text>ERBB2_equals_0_to_ERBB2_equals_1_when_EGF_equals_1</text></name></transition>
+<transition id="ERBB2_equals_1_to_ERBB2_equals_0_when_EGF_equals_0"><name><text>ERBB2_equals_1_to_ERBB2_equals_0_when_EGF_equals_0</text></name></transition>
+<transition id="ERBB2_3_equals_0_to_ERBB2_3_equals_1_when_ERBB2_equals_1_and_ERBB3_equals_1"><name><text>ERBB2_3_equals_0_to_ERBB2_3_equals_1_when_ERBB2_equals_1_and_ERBB3_equals_1</text></name></transition>
+<transition id="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB2_equals_0"><name><text>ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB2_equals_0</text></name></transition>
+<transition id="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB3_equals_0"><name><text>ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB3_equals_0</text></name></transition>
+<transition id="ERBB3_equals_0_to_ERBB3_equals_1_when_EGF_equals_1"><name><text>ERBB3_equals_0_to_ERBB3_equals_1_when_EGF_equals_1</text></name></transition>
+<transition id="ERBB3_equals_1_to_ERBB3_equals_0_when_EGF_equals_0"><name><text>ERBB3_equals_1_to_ERBB3_equals_0_when_EGF_equals_0</text></name></transition>
+<transition id="ERalpha_equals_0_to_ERalpha_equals_1_when_AKT1_equals_1"><name><text>ERalpha_equals_0_to_ERalpha_equals_1_when_AKT1_equals_1</text></name></transition>
+<transition id="ERalpha_equals_0_to_ERalpha_equals_1_when_MEK1_equals_1"><name><text>ERalpha_equals_0_to_ERalpha_equals_1_when_MEK1_equals_1</text></name></transition>
+<transition id="ERalpha_equals_1_to_ERalpha_equals_0_when_AKT1_equals_0_and_MEK1_equals_0"><name><text>ERalpha_equals_1_to_ERalpha_equals_0_when_AKT1_equals_0_and_MEK1_equals_0</text></name></transition>
+<transition id="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1"><name><text>IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1</text></name></transition>
+<transition id="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_1_and_ERBB2_3_equals_0"><name><text>IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_1_and_ERBB2_3_equals_0</text></name></transition>
+<transition id="IGF1R_equals_1_to_IGF1R_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0"><name><text>IGF1R_equals_1_to_IGF1R_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0</text></name></transition>
+<transition id="IGF1R_equals_1_to_IGF1R_equals_0_when_ERBB2_3_equals_1"><name><text>IGF1R_equals_1_to_IGF1R_equals_0_when_ERBB2_3_equals_1</text></name></transition>
+<transition id="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_equals_1"><name><text>MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_equals_1</text></name></transition>
+<transition id="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_2_equals_1"><name><text>MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_2_equals_1</text></name></transition>
+<transition id="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_3_equals_1"><name><text>MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_3_equals_1</text></name></transition>
+<transition id="MEK1_equals_0_to_MEK1_equals_1_when_ERBB2_3_equals_1"><name><text>MEK1_equals_0_to_MEK1_equals_1_when_ERBB2_3_equals_1</text></name></transition>
+<transition id="MEK1_equals_0_to_MEK1_equals_1_when_IGF1R_equals_1"><name><text>MEK1_equals_0_to_MEK1_equals_1_when_IGF1R_equals_1</text></name></transition>
+<transition id="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"><name><text>MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0</text></name></transition>
+<transition id="MYC_equals_0_to_MYC_equals_1_when_AKT1_equals_1"><name><text>MYC_equals_0_to_MYC_equals_1_when_AKT1_equals_1</text></name></transition>
+<transition id="MYC_equals_0_to_MYC_equals_1_when_ERalpha_equals_1"><name><text>MYC_equals_0_to_MYC_equals_1_when_ERalpha_equals_1</text></name></transition>
+<transition id="MYC_equals_0_to_MYC_equals_1_when_MEK1_equals_1"><name><text>MYC_equals_0_to_MYC_equals_1_when_MEK1_equals_1</text></name></transition>
+<transition id="MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0"><name><text>MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0</text></name></transition>
+<transition id="p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0"><name><text>p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0</text></name></transition>
+<transition id="p21_equals_1_to_p21_equals_0_when_AKT1_equals_1"><name><text>p21_equals_1_to_p21_equals_0_when_AKT1_equals_1</text></name></transition>
+<transition id="p21_equals_1_to_p21_equals_0_when_CDK4_equals_1"><name><text>p21_equals_1_to_p21_equals_0_when_CDK4_equals_1</text></name></transition>
+<transition id="p21_equals_1_to_p21_equals_0_when_MYC_equals_1"><name><text>p21_equals_1_to_p21_equals_0_when_MYC_equals_1</text></name></transition>
+<transition id="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0"><name><text>p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0</text></name></transition>
+<transition id="p27_equals_1_to_p27_equals_0_when_AKT1_equals_1"><name><text>p27_equals_1_to_p27_equals_0_when_AKT1_equals_1</text></name></transition>
+<transition id="p27_equals_1_to_p27_equals_0_when_CDK2_equals_1"><name><text>p27_equals_1_to_p27_equals_0_when_CDK2_equals_1</text></name></transition>
+<transition id="p27_equals_1_to_p27_equals_0_when_CDK4_equals_1"><name><text>p27_equals_1_to_p27_equals_0_when_CDK4_equals_1</text></name></transition>
+<transition id="p27_equals_1_to_p27_equals_0_when_MYC_equals_1"><name><text>p27_equals_1_to_p27_equals_0_when_MYC_equals_1</text></name></transition>
+<transition id="pRB1_equals_0_to_pRB1_equals_1_when_CDK4_equals_1_and_CDK6_equals_1"><name><text>pRB1_equals_0_to_pRB1_equals_1_when_CDK4_equals_1_and_CDK6_equals_1</text></name></transition>
+<transition id="pRB1_equals_1_to_pRB1_equals_0_when_CDK4_equals_0"><name><text>pRB1_equals_1_to_pRB1_equals_0_when_CDK4_equals_0</text></name></transition>
+<transition id="pRB1_equals_1_to_pRB1_equals_0_when_CDK6_equals_0"><name><text>pRB1_equals_1_to_pRB1_equals_0_when_CDK6_equals_0</text></name></transition>
+<arc id="p1_t1" source="AKT1_0" target="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_equals_1"/>
+<arc id="t1_p2" source="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_equals_1" target="AKT1_equals_1"/>
+<arc id="p1_t2" source="AKT1_0" target="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_2_equals_1"/>
+<arc id="p1_t3" source="AKT1_0" target="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_3_equals_1"/>
+<arc id="p1_t4" source="AKT1_0" target="AKT1_equals_0_to_AKT1_equals_1_when_ERBB2_3_equals_1"/>
+<arc id="p1_t5" source="AKT1_0" target="AKT1_equals_0_to_AKT1_equals_1_when_IGF1R_equals_1"/>
+<arc id="t1_p16" source="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_equals_1" target="ERBB1_equals_1"/>
+<arc id="p1_t17" source="AKT1_0" target="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1"/>
+<arc id="p1_t19" source="AKT1_0" target="CyclinD1_equals_1_to_CyclinD1_equals_0_when_AKT1_equals_0_and_MEK1_equals_0"/>
+<arc id="p1_t42" source="AKT1_0" target="ERalpha_equals_1_to_ERalpha_equals_0_when_AKT1_equals_0_and_MEK1_equals_0"/>
+<arc id="p1_t43" source="AKT1_0" target="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1"/>
+<arc id="p1_t45" source="AKT1_0" target="IGF1R_equals_1_to_IGF1R_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0"/>
+<arc id="p1_t56" source="AKT1_0" target="MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0"/>
+<arc id="p1_t57" source="AKT1_0" target="p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0"/>
+<arc id="p1_t61" source="AKT1_0" target="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0"/>
+<arc id="t2_p2" source="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_2_equals_1" target="AKT1_equals_1"/>
+<arc id="p2_t6" source="AKT1_equals_1" target="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="t2_p18" source="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_2_equals_1" target="ERBB1_2_equals_1"/>
+<arc id="p2_t18" source="AKT1_equals_1" target="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1"/>
+<arc id="p2_t40" source="AKT1_equals_1" target="ERalpha_equals_0_to_ERalpha_equals_1_when_AKT1_equals_1"/>
+<arc id="p2_t44" source="AKT1_equals_1" target="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_1_and_ERBB2_3_equals_0"/>
+<arc id="p2_t53" source="AKT1_equals_1" target="MYC_equals_0_to_MYC_equals_1_when_AKT1_equals_1"/>
+<arc id="p2_t58" source="AKT1_equals_1" target="p21_equals_1_to_p21_equals_0_when_AKT1_equals_1"/>
+<arc id="p2_t62" source="AKT1_equals_1" target="p27_equals_1_to_p27_equals_0_when_AKT1_equals_1"/>
+<arc id="t3_p2" source="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_3_equals_1" target="AKT1_equals_1"/>
+<arc id="p3_t7" source="CDK2_equals_0" target="CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0"/>
+<arc id="t3_p20" source="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_3_equals_1" target="ERBB1_3_equals_1"/>
+<arc id="p3_t61" source="CDK2_equals_0" target="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0"/>
+<arc id="t4_p2" source="AKT1_equals_0_to_AKT1_equals_1_when_ERBB2_3_equals_1" target="AKT1_equals_1"/>
+<arc id="p4_t8" source="CDK2_equals_1" target="CDK2_equals_1_to_CDK2_equals_0_when_CyclinE1_equals_0"/>
+<arc id="p4_t9" source="CDK2_equals_1" target="CDK2_equals_1_to_CDK2_equals_0_when_p21_equals_1"/>
+<arc id="p4_t10" source="CDK2_equals_1" target="CDK2_equals_1_to_CDK2_equals_0_when_p27_equals_1"/>
+<arc id="t4_p24" source="AKT1_equals_0_to_AKT1_equals_1_when_ERBB2_3_equals_1" target="ERBB2_3_equals_1"/>
+<arc id="p4_t63" source="CDK2_equals_1" target="p27_equals_1_to_p27_equals_0_when_CDK2_equals_1"/>
+<arc id="t5_p2" source="AKT1_equals_0_to_AKT1_equals_1_when_IGF1R_equals_1" target="AKT1_equals_1"/>
+<arc id="p5_t11" source="CDK4_equals_0" target="CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0"/>
+<arc id="t5_p30" source="AKT1_equals_0_to_AKT1_equals_1_when_IGF1R_equals_1" target="IGF1R_equals_1"/>
+<arc id="p5_t57" source="CDK4_equals_0" target="p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0"/>
+<arc id="p5_t61" source="CDK4_equals_0" target="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0"/>
+<arc id="p5_t67" source="CDK4_equals_0" target="pRB1_equals_1_to_pRB1_equals_0_when_CDK4_equals_0"/>
+<arc id="t6_p1" source="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="AKT1_0"/>
+<arc id="p6_t12" source="CDK4_equals_1" target="CDK4_equals_1_to_CDK4_equals_0_when_CyclinD1_equals_0"/>
+<arc id="p6_t13" source="CDK4_equals_1" target="CDK4_equals_1_to_CDK4_equals_0_when_p21_equals_1"/>
+<arc id="p6_t14" source="CDK4_equals_1" target="CDK4_equals_1_to_CDK4_equals_0_when_p27_equals_1"/>
+<arc id="t6_p15" source="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="ERBB1_equals_0"/>
+<arc id="t6_p17" source="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="ERBB1_2_equals_0"/>
+<arc id="t6_p19" source="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="ERBB1_3_equals_0"/>
+<arc id="t6_p23" source="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="ERBB2_3_equals_0"/>
+<arc id="t6_p29" source="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="IGF1R_equals_0"/>
+<arc id="p6_t59" source="CDK4_equals_1" target="p21_equals_1_to_p21_equals_0_when_CDK4_equals_1"/>
+<arc id="p6_t64" source="CDK4_equals_1" target="p27_equals_1_to_p27_equals_0_when_CDK4_equals_1"/>
+<arc id="p6_t66" source="CDK4_equals_1" target="pRB1_equals_0_to_pRB1_equals_1_when_CDK4_equals_1_and_CDK6_equals_1"/>
+<arc id="t7_p4" source="CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0" target="CDK2_equals_1"/>
+<arc id="t7_p12" source="CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0" target="CyclinE1_equals_1"/>
+<arc id="p7_t15" source="CDK6_equals_0" target="CDK6_equals_0_to_CDK6_equals_1_when_CyclinD1_equals_1"/>
+<arc id="t7_p35" source="CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0" target="p21_equals_0"/>
+<arc id="t7_p37" source="CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0" target="p27_equals_0"/>
+<arc id="p7_t68" source="CDK6_equals_0" target="pRB1_equals_1_to_pRB1_equals_0_when_CDK6_equals_0"/>
+<arc id="t8_p3" source="CDK2_equals_1_to_CDK2_equals_0_when_CyclinE1_equals_0" target="CDK2_equals_0"/>
+<arc id="t8_p11" source="CDK2_equals_1_to_CDK2_equals_0_when_CyclinE1_equals_0" target="CyclinE1_equals_0"/>
+<arc id="p8_t16" source="CDK6_equals_1" target="CDK6_equals_1_to_CDK6_equals_0_when_CyclinD1_equals_0"/>
+<arc id="p8_t66" source="CDK6_equals_1" target="pRB1_equals_0_to_pRB1_equals_1_when_CDK4_equals_1_and_CDK6_equals_1"/>
+<arc id="t9_p3" source="CDK2_equals_1_to_CDK2_equals_0_when_p21_equals_1" target="CDK2_equals_0"/>
+<arc id="p9_t12" source="CyclinD1_equals_0" target="CDK4_equals_1_to_CDK4_equals_0_when_CyclinD1_equals_0"/>
+<arc id="p9_t16" source="CyclinD1_equals_0" target="CDK6_equals_1_to_CDK6_equals_0_when_CyclinD1_equals_0"/>
+<arc id="p9_t17" source="CyclinD1_equals_0" target="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1"/>
+<arc id="p9_t18" source="CyclinD1_equals_0" target="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1"/>
+<arc id="t9_p36" source="CDK2_equals_1_to_CDK2_equals_0_when_p21_equals_1" target="p21_equals_1"/>
+<arc id="t10_p3" source="CDK2_equals_1_to_CDK2_equals_0_when_p27_equals_1" target="CDK2_equals_0"/>
+<arc id="p10_t11" source="CyclinD1_equals_1" target="CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0"/>
+<arc id="p10_t15" source="CyclinD1_equals_1" target="CDK6_equals_0_to_CDK6_equals_1_when_CyclinD1_equals_1"/>
+<arc id="p10_t19" source="CyclinD1_equals_1" target="CyclinD1_equals_1_to_CyclinD1_equals_0_when_AKT1_equals_0_and_MEK1_equals_0"/>
+<arc id="p10_t20" source="CyclinD1_equals_1" target="CyclinD1_equals_1_to_CyclinD1_equals_0_when_ERalpha_equals_0"/>
+<arc id="p10_t21" source="CyclinD1_equals_1" target="CyclinD1_equals_1_to_CyclinD1_equals_0_when_MYC_equals_0"/>
+<arc id="t10_p38" source="CDK2_equals_1_to_CDK2_equals_0_when_p27_equals_1" target="p27_equals_1"/>
+<arc id="t11_p6" source="CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0" target="CDK4_equals_1"/>
+<arc id="p11_t8" source="CyclinE1_equals_0" target="CDK2_equals_1_to_CDK2_equals_0_when_CyclinE1_equals_0"/>
+<arc id="t11_p10" source="CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0" target="CyclinD1_equals_1"/>
+<arc id="p11_t22" source="CyclinE1_equals_0" target="CyclinE1_equals_0_to_CyclinE1_equals_1_when_MYC_equals_1"/>
+<arc id="t11_p35" source="CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0" target="p21_equals_0"/>
+<arc id="t11_p37" source="CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0" target="p27_equals_0"/>
+<arc id="t12_p5" source="CDK4_equals_1_to_CDK4_equals_0_when_CyclinD1_equals_0" target="CDK4_equals_0"/>
+<arc id="p12_t7" source="CyclinE1_equals_1" target="CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0"/>
+<arc id="t12_p9" source="CDK4_equals_1_to_CDK4_equals_0_when_CyclinD1_equals_0" target="CyclinD1_equals_0"/>
+<arc id="p12_t23" source="CyclinE1_equals_1" target="CyclinE1_equals_1_to_CyclinE1_equals_0_when_MYC_equals_0"/>
+<arc id="t13_p5" source="CDK4_equals_1_to_CDK4_equals_0_when_p21_equals_1" target="CDK4_equals_0"/>
+<arc id="p13_t24" source="EGF_equals_0" target="EGF_equals_0_to_EGF_equals_1"/>
+<arc id="p13_t26" source="EGF_equals_0" target="ERBB1_equals_1_to_ERBB1_equals_0_when_EGF_equals_0"/>
+<arc id="p13_t34" source="EGF_equals_0" target="ERBB2_equals_1_to_ERBB2_equals_0_when_EGF_equals_0"/>
+<arc id="t13_p36" source="CDK4_equals_1_to_CDK4_equals_0_when_p21_equals_1" target="p21_equals_1"/>
+<arc id="p13_t39" source="EGF_equals_0" target="ERBB3_equals_1_to_ERBB3_equals_0_when_EGF_equals_0"/>
+<arc id="t14_p5" source="CDK4_equals_1_to_CDK4_equals_0_when_p27_equals_1" target="CDK4_equals_0"/>
+<arc id="p14_t25" source="EGF_equals_1" target="ERBB1_equals_0_to_ERBB1_equals_1_when_EGF_equals_1"/>
+<arc id="p14_t33" source="EGF_equals_1" target="ERBB2_equals_0_to_ERBB2_equals_1_when_EGF_equals_1"/>
+<arc id="t14_p38" source="CDK4_equals_1_to_CDK4_equals_0_when_p27_equals_1" target="p27_equals_1"/>
+<arc id="p14_t38" source="EGF_equals_1" target="ERBB3_equals_0_to_ERBB3_equals_1_when_EGF_equals_1"/>
+<arc id="p15_t6" source="ERBB1_equals_0" target="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="t15_p8" source="CDK6_equals_0_to_CDK6_equals_1_when_CyclinD1_equals_1" target="CDK6_equals_1"/>
+<arc id="t15_p10" source="CDK6_equals_0_to_CDK6_equals_1_when_CyclinD1_equals_1" target="CyclinD1_equals_1"/>
+<arc id="p15_t25" source="ERBB1_equals_0" target="ERBB1_equals_0_to_ERBB1_equals_1_when_EGF_equals_1"/>
+<arc id="p15_t28" source="ERBB1_equals_0" target="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB1_equals_0"/>
+<arc id="p15_t31" source="ERBB1_equals_0" target="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB1_equals_0"/>
+<arc id="p15_t52" source="ERBB1_equals_0" target="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="p16_t1" source="ERBB1_equals_1" target="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_equals_1"/>
+<arc id="t16_p7" source="CDK6_equals_1_to_CDK6_equals_0_when_CyclinD1_equals_0" target="CDK6_equals_0"/>
+<arc id="t16_p9" source="CDK6_equals_1_to_CDK6_equals_0_when_CyclinD1_equals_0" target="CyclinD1_equals_0"/>
+<arc id="p16_t26" source="ERBB1_equals_1" target="ERBB1_equals_1_to_ERBB1_equals_0_when_EGF_equals_0"/>
+<arc id="p16_t27" source="ERBB1_equals_1" target="ERBB1_2_equals_0_to_ERBB1_2_equals_1_when_ERBB1_equals_1_and_ERBB2_equals_1"/>
+<arc id="p16_t30" source="ERBB1_equals_1" target="ERBB1_3_equals_0_to_ERBB1_3_equals_1_when_ERBB1_equals_1_and_ERBB3_equals_1"/>
+<arc id="p16_t47" source="ERBB1_equals_1" target="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_equals_1"/>
+<arc id="t17_p1" source="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1" target="AKT1_0"/>
+<arc id="p17_t6" source="ERBB1_2_equals_0" target="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="t17_p10" source="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1" target="CyclinD1_equals_1"/>
+<arc id="p17_t27" source="ERBB1_2_equals_0" target="ERBB1_2_equals_0_to_ERBB1_2_equals_1_when_ERBB1_equals_1_and_ERBB2_equals_1"/>
+<arc id="t17_p28" source="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1" target="ERalpha_equals_1"/>
+<arc id="t17_p32" source="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1" target="MEK1_equals_1"/>
+<arc id="t17_p34" source="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1" target="MYC_equals_1"/>
+<arc id="p17_t52" source="ERBB1_2_equals_0" target="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="t18_p2" source="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1" target="AKT1_equals_1"/>
+<arc id="p18_t2" source="ERBB1_2_equals_1" target="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_2_equals_1"/>
+<arc id="t18_p10" source="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1" target="CyclinD1_equals_1"/>
+<arc id="t18_p28" source="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1" target="ERalpha_equals_1"/>
+<arc id="p18_t28" source="ERBB1_2_equals_1" target="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB1_equals_0"/>
+<arc id="p18_t29" source="ERBB1_2_equals_1" target="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB2_equals_0"/>
+<arc id="t18_p34" source="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1" target="MYC_equals_1"/>
+<arc id="p18_t48" source="ERBB1_2_equals_1" target="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_2_equals_1"/>
+<arc id="t19_p1" source="CyclinD1_equals_1_to_CyclinD1_equals_0_when_AKT1_equals_0_and_MEK1_equals_0" target="AKT1_0"/>
+<arc id="p19_t6" source="ERBB1_3_equals_0" target="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="t19_p9" source="CyclinD1_equals_1_to_CyclinD1_equals_0_when_AKT1_equals_0_and_MEK1_equals_0" target="CyclinD1_equals_0"/>
+<arc id="p19_t30" source="ERBB1_3_equals_0" target="ERBB1_3_equals_0_to_ERBB1_3_equals_1_when_ERBB1_equals_1_and_ERBB3_equals_1"/>
+<arc id="t19_p31" source="CyclinD1_equals_1_to_CyclinD1_equals_0_when_AKT1_equals_0_and_MEK1_equals_0" target="MEK1_equals_0"/>
+<arc id="p19_t52" source="ERBB1_3_equals_0" target="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="p20_t3" source="ERBB1_3_equals_1" target="AKT1_equals_0_to_AKT1_equals_1_when_ERBB1_3_equals_1"/>
+<arc id="t20_p9" source="CyclinD1_equals_1_to_CyclinD1_equals_0_when_ERalpha_equals_0" target="CyclinD1_equals_0"/>
+<arc id="t20_p27" source="CyclinD1_equals_1_to_CyclinD1_equals_0_when_ERalpha_equals_0" target="ERalpha_equals_0"/>
+<arc id="p20_t31" source="ERBB1_3_equals_1" target="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB1_equals_0"/>
+<arc id="p20_t32" source="ERBB1_3_equals_1" target="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB3_equals_0"/>
+<arc id="p20_t49" source="ERBB1_3_equals_1" target="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_3_equals_1"/>
+<arc id="t21_p9" source="CyclinD1_equals_1_to_CyclinD1_equals_0_when_MYC_equals_0" target="CyclinD1_equals_0"/>
+<arc id="p21_t29" source="ERBB2_equals_0" target="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB2_equals_0"/>
+<arc id="t21_p33" source="CyclinD1_equals_1_to_CyclinD1_equals_0_when_MYC_equals_0" target="MYC_equals_0"/>
+<arc id="p21_t33" source="ERBB2_equals_0" target="ERBB2_equals_0_to_ERBB2_equals_1_when_EGF_equals_1"/>
+<arc id="p21_t36" source="ERBB2_equals_0" target="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB2_equals_0"/>
+<arc id="t22_p12" source="CyclinE1_equals_0_to_CyclinE1_equals_1_when_MYC_equals_1" target="CyclinE1_equals_1"/>
+<arc id="p22_t27" source="ERBB2_equals_1" target="ERBB1_2_equals_0_to_ERBB1_2_equals_1_when_ERBB1_equals_1_and_ERBB2_equals_1"/>
+<arc id="t22_p34" source="CyclinE1_equals_0_to_CyclinE1_equals_1_when_MYC_equals_1" target="MYC_equals_1"/>
+<arc id="p22_t34" source="ERBB2_equals_1" target="ERBB2_equals_1_to_ERBB2_equals_0_when_EGF_equals_0"/>
+<arc id="p22_t35" source="ERBB2_equals_1" target="ERBB2_3_equals_0_to_ERBB2_3_equals_1_when_ERBB2_equals_1_and_ERBB3_equals_1"/>
+<arc id="p23_t6" source="ERBB2_3_equals_0" target="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="t23_p11" source="CyclinE1_equals_1_to_CyclinE1_equals_0_when_MYC_equals_0" target="CyclinE1_equals_0"/>
+<arc id="t23_p33" source="CyclinE1_equals_1_to_CyclinE1_equals_0_when_MYC_equals_0" target="MYC_equals_0"/>
+<arc id="p23_t35" source="ERBB2_3_equals_0" target="ERBB2_3_equals_0_to_ERBB2_3_equals_1_when_ERBB2_equals_1_and_ERBB3_equals_1"/>
+<arc id="p23_t43" source="ERBB2_3_equals_0" target="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1"/>
+<arc id="p23_t44" source="ERBB2_3_equals_0" target="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_1_and_ERBB2_3_equals_0"/>
+<arc id="p23_t52" source="ERBB2_3_equals_0" target="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="p24_t4" source="ERBB2_3_equals_1" target="AKT1_equals_0_to_AKT1_equals_1_when_ERBB2_3_equals_1"/>
+<arc id="t24_p14" source="EGF_equals_0_to_EGF_equals_1" target="EGF_equals_1"/>
+<arc id="p24_t36" source="ERBB2_3_equals_1" target="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB2_equals_0"/>
+<arc id="p24_t37" source="ERBB2_3_equals_1" target="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB3_equals_0"/>
+<arc id="p24_t46" source="ERBB2_3_equals_1" target="IGF1R_equals_1_to_IGF1R_equals_0_when_ERBB2_3_equals_1"/>
+<arc id="p24_t50" source="ERBB2_3_equals_1" target="MEK1_equals_0_to_MEK1_equals_1_when_ERBB2_3_equals_1"/>
+<arc id="t25_p14" source="ERBB1_equals_0_to_ERBB1_equals_1_when_EGF_equals_1" target="EGF_equals_1"/>
+<arc id="t25_p16" source="ERBB1_equals_0_to_ERBB1_equals_1_when_EGF_equals_1" target="ERBB1_equals_1"/>
+<arc id="p25_t32" source="ERBB3_equals_0" target="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB3_equals_0"/>
+<arc id="p25_t37" source="ERBB3_equals_0" target="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB3_equals_0"/>
+<arc id="p25_t38" source="ERBB3_equals_0" target="ERBB3_equals_0_to_ERBB3_equals_1_when_EGF_equals_1"/>
+<arc id="t26_p13" source="ERBB1_equals_1_to_ERBB1_equals_0_when_EGF_equals_0" target="EGF_equals_0"/>
+<arc id="t26_p15" source="ERBB1_equals_1_to_ERBB1_equals_0_when_EGF_equals_0" target="ERBB1_equals_0"/>
+<arc id="p26_t30" source="ERBB3_equals_1" target="ERBB1_3_equals_0_to_ERBB1_3_equals_1_when_ERBB1_equals_1_and_ERBB3_equals_1"/>
+<arc id="p26_t35" source="ERBB3_equals_1" target="ERBB2_3_equals_0_to_ERBB2_3_equals_1_when_ERBB2_equals_1_and_ERBB3_equals_1"/>
+<arc id="p26_t39" source="ERBB3_equals_1" target="ERBB3_equals_1_to_ERBB3_equals_0_when_EGF_equals_0"/>
+<arc id="t27_p16" source="ERBB1_2_equals_0_to_ERBB1_2_equals_1_when_ERBB1_equals_1_and_ERBB2_equals_1" target="ERBB1_equals_1"/>
+<arc id="t27_p18" source="ERBB1_2_equals_0_to_ERBB1_2_equals_1_when_ERBB1_equals_1_and_ERBB2_equals_1" target="ERBB1_2_equals_1"/>
+<arc id="p27_t20" source="ERalpha_equals_0" target="CyclinD1_equals_1_to_CyclinD1_equals_0_when_ERalpha_equals_0"/>
+<arc id="t27_p22" source="ERBB1_2_equals_0_to_ERBB1_2_equals_1_when_ERBB1_equals_1_and_ERBB2_equals_1" target="ERBB2_equals_1"/>
+<arc id="p27_t40" source="ERalpha_equals_0" target="ERalpha_equals_0_to_ERalpha_equals_1_when_AKT1_equals_1"/>
+<arc id="p27_t41" source="ERalpha_equals_0" target="ERalpha_equals_0_to_ERalpha_equals_1_when_MEK1_equals_1"/>
+<arc id="p27_t45" source="ERalpha_equals_0" target="IGF1R_equals_1_to_IGF1R_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0"/>
+<arc id="p27_t56" source="ERalpha_equals_0" target="MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0"/>
+<arc id="t28_p15" source="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB1_equals_0" target="ERBB1_equals_0"/>
+<arc id="t28_p17" source="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB1_equals_0" target="ERBB1_2_equals_0"/>
+<arc id="p28_t17" source="ERalpha_equals_1" target="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1"/>
+<arc id="p28_t18" source="ERalpha_equals_1" target="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1"/>
+<arc id="p28_t42" source="ERalpha_equals_1" target="ERalpha_equals_1_to_ERalpha_equals_0_when_AKT1_equals_0_and_MEK1_equals_0"/>
+<arc id="p28_t43" source="ERalpha_equals_1" target="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1"/>
+<arc id="p28_t54" source="ERalpha_equals_1" target="MYC_equals_0_to_MYC_equals_1_when_ERalpha_equals_1"/>
+<arc id="p29_t6" source="IGF1R_equals_0" target="AKT1_equals_1_to_AKT1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="t29_p17" source="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB2_equals_0" target="ERBB1_2_equals_0"/>
+<arc id="t29_p21" source="ERBB1_2_equals_1_to_ERBB1_2_equals_0_when_ERBB2_equals_0" target="ERBB2_equals_0"/>
+<arc id="p29_t43" source="IGF1R_equals_0" target="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1"/>
+<arc id="p29_t44" source="IGF1R_equals_0" target="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_1_and_ERBB2_3_equals_0"/>
+<arc id="p29_t52" source="IGF1R_equals_0" target="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="p30_t5" source="IGF1R_equals_1" target="AKT1_equals_0_to_AKT1_equals_1_when_IGF1R_equals_1"/>
+<arc id="t30_p16" source="ERBB1_3_equals_0_to_ERBB1_3_equals_1_when_ERBB1_equals_1_and_ERBB3_equals_1" target="ERBB1_equals_1"/>
+<arc id="t30_p20" source="ERBB1_3_equals_0_to_ERBB1_3_equals_1_when_ERBB1_equals_1_and_ERBB3_equals_1" target="ERBB1_3_equals_1"/>
+<arc id="t30_p26" source="ERBB1_3_equals_0_to_ERBB1_3_equals_1_when_ERBB1_equals_1_and_ERBB3_equals_1" target="ERBB3_equals_1"/>
+<arc id="p30_t45" source="IGF1R_equals_1" target="IGF1R_equals_1_to_IGF1R_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0"/>
+<arc id="p30_t46" source="IGF1R_equals_1" target="IGF1R_equals_1_to_IGF1R_equals_0_when_ERBB2_3_equals_1"/>
+<arc id="p30_t51" source="IGF1R_equals_1" target="MEK1_equals_0_to_MEK1_equals_1_when_IGF1R_equals_1"/>
+<arc id="t31_p15" source="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB1_equals_0" target="ERBB1_equals_0"/>
+<arc id="t31_p19" source="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB1_equals_0" target="ERBB1_3_equals_0"/>
+<arc id="p31_t19" source="MEK1_equals_0" target="CyclinD1_equals_1_to_CyclinD1_equals_0_when_AKT1_equals_0_and_MEK1_equals_0"/>
+<arc id="p31_t42" source="MEK1_equals_0" target="ERalpha_equals_1_to_ERalpha_equals_0_when_AKT1_equals_0_and_MEK1_equals_0"/>
+<arc id="p31_t47" source="MEK1_equals_0" target="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_equals_1"/>
+<arc id="p31_t48" source="MEK1_equals_0" target="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_2_equals_1"/>
+<arc id="p31_t49" source="MEK1_equals_0" target="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_3_equals_1"/>
+<arc id="p31_t50" source="MEK1_equals_0" target="MEK1_equals_0_to_MEK1_equals_1_when_ERBB2_3_equals_1"/>
+<arc id="p31_t51" source="MEK1_equals_0" target="MEK1_equals_0_to_MEK1_equals_1_when_IGF1R_equals_1"/>
+<arc id="p31_t56" source="MEK1_equals_0" target="MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0"/>
+<arc id="p32_t17" source="MEK1_equals_1" target="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1"/>
+<arc id="t32_p19" source="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB3_equals_0" target="ERBB1_3_equals_0"/>
+<arc id="t32_p25" source="ERBB1_3_equals_1_to_ERBB1_3_equals_0_when_ERBB3_equals_0" target="ERBB3_equals_0"/>
+<arc id="p32_t41" source="MEK1_equals_1" target="ERalpha_equals_0_to_ERalpha_equals_1_when_MEK1_equals_1"/>
+<arc id="p32_t52" source="MEK1_equals_1" target="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0"/>
+<arc id="p32_t55" source="MEK1_equals_1" target="MYC_equals_0_to_MYC_equals_1_when_MEK1_equals_1"/>
+<arc id="t33_p14" source="ERBB2_equals_0_to_ERBB2_equals_1_when_EGF_equals_1" target="EGF_equals_1"/>
+<arc id="p33_t21" source="MYC_equals_0" target="CyclinD1_equals_1_to_CyclinD1_equals_0_when_MYC_equals_0"/>
+<arc id="t33_p22" source="ERBB2_equals_0_to_ERBB2_equals_1_when_EGF_equals_1" target="ERBB2_equals_1"/>
+<arc id="p33_t23" source="MYC_equals_0" target="CyclinE1_equals_1_to_CyclinE1_equals_0_when_MYC_equals_0"/>
+<arc id="p33_t53" source="MYC_equals_0" target="MYC_equals_0_to_MYC_equals_1_when_AKT1_equals_1"/>
+<arc id="p33_t54" source="MYC_equals_0" target="MYC_equals_0_to_MYC_equals_1_when_ERalpha_equals_1"/>
+<arc id="p33_t55" source="MYC_equals_0" target="MYC_equals_0_to_MYC_equals_1_when_MEK1_equals_1"/>
+<arc id="p33_t57" source="MYC_equals_0" target="p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0"/>
+<arc id="p33_t61" source="MYC_equals_0" target="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0"/>
+<arc id="t34_p13" source="ERBB2_equals_1_to_ERBB2_equals_0_when_EGF_equals_0" target="EGF_equals_0"/>
+<arc id="p34_t17" source="MYC_equals_1" target="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_0_and_ERalpha_equals_1_and_MEK1_equals_1_and_MYC_equals_1"/>
+<arc id="p34_t18" source="MYC_equals_1" target="CyclinD1_equals_0_to_CyclinD1_equals_1_when_AKT1_equals_1_and_ERalpha_equals_1_and_MYC_equals_1"/>
+<arc id="t34_p21" source="ERBB2_equals_1_to_ERBB2_equals_0_when_EGF_equals_0" target="ERBB2_equals_0"/>
+<arc id="p34_t22" source="MYC_equals_1" target="CyclinE1_equals_0_to_CyclinE1_equals_1_when_MYC_equals_1"/>
+<arc id="p34_t56" source="MYC_equals_1" target="MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0"/>
+<arc id="p34_t60" source="MYC_equals_1" target="p21_equals_1_to_p21_equals_0_when_MYC_equals_1"/>
+<arc id="p34_t65" source="MYC_equals_1" target="p27_equals_1_to_p27_equals_0_when_MYC_equals_1"/>
+<arc id="p35_t7" source="p21_equals_0" target="CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0"/>
+<arc id="p35_t11" source="p21_equals_0" target="CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0"/>
+<arc id="t35_p22" source="ERBB2_3_equals_0_to_ERBB2_3_equals_1_when_ERBB2_equals_1_and_ERBB3_equals_1" target="ERBB2_equals_1"/>
+<arc id="t35_p24" source="ERBB2_3_equals_0_to_ERBB2_3_equals_1_when_ERBB2_equals_1_and_ERBB3_equals_1" target="ERBB2_3_equals_1"/>
+<arc id="t35_p26" source="ERBB2_3_equals_0_to_ERBB2_3_equals_1_when_ERBB2_equals_1_and_ERBB3_equals_1" target="ERBB3_equals_1"/>
+<arc id="p35_t57" source="p21_equals_0" target="p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0"/>
+<arc id="p36_t9" source="p21_equals_1" target="CDK2_equals_1_to_CDK2_equals_0_when_p21_equals_1"/>
+<arc id="p36_t13" source="p21_equals_1" target="CDK4_equals_1_to_CDK4_equals_0_when_p21_equals_1"/>
+<arc id="t36_p21" source="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB2_equals_0" target="ERBB2_equals_0"/>
+<arc id="t36_p23" source="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB2_equals_0" target="ERBB2_3_equals_0"/>
+<arc id="p36_t58" source="p21_equals_1" target="p21_equals_1_to_p21_equals_0_when_AKT1_equals_1"/>
+<arc id="p36_t59" source="p21_equals_1" target="p21_equals_1_to_p21_equals_0_when_CDK4_equals_1"/>
+<arc id="p36_t60" source="p21_equals_1" target="p21_equals_1_to_p21_equals_0_when_MYC_equals_1"/>
+<arc id="p37_t7" source="p27_equals_0" target="CDK2_equals_0_to_CDK2_equals_1_when_CyclinE1_equals_1_and_p21_equals_0_and_p27_equals_0"/>
+<arc id="p37_t11" source="p27_equals_0" target="CDK4_equals_0_to_CDK4_equals_1_when_CyclinD1_equals_1_and_p21_equals_0_and_p27_equals_0"/>
+<arc id="t37_p23" source="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB3_equals_0" target="ERBB2_3_equals_0"/>
+<arc id="t37_p25" source="ERBB2_3_equals_1_to_ERBB2_3_equals_0_when_ERBB3_equals_0" target="ERBB3_equals_0"/>
+<arc id="p37_t61" source="p27_equals_0" target="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0"/>
+<arc id="p38_t10" source="p27_equals_1" target="CDK2_equals_1_to_CDK2_equals_0_when_p27_equals_1"/>
+<arc id="t38_p14" source="ERBB3_equals_0_to_ERBB3_equals_1_when_EGF_equals_1" target="EGF_equals_1"/>
+<arc id="p38_t14" source="p27_equals_1" target="CDK4_equals_1_to_CDK4_equals_0_when_p27_equals_1"/>
+<arc id="t38_p26" source="ERBB3_equals_0_to_ERBB3_equals_1_when_EGF_equals_1" target="ERBB3_equals_1"/>
+<arc id="p38_t62" source="p27_equals_1" target="p27_equals_1_to_p27_equals_0_when_AKT1_equals_1"/>
+<arc id="p38_t63" source="p27_equals_1" target="p27_equals_1_to_p27_equals_0_when_CDK2_equals_1"/>
+<arc id="p38_t64" source="p27_equals_1" target="p27_equals_1_to_p27_equals_0_when_CDK4_equals_1"/>
+<arc id="p38_t65" source="p27_equals_1" target="p27_equals_1_to_p27_equals_0_when_MYC_equals_1"/>
+<arc id="t39_p13" source="ERBB3_equals_1_to_ERBB3_equals_0_when_EGF_equals_0" target="EGF_equals_0"/>
+<arc id="t39_p25" source="ERBB3_equals_1_to_ERBB3_equals_0_when_EGF_equals_0" target="ERBB3_equals_0"/>
+<arc id="p39_t66" source="pRB1_equals_0" target="pRB1_equals_0_to_pRB1_equals_1_when_CDK4_equals_1_and_CDK6_equals_1"/>
+<arc id="t40_p2" source="ERalpha_equals_0_to_ERalpha_equals_1_when_AKT1_equals_1" target="AKT1_equals_1"/>
+<arc id="t40_p28" source="ERalpha_equals_0_to_ERalpha_equals_1_when_AKT1_equals_1" target="ERalpha_equals_1"/>
+<arc id="p40_t67" source="pRB1_equals_1" target="pRB1_equals_1_to_pRB1_equals_0_when_CDK4_equals_0"/>
+<arc id="p40_t68" source="pRB1_equals_1" target="pRB1_equals_1_to_pRB1_equals_0_when_CDK6_equals_0"/>
+<arc id="t41_p28" source="ERalpha_equals_0_to_ERalpha_equals_1_when_MEK1_equals_1" target="ERalpha_equals_1"/>
+<arc id="t41_p32" source="ERalpha_equals_0_to_ERalpha_equals_1_when_MEK1_equals_1" target="MEK1_equals_1"/>
+<arc id="t42_p1" source="ERalpha_equals_1_to_ERalpha_equals_0_when_AKT1_equals_0_and_MEK1_equals_0" target="AKT1_0"/>
+<arc id="t42_p27" source="ERalpha_equals_1_to_ERalpha_equals_0_when_AKT1_equals_0_and_MEK1_equals_0" target="ERalpha_equals_0"/>
+<arc id="t42_p31" source="ERalpha_equals_1_to_ERalpha_equals_0_when_AKT1_equals_0_and_MEK1_equals_0" target="MEK1_equals_0"/>
+<arc id="t43_p1" source="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1" target="AKT1_0"/>
+<arc id="t43_p23" source="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1" target="ERBB2_3_equals_0"/>
+<arc id="t43_p28" source="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1" target="ERalpha_equals_1"/>
+<arc id="t43_p30" source="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_0_and_ERBB2_3_equals_0_and_ERalpha_equals_1" target="IGF1R_equals_1"/>
+<arc id="t44_p2" source="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_1_and_ERBB2_3_equals_0" target="AKT1_equals_1"/>
+<arc id="t44_p23" source="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_1_and_ERBB2_3_equals_0" target="ERBB2_3_equals_0"/>
+<arc id="t44_p30" source="IGF1R_equals_0_to_IGF1R_equals_1_when_AKT1_equals_1_and_ERBB2_3_equals_0" target="IGF1R_equals_1"/>
+<arc id="t45_p1" source="IGF1R_equals_1_to_IGF1R_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0" target="AKT1_0"/>
+<arc id="t45_p27" source="IGF1R_equals_1_to_IGF1R_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0" target="ERalpha_equals_0"/>
+<arc id="t45_p29" source="IGF1R_equals_1_to_IGF1R_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0" target="IGF1R_equals_0"/>
+<arc id="t46_p24" source="IGF1R_equals_1_to_IGF1R_equals_0_when_ERBB2_3_equals_1" target="ERBB2_3_equals_1"/>
+<arc id="t46_p29" source="IGF1R_equals_1_to_IGF1R_equals_0_when_ERBB2_3_equals_1" target="IGF1R_equals_0"/>
+<arc id="t47_p16" source="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_equals_1" target="ERBB1_equals_1"/>
+<arc id="t47_p32" source="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_equals_1" target="MEK1_equals_1"/>
+<arc id="t48_p18" source="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_2_equals_1" target="ERBB1_2_equals_1"/>
+<arc id="t48_p32" source="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_2_equals_1" target="MEK1_equals_1"/>
+<arc id="t49_p20" source="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_3_equals_1" target="ERBB1_3_equals_1"/>
+<arc id="t49_p32" source="MEK1_equals_0_to_MEK1_equals_1_when_ERBB1_3_equals_1" target="MEK1_equals_1"/>
+<arc id="t50_p24" source="MEK1_equals_0_to_MEK1_equals_1_when_ERBB2_3_equals_1" target="ERBB2_3_equals_1"/>
+<arc id="t50_p32" source="MEK1_equals_0_to_MEK1_equals_1_when_ERBB2_3_equals_1" target="MEK1_equals_1"/>
+<arc id="t51_p30" source="MEK1_equals_0_to_MEK1_equals_1_when_IGF1R_equals_1" target="IGF1R_equals_1"/>
+<arc id="t51_p32" source="MEK1_equals_0_to_MEK1_equals_1_when_IGF1R_equals_1" target="MEK1_equals_1"/>
+<arc id="t52_p15" source="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="ERBB1_equals_0"/>
+<arc id="t52_p17" source="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="ERBB1_2_equals_0"/>
+<arc id="t52_p19" source="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="ERBB1_3_equals_0"/>
+<arc id="t52_p23" source="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="ERBB2_3_equals_0"/>
+<arc id="t52_p29" source="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="IGF1R_equals_0"/>
+<arc id="t52_p31" source="MEK1_equals_1_to_MEK1_equals_0_when_ERBB1_equals_0_and_ERBB1_2_equals_0_and_ERBB1_3_equals_0_and_ERBB2_3_equals_0_and_IGF1R_equals_0" target="MEK1_equals_0"/>
+<arc id="t53_p2" source="MYC_equals_0_to_MYC_equals_1_when_AKT1_equals_1" target="AKT1_equals_1"/>
+<arc id="t53_p34" source="MYC_equals_0_to_MYC_equals_1_when_AKT1_equals_1" target="MYC_equals_1"/>
+<arc id="t54_p28" source="MYC_equals_0_to_MYC_equals_1_when_ERalpha_equals_1" target="ERalpha_equals_1"/>
+<arc id="t54_p34" source="MYC_equals_0_to_MYC_equals_1_when_ERalpha_equals_1" target="MYC_equals_1"/>
+<arc id="t55_p32" source="MYC_equals_0_to_MYC_equals_1_when_MEK1_equals_1" target="MEK1_equals_1"/>
+<arc id="t55_p34" source="MYC_equals_0_to_MYC_equals_1_when_MEK1_equals_1" target="MYC_equals_1"/>
+<arc id="t56_p1" source="MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0" target="AKT1_0"/>
+<arc id="t56_p27" source="MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0" target="ERalpha_equals_0"/>
+<arc id="t56_p31" source="MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0" target="MEK1_equals_0"/>
+<arc id="t56_p33" source="MYC_equals_1_to_MYC_equals_0_when_AKT1_equals_0_and_ERalpha_equals_0_and_MEK1_equals_0" target="MYC_equals_0"/>
+<arc id="t57_p1" source="p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0" target="AKT1_0"/>
+<arc id="t57_p5" source="p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0" target="CDK4_equals_0"/>
+<arc id="t57_p33" source="p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0" target="MYC_equals_0"/>
+<arc id="t57_p36" source="p21_equals_0_to_p21_equals_1_when_AKT1_equals_0_and_CDK4_equals_0_and_MYC_equals_0" target="p21_equals_1"/>
+<arc id="t58_p2" source="p21_equals_1_to_p21_equals_0_when_AKT1_equals_1" target="AKT1_equals_1"/>
+<arc id="t58_p35" source="p21_equals_1_to_p21_equals_0_when_AKT1_equals_1" target="p21_equals_0"/>
+<arc id="t59_p6" source="p21_equals_1_to_p21_equals_0_when_CDK4_equals_1" target="CDK4_equals_1"/>
+<arc id="t59_p35" source="p21_equals_1_to_p21_equals_0_when_CDK4_equals_1" target="p21_equals_0"/>
+<arc id="t60_p34" source="p21_equals_1_to_p21_equals_0_when_MYC_equals_1" target="MYC_equals_1"/>
+<arc id="t60_p35" source="p21_equals_1_to_p21_equals_0_when_MYC_equals_1" target="p21_equals_0"/>
+<arc id="t61_p1" source="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0" target="AKT1_0"/>
+<arc id="t61_p3" source="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0" target="CDK2_equals_0"/>
+<arc id="t61_p5" source="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0" target="CDK4_equals_0"/>
+<arc id="t61_p33" source="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0" target="MYC_equals_0"/>
+<arc id="t61_p38" source="p27_equals_0_to_p27_equals_1_when_AKT1_equals_0_and_CDK2_equals_0_and_CDK4_equals_0_and_MYC_equals_0" target="p27_equals_1"/>
+<arc id="t62_p2" source="p27_equals_1_to_p27_equals_0_when_AKT1_equals_1" target="AKT1_equals_1"/>
+<arc id="t62_p37" source="p27_equals_1_to_p27_equals_0_when_AKT1_equals_1" target="p27_equals_0"/>
+<arc id="t63_p4" source="p27_equals_1_to_p27_equals_0_when_CDK2_equals_1" target="CDK2_equals_1"/>
+<arc id="t63_p37" source="p27_equals_1_to_p27_equals_0_when_CDK2_equals_1" target="p27_equals_0"/>
+<arc id="t64_p6" source="p27_equals_1_to_p27_equals_0_when_CDK4_equals_1" target="CDK4_equals_1"/>
+<arc id="t64_p37" source="p27_equals_1_to_p27_equals_0_when_CDK4_equals_1" target="p27_equals_0"/>
+<arc id="t65_p34" source="p27_equals_1_to_p27_equals_0_when_MYC_equals_1" target="MYC_equals_1"/>
+<arc id="t65_p37" source="p27_equals_1_to_p27_equals_0_when_MYC_equals_1" target="p27_equals_0"/>
+<arc id="t66_p6" source="pRB1_equals_0_to_pRB1_equals_1_when_CDK4_equals_1_and_CDK6_equals_1" target="CDK4_equals_1"/>
+<arc id="t66_p8" source="pRB1_equals_0_to_pRB1_equals_1_when_CDK4_equals_1_and_CDK6_equals_1" target="CDK6_equals_1"/>
+<arc id="t66_p40" source="pRB1_equals_0_to_pRB1_equals_1_when_CDK4_equals_1_and_CDK6_equals_1" target="pRB1_equals_1"/>
+<arc id="t67_p5" source="pRB1_equals_1_to_pRB1_equals_0_when_CDK4_equals_0" target="CDK4_equals_0"/>
+<arc id="t67_p39" source="pRB1_equals_1_to_pRB1_equals_0_when_CDK4_equals_0" target="pRB1_equals_0"/>
+<arc id="t68_p7" source="pRB1_equals_1_to_pRB1_equals_0_when_CDK6_equals_0" target="CDK6_equals_0"/>
+<arc id="t68_p39" source="pRB1_equals_1_to_pRB1_equals_0_when_CDK6_equals_0" target="pRB1_equals_0"/>
+<toolspecific tool="nupn" version="1.1">
+<size places="40" transitions="68" arcs="338"/>
+<structure units="21" root="u0" safe="true">
+<unit id="u0">
+<places/>
+<subunits>u1 u2 u3 u4 u5 u6 u7 u8 u9 u10 u11 u12 u13 u14 u15 u16 u17 u18 u19 u20</subunits>
+</unit>
+<unit id="u1">
+<places>pRB1_equals_0 pRB1_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u2">
+<places>p27_equals_0 p27_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u3">
+<places>p21_equals_0 p21_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u4">
+<places>MEK1_equals_0 MEK1_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u5">
+<places>IGF1R_equals_0 IGF1R_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u6">
+<places>ERBB2_3_equals_0 ERBB2_3_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u7">
+<places>ERBB1_3_equals_0 ERBB1_3_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u8">
+<places>ERBB3_equals_0 ERBB3_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u9">
+<places>ERBB1_2_equals_0 ERBB1_2_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u10">
+<places>ERBB2_equals_0 ERBB2_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u11">
+<places>ERBB1_equals_0 ERBB1_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u12">
+<places>EGF_equals_0 EGF_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u13">
+<places>MYC_equals_0 MYC_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u14">
+<places>ERalpha_equals_0 ERalpha_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u15">
+<places>CyclinE1_equals_0 CyclinE1_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u16">
+<places>CyclinD1_equals_0 CyclinD1_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u17">
+<places>CDK6_equals_0 CDK6_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u18">
+<places>CDK4_equals_0 CDK4_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u19">
+<places>CDK2_equals_0 CDK2_equals_1</places>
+<subunits/>
+</unit>
+<unit id="u20">
+<places>AKT1_0 AKT1_equals_1</places>
+<subunits/>
+</unit>
+</structure>
+</toolspecific>
+</page><name><text>EGFr-PT-02010</text></name></net></pnml>
