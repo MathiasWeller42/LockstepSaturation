@@ -16,27 +16,34 @@
 #include "../src/print.h"
 
 bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs, algorithmType algorithm) {
+  std::pair<std::list<sylvan::Bdd>, int> sccAndSteps;
   std::cout << "Called testGraph" << std::endl;
   std::list<sylvan::Bdd> result;
   switch (algorithm)
   {
     case lockstepSat:         
-      result = lockstepSaturation(graph); 
+      sccAndSteps = lockstepSaturation(graph); 
+      result = sccAndSteps.first;
       break;
     case lockstepRelUnion:    
-      result = lockstepRelationUnion(graph); 
-      break;
-    case lockstepLitRelUnion: 
-      result = lockstepLiteralRelationUnion(graph); 
+      sccAndSteps = lockstepRelationUnion(graph);
+      result = sccAndSteps.first; 
       break;
     case xbSat:               
-      result = xieBeerelSaturation(graph); 
+      sccAndSteps = xieBeerelSaturation(graph);
+      result = sccAndSteps.first; 
       break;
     case xbRelUnion:          
-      result = xieBeerelRelationUnion(graph); 
+      sccAndSteps = xieBeerelRelationUnion(graph);
+      result = sccAndSteps.first; 
       break;
-    case xbLitRelUnion:       
-      result = xieBeerelLiteralRelationUnion(graph); 
+    case xbBackwardSat:
+      sccAndSteps = xieBeerelBackwardSaturation(graph);
+      result = sccAndSteps.first;
+      break;
+    case xbBackwardRelUnion:
+      sccAndSteps = xieBeerelBackwardRelationUnion(graph);
+      result = sccAndSteps.first;
       break;
   }
 
@@ -67,10 +74,6 @@ int runWithAllAlgorithmTypes(std::string testFunctionString, std::function<bool(
     std::cout << testFunctionString << " " << algoToString(lockstepRelUnion) << " failed" << std::endl;
     fails++;
   } 
-  if(!testFunction(lockstepLitRelUnion)) {
-    std::cout << testFunctionString << " " << algoToString(lockstepLitRelUnion) << " failed" << std::endl;
-    fails++;
-  }
   if(!testFunction(xbSat)) {
     std::cout << testFunctionString << " " << algoToString(xbSat) << " failed" << std::endl;
     fails++;
@@ -79,10 +82,18 @@ int runWithAllAlgorithmTypes(std::string testFunctionString, std::function<bool(
     std::cout << testFunctionString << " " << algoToString(xbRelUnion) << " failed" << std::endl;
     fails++;
   }
-  if(!testFunction(xbLitRelUnion)) {
-    std::cout << testFunctionString << " " << algoToString(xbLitRelUnion) << " failed" << std::endl;
+  if(!testFunction(xbBackwardRelUnion)) {
+    std::cout << testFunctionString << " " << algoToString(xbBackwardRelUnion) << " failed" << std::endl;
     fails++;
   }
+
+if(!testFunction(xbBackwardSat)) {
+    std::cout << testFunctionString << " " << algoToString(xbBackwardSat) << " failed" << std::endl;
+    fails++;
+  }
+
+
+
   return fails;
 }
 

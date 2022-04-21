@@ -29,10 +29,10 @@ int main() {
   std::cout << "Hello World!" << std::endl;
 
   std::list<std::string> pathStrings = getPathStrings();
-  int maxPreprocess = -1;
+  int maxPreprocess = 0;
   int minPreprocess = 0;
   bool useInitialMarking = false;
-  std::list<algorithmType> runTypes = {xbSat, /*lockstepSat, xbRelUnion, lockstepRelUnion,*/ xbLitRelUnion, lockstepLitRelUnion};
+  std::list<algorithmType> runTypes = {xbSat, xbBackwardSat, lockstepSat, xbRelUnion, xbBackwardRelUnion, lockstepRelUnion};
   experiment(pathStrings, maxPreprocess, minPreprocess, useInitialMarking, runTypes);
 
   std::cout << "Goodbye :)" << std::endl;

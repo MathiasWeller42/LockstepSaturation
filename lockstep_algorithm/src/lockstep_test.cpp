@@ -26,8 +26,9 @@
 std::list<std::string> getPathStrings() {
   std::list<std::string> resultList = {};
   resultList.push_back("ShieldRVt/PT/shield_t_rv_001_a_11place.pnml");                        //11
-/*  resultList.push_back("ShieldRVs/PT/shield_s_rv_001_a_17place.pnml");                        //17
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_001_a_17place.pnml");                        //17
   resultList.push_back("ShieldRVt/PT/shield_t_rv_002_a_19place.pnml");                        //19
+/*
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_a_22place.pnml");                      //22
   resultList.push_back("GPUForwardProgress/PT/gpufp_04_a_24place.pnml");                      //24
   resultList.push_back("ShieldRVt/PT/shield_t_rv_003_a_27place.pnml");                        //27
@@ -51,7 +52,6 @@ std::list<std::string> getPathStrings() {
   resultList.push_back("GPUForwardProgress/PT/gpufp_12_a_56place.pnml");                      //56
   resultList.push_back("ShieldRVs/PT/shield_s_rv_004_a_59place.pnml");                        //59
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_a_60place.pnml");                      //60
-
   resultList.push_back("DiscoveryGPU/PT/discovery_06_a_63place.pnml");                        //63
   resultList.push_back("ShieldPPPs/PT/shield_s_ppp_002_a_65place.pnml");                      //65
   resultList.push_back("ShieldPPPs/PT/shield_s_ppp_001_b_71place.pnml");                      //71
@@ -362,26 +362,33 @@ std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs, int 
 }
 
 std::pair<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>> timeRun(const Graph &graph, algorithmType runType) {
+  std::pair<std::list<sylvan::Bdd>, int> sccAndSteps;
   std::list<sylvan::Bdd> sccList;
   auto start = std::chrono::high_resolution_clock::now();
   switch(runType) {
     case lockstepSat:
-      sccList = lockstepSaturation(graph);
+      sccAndSteps = lockstepSaturation(graph);
+      sccList = sccAndSteps.first;
       break;
     case lockstepRelUnion:
-      sccList = lockstepRelationUnion(graph);
-      break;
-    case lockstepLitRelUnion:
-      sccList = lockstepLiteralRelationUnion(graph);
+      sccAndSteps = lockstepRelationUnion(graph);
+      sccList = sccAndSteps.first;
       break;
     case xbSat:
-      sccList = xieBeerelSaturation(graph);
+      sccAndSteps = xieBeerelSaturation(graph);
+      sccList = sccAndSteps.first;
       break;
     case xbRelUnion:
-      sccList = xieBeerelRelationUnion(graph);
+      sccAndSteps = xieBeerelRelationUnion(graph);
+      sccList = sccAndSteps.first;
       break;
-    case xbLitRelUnion:
-      sccList = xieBeerelLiteralRelationUnion(graph);
+    case xbBackwardSat:
+      sccAndSteps = xieBeerelBackwardSaturation(graph);
+      sccList = sccAndSteps.first;
+      break;
+    case xbBackwardRelUnion:
+      sccAndSteps = xieBeerelBackwardRelationUnion(graph);
+      sccList = sccAndSteps.first;
       break;
   }
 

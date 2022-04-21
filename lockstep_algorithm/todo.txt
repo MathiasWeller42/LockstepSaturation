@@ -1,17 +1,11 @@
 Den mest dank-swaggern todo-liste #WØRF uWu *tips fedora*
 -----------------------------------------------
 TODO 1 : Skriv til Jaco og bed om en PN-artikel
-TODO 2 : Find flere PN (ikke nødvendigvis safe - MCC + google)
-TODO 3 : Fix læsning af pnml-filer
-TODO 4: Hvorfor er litrelunion broken?
+TODO 2 : Fix læsning af pnml-filer (hvis nødvendigt)
 
 TODO i+1 : clean-up, **kommentarer** og læsbarhed (lav et pænt interface)
 
-TODO j+2 : asserts i lockstep??
-TODO j+3 : optimer iterative lockstep
-TODO j+4 : faktorér kopieret kode ud i lockstep
-
-TODO i : Husk at tests er en ting...
+TODO j : Husk at tests er en ting...
 
 TODO x : Græd
 TODO y : #Forskning

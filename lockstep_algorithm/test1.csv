@@ -1,6 +1,25 @@
 Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;
-Xie-Beerel saturation;11;11;124;84;1,476190;
-Xie-Beerel literal relation union;11;11;109;77;1,415584;
-Lockstep literal relation union;11;11;109;87;1,252874;
+Xie-Beerel saturation;11;11;1;3;0,333333;
+Xie-Beerel backward saturation;11;11;1;1;1,000000;
+Lockstep saturation;11;11;1;0;inf;
+Xie-Beerel relation union;11;11;1;6;0,166667;
+Xie-Beerel backward relation union;11;11;1;1;1,000000;
+Lockstep relation union;11;11;1;1;1,000000;
+
+Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;
+Xie-Beerel saturation;17;22;9;67;0,134328;
+Xie-Beerel backward saturation;17;22;9;25;0,360000;
+Lockstep saturation;17;22;9;21;0,428571;
+Xie-Beerel relation union;17;22;9;44;0,204545;
+Xie-Beerel backward relation union;17;22;9;16;0,562500;
+Lockstep relation union;17;22;9;15;0,600000;
+
+Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;
+Xie-Beerel saturation;19;19;1;15;0,066667;
+Xie-Beerel backward saturation;19;19;1;5;0,200000;
+Lockstep saturation;19;19;1;4;0,250000;
+Xie-Beerel relation union;19;19;1;31;0,032258;
+Xie-Beerel backward relation union;19;19;1;5;0,200000;
+Lockstep relation union;19;19;1;4;0,250000;
 
 Algorithm run;Places;Relations;

@@ -7,10 +7,10 @@ enum algorithmType
 {
   lockstepSat,
   lockstepRelUnion,
-  lockstepLitRelUnion,
   xbSat,
   xbRelUnion,
-  xbLitRelUnion
+  xbBackwardSat, 
+  xbBackwardRelUnion
 };
 
 inline const std::string algoToString(algorithmType runType) {
@@ -20,14 +20,14 @@ inline const std::string algoToString(algorithmType runType) {
       return "Lockstep saturation";
     case lockstepRelUnion:
       return "Lockstep relation union";
-    case lockstepLitRelUnion:
-      return "Lockstep literal relation union";
     case xbSat:
       return "Xie-Beerel saturation";
     case xbRelUnion:
       return "Xie-Beerel relation union";
-    case xbLitRelUnion:
-      return "Xie-Beerel literal relation union";
+    case xbBackwardSat:
+      return "Xie-Beerel backward saturation";
+    case xbBackwardRelUnion:
+      return "Xie-Beerel backward relation union";
     default:
       return "[Unknown Algorithm type]";
   }
