@@ -13,7 +13,7 @@
 #include "../src/lockstep.h"
 #include "../src/bdd_utilities.h"
 #include "../src/petriTranslation.h"
-#include "../src/lockstep_test.h"
+#include "../src/benchmark.h"
 
 bool testNoGraph(algorithmType algorithm);
 bool testOneNodeGraph(algorithmType algorithm);
@@ -30,6 +30,7 @@ bool testGraphExample2multRel(algorithmType algorithm);
 bool testGraphExample3oneRel(algorithmType algorithm);
 bool testGraphExample3multRel(algorithmType algorithm);
 int runWithAllAlgorithmTypes(std::string testFunctionString, std::function<bool(algorithmType)> testFunction);
+bool runTest(std::string testFunctionString, std::function<bool()> testFunction, bool expectedResult);
 
 bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> expectedSCCs, algorithmType algorithm);
 

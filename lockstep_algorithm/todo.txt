@@ -1,7 +1,6 @@
 Den mest dank-swaggern todo-liste #WØRF uWu *tips fedora*
 -----------------------------------------------
 TODO 1 : Skriv til Jaco og bed om en PN-artikel
-TODO 2 : Fix læsning af pnml-filer (hvis nødvendigt)
 
 TODO i+1 : clean-up, **kommentarer** og læsbarhed (lav et pænt interface)
 

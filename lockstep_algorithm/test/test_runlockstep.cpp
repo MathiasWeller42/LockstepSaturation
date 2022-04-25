@@ -12,7 +12,7 @@
 #include "../src/bdd_utilities.h"
 #include "../src/petriTranslation.h"
 #include "../src/graph_creation.h"
-#include "../src/lockstep_test.h"
+#include "../src/benchmark.h"
 #include "../src/print.h"
 
 bool testGraph(const Graph &graph, const std::list<sylvan::Bdd> &expectedSCCs, algorithmType algorithm) {
@@ -70,31 +70,42 @@ int runWithAllAlgorithmTypes(std::string testFunctionString, std::function<bool(
     std::cout << testFunctionString << " " << algoToString(lockstepSat) << " failed" << std::endl;
     fails++;
   }
+
   if(!testFunction(lockstepRelUnion)) {
     std::cout << testFunctionString << " " << algoToString(lockstepRelUnion) << " failed" << std::endl;
     fails++;
-  } 
+  }
+
   if(!testFunction(xbSat)) {
     std::cout << testFunctionString << " " << algoToString(xbSat) << " failed" << std::endl;
     fails++;
   }
+
   if(!testFunction(xbRelUnion)) {
     std::cout << testFunctionString << " " << algoToString(xbRelUnion) << " failed" << std::endl;
     fails++;
   }
+
   if(!testFunction(xbBackwardRelUnion)) {
     std::cout << testFunctionString << " " << algoToString(xbBackwardRelUnion) << " failed" << std::endl;
     fails++;
   }
 
-if(!testFunction(xbBackwardSat)) {
+  if(!testFunction(xbBackwardSat)) {
     std::cout << testFunctionString << " " << algoToString(xbBackwardSat) << " failed" << std::endl;
     fails++;
   }
 
-
-
   return fails;
+}
+
+bool runTest(std::string testFunctionString, std::function<bool()> testFunction, bool expectedResult) {
+  if(testFunction() == expectedResult) {
+    return true;
+  } else {
+    std::cout << testFunctionString << " failed" << std::endl;
+    return false; 
+  }
 }
 
 bool testNoGraph(algorithmType algorithm) {

@@ -123,31 +123,26 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
 
   for(int placeNum : selfLoops) {
     sylvan::Bdd beforeSource = ithvar(placeNum);
-    resultBdd = resultBdd.And(beforeSource);
+    resultBdd = intersectBdd(resultBdd, beforeSource);
 
     sylvan::Bdd afterSource = ithvar(placeNum+1);
-    resultBdd = resultBdd.And(afterSource);
+    resultBdd = intersectBdd(resultBdd, afterSource);
   }
 
   for(int placeNum : newSources) {
     //The source places have tokens before the transition
     sylvan::Bdd beforeSource = ithvar(placeNum);
-    resultBdd = resultBdd.And(beforeSource);
+    resultBdd = intersectBdd(resultBdd, beforeSource);
 
     //After the transition, the source places have no tokens
     sylvan::Bdd afterSource = nithvar(placeNum + 1);
-    resultBdd = resultBdd.And(afterSource);
+    resultBdd = intersectBdd(resultBdd, afterSource);
   }
 
   for(int placeNum : newTargets) {
-    //The target places have no tokens before the transition
-    //TODO: Overvej om det kan fjerererererernes.
-    /*sylvan::Bdd beforeTarget = nithvar(placeNum);
-    resultBdd = resultBdd.And(beforeTarget);*/
-
     //After the transition, the target places now have tokens
     sylvan::Bdd afterTarget = ithvar(placeNum + 1);
-    resultBdd = resultBdd.And(afterTarget);
+    resultBdd = intersectBdd(resultBdd, afterTarget);
   }
 
   result.relationBdd = resultBdd;
@@ -280,7 +275,7 @@ Graph PNMLtoGraph(std::string fileString, bool useInitialMarking) {
   sylvan::Bdd initialBdd = leaf_true();
   for(int i = 0; i < 2*numPlaces; i=i+2) {
     sylvan::Bdd placeMarking =  initialMarking.find(i) != initialMarking.end() ? ithvar(i) : nithvar(i);
-    initialBdd = initialBdd.And(placeMarking);
+    initialBdd = intersectBdd(initialBdd, placeMarking);
   }
 
   Graph pnmlGraph;

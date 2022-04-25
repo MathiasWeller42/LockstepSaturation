@@ -8,7 +8,7 @@
 #include "graph_examples.h"
 #include "../src/petriTranslation.h"
 #include "../src/graph_creation.h"
-#include "../src/lockstep_test.h"
+#include "../src/benchmark.h"
 #include "../src/print.h"
 #include "../src/bdd_utilities.h"
 

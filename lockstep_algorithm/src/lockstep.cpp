@@ -3,6 +3,7 @@
 #include <deque>
 #include <stack>
 #include <vector>
+#include <chrono>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
@@ -20,6 +21,10 @@ sylvan::Bdd pick(const sylvan::Bdd &nodeSet, const sylvan::BddSet &cube) {
 
 //LOCKSTEP SATURATION ITERATIVE ##########################################################################
 std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph) {
+  auto start = std::chrono::high_resolution_clock::now();
+  auto stop = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+
   int symbolicSteps = 0;
 
   std::cout << "Running lockstepSaturation" << std::endl;
@@ -37,6 +42,13 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph
   const std::deque<Relation> relationDeque = fullGraph.relations;
 
   while(!callStack.empty()) {
+    stop = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+    if((int)duration.count() > 60000) {
+      std::cout << "Took too long " << (int)duration.count() << std::endl;
+      return {{},0};
+    }
+
     const sylvan::Bdd nodeSet = callStack.top();
     callStack.pop();
 
@@ -75,8 +87,8 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph
         relBackCube = relationDeque[relBackI].cube;
       } else {
         relBackI = 0;
-        relBack = relationDeque[relBackI].relationBdd;
-        relBackCube = relationDeque[relBackI].cube;
+        relBack = relationDeque[0].relationBdd;
+        relBackCube = relationDeque[0].cube;
       }
 
       //Add to the forward and backward sets
@@ -97,34 +109,34 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph
       forwardSet = nonConverged;
     }
 
-    //Find where the non-converged overlaps the converged set
-    while(relFrontI < relationDeque.size() || relBackI < relationDeque.size()) {
-      if(frontConverged) {
-        sylvan::Bdd relResultBack = differenceBdd(intersectBdd(backwardSet.RelPrev(relBack, relBackCube), forwardSet), backwardSet);
-        symbolicSteps++;
-        if(intersectBdd(relResultBack, forwardSet) == leaf_false()) {
-          relBackI++;
-          relBack = relationDeque[relBackI].relationBdd;
-          relBackCube = relationDeque[relBackI].cube;
-        } else {
-          relBackI = 0;
-          relBack = relationDeque[relBackI].relationBdd;
-          relBackCube = relationDeque[relBackI].cube;
-          backwardSet = unionBdd(backwardSet, relResultBack);
-        }
+
+    while(relFrontI < relationDeque.size()) {
+      sylvan::Bdd relResultFront = differenceBdd(intersectBdd(forwardSet.RelNext(relFront, relFrontCube), backwardSet), forwardSet);
+      symbolicSteps++;
+      if(relResultFront == leaf_false()) {
+        relFrontI++;
+        relFront = relationDeque[relFrontI].relationBdd;
+        relFrontCube = relationDeque[relFrontI].cube;
       } else {
-        sylvan::Bdd relResultFront = differenceBdd(intersectBdd(forwardSet.RelNext(relFront, relFrontCube), backwardSet), forwardSet);
-        symbolicSteps++;
-        if(intersectBdd(relResultFront, backwardSet) == leaf_false()) {
-          relFrontI++;
-          relFront = relationDeque[relFrontI].relationBdd;
-          relFrontCube = relationDeque[relFrontI].cube;
-        } else {
-          relFrontI = 0;
-          relFront = relationDeque[relFrontI].relationBdd;
-          relFrontCube = relationDeque[relFrontI].cube;
-          forwardSet = unionBdd(forwardSet, relResultFront);
-        }
+        relFrontI = 0;
+        relFront = relationDeque[0].relationBdd;
+        relFrontCube = relationDeque[0].cube;
+        forwardSet = unionBdd(forwardSet, relResultFront);
+      }
+    }
+
+    while(relBackI < relationDeque.size()) {
+      sylvan::Bdd relResultBack = differenceBdd(intersectBdd(backwardSet.RelPrev(relBack, relBackCube), forwardSet), backwardSet);
+      symbolicSteps++;
+      if(relResultBack == leaf_false()) {
+        relBackI++;
+        relBack = relationDeque[relBackI].relationBdd;
+        relBackCube = relationDeque[relBackI].cube;
+      } else {
+        relBackI = 0;
+        relBack = relationDeque[0].relationBdd;
+        relBackCube = relationDeque[0].cube;
+        backwardSet = unionBdd(backwardSet, relResultBack);
       }
     }
 
@@ -197,13 +209,11 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepRelationUnion(const Graph &fullGr
     bool somethingChangedFront = true;
     bool somethingChangedBack = true;
 
-    int woop = 0;
     while(somethingChangedFront && somethingChangedBack) {
       somethingChangedFront = false;
       somethingChangedBack = false;
 
       for(int i = 0 ; i < relationDeque.size(); i++) {
-        woop++;
         currentRelation = relationDeque[i].relationBdd;
         currentRelationCube = relationDeque[i].cube;
 
@@ -211,6 +221,7 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepRelationUnion(const Graph &fullGr
         sylvan::Bdd relResultFront = differenceBdd(intersectBdd(forwardFront.RelNext(currentRelation, currentRelationCube), nodeSet), forwardSet);
         sylvan::Bdd relResultBack = differenceBdd(intersectBdd(backwardFront.RelPrev(currentRelation, currentRelationCube), nodeSet), backwardSet);
         symbolicSteps = symbolicSteps + 2;
+
         //We accumulate the entire ring by adding the partial rings from all relations
         forwardAcc = unionBdd(forwardAcc, relResultFront);
         backwardAcc = unionBdd(backwardAcc, relResultBack);
@@ -222,6 +233,7 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepRelationUnion(const Graph &fullGr
       if(backwardAcc != leaf_false()) {
         somethingChangedBack = true;
       }
+
       //Add everything to forward and backward sets
       forwardSet = unionBdd(forwardSet, forwardAcc);
       backwardSet = unionBdd(backwardSet, backwardAcc);
@@ -246,29 +258,8 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepRelationUnion(const Graph &fullGr
       forwardSet = nonConverged;
     }
 
-    //Find where the non-converged overlaps the converged set
-    while(somethingChangedFront || somethingChangedBack) {
-      if(frontConverged) {
-        somethingChangedBack = false;
-        for(int i = 0 ; i < relationDeque.size(); i++) {
-          currentRelation = relationDeque[i].relationBdd;
-          currentRelationCube = relationDeque[i].cube;
-
-          //Finds part of the next ring with the active relation
-          sylvan::Bdd relResultBack = differenceBdd(intersectBdd(backwardFront.RelPrev(currentRelation, currentRelationCube), forwardSet), backwardSet);
-          symbolicSteps++;
-          if(relResultBack != leaf_false()) {
-            somethingChangedBack = true;
-          }
-          backwardAcc = unionBdd(backwardAcc, relResultBack);
-        }
-        backwardSet = unionBdd(backwardSet, backwardAcc);
-
-        //Find new ring and reset accumulator
-        backwardFront = differenceBdd(backwardAcc, backwardFront);
-        backwardAcc = leaf_false();
-      } else {
-        somethingChangedFront = false;
+    while(somethingChangedFront) {
+      somethingChangedFront = false;
         for(int i = 0 ; i < relationDeque.size(); i++) {
           currentRelation = relationDeque[i].relationBdd;
           currentRelationCube = relationDeque[i].cube;
@@ -276,17 +267,37 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepRelationUnion(const Graph &fullGr
           //Finds part of the next ring with the active relation
           sylvan::Bdd relResultFront = differenceBdd(intersectBdd(forwardFront.RelNext(currentRelation, currentRelationCube), backwardSet), forwardSet);
           symbolicSteps++;
-          if(relResultFront != leaf_false()) {
-            somethingChangedFront = true;
-          }
           forwardAcc = unionBdd(forwardAcc, relResultFront);
+        }
+        if(forwardAcc != leaf_false()) {
+          somethingChangedFront = true;
         }
         forwardSet = unionBdd(forwardSet, forwardAcc);
 
         //Find new ring and reset accumulator
         forwardFront = differenceBdd(forwardAcc, forwardFront);
         forwardAcc = leaf_false();
-      }
+    }
+
+    while(somethingChangedBack) {
+      somethingChangedBack = false;
+        for(int i = 0 ; i < relationDeque.size(); i++) {
+          currentRelation = relationDeque[i].relationBdd;
+          currentRelationCube = relationDeque[i].cube;
+
+          //Finds part of the next ring with the active relation
+          sylvan::Bdd relResultBack = differenceBdd(intersectBdd(backwardFront.RelPrev(currentRelation, currentRelationCube), forwardSet), backwardSet);
+          symbolicSteps++;
+          backwardAcc = unionBdd(backwardAcc, relResultBack);
+        }
+        if(backwardAcc != leaf_false()) {
+          somethingChangedBack = true;
+        }
+        backwardSet = unionBdd(backwardSet, backwardAcc);
+
+        //Find new ring and reset accumulator
+        backwardFront = differenceBdd(backwardAcc, backwardFront);
+        backwardAcc = leaf_false();
     }
 
     //Create SCC

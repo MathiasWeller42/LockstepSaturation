@@ -7,7 +7,7 @@
 
 #include "lockstep.h"
 #include "petriTranslation.h"
-#include "lockstep_test.h"
+#include "benchmark.h"
 #include "print.h"
 #include "../test/graph_examples.h"
 
@@ -29,11 +29,12 @@ int main() {
   std::cout << "Hello World!" << std::endl;
 
   std::list<std::string> pathStrings = getPathStrings();
-  int maxPreprocess = 0;
+  int maxPreprocess = -1;
   int minPreprocess = 0;
-  bool useInitialMarking = false;
-  std::list<algorithmType> runTypes = {xbSat, xbBackwardSat, lockstepSat, xbRelUnion, xbBackwardRelUnion, lockstepRelUnion};
-  experiment(pathStrings, maxPreprocess, minPreprocess, useInitialMarking, runTypes);
+  bool useInitialMarking = true;
+  std::list<algorithmType> runTypes = {/*xbSat, xbBackwardSat,*/ lockstepSat/*, xbRelUnion, xbBackwardRelUnion, lockstepRelUnion*/};
+  std::string fileName = "test4";
+  experiment(pathStrings, minPreprocess, maxPreprocess, useInitialMarking, runTypes, fileName);
 
   std::cout << "Goodbye :)" << std::endl;
 

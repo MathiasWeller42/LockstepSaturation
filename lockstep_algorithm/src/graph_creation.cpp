@@ -31,7 +31,7 @@ sylvan::Bdd makeNode(std::string &bitstring) {
     } else {
       currentBdd = nithvar(currentI);
     }
-    resultBdd = resultBdd.And(currentBdd);
+    resultBdd = intersectBdd(resultBdd, currentBdd);
   }
   return resultBdd;
 }
@@ -43,7 +43,7 @@ sylvan::Bdd makeNodes(std::list<std::string> &bitstrings) {
   sylvan::Bdd resultBdd = leaf_false();
   for(std::string currentBitstring : bitstrings) {
     currentBdd = makeNode(currentBitstring);
-    resultBdd = resultBdd.Or(currentBdd);
+    resultBdd = unionBdd(resultBdd, currentBdd);
   }
   return resultBdd;
 }
@@ -72,7 +72,7 @@ inline sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo)
     } else {
       currentBddTo = nithvar(currentITo);
     }
-    resultBdd = resultBdd.And(currentBddFrom).And(currentBddTo);
+    resultBdd = intersectBdd(intersectBdd(resultBdd, currentBddFrom), currentBddTo);
   }
   return resultBdd;
 }
@@ -82,7 +82,7 @@ Relation makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings
   sylvan::Bdd resultBdd = leaf_false();
   for(std::pair<std::string, std::string> currentPair : bitstrings) {
     currentBdd = makeArc(currentPair.first, currentPair.second);
-    resultBdd = resultBdd.Or(currentBdd);
+    resultBdd = unionBdd(resultBdd, currentBdd);
   }
   Relation resultRelation = {};
   resultRelation.relationBdd = resultBdd;

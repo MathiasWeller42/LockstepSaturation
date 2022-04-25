@@ -48,7 +48,4 @@ inline sylvan::Bdd pickAssignment(const sylvan::Bdd &bdd, const sylvan::BddSet &
   return makeNode(bitString);
 }
 
-bool hasOddVars(const sylvan::Bdd &bdd);
-std::list<int> getVars(const sylvan::Bdd &bdd);
-
 #endif //BDD_UTILITIES_H

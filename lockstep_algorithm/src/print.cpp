@@ -6,16 +6,21 @@
 #include <sylvan.h>
 #include <sylvan_table.h>
 #include <sylvan_obj.hpp>
-#include <math.h>           /* pow function*/
+#include <math.h>
 
 #include "print.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// Pretty printing
+//Pretty printing
 ////////////////////////////////////////////////////////////////////////////////
 
-//HELPER workhorse function for printing the bdd diagram
-inline void __printBdd(const std::string &prefix, const sylvan::Bdd &bdd, bool isLeft) {
+//Main function for printing the binary BDD tree
+void printBdd(const sylvan::Bdd &bdd) {
+  __printBdd(" ", bdd, false);
+}
+
+//HELPER workhorse function for printing the bdd
+void __printBdd(const std::string &prefix, const sylvan::Bdd &bdd, bool isLeft) {
   std::cout << prefix;
 
   std::cout << (isLeft ? "├─T─" : "└─F─" );
@@ -30,29 +35,6 @@ inline void __printBdd(const std::string &prefix, const sylvan::Bdd &bdd, bool i
   // enter the next tree level - left and right branch
   __printBdd( prefix + newString, bdd.Then(), true);
   __printBdd( prefix + newString, bdd.Else(), false);
-}
-
-//Main function for printing the binary BDD tree
-void printBdd(const sylvan::Bdd &bdd) {
-  __printBdd(" ", bdd, false);
-}
-
-//HELPER work horse function for printing the nodes of the bdd via the true paths
-inline std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd) {
-   std::list<std::string> nodeList = {};
-   if(bdd.isTerminal()){
-    if(bdd.isOne()) {
-      nodeList.push_front(currentPath);
-    }
-    return nodeList;
-   }
-  std::list<std::string> recResult1 = __printBddAsString("x" + std::to_string(bdd.TopVar()) +"=1 " + currentPath, bdd.Then());
-  nodeList.splice(nodeList.end(), recResult1);
-
-  std::list<std::string> recResult2 = __printBddAsString("x" + std::to_string(bdd.TopVar()) + "=0 " + currentPath, bdd.Else());
-  nodeList.splice(nodeList.end(), recResult2);
-
-  return nodeList;
 }
 
 //Prints the true-paths of the BDD on the form "01x1", where x means either 0 or 1, and the total number of nodes the BDD represents
@@ -82,19 +64,30 @@ void printBddAsString(const int nodes, const sylvan::Bdd &bdd) {
         std::cout << str << "";
       }
     }
-    //Måske ikke relevant med mængden af nodes -  kan fjernes nemt.
     std::cout << std::endl << "Number of nodes: " << std::to_string(totalNoOfNodes);
     std::cout << std::endl << std::endl;
 }
 
-void printBddListAsString(const int nodes, const std::list<sylvan::Bdd> bdds) {
-  for(sylvan::Bdd bdd: bdds) {
-    printBddAsString(nodes, bdd);
-  }
+//HELPER work horse function for printing the nodes of the bdd via the true paths
+std::list<std::string> __printBddAsString(const std::string &currentPath, const sylvan::Bdd &bdd) {
+   std::list<std::string> nodeList = {};
+   if(bdd.isTerminal()){
+    if(bdd.isOne()) {
+      nodeList.push_front(currentPath);
+    }
+    return nodeList;
+   }
+  std::list<std::string> recResult1 = __printBddAsString("x" + std::to_string(bdd.TopVar()) +"=1 " + currentPath, bdd.Then());
+  nodeList.splice(nodeList.end(), recResult1);
+
+  std::list<std::string> recResult2 = __printBddAsString("x" + std::to_string(bdd.TopVar()) + "=0 " + currentPath, bdd.Else());
+  nodeList.splice(nodeList.end(), recResult2);
+
+  return nodeList;
 }
 
 //This puts the output string in a single output which then can be printed
-void printBigBddAsString(const int nodes, const sylvan::Bdd &bdd) {
+void printBddAsSingleString(const int nodes, const sylvan::Bdd &bdd) {
   std::list<std::string> result = __printBddAsString("", bdd);
   int totalNoOfNodes = 0;
   std::string output = "";
@@ -124,40 +117,31 @@ void printBigBddAsString(const int nodes, const sylvan::Bdd &bdd) {
   std::cout << std::endl << std::endl;
 }
 
-//HELPER work horse function for printing the nodes of the bdd via the true paths
-inline std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pair<std::string, std::string> currentPath, const sylvan::Bdd &bdd) {
-   std::list<std::pair<std::string, std::string>> nodeList = {};
-   if(bdd.isTerminal()){
-    if(bdd.isOne()) {
-      nodeList.push_front(currentPath);
-    }
-    return nodeList;
-   }
-
-  if(bdd.TopVar() % 2 == 0){
-    std::string firstBefore = currentPath.first;
-    currentPath.first = "x" + std::to_string(bdd.TopVar()) +"=1 " + firstBefore;
-    std::list<std::pair<std::string, std::string>> recResult1 =  __printRelationsAsString(currentPath, bdd.Then());
-    nodeList.splice(nodeList.end(), recResult1);
-
-    currentPath.first = "x" + std::to_string(bdd.TopVar()) +"=0 " + firstBefore;
-    std::list<std::pair<std::string, std::string>> recResult2 =  __printRelationsAsString(currentPath, bdd.Else());
-    nodeList.splice(nodeList.end(), recResult2);
-  } else if(bdd.TopVar() % 2 == 1){
-
-    std::string secondBefore = currentPath.second;
-    currentPath.second = "x" + std::to_string(bdd.TopVar()-1) +"=1 " + secondBefore;
-    std::list<std::pair<std::string, std::string>> recResult1 =  __printRelationsAsString(currentPath, bdd.Then());
-    nodeList.splice(nodeList.end(), recResult1);
-
-    currentPath.second = "x" + std::to_string(bdd.TopVar()-1) +"=0 " + secondBefore;
-    std::list<std::pair<std::string, std::string>> recResult2 =  __printRelationsAsString(currentPath, bdd.Else());
-    nodeList.splice(nodeList.end(), recResult2);
+//Print all the BDDs in a list
+void printBddListAsString(const int nodes, const std::list<sylvan::Bdd> bdds) {
+  for(sylvan::Bdd bdd: bdds) {
+    printBddAsString(nodes, bdd);
   }
-  return nodeList;
 }
 
-inline long long __countNodes(long long prevTop, int maxVar, const sylvan::Bdd &bdd) {
+//Returns the number of nodes in a BDD with even numbered vars from 0 to 2*numVars
+long long countNodes(int numVars, const sylvan::Bdd &bdd) {
+  if(bdd.isTerminal()){
+    if(bdd.isOne()) {
+      return (long long) pow(2, numVars);
+    } else {
+      return 0;
+    }
+  }
+  if(numVars <= 64) {
+    return __countNodes(-1, 2 * numVars - 2, bdd);
+  } else {
+    return -1;
+  }
+}
+
+//Helper function for countNodes
+long long __countNodes(long long prevTop, int maxVar, const sylvan::Bdd &bdd) {
   if(bdd.isTerminal()){
     if(bdd.isOne()) {
       return (long long) pow(2, (maxVar - prevTop) / 2);
@@ -183,21 +167,7 @@ inline long long __countNodes(long long prevTop, int maxVar, const sylvan::Bdd &
   return result;
 }
 
-long long countNodes(int numVars, const sylvan::Bdd &bdd) {
-  if(bdd.isTerminal()){
-    if(bdd.isOne()) {
-      return (long long) pow(2, numVars);
-    } else {
-      return 0;
-    }
-  }
-  if(numVars <= 64) {
-    return __countNodes(-1, 2 * numVars - 2, bdd);
-  } else {
-    return -1;
-  }
-}
-
+//Print a single relation as a string
 void printSingleRelationAsString(const sylvan::Bdd relation) {
     std::cout << "Here is a relation: " << std::endl;
     std::pair<std::string, std::string> pair("","");
@@ -208,10 +178,45 @@ void printSingleRelationAsString(const sylvan::Bdd relation) {
     }
 }
 
-inline void printRelationsAsString(const std::deque<sylvan::Bdd> relations) {
+//Print a deque of relations as a string
+void printRelationsAsString(const std::deque<sylvan::Bdd> relations) {
   for(sylvan::Bdd relation : relations) {
     printSingleRelationAsString(relation);
   }
+}
+
+//HELPER work horse function for printing the nodes of the bdd via the true paths
+std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pair<std::string, std::string> currentPath, const sylvan::Bdd &bdd) {
+   std::list<std::pair<std::string, std::string>> nodeList = {};
+   if(bdd.isTerminal()) {
+    if(bdd.isOne()) {
+      nodeList.push_front(currentPath);
+    }
+    return nodeList;
+   }
+
+  if(bdd.TopVar() % 2 == 0) {
+    std::string firstBefore = currentPath.first;
+    currentPath.first = "x" + std::to_string(bdd.TopVar()) +"=1 " + firstBefore;
+    std::list<std::pair<std::string, std::string>> recResult1 =  __printRelationsAsString(currentPath, bdd.Then());
+    nodeList.splice(nodeList.end(), recResult1);
+
+    currentPath.first = "x" + std::to_string(bdd.TopVar()) +"=0 " + firstBefore;
+    std::list<std::pair<std::string, std::string>> recResult2 =  __printRelationsAsString(currentPath, bdd.Else());
+    nodeList.splice(nodeList.end(), recResult2);
+
+  } else if(bdd.TopVar() % 2 == 1) {
+    std::string secondBefore = currentPath.second;
+    currentPath.second = "x" + std::to_string(bdd.TopVar()-1) +"=1 " + secondBefore;
+    std::list<std::pair<std::string, std::string>> recResult1 =  __printRelationsAsString(currentPath, bdd.Then());
+    nodeList.splice(nodeList.end(), recResult1);
+
+    currentPath.second = "x" + std::to_string(bdd.TopVar()-1) +"=0 " + secondBefore;
+    std::list<std::pair<std::string, std::string>> recResult2 =  __printRelationsAsString(currentPath, bdd.Else());
+    nodeList.splice(nodeList.end(), recResult2);
+  }
+  
+  return nodeList;
 }
 
 void printMap(std::map<std::string, int> map) {

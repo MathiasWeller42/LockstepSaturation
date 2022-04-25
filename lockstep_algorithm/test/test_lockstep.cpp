@@ -27,74 +27,25 @@ void runAllTests() {
   fails += runWithAllAlgorithmTypes("testGraphExample3oneRel", testGraphExample3oneRel);
   fails += runWithAllAlgorithmTypes("testGraphExample3multRel", testGraphExample3multRel);
 
-  //SCC List Correctness
-  if(testSccCorrectnessLen()) {
-    std::cout << "testSccCorrectnessLen failed" << std::endl;
-    fails++;
-  }
-  if(testSccCorrectnessDuplicates()) {
-    std::cout << "testSccCorrectnessDuplicates failed" << std::endl;
-    fails++;
-  }
-  if(testSccCorrectnessNegSameLenNoDuplicates()) {
-    std::cout << "testSccCorrectnessNegSameLenNoDuplicates failed" << std::endl;
-    fails++;
-  }
-  if(!testSccCorrectnessPosPermutation()) {
-    std::cout << "testSccCorrectnessPosPermutation failed" << std::endl;
-    fails++;
-  }
-  if(testsccListContainsDifferentSccsWithDuplicateNodesNeg()) {
-    std::cout << "testsccListContainsDifferentSccsWithDuplicateNodesNeg failed" << std::endl;
-    fails++;
-  }
-  if(!testsccListContainsDifferentSccsWithDuplicateNodesPos()) {
-    std::cout << "testsccListContainsDifferentSccsWithDuplicateNodesPos failed" << std::endl;
-    fails++;
-  }
-  if(!testUnionIsWholeBddPos()) {
-    std::cout << "testUnionIsWholeBddPos failed" << std::endl;
-    fails++;
-  }
-  if(testUnionIsWholeBddNeg()) {
-    std::cout << "testUnionIsWholeBddNeg failed" << std::endl;
-    fails++;
-  }
+  //Test SCC list correctness
+  fails += !runTest("testSccCorrectnessLen", testSccCorrectnessLen, false);
+  fails += !runTest("testSccCorrectnessDuplicates", testSccCorrectnessDuplicates, false);
+  fails += !runTest("testSccCorrectnessNegSameLenNoDuplicates", testSccCorrectnessNegSameLenNoDuplicates, false);
+  fails += !runTest("testSccCorrectnessPosPermutation", testSccCorrectnessPosPermutation, true);
+  fails += !runTest("testsccListContainsDifferentSccsWithDuplicateNodesNeg", testsccListContainsDifferentSccsWithDuplicateNodesNeg, false);
+  fails += !runTest("testsccListContainsDifferentSccsWithDuplicateNodesPos", testsccListContainsDifferentSccsWithDuplicateNodesPos, true);
+  fails += !runTest("testUnionIsWholeBddPos", testUnionIsWholeBddPos, true);
+  fails += !runTest("testUnionIsWholeBddNeg", testUnionIsWholeBddNeg, false);
 
-  if(!testNodeCountTerminalTrue()) {
-    std::cout << "testNodeCountTerminalTrue failed" << std::endl;
-    fails++;
-  }
 
-  if(!testNodeCountTerminalFalse()) {
-    std::cout << "testNodeCountTerminalTrue failed" << std::endl;
-    fails++;
-  }
-
-  if(!testNodeCountSingleNode()) {
-    std::cout << "testNodeCountSingleNode failed" << std::endl;
-    fails++;
-  }
-
-  if(!testNodeCountTwoNodes()) {
-    std::cout << "testNodeCountTwoNodes failed" << std::endl;
-    fails++;
-  }
-
-  if(!testNodeCountFiveNodes()) {
-    std::cout << "testNodeCountFiveNodes failed" << std::endl;
-    fails++;
-  }
-
-  if(!testNodeCountTenNodes()) {
-    std::cout << "testNodeCountTenNodes failed" << std::endl;
-    fails++;
-  }
-
-  if(!testNodeCountTwentyNodes()) {
-    std::cout << "testNodeCountTwentyNodes failed" << std::endl;
-    fails++;
-  }
+  //Test nodeCount
+  fails += !runTest("testNodeCountTerminalTrue", testNodeCountTerminalTrue, true);
+  fails += !runTest("testNodeCountTerminalFalse", testNodeCountTerminalFalse, true);
+  fails += !runTest("testNodeCountSingleNode", testNodeCountSingleNode, true);
+  fails += !runTest("testNodeCountTwoNodes", testNodeCountTwoNodes, true);
+  fails += !runTest("testNodeCountFiveNodes", testNodeCountFiveNodes, true);
+  fails += !runTest("testNodeCountTenNodes", testNodeCountTenNodes, true);
+  fails += !runTest("testNodeCountTwentyNodes", testNodeCountTwentyNodes, true);
 
 bool success = (fails == 0);
 

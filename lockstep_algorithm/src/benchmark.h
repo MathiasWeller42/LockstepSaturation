@@ -1,5 +1,7 @@
-#ifndef LOCKSTEP_TEST_H
-#define LOCKSTEP_TEST_H
+#ifndef BENCHMARK_H
+#define BENCHMARK_H
+
+#include <chrono>
 
 #include "petriTranslation.h"
 
@@ -9,7 +11,7 @@ enum algorithmType
   lockstepRelUnion,
   xbSat,
   xbRelUnion,
-  xbBackwardSat, 
+  xbBackwardSat,
   xbBackwardRelUnion
 };
 
@@ -33,7 +35,8 @@ inline const std::string algoToString(algorithmType runType) {
   }
 }
 
-void experiment(std::list<std::string> pathStrings, int maxPreprocess, int minPreprocess, bool useInitialMarking, std::list<algorithmType> runTypes);
+void experiment(std::list<std::string> pathStrings, int minPreprocess, int maxPreprocess,
+                bool useInitialMarking, std::list<algorithmType> runTypes, std::string fileName);
 
 Graph graphPreprocessing(const Graph &graph, int pruningSteps);
 Graph graphPreprocessingFixedPoint(const Graph &graph);
@@ -48,9 +51,14 @@ void validateAlgoSccResults(const std::list<sylvan::Bdd> resultSccList, const Gr
 void writeToCSV(std::string fileName, std::vector<std::vector<std::string>> grid);
 std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs, int noOfAlgorithms);
 
-std::vector<std::vector<std::string>> testAndPrintWithMax(const Graph &graph, int maxPruning, int minPruning, std::list<algorithmType> runTypes, std::vector<std::vector<std::string>> grid, std::string fileName, int row);
-std::vector<std::vector<std::string>> timeAll(const Graph &graph, std::list<algorithmType> runTypes, std::vector<std::vector<std::string>> grid, int row);
+std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int maxPruning, int minPruning,
+                                                       std::list<algorithmType> runTypes,
+                                                       std::vector<std::vector<std::string>> grid, int row);
+std::vector<std::vector<std::string>> timeAll(const Graph &graph, std::list<algorithmType> runTypes,
+                                              std::vector<std::vector<std::string>> grid, int row);
+std::tuple<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>, int> timeRun(const Graph &graph,
+                                                                                         algorithmType runType);
 
 std::list<std::string> getPathStrings();
 
-#endif //LOCKSTEP_TEST_H
+#endif //BENCHMARK_H
