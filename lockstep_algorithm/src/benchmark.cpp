@@ -25,6 +25,8 @@
 //These pathstrings were sorted with HumanSort *TM*
 std::list<std::string> getPathStrings() {
   std::list<std::string> resultList = {};
+  //resultList.push_back("xb_slow.pnml");
+
   /*
   // < 5 seconds
   resultList.push_back("ShieldRVt/PT/shield_t_rv_001_a_11place.pnml");                        //11
@@ -45,29 +47,36 @@ std::list<std::string> getPathStrings() {
   resultList.push_back("SmartHome/PT/smhome_03_45place.pnml");                                //45
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_002_a_53place.pnml");                      //53
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_a_60place.pnml");                      //60
-  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_003_a_78place.pnml");                      //78
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79
   */
 
-  /*
+  // < 5 seconds
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_003_a_78place.pnml");                      //78
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79
+
   // < 15 seconds
-  resultList.push_back("ShieldRVt/PT/shield_t_rv_001_b_53place.pnml");                        //53
+  //resultList.push_back("ShieldRVt/PT/shield_t_rv_001_b_53place.pnml");                        //53
   resultList.push_back("ShieldRVt/PT/shield_t_rv_010_a_83place.pnml");                        //83
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_98place.pnml");                      //98
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_004_a_103place.pnml");                     //103
-  */
-
-  // > 15 seconds
-  resultList.push_back("GPUForwardProgress/PT/gpufp_08_a_40place.pnml");                      //40
-  resultList.push_back("ShieldRVs/PT/shield_s_rv_003_a_45place.pnml");                        //45
-  //resultList.push_back("GPUForwardProgress/PT/gpufp_12_a_56place.pnml");                      //56 (langsom... 2+ timer)
-  //resultList.push_back("ShieldRVs/PT/shield_s_rv_004_a_59place.pnml");                        //59 (langsom... 30+ min?)
-  //resultList.push_back("DiscoveryGPU/PT/discovery_06_a_63place.pnml");                        //63 (ca. 30 min)
-  //resultList.push_back("ShieldPPPs/PT/shield_s_ppp_002_a_65place.pnml");                      //65 (langsom... 1+ timer)
+  /*
+  // < 30 seconds
   resultList.push_back("ShieldPPPs/PT/shield_s_ppp_001_b_71place.pnml");                      //71
+
+  // < 2 minutes
+  resultList.push_back("GPUForwardProgress/PT/gpufp_08_a_40place.pnml");                      //40
+
+  // < 15 minutes
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_003_a_45place.pnml");                        //45
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_b_73place.pnml");                      //73
+  */
+  // > 15 minutes
+  /*
+  resultList.push_back("GPUForwardProgress/PT/gpufp_12_a_56place.pnml");                      //56 (langsom... 2+ timer)
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_004_a_59place.pnml");                        //59 (langsom... 30+ min?)
+  resultList.push_back("DiscoveryGPU/PT/discovery_06_a_63place.pnml");                        //63 (ca. 30 min)
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_002_a_65place.pnml");                      //65 (langsom... 1+ timer)
   resultList.push_back("GPUForwardProgress/PT/gpufp_16_a_72place.pnml");                      //72
   resultList.push_back("DiscoveryGPU/PT/discovery_07_a_73place.pnml");                        //73
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_b_73place.pnml");                      //73
   resultList.push_back("ShieldRVs/PT/shield_s_rv_005_a_73place.pnml");                        //73
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_001_b_81place.pnml");                      //81
   resultList.push_back("ShieldRVs/PT/shield_s_rv_002_b_83place.pnml");                        //83
@@ -88,9 +97,9 @@ std::list<std::string> getPathStrings() {
   resultList.push_back("DiscoveryGPU/PT/discovery_12_a_123place.pnml");                       //123
   resultList.push_back("ShieldRVs/PT/shield_s_rv_003_b_123place.pnml");                       //123
   resultList.push_back("HealthRecord/PT/hrec_05_125place.pnml");                              //125
+  */
 
   //untested timewise
-  /*
   resultList.push_back("ShieldPPPs/PT/shield_s_ppp_004_a_127place.pnml");                     //127
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_005_a_128place.pnml");                     //128
   resultList.push_back("DiscoveryGPU/PT/discovery_13_a_133place.pnml");                       //133
@@ -119,13 +128,15 @@ std::list<std::string> getPathStrings() {
   resultList.push_back("ShieldRVt/PT/shield_t_rv_020_a_163place.pnml");                       //163
   resultList.push_back("ShieldRVs/PT/shield_s_rv_004_b_163place.pnml");                       //163
   resultList.push_back("GPUForwardProgress/PT/gpufp_40_a_168place.pnml");                     //168
+  /*
   resultList.push_back("DiscoveryGPU/PT/discovery_06_b_184place.pnml");                       //184
   resultList.push_back("GPUForwardProgress/PT/gpufp_08_b_188place.pnml");                     //188
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_010_a_193place.pnml");                     //193
   resultList.push_back("ShieldRVt/PT/shield_t_rv_004_b_203place.pnml");                       //203
   resultList.push_back("ShieldRVs/PT/shield_s_rv_005_b_203place.pnml");                       //203
   resultList.push_back("DiscoveryGPU/PT/discovery_07_b_212place.pnml");                       //212
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_b_213place.pnml");                     //213*/
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_b_213place.pnml");                     //213
+  */
 
   return resultList;
 }
@@ -181,9 +192,19 @@ std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int m
   if(maxPruning < 0) {
     std::cout << "### With pre-processing (fixed point)" << std::endl;
     Graph processedGraph = graphPreprocessingFixedPoint(graph);
+
+    std::cout << "Counting nodes.." << std::endl;
+    long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
+    std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
+    for(int i = 1 ; i <= runTypes.size() ; i++) {
+      grid[row+i].push_back(std::to_string(nodeCount));
+    }
+
+
     grid = timeAll(processedGraph, runTypes, grid, row);
     std::cout << std::endl;
-    grid[row].insert(grid[row].end(), {"SCC's", "Fixed-point pruning steps (ms)", "SSC/ms", "Symbolic steps" });
+
+    grid[row].insert(grid[row].end(), {"Nodes" , "SCCs", "Running time (ms)", "SSCs/ms", "Symbolic steps"});
   }
   else {
     if(maxPruning == 0) {

@@ -133,11 +133,7 @@ long long countNodes(int numVars, const sylvan::Bdd &bdd) {
       return 0;
     }
   }
-  if(numVars <= 64) {
-    return __countNodes(-1, 2 * numVars - 2, bdd);
-  } else {
-    return -1;
-  }
+  return __countNodes(-1, 2 * numVars - 2, bdd);
 }
 
 //Helper function for countNodes
@@ -152,17 +148,35 @@ long long __countNodes(long long prevTop, int maxVar, const sylvan::Bdd &bdd) {
 
   long long currentTop = bdd.TopVar();
   double factor;
+  int exponent;
   if(prevTop == -1) {
-    factor = pow(2, (currentTop) / 2);
+    exponent = (currentTop) / 2;
+    factor = pow(2, exponent);
   } else {
-    factor = pow(2, (currentTop - prevTop) / 2 - 1);
+    exponent = (currentTop - prevTop) / 2 - 1;
+    factor = pow(2, exponent);
   }
 
   int recResult1 =  __countNodes(currentTop, maxVar, bdd.Then());
-
   int recResult2 =  __countNodes(currentTop, maxVar, bdd.Else());
+  int recResults = (recResult1 + recResult2);
+
+  //Check for overflow in addition
+  if(recResults < 0) {
+    return -1;
+  }
+
+  if((int)log2(recResults) + 1 + exponent + 1 >= 64) {
+    return -1;
+  }
 
   int result = (long long) factor * (recResult1 + recResult2);
+
+  //Check for overflow in multiplication
+  /*if((factor != 0) && (result / factor != recResults)) {
+    return -1;
+  }*/
+
 
   return result;
 }

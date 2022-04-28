@@ -27,7 +27,6 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph
 
   int symbolicSteps = 0;
 
-  std::cout << "Running lockstepSaturation" << std::endl;
   std::stack<sylvan::Bdd> callStack;
   callStack.push(fullGraph.nodes);
 
@@ -44,7 +43,7 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph
   while(!callStack.empty()) {
     stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-    if((int)duration.count() > 60000) {
+    if((int)duration.count() > 900000) {
       std::cout << "Took too long " << (int)duration.count() << std::endl;
       return {{},0};
     }
@@ -169,7 +168,6 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph
 std::pair<std::list<sylvan::Bdd>, int> lockstepRelationUnion(const Graph &fullGraph) {
   int symbolicSteps = 0;
 
-  std::cout << "Running lockstepRelationUnion" << std::endl;
   std::stack<sylvan::Bdd> callStack;
   callStack.push(fullGraph.nodes);
 
@@ -327,7 +325,7 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepRelationUnion(const Graph &fullGr
 
 std::pair<std::list<sylvan::Bdd>, int> xieBeerelSaturation(const Graph &fullGraph) {
   int symbolicSteps = 0;
-  std::cout << "Running xieBeerelSaturation" << std::endl;
+
   std::stack<sylvan::Bdd> callStack;
   callStack.push(fullGraph.nodes);
 
@@ -390,7 +388,7 @@ std::pair<std::list<sylvan::Bdd>, int> xieBeerelSaturation(const Graph &fullGrap
 
 std::pair<std::list<sylvan::Bdd>, int> xieBeerelBackwardSaturation(const Graph &fullGraph) {
   int symbolicSteps = 0;
-  std::cout << "Running xieBeerelBackwardSaturation" << std::endl;
+
   std::stack<sylvan::Bdd> callStack;
   callStack.push(fullGraph.nodes);
 
@@ -454,7 +452,6 @@ std::pair<std::list<sylvan::Bdd>, int> xieBeerelBackwardSaturation(const Graph &
 
 
 std::pair<std::list<sylvan::Bdd>, int> xieBeerelRelationUnion(const Graph &fullGraph) {
-  std::cout << "Running xieBeerelRelationUnion" << std::endl;
   int symbolicSteps = 0;
 
   std::stack<sylvan::Bdd> callStack;
@@ -520,7 +517,6 @@ std::pair<std::list<sylvan::Bdd>, int> xieBeerelRelationUnion(const Graph &fullG
 }
 
 std::pair<std::list<sylvan::Bdd>, int> xieBeerelBackwardRelationUnion(const Graph &fullGraph) {
-  std::cout << "Running xieBeerelBackwardRelationUnion" << std::endl;
   int symbolicSteps = 0;
 
   std::stack<sylvan::Bdd> callStack;

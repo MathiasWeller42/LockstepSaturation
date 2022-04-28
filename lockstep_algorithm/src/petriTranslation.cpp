@@ -79,13 +79,11 @@ inline std::list<int> list_difference(std::list<int> &list1, std::list<int> &lis
 inline Relation makeRelationFromTransition(Transition transition, std::map<std::string, int> placeMap) {
   Relation result = {};
 
-  sylvan::Bdd resultBdd = leaf_true();
-
-  //The sets of vars included in the sources and targets in the transition
+  //Collect the sets of vars included in the sources and targets in the transition
   std::list<int> sources = {};
   std::list<int> targets = {};
 
-  //Handling self-loops
+  //The arcs in the transition sources all have the transition as their target and a node as their source
   for(Arc arc : transition.sources) {
     if(placeMap.count(arc.source)) {
       int placeNum = placeMap[arc.source];
@@ -117,10 +115,15 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
   result.top = varSet.front();
 
   //Create the relation BDD
+  sylvan::Bdd resultBdd = leaf_true();
+
+  //The self-looping nodes are those both in sources and targets
   std::list<int> selfLoops = list_intersect(sources, targets);
+
   std::list<int> newSources = list_difference(sources, targets);
   std::list<int> newTargets = list_difference(targets, sources);
 
+  //Handling self-loops by asserting they should have a marking both before and after the transition
   for(int placeNum : selfLoops) {
     sylvan::Bdd beforeSource = ithvar(placeNum);
     resultBdd = intersectBdd(resultBdd, beforeSource);
@@ -129,6 +132,7 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
     resultBdd = intersectBdd(resultBdd, afterSource);
   }
 
+  //Handling non-loop sources
   for(int placeNum : newSources) {
     //The source places have tokens before the transition
     sylvan::Bdd beforeSource = ithvar(placeNum);
@@ -139,6 +143,7 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
     resultBdd = intersectBdd(resultBdd, afterSource);
   }
 
+  //Handling non-loop targets
   for(int placeNum : newTargets) {
     //After the transition, the target places now have tokens
     sylvan::Bdd afterTarget = ithvar(placeNum + 1);

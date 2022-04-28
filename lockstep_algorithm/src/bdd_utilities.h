@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <algorithm>
+#include <string>
+#include <iostream>
 
 #include <sylvan.h>
 #include <sylvan_table.h>
@@ -44,6 +46,10 @@ inline sylvan::Bdd pickAssignment(const sylvan::Bdd &bdd, const sylvan::BddSet &
     } else {
       bitString = bitString + '0';
     }
+  }
+  if(cube.size() != bitString.size()) {
+    std::cout << "Something wrong in pick()" << std::endl;
+    exit(-1);
   }
   return makeNode(bitString);
 }

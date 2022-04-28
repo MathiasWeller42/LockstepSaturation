@@ -32,8 +32,8 @@ int main() {
   int maxPreprocess = -1;
   int minPreprocess = 0;
   bool useInitialMarking = true;
-  std::list<algorithmType> runTypes = {/*xbSat, xbBackwardSat,*/ lockstepSat/*, xbRelUnion, xbBackwardRelUnion, lockstepRelUnion*/};
-  std::string fileName = "test4";
+  std::list<algorithmType> runTypes = {xbSat/*, xbBackwardSat, lockstepSat, xbRelUnion, xbBackwardRelUnion, lockstepRelUnion*/};
+  std::string fileName = "test3";
   experiment(pathStrings, minPreprocess, maxPreprocess, useInitialMarking, runTypes, fileName);
 
   std::cout << "Goodbye :)" << std::endl;

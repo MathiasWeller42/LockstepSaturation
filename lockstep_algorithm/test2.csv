@@ -1,113 +1,64 @@
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;11;11;1;4;0,25;102
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;17;22;9;65;0,138462;2546
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;19;19;1;16;0,0625;361
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;22;17;1;24;0,041667;500
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;24;29;189;216;0,875;17623
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;27;27;1;32;0,03125;834
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;28;21;1;32;0,03125;889
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;31;41;0;5010;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;34;29;198;1001;0,197802;33589
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;35;35;1;54;0,018519;1475
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;38;113;75;1437;0,052192;122280
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;40;49;0;5002;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;41;127;75;1736;0,043203;149043
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;41;31;1;77;0,012987;2011
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;43;43;1;104;0,009615;2774
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;43;48;55;414;0,13285;19454
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;45;145;75;2124;0,035311;199779
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;45;60;0;5099;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;53;39;1;156;0,00641;4232
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;53;53;0;5001;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;56;69;0;5001;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;59;79;0;6560;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;60;45;1;192;0,005208;4783
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;63;85;0;5008;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;65;55;0;6358;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;71;66;0;5003;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;72;89;0;5004;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;73;99;0;5028;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;73;68;0;5008;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;73;98;0;6234;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;78;57;1;519;0,001927;11408
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;79;59;1;442;0,002262;9546
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;81;74;0;5003;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;83;83;1;615;0,001626;13512
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;83;93;0;6979;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;83;113;0;5068;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;88;109;0;5092;0;0
-;;;;;;
-Algorithm run;Places;Relations;SCC's;Fixed-point pruning steps (ms);SSC/ms;Symbolic steps
-Lockstep saturation;93;127;0;5013;0;0
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;11;11;32;1;3;0,333333;102;
+Xie-Beerel backward saturation;11;11;32;1;1;1,000000;102;
+Lockstep saturation;11;11;32;1;1;1,000000;102;
+Xie-Beerel relation union;11;11;32;1;6;0,166667;154;
+Xie-Beerel backward relation union;11;11;32;1;1;1,000000;154;
+Lockstep relation union;11;11;32;1;1;1,000000;154;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;17;22;164;9;70;0,128571;2630;
+Xie-Beerel backward saturation;17;22;164;9;27;0,333333;2174;
+Lockstep saturation;17;22;164;9;23;0,391304;2546;
+Xie-Beerel relation union;17;22;164;9;49;0,183673;2090;
+Xie-Beerel backward relation union;17;22;164;9;20;0,450000;1892;
+Lockstep relation union;17;22;164;9;15;0,600000;2024;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;19;19;512;1;15;0,066667;361;
+Xie-Beerel backward saturation;19;19;512;1;3;0,333333;361;
+Lockstep saturation;19;19;512;1;2;0,500000;361;
+Xie-Beerel relation union;19;19;512;1;33;0,030303;456;
+Xie-Beerel backward relation union;19;19;512;1;5;0,200000;456;
+Lockstep relation union;19;19;512;1;4;0,250000;456;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;22;17;1280;1;22;0,045455;500;
+Xie-Beerel backward saturation;22;17;1280;1;5;0,200000;500;
+Lockstep saturation;22;17;1280;1;4;0,250000;500;
+Xie-Beerel relation union;22;17;1280;1;60;0,016667;629;
+Xie-Beerel backward relation union;22;17;1280;1;7;0,142857;629;
+Lockstep relation union;22;17;1280;1;7;0,142857;629;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;24;29;1194;189;213;0,887324;16833;
+Xie-Beerel backward saturation;24;29;1194;189;145;1,303448;16809;
+Lockstep saturation;24;29;1194;189;129;1,465116;17623;
+Xie-Beerel relation union;24;29;1194;189;216;0,875000;21228;
+Xie-Beerel backward relation union;24;29;1194;189;171;1,105263;22040;
+Lockstep relation union;24;29;1194;189;159;1,188679;23432;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;27;27;8192;1;29;0,034483;834;
+Xie-Beerel backward saturation;27;27;8192;1;9;0,111111;834;
+Lockstep saturation;27;27;8192;1;7;0,142857;834;
+Xie-Beerel relation union;27;27;8192;1;64;0,015625;972;
+Xie-Beerel backward relation union;27;27;8192;1;12;0,083333;972;
+Lockstep relation union;27;27;8192;1;11;0,090909;972;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;28;21;8000;1;28;0,035714;889;
+Xie-Beerel backward saturation;28;21;8000;1;9;0,111111;889;
+Lockstep saturation;28;21;8000;1;9;0,111111;889;
+Xie-Beerel relation union;28;21;8000;1;92;0,010870;1197;
+Xie-Beerel backward relation union;28;21;8000;1;15;0,066667;1197;
+Lockstep relation union;28;21;8000;1;13;0,076923;1197;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;31;41;15386;1727;4630;0,373002;299548;
+Xie-Beerel backward saturation;31;41;15386;1727;3577;0,482807;268707;
+Lockstep saturation;31;41;15386;1727;4443;0,388701;299592;
+Xie-Beerel relation union;31;41;15386;1727;4560;0,378728;318406;
+Xie-Beerel backward relation union;31;41;15386;1727;4105;0,420706;297742;
+Lockstep relation union;31;41;15386;1727;4706;0,366978;333248;
+

@@ -1,6 +1,20 @@
+Hvad skal vi snakke med Jaco og Andreas om?
+- Vi har preliminary results
+  - Saturation bedre end relation union
+  - XB måske lidt bedre end vores... :(
+  - vi skal lave mere benchmarking ofc
+Lav et PN der er dårligt for XB - konstruer via automater
+
+- Den artikel vi sendte
+  - De laver "saturation", men på colored boolean networks
+
+- Hvad skal vi ellers lave?
+  - Flere SCC algoritmer?
+  - Vi har klaret alt i bachelorkontrakten (minus opgaveskrivning)
+
 Den mest dank-swaggern todo-liste #WØRF uWu *tips fedora*
 -----------------------------------------------
-TODO 1 : Skriv til Jaco og bed om en PN-artikel
+TODO 1 : Hvordan laver man pæn pseudo-kode???
 
 TODO i+1 : clean-up, **kommentarer** og læsbarhed (lav et pænt interface)
 

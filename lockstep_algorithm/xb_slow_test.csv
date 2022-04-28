@@ -1,0 +1,5 @@
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;73;106;13824;1728;11122;0,155368;915840;
+Xie-Beerel backward saturation;73;106;13824;1728;24393;0,070840;2791932;
+Lockstep saturation;73;106;13824;1728;19687;0,087774;1278890;
+
