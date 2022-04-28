@@ -11,6 +11,7 @@
 #include "../src/benchmark.h"
 #include "../src/print.h"
 #include "../src/bdd_utilities.h"
+#include "../src/lockstep.h"
 
 bool testSccCorrectnessLen() {
   std::string n0 = "00000"; std::string n1 = "00001";
@@ -319,7 +320,38 @@ bool testNodeCountTwentyNodes() {
 
 
 
+void testPick() {
+  //Graph 1
+  Graph graph1 = graphExample1multRel();
+  sylvan::Bdd pick5 = pick(graph1.nodes, graph1.cube);
+  std::cout << "graphExample1oneRel" << std::endl;
+  printBdd(pick5);
 
+  //Graph 2
+  Graph graph2 = graphExample2multRel();
+  sylvan::Bdd pick6 = pick(graph2.nodes, graph2.cube);
+  std::cout << "graphExample2oneRel" << std::endl;
+  printBdd(pick6);
+
+  //Graph 3
+  Graph graph3 = graphExample3oneRel();
+  sylvan::Bdd pick7 = pick(graph3.nodes, graph3.cube);
+  std::cout << "graphExample3oneRel" << std::endl;
+  printBdd(pick7);
+
+  //Graph 4
+  Graph graph4 = fourNodesOneRelation();
+  sylvan::Bdd pick8 = pick(graph4.nodes, graph4.cube);
+  std::cout << "fourNodesOneRelation" << std::endl;
+  printBdd(pick8);
+
+  //Graph 5
+  Graph graph5 = nonConnectedGraph();
+  sylvan::Bdd pick9 = pick(graph5.nodes, graph5.cube);
+  std::cout << "nonConnectedGraph" << std::endl;
+  printBdd(pick9);
+
+}
 
 
 

@@ -46,7 +46,7 @@ Optional arguments:
 at all (also unreachable) states if false.
 */
 void benchmark(std::list<std::string> PNMLfileNames, std::string csvFileName,
-                                 std::list<algorithmType> algorithms,
-                                 int pruning=-1, bool useInitialMarking=true) {
+               std::list<algorithmType> algorithms,
+               int pruning, bool useInitialMarking) {
   experiment(PNMLfileNames, pruning, pruning, useInitialMarking, algorithms, csvFileName);
 }

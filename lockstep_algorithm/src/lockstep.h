@@ -22,4 +22,6 @@ std::pair<sylvan::Bdd, int> reachabilityBackwardSaturation(const Graph &graph, s
 std::pair<sylvan::Bdd, int> reachabilityForwardRelationUnion(const Graph &graph, sylvan::Bdd nodes);
 std::pair<sylvan::Bdd, int> reachabilityBackwardRelationUnion(const Graph &graph, sylvan::Bdd nodes);
 
+sylvan::Bdd pick(const sylvan::Bdd &nodeSet, const sylvan::BddSet &cube);
+
 #endif  //LOCKSTEP_H

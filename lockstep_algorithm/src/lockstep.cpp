@@ -16,14 +16,21 @@
 
 sylvan::Bdd pick(const sylvan::Bdd &nodeSet, const sylvan::BddSet &cube) {
 	//Find path in BDD that evaluates to true, and evaluate the decisions into new node
-	return pickAssignment(nodeSet, cube);
+  sylvan::Bdd picked = pickAssignment(nodeSet, cube);
+
+  /*std::cout << "Picking" << std::endl;
+  std::cout << "This node was picked:" << std::endl;
+  printBddAsString(cube.size(), picked);
+  std::cout << ".. From this nodeSet:" << std::endl;
+  printBddAsString(cube.size(), nodeSet);*/
+	return picked;
 }
 
 //LOCKSTEP SATURATION ITERATIVE ##########################################################################
 std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph) {
-  auto start = std::chrono::high_resolution_clock::now();
+  /*auto start = std::chrono::high_resolution_clock::now();
   auto stop = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);*/
 
   int symbolicSteps = 0;
 
@@ -41,12 +48,12 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph
   const std::deque<Relation> relationDeque = fullGraph.relations;
 
   while(!callStack.empty()) {
-    stop = std::chrono::high_resolution_clock::now();
+    /*stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
     if((int)duration.count() > 900000) {
       std::cout << "Took too long " << (int)duration.count() << std::endl;
       return {{},0};
-    }
+    }*/
 
     const sylvan::Bdd nodeSet = callStack.top();
     callStack.pop();

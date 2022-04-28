@@ -23,11 +23,9 @@
 #include "../test/graph_examples.h"
 
 //These pathstrings were sorted with HumanSort *TM*
-std::list<std::string> getPathStrings() {
+std::list<std::string> getPathStringsAll() {
   std::list<std::string> resultList = {};
-  //resultList.push_back("xb_slow.pnml");
 
-  /*
   // < 5 seconds
   resultList.push_back("ShieldRVt/PT/shield_t_rv_001_a_11place.pnml");                        //11
   resultList.push_back("ShieldRVs/PT/shield_s_rv_001_a_17place.pnml");                        //17
@@ -47,17 +45,25 @@ std::list<std::string> getPathStrings() {
   resultList.push_back("SmartHome/PT/smhome_03_45place.pnml");                                //45
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_002_a_53place.pnml");                      //53
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_a_60place.pnml");                      //60
-  */
 
+  return resultList;
+}
+
+std::list<std::string> getPathStringsFast() {
+  std::list<std::string> resultList = {};
+
+  /*
   // < 5 seconds
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_003_a_78place.pnml");                      //78
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_005_a_128place.pnml");                     //128
 
   // < 15 seconds
-  //resultList.push_back("ShieldRVt/PT/shield_t_rv_001_b_53place.pnml");                        //53
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_001_b_53place.pnml");                        //53
   resultList.push_back("ShieldRVt/PT/shield_t_rv_010_a_83place.pnml");                        //83
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_98place.pnml");                      //98
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_004_a_103place.pnml");                     //103
+  */
   /*
   // < 30 seconds
   resultList.push_back("ShieldPPPs/PT/shield_s_ppp_001_b_71place.pnml");                      //71
@@ -100,8 +106,8 @@ std::list<std::string> getPathStrings() {
   */
 
   //untested timewise
-  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_004_a_127place.pnml");                     //127
-  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_005_a_128place.pnml");                     //128
+  //resultList.push_back("ShieldPPPs/PT/shield_s_ppp_004_a_127place.pnml");                     //127 (meget langsom reachability)
+
   resultList.push_back("DiscoveryGPU/PT/discovery_13_a_133place.pnml");                       //133
   resultList.push_back("GPUForwardProgress/PT/gpufp_32_a_136place.pnml");                     //136
   resultList.push_back("ShieldPPPs/PT/shield_s_ppp_002_b_139place.pnml");                     //139
@@ -128,7 +134,6 @@ std::list<std::string> getPathStrings() {
   resultList.push_back("ShieldRVt/PT/shield_t_rv_020_a_163place.pnml");                       //163
   resultList.push_back("ShieldRVs/PT/shield_s_rv_004_b_163place.pnml");                       //163
   resultList.push_back("GPUForwardProgress/PT/gpufp_40_a_168place.pnml");                     //168
-  /*
   resultList.push_back("DiscoveryGPU/PT/discovery_06_b_184place.pnml");                       //184
   resultList.push_back("GPUForwardProgress/PT/gpufp_08_b_188place.pnml");                     //188
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_010_a_193place.pnml");                     //193
@@ -136,7 +141,8 @@ std::list<std::string> getPathStrings() {
   resultList.push_back("ShieldRVs/PT/shield_s_rv_005_b_203place.pnml");                       //203
   resultList.push_back("DiscoveryGPU/PT/discovery_07_b_212place.pnml");                       //212
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_b_213place.pnml");                     //213
-  */
+
+  //resultList.push_back("xb_slow.pnml");
 
   return resultList;
 }
@@ -193,13 +199,13 @@ std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int m
     std::cout << "### With pre-processing (fixed point)" << std::endl;
     Graph processedGraph = graphPreprocessingFixedPoint(graph);
 
-    std::cout << "Counting nodes.." << std::endl;
+    /*std::cout << "Counting nodes.." << std::endl;
     long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
-    std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
+    std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;*/
+    long long nodeCount = -1;
     for(int i = 1 ; i <= runTypes.size() ; i++) {
       grid[row+i].push_back(std::to_string(nodeCount));
     }
-
 
     grid = timeAll(processedGraph, runTypes, grid, row);
     std::cout << std::endl;
@@ -210,28 +216,51 @@ std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int m
     if(maxPruning == 0) {
       std::cout << "### With no pre-processing" << std::endl;
       Graph processedGraph = graphPreprocessing(graph, 0);
+
+      std::cout << "Counting nodes.." << std::endl;
+      long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
+      std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
+      for(int i = 1 ; i <= runTypes.size() ; i++) {
+        grid[row+i].push_back(std::to_string(nodeCount));
+      }
+
       grid = timeAll(graph, runTypes, grid, row);
-      grid[row].insert(grid[row].end(), {"SCC's", std::to_string(0) + " pruning steps (ms)", "SCC/ms", "Symbolic steps" });
+      grid[row].insert(grid[row].end(), {"Nodes", "SCC's", std::to_string(0) + " pruning steps (ms)", "SCC/ms", "Symbolic steps" });
     }
     else {
       std::cout << "### With pre-processing (" << std::to_string(maxPruning) << " or fixed-point)" << std::endl;
       std::pair<Graph, int> result = graphPreprocessingFixedPointWithMax(graph, maxPruning);
       Graph processedGraph = result.first;
-      int newMax = result.second;
 
+      std::cout << "Counting nodes.." << std::endl;
+      long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
+      std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
+      for(int i = 1 ; i <= runTypes.size() ; i++) {
+        grid[row+i].push_back(std::to_string(nodeCount));
+      }
+
+      int newMax = result.second;
       int newMax2Pow = pow(2,floor(log2(newMax-1)));
 
       grid = timeAll(processedGraph, runTypes, grid, row);
       std::cout << std::endl;
-      grid[row].insert(grid[row].end(), {"SCC's", std::to_string(newMax) + " pruning steps (ms)", "SCC/ms", "Symbolic steps" });
+      grid[row].insert(grid[row].end(), {"Nodes", "SCC's", std::to_string(newMax) + " pruning steps (ms)", "SCC/ms", "Symbolic steps" });
 
       for(int i = newMax2Pow; i >= minPruning; i = floor(i/2)) {
         std::cout << "### With pre-processing (" << std::to_string(i) << ")" << std::endl;
         processedGraph = graphPreprocessing(graph, i);
+
+        std::cout << "Counting nodes.." << std::endl;
+        long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
+        std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
+        for(int i = 1 ; i <= runTypes.size() ; i++) {
+          grid[row+i].push_back(std::to_string(nodeCount));
+        }
+
         grid = timeAll(processedGraph, runTypes, grid, row);
         std::cout << std::endl;
 
-        grid[row].insert(grid[row].end(), {"SCC's", std::to_string(i) + " pruning steps (ms)", "SCC/ms", "Symbolic steps" });
+        grid[row].insert(grid[row].end(), {"Nodes", "SCC's", std::to_string(i) + " pruning steps (ms)", "SCC/ms", "Symbolic steps" });
 
         if(i == 0 || i == minPruning) {
           break;

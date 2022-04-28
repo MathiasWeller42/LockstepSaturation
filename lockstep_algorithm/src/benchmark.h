@@ -59,6 +59,7 @@ std::vector<std::vector<std::string>> timeAll(const Graph &graph, std::list<algo
 std::tuple<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>, int> timeRun(const Graph &graph,
                                                                                          algorithmType runType);
 
-std::list<std::string> getPathStrings();
+std::list<std::string> getPathStringsAll();
+std::list<std::string> getPathStringsFast();
 
 #endif //BENCHMARK_H
