@@ -1,8 +1,8 @@
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;11;11;33;2;2;1,000000;148;
+Xie-Beerel backward saturation;11;11;33;2;3;0,666667;148;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;17;22;171;16;40;0,400000;2361;
+Xie-Beerel backward saturation;17;22;171;16;45;0,355556;2361;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
 Xie-Beerel backward saturation;19;19;513;2;15;0,133333;586;
@@ -14,41 +14,50 @@ Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic 
 Xie-Beerel backward saturation;24;29;1373;368;230;1,600000;29203;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;27;27;8193;2;35;0,057143;1241;
+Xie-Beerel backward saturation;27;27;8193;2;33;0,060606;1241;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;28;21;8001;2;45;0,044444;1490;
+Xie-Beerel backward saturation;28;21;8001;2;43;0,046512;1490;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;31;41;16021;2362;4557;0,518323;388624;
+Xie-Beerel backward saturation;31;41;16021;2362;4563;0,517642;388624;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;34;29;61496;406;1257;0,322991;59512;
+Xie-Beerel backward saturation;34;29;61496;406;1243;0,326629;59512;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
 Xie-Beerel backward saturation;35;35;131073;2;65;0,030769;2390;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;38;113;43201;76;1061;0,071631;79073;
+Xie-Beerel backward saturation;38;113;43201;76;981;0,077472;79073;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;41;127;86401;76;1374;0,055313;105639;
+Xie-Beerel backward saturation;40;49;380093;118208;107802;1,096529;14140902;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;41;31;819201;2;156;0,012821;3713;
+Xie-Beerel backward saturation;41;127;86401;76;1343;0,056590;105639;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;43;43;2097153;2;121;0,016529;4135;
+Xie-Beerel backward saturation;41;31;819201;2;164;0,012195;3713;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;43;48;3596;479;808;0,592822;70636;
+Xie-Beerel backward saturation;43;43;2097153;2;124;0,016129;4135;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;45;145;259201;76;1938;0,039216;153614;
+Xie-Beerel backward saturation;43;48;3596;479;792;0,604798;70636;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;53;39;32000001;2;489;0,004090;11765;
+Xie-Beerel backward saturation;45;145;259201;76;1931;0,039358;153614;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward saturation;60;45;524288001;2;496;0,004032;9682;
+Xie-Beerel backward saturation;45;60;1530495;327762;623379;0,525783;51411176;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel backward saturation;53;39;32000001;2;566;0,003534;11765;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel backward saturation;53;53;21947;2909;5056;0,575356;433710;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel backward saturation;60;45;524288001;2;709;0,002821;9682;
 

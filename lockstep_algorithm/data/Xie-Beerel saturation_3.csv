@@ -1,54 +1,63 @@
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;11;11;-1;1;2;0,500000;102;
+Xie-Beerel saturation;11;11;32;1;2;0,500000;102;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;17;22;-1;9;51;0,176471;2630;
+Xie-Beerel saturation;17;22;164;9;55;0,163636;2630;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;19;19;-1;1;11;0,090909;361;
+Xie-Beerel saturation;19;19;512;1;10;0,100000;361;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;22;17;-1;1;15;0,066667;500;
+Xie-Beerel saturation;22;17;1280;1;14;0,071429;500;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;24;29;-1;189;177;1,067797;16833;
+Xie-Beerel saturation;24;29;1194;189;147;1,285714;16833;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;27;27;-1;1;27;0,037037;834;
+Xie-Beerel saturation;27;27;8192;1;26;0,038462;834;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;28;21;-1;1;29;0,034483;889;
+Xie-Beerel saturation;28;21;8000;1;28;0,035714;889;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;31;41;-1;1727;4374;0,394833;299548;
+Xie-Beerel saturation;31;41;15386;1727;4056;0,425789;299548;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;34;29;-1;198;948;0,208861;32660;
+Xie-Beerel saturation;34;29;61288;198;877;0,225770;32660;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;35;35;-1;1;48;0,020833;1475;
+Xie-Beerel saturation;35;35;131072;1;47;0,021277;1475;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;38;113;-1;75;1408;0,053267;116515;
+Xie-Beerel saturation;38;113;43200;75;1162;0,064544;116515;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;41;127;-1;75;1707;0,043937;143241;
+Xie-Beerel saturation;40;49;321114;59229;61468;0,963575;7716649;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;41;31;-1;1;75;0,013333;2011;
+Xie-Beerel saturation;41;127;86400;75;1656;0,045290;143241;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;43;43;-1;1;101;0,009901;2774;
+Xie-Beerel saturation;41;31;819200;1;73;0,013699;2011;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;43;48;-1;55;418;0,131579;21404;
+Xie-Beerel saturation;43;43;2097152;1;100;0,010000;2774;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;45;145;-1;75;2169;0,034578;193845;
+Xie-Beerel saturation;43;48;3172;55;400;0,137500;21404;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;53;39;-1;1;170;0,005882;4232;
+Xie-Beerel saturation;45;145;259200;75;2051;0,036568;193845;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel saturation;60;45;-1;1;210;0,004762;4783;
+Xie-Beerel saturation;45;60;1455374;252641;583256;0,433156;50249423;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;53;39;32000000;1;156;0,006410;4232;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;53;53;21658;2620;6369;0,411368;497369;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation;60;45;524288000;1;194;0,005155;4783;
 

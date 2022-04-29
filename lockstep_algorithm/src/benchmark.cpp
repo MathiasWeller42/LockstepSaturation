@@ -26,7 +26,7 @@
 std::list<std::string> getPathStringsAll() {
   std::list<std::string> resultList = {};
 
-  // < 5 seconds
+  // < 15 minutes
   resultList.push_back("ShieldRVt/PT/shield_t_rv_001_a_11place.pnml");                        //11
   resultList.push_back("ShieldRVs/PT/shield_s_rv_001_a_17place.pnml");                        //17
   resultList.push_back("ShieldRVt/PT/shield_t_rv_002_a_19place.pnml");                        //19
@@ -38,43 +38,38 @@ std::list<std::string> getPathStringsAll() {
   resultList.push_back("ShieldPPPs/PT/shield_s_ppp_001_a_34place.pnml");                      //34
   resultList.push_back("ShieldRVt/PT/shield_t_rv_004_a_35place.pnml");                        //35
   resultList.push_back("SmartHome/PT/smhome_01_38place.pnml");                                //38
+  resultList.push_back("GPUForwardProgress/PT/gpufp_08_a_40place.pnml");                      //40
   resultList.push_back("SmartHome/PT/smhome_02_41place.pnml");                                //41
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_002_a_41place.pnml");                      //41
   resultList.push_back("ShieldRVt/PT/shield_t_rv_005_a_43place.pnml");                        //43
   resultList.push_back("ShieldRVs/PT/shield_s_rv_001_b_43place.pnml");                        //43
   resultList.push_back("SmartHome/PT/smhome_03_45place.pnml");                                //45
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_003_a_45place.pnml");                        //45
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_002_a_53place.pnml");                      //53
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_001_b_53place.pnml");                        //53
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_a_60place.pnml");                      //60
 
+  return resultList;
+}
+
+std::list<std::string> getPathStringsAllNoCount() {
+  std::list<std::string> resultList = {};
+
+  // < 15 minutes
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_001_b_71place.pnml");                      //71
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_b_73place.pnml");                      //73
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_003_a_78place.pnml");                      //78
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_010_a_83place.pnml");                        //83
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_98place.pnml");                      //98
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_004_a_103place.pnml");                     //103
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_005_a_128place.pnml");                     //128
   return resultList;
 }
 
 std::list<std::string> getPathStringsFast() {
   std::list<std::string> resultList = {};
 
-  /*
-  // < 5 seconds
-  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_003_a_78place.pnml");                      //78
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79
-  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_005_a_128place.pnml");                     //128
-
-  // < 15 seconds
-  resultList.push_back("ShieldRVt/PT/shield_t_rv_001_b_53place.pnml");                        //53
-  resultList.push_back("ShieldRVt/PT/shield_t_rv_010_a_83place.pnml");                        //83
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_98place.pnml");                      //98
-  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_004_a_103place.pnml");                     //103
-  */
-  /*
-  // < 30 seconds
-  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_001_b_71place.pnml");                      //71
-
-  // < 2 minutes
-  resultList.push_back("GPUForwardProgress/PT/gpufp_08_a_40place.pnml");                      //40
-
-  // < 15 minutes
-  resultList.push_back("ShieldRVs/PT/shield_s_rv_003_a_45place.pnml");                        //45
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_b_73place.pnml");                      //73
-  */
   // > 15 minutes
   /*
   resultList.push_back("GPUForwardProgress/PT/gpufp_12_a_56place.pnml");                      //56 (langsom... 2+ timer)
@@ -199,10 +194,9 @@ std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int m
     std::cout << "### With pre-processing (fixed point)" << std::endl;
     Graph processedGraph = graphPreprocessingFixedPoint(graph);
 
-    /*std::cout << "Counting nodes.." << std::endl;
+    std::cout << "Counting nodes.." << std::endl;
     long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
-    std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;*/
-    long long nodeCount = -1;
+    std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
     for(int i = 1 ; i <= runTypes.size() ; i++) {
       grid[row+i].push_back(std::to_string(nodeCount));
     }

@@ -26,7 +26,6 @@ std::list<sylvan::Bdd> findSCCs(std::string PNMLfileName,
   if(pruning < 0) {
     processedGraph = graphPreprocessingFixedPoint(originalGraph);
   } else {
-    //TODO: Brug max-versionen i stedet?
     std::pair<Graph, int> result = graphPreprocessingFixedPointWithMax(originalGraph, pruning);
     processedGraph = result.first;
   }

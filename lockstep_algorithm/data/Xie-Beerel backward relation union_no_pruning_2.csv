@@ -2,53 +2,62 @@ Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic 
 Xie-Beerel backward relation union;11;11;33;2;4;0,500000;176;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;17;22;171;16;39;0,410256;2266;
+Xie-Beerel backward relation union;17;22;171;16;42;0,380952;2266;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
 Xie-Beerel backward relation union;19;19;513;2;18;0,111111;494;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;22;17;1281;2;31;0,064516;663;
+Xie-Beerel backward relation union;22;17;1281;2;33;0,060606;663;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;24;29;1373;368;305;1,206557;37845;
+Xie-Beerel backward relation union;24;29;1373;368;355;1,036620;37845;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
 Xie-Beerel backward relation union;27;27;8193;2;57;0,035088;1026;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;28;21;8001;2;87;0,022989;1239;
+Xie-Beerel backward relation union;28;21;8001;2;86;0,023256;1239;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;31;41;16021;2362;4388;0,538286;371829;
+Xie-Beerel backward relation union;31;41;16021;2362;4531;0,521298;371829;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;34;29;61496;406;1548;0,262274;55651;
+Xie-Beerel backward relation union;34;29;61496;406;1622;0,250308;55651;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;35;35;131073;2;185;0,010811;1715;
+Xie-Beerel backward relation union;35;35;131073;2;196;0,010204;1715;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;38;113;43201;76;2089;0,036381;167240;
+Xie-Beerel backward relation union;38;113;43201;76;2393;0,031759;167240;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;41;127;86401;76;2691;0,028242;207010;
+Xie-Beerel backward relation union;40;49;380093;118208;152955;0,772829;17667489;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;41;31;819201;2;599;0,003339;2232;
+Xie-Beerel backward relation union;41;127;86401;76;2774;0,027397;207010;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;43;43;2097153;2;991;0,002018;2580;
+Xie-Beerel backward relation union;41;31;819201;2;574;0,003484;2232;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;43;48;3596;479;869;0,551208;77040;
+Xie-Beerel backward relation union;43;43;2097153;2;949;0,002107;2580;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;45;145;259201;76;3782;0,020095;258100;
+Xie-Beerel backward relation union;43;48;3596;479;863;0,555041;77040;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;53;39;32000001;2;9149;0,000219;4758;
+Xie-Beerel backward relation union;45;145;259201;76;3628;0,020948;258100;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel backward relation union;60;45;524288001;2;50617;0,000040;5040;
+Xie-Beerel backward relation union;45;60;1530495;327762;752142;0,435771;62651520;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel backward relation union;53;39;32000001;2;9890;0,000202;4758;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel backward relation union;53;53;21947;2909;5689;0,511338;503924;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel backward relation union;60;45;524288001;2;52255;0,000038;5040;
 

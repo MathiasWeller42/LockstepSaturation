@@ -1,54 +1,63 @@
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;11;11;-1;1;5;0,200000;154;
+Xie-Beerel relation union;11;11;32;1;4;0,250000;154;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;17;22;-1;9;54;0,166667;2090;
+Xie-Beerel relation union;17;22;164;9;45;0,200000;2090;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;19;19;-1;1;22;0,045455;456;
+Xie-Beerel relation union;19;19;512;1;18;0,055556;456;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;22;17;-1;1;37;0,027027;629;
+Xie-Beerel relation union;22;17;1280;1;31;0,032258;629;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;24;29;-1;189;256;0,738281;21228;
+Xie-Beerel relation union;24;29;1194;189;209;0,904306;21228;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;27;27;-1;1;67;0,014925;972;
+Xie-Beerel relation union;27;27;8192;1;57;0,017544;972;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;28;21;-1;1;106;0,009434;1197;
+Xie-Beerel relation union;28;21;8000;1;89;0,011236;1197;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;31;41;-1;1727;5175;0,333720;318406;
+Xie-Beerel relation union;31;41;15386;1727;4389;0,393484;318406;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;34;29;-1;198;2258;0,087688;31146;
+Xie-Beerel relation union;34;29;61288;198;1899;0,104265;31146;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;35;35;-1;1;248;0,004032;1645;
+Xie-Beerel relation union;35;35;131072;1;200;0,005000;1645;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;38;113;-1;75;2493;0,030084;155714;
+Xie-Beerel relation union;38;113;43200;75;2114;0,035478;155714;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;41;127;-1;75;2902;0,025844;194056;
+Xie-Beerel relation union;40;49;321114;59229;79487;0,745141;8735524;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;41;31;-1;1;554;0,001805;2170;
+Xie-Beerel relation union;41;127;86400;75;2473;0,030328;194056;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;43;43;-1;1;774;0,001292;2494;
+Xie-Beerel relation union;41;31;819200;1;544;0,001838;2170;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;43;48;-1;55;396;0,138889;18096;
+Xie-Beerel relation union;43;43;2097152;1;760;0,001316;2494;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;45;145;-1;75;3642;0,020593;243310;
+Xie-Beerel relation union;43;48;3172;55;350;0,157143;18096;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;53;39;-1;1;6107;0,000164;4680;
+Xie-Beerel relation union;45;145;259200;75;3407;0,022014;243310;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Xie-Beerel relation union;60;45;-1;1;39021;0,000026;4950;
+Xie-Beerel relation union;45;60;1455374;252641;644694;0,391877;57199860;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel relation union;53;39;32000000;1;11336;0,000088;4680;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel relation union;53;53;21658;2620;6893;0,380096;587664;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel relation union;60;45;524288000;1;36248;0,000028;4950;
 

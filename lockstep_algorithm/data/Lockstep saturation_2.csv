@@ -1,54 +1,63 @@
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;11;11;-1;1;3;0,333333;102;
+Lockstep saturation;11;11;32;1;2;0,500000;102;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;17;22;-1;9;63;0,142857;2546;
+Lockstep saturation;17;22;164;9;53;0,169811;2546;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;19;19;-1;1;13;0,076923;361;
+Lockstep saturation;19;19;512;1;11;0,090909;361;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;22;17;-1;1;18;0,055556;500;
+Lockstep saturation;22;17;1280;1;15;0,066667;500;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;24;29;-1;189;190;0,994737;17623;
+Lockstep saturation;24;29;1194;189;179;1,055866;17623;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;27;27;-1;1;31;0,032258;834;
+Lockstep saturation;27;27;8192;1;27;0,037037;834;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;28;21;-1;1;31;0,032258;889;
+Lockstep saturation;28;21;8000;1;28;0,035714;889;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;31;41;-1;1727;5046;0,342251;299592;
+Lockstep saturation;31;41;15386;1727;4492;0,384461;299592;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;34;29;-1;198;1024;0,193359;33589;
+Lockstep saturation;34;29;61288;198;1116;0,177419;33589;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;35;35;-1;1;55;0,018182;1475;
+Lockstep saturation;35;35;131072;1;58;0,017241;1475;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;38;113;-1;75;1614;0,046468;122280;
+Lockstep saturation;38;113;43200;75;1668;0,044964;122280;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;41;127;-1;75;2015;0,037221;149043;
+Lockstep saturation;40;49;321114;59229;76795;0,771261;8465567;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;41;31;-1;1;80;0,012500;2011;
+Lockstep saturation;41;127;86400;75;1630;0,046012;149043;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;43;43;-1;1;119;0,008403;2774;
+Lockstep saturation;41;31;819200;1;68;0,014706;2011;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;43;48;-1;55;413;0,133172;19454;
+Lockstep saturation;43;43;2097152;1;95;0,010526;2774;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;45;145;-1;75;2685;0,027933;199779;
+Lockstep saturation;43;48;3172;55;333;0,165165;19454;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;53;39;-1;1;183;0,005464;4232;
+Lockstep saturation;45;145;259200;75;2227;0,033678;199779;
 
 Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;60;45;-1;1;228;0,004386;4783;
+Lockstep saturation;45;60;1455374;252641;645087;0,391639;47028157;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation;53;39;32000000;1;161;0,006211;4232;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation;53;53;21658;2620;5118;0,511919;433082;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation;60;45;524288000;1;199;0,005025;4783;
 

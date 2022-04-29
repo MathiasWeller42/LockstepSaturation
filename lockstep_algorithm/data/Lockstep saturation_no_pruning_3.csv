@@ -1,54 +1,63 @@
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;11;11;33;2;3;0,666667;147;
+Lockstep saturation;11;11;33;2;3;0,666667;148;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;17;22;171;16;54;0,296296;2964;
+Lockstep saturation;17;22;171;16;52;0,307692;2645;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;19;19;513;2;15;0,133333;585;
+Lockstep saturation;19;19;513;2;16;0,125000;586;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;22;17;1281;2;27;0,074074;854;
+Lockstep saturation;22;17;1281;2;26;0,076923;856;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;24;29;1373;368;245;1,502041;31000;
+Lockstep saturation;24;29;1373;368;282;1,304965;29973;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;27;27;8193;2;39;0,051282;1240;
+Lockstep saturation;27;27;8193;2;39;0,051282;1241;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;28;21;8001;2;51;0,039216;1475;
+Lockstep saturation;28;21;8001;2;55;0,036364;1490;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;31;41;16021;2362;6188;0,381707;448703;
+Lockstep saturation;31;41;16021;2362;6217;0,379926;445734;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;34;29;61496;406;1989;0,204123;57686;
+Lockstep saturation;34;29;61496;406;2211;0,183627;58410;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;35;35;131073;2;95;0,021053;2389;
+Lockstep saturation;35;35;131073;2;95;0,021053;2390;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;38;113;43201;76;1207;0,062966;66232;
+Lockstep saturation;38;113;43201;76;940;0,080851;66620;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;41;127;86401;76;1161;0,065461;89160;
+Lockstep saturation;40;49;380093;118208;150988;0,782897;14764902;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;41;31;819201;2;158;0,012658;3700;
+Lockstep saturation;41;127;86401;76;1150;0,066087;89161;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;43;43;2097153;2;140;0,014286;4134;
+Lockstep saturation;41;31;819201;2;167;0,011976;3713;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;43;48;3596;479;1662;0,288207;128253;
+Lockstep saturation;43;43;2097153;2;126;0,015873;4135;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;45;145;259201;76;1730;0,043931;150640;
+Lockstep saturation;43;48;3596;479;998;0,479960;80899;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;53;39;32000001;2;497;0,004024;11729;
+Lockstep saturation;45;145;259201;76;2058;0,036929;152088;
 
 Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
-Xie-Beerel saturation;60;45;524288001;2;517;0,003868;9658;
+Lockstep saturation;45;60;1530495;327762;717008;0,457125;57453327;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Lockstep saturation;53;39;32000001;2;616;0,003247;11765;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Lockstep saturation;53;53;21947;2909;5931;0,490474;490585;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Lockstep saturation;60;45;524288001;2;924;0,002165;9682;
 

@@ -60,6 +60,7 @@ std::tuple<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>, int>
                                                                                          algorithmType runType);
 
 std::list<std::string> getPathStringsAll();
+std::list<std::string> getPathStringsAllNoCount();
 std::list<std::string> getPathStringsFast();
 
 #endif //BENCHMARK_H
