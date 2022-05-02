@@ -192,12 +192,24 @@ Graph pruneGraph(const Graph &graph) {
 }
 
 Graph fixedPointPruning(const Graph &graph) {
+  auto start = std::chrono::high_resolution_clock::now();
+  auto stop = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+
   sylvan::Bdd oldNodes = graph.nodes;
 
   Graph resultGraph = pruneGraph(graph);
   int pruningSteps = 1;
 
   while(resultGraph.nodes != oldNodes) {
+    stop = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+    if((int)duration.count() > 60000) {
+      std::cout << "Took too long pruning " << (int)duration.count() << std::endl;
+      resultGraph.nodes = leaf_false();
+      return resultGraph;
+    }
+
     oldNodes = resultGraph.nodes;
     resultGraph = pruneGraph(resultGraph);
     pruningSteps++;

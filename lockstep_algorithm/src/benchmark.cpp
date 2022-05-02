@@ -64,6 +64,9 @@ std::list<std::string> getPathStringsAllNoCount() {
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_98place.pnml");                      //98
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_004_a_103place.pnml");                     //103
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_005_a_128place.pnml");                     //128
+  resultList.push_back("SmartHome/PT/smhome_04_139place.pnml");                               //139
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_020_a_163place.pnml");                       //163
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_010_a_193place.pnml");                     //193
   return resultList;
 }
 
@@ -84,7 +87,7 @@ std::list<std::string> getPathStringsFast() {
   resultList.push_back("DiscoveryGPU/PT/discovery_08_a_83place.pnml");                        //83
   resultList.push_back("GPUForwardProgress/PT/gpufp_20_a_88place.pnml");                      //88
   resultList.push_back("DiscoveryGPU/PT/discovery_09_a_93place.pnml");                        //93
-  //resultList.push_back("ShieldPPPs/PT/shield_s_ppp_003_a_96place.pnml");                      //96 (meget langsom pruning)
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_003_a_96place.pnml");                      //96 (meget langsom pruning - prøv uden count???)
   resultList.push_back("ShieldRVt/PT/shield_t_rv_002_b_103place.pnml");                       //103
   resultList.push_back("DiscoveryGPU/PT/discovery_10_a_103place.pnml");                       //103
   resultList.push_back("GPUForwardProgress/PT/gpufp_24_a_104place.pnml");                     //104
@@ -98,44 +101,37 @@ std::list<std::string> getPathStringsFast() {
   resultList.push_back("DiscoveryGPU/PT/discovery_12_a_123place.pnml");                       //123
   resultList.push_back("ShieldRVs/PT/shield_s_rv_003_b_123place.pnml");                       //123
   resultList.push_back("HealthRecord/PT/hrec_05_125place.pnml");                              //125
-  */
-
-  //untested timewise
-  //resultList.push_back("ShieldPPPs/PT/shield_s_ppp_004_a_127place.pnml");                     //127 (meget langsom reachability)
-
   resultList.push_back("DiscoveryGPU/PT/discovery_13_a_133place.pnml");                       //133
   resultList.push_back("GPUForwardProgress/PT/gpufp_32_a_136place.pnml");                     //136
   resultList.push_back("ShieldPPPs/PT/shield_s_ppp_002_b_139place.pnml");                     //139
-  resultList.push_back("SmartHome/PT/smhome_04_139place.pnml");                               //139
   resultList.push_back("DiscoveryGPU/PT/discovery_14_a_143place.pnml");                       //143
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_002_b_143place.pnml");                     //143
   resultList.push_back("ShieldRVs/PT/shield_s_rv_010_a_143place.pnml");                       //143
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_004_a_127place.pnml");                     //127 (meget langsom reachability)
   resultList.push_back("GPUForwardProgress/PT/gpufp_36_a_152place.pnml");                     //152
-  resultList.push_back("ShieldRVt/PT/shield_t_rv_003_b_153place.pnml");                       //153
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_003_b_153place.pnml");                       //153 (langsom pruning)
   resultList.push_back("DiscoveryGPU/PT/discovery_15_a_153place.pnml");                       //153
-  resultList.push_back("HealthRecord/PT/hrec_06_154place.pnml");                              //154
-  resultList.push_back("HealthRecord/PT/hrec_07_155place.pnml");                              //155
-  resultList.push_back("HealthRecord/PT/hrec_08_156place.pnml");                              //156
-  resultList.push_back("HealthRecord/PT/hrec_09_157place.pnml");                              //157
-  resultList.push_back("HealthRecord/PT/hrec_10_158place.pnml");                              //158
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_158place.pnml");                     //158
-  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_005_a_158place.pnml");                     //158
-  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_002_b_159place.pnml");                     //159
-  resultList.push_back("HealthRecord/PT/hrec_11_159place.pnml");                              //159
-  resultList.push_back("HealthRecord/PT/hrec_12_160place.pnml");                              //160
-  resultList.push_back("HealthRecord/PT/hrec_13_161place.pnml");                              //161
-  resultList.push_back("HealthRecord/PT/hrec_14_162place.pnml");                              //162
-  resultList.push_back("HealthRecord/PT/hrec_15_163place.pnml");                              //163
-  resultList.push_back("ShieldRVt/PT/shield_t_rv_020_a_163place.pnml");                       //163
-  resultList.push_back("ShieldRVs/PT/shield_s_rv_004_b_163place.pnml");                       //163
+  resultList.push_back("HealthRecord/PT/hrec_06_154place.pnml");                              //154 (langsom pruning)
+  resultList.push_back("HealthRecord/PT/hrec_07_155place.pnml");                              //155 (langsom reachability)
+  resultList.push_back("HealthRecord/PT/hrec_08_156place.pnml");                              //156 (langsom reachability)
+  resultList.push_back("HealthRecord/PT/hrec_09_157place.pnml");                              //157 (langsom reachability)
+  resultList.push_back("HealthRecord/PT/hrec_10_158place.pnml");                              //158 (langsom reachability)
+  resultList.push_back("ShieldPPPs/PT/shield_s_ppp_005_a_158place.pnml");                     //158 (langsom reachability)
+  resultList.push_back("ShieldPPPt/PT/shield_t_ppp_002_b_159place.pnml");                     //159 (langsom reachability)
+  resultList.push_back("HealthRecord/PT/hrec_11_159place.pnml");                              //159 (langsom reachability)
+  resultList.push_back("HealthRecord/PT/hrec_12_160place.pnml");                              //160 (langsom reachability)
+  resultList.push_back("HealthRecord/PT/hrec_13_161place.pnml");                              //161 (langsom reachability)
+  resultList.push_back("HealthRecord/PT/hrec_14_162place.pnml");                              //162 (langsom reachability)
+  resultList.push_back("HealthRecord/PT/hrec_15_163place.pnml");                              //163 (langsom reachability)
+  resultList.push_back("ShieldRVs/PT/shield_s_rv_004_b_163place.pnml");                       //163 (langsom reachability)
   resultList.push_back("GPUForwardProgress/PT/gpufp_40_a_168place.pnml");                     //168
-  resultList.push_back("DiscoveryGPU/PT/discovery_06_b_184place.pnml");                       //184
-  resultList.push_back("GPUForwardProgress/PT/gpufp_08_b_188place.pnml");                     //188
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_010_a_193place.pnml");                     //193
-  resultList.push_back("ShieldRVt/PT/shield_t_rv_004_b_203place.pnml");                       //203
+  resultList.push_back("DiscoveryGPU/PT/discovery_06_b_184place.pnml");                       //184 (langsom pruning)
+  resultList.push_back("GPUForwardProgress/PT/gpufp_08_b_188place.pnml");                     //188 (langsom pruning)
+  resultList.push_back("ShieldRVt/PT/shield_t_rv_004_b_203place.pnml");                       //203 (langsom reachability)
   resultList.push_back("ShieldRVs/PT/shield_s_rv_005_b_203place.pnml");                       //203
   resultList.push_back("DiscoveryGPU/PT/discovery_07_b_212place.pnml");                       //212
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_b_213place.pnml");                     //213
+  */
 
   //resultList.push_back("xb_slow.pnml");
 

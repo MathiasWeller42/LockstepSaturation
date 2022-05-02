@@ -126,6 +126,8 @@ void printBddListAsString(const int nodes, const std::list<sylvan::Bdd> bdds) {
 
 //Returns the number of nodes in a BDD with even numbered vars from 0 to 2*numVars
 long long countNodes(int numVars, const sylvan::Bdd &bdd) {
+  return -1;
+
   if(bdd.isTerminal()){
     if(bdd.isOne()) {
       return (long long) pow(2, numVars);

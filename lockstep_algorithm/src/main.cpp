@@ -28,12 +28,12 @@ int main() {
   sylvan::sylvan_init_package();
   sylvan::sylvan_init_bdd();
 
-  std::cout << "Hello World!" << std::endl;
+  std::cout << "Hello SCC-finding World!" << std::endl;
 
   std::list<std::string> pathStringsAll = getPathStringsAll();
-  std::list<algorithmType> allRunTypes = {xbSat, xbBackwardSat, lockstepSat, xbRelUnion, xbBackwardRelUnion, lockstepRelUnion};
+  std::list<algorithmType> allRunTypes = {/*xbSat, xbBackwardSat,*/ lockstepSat/*, xbRelUnion, xbBackwardRelUnion, lockstepRelUnion*/};
 
-  for(algorithmType algo : allRunTypes) {
+  /*for(algorithmType algo : allRunTypes) {
     std::list<algorithmType> algorithms = {algo};
     std::string fileName = algoToString(algo) + "_1";
     benchmark(pathStringsAll, fileName, algorithms);
@@ -64,16 +64,16 @@ int main() {
     std::list<algorithmType> algorithms = {algo};
     std::string fileName = algoToString(algo) + "_no_pruning_3";
     benchmark(pathStringsAll, fileName, algorithms, 0);
-  }
-
-  //std::list<std::string> pathStringsFast = getPathStringsFast();
-  //std::list<algorithmType> fastRunTypes = {lockstepSat, xbSat, xbBackwardSat};
-
-  /*for(algorithmType algo : fastRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_2";
-    benchmark(pathStringsFast, fileName, algorithms);
   }*/
+
+  std::list<std::string> pathStringsFast = getPathStringsFast();
+  std::list<algorithmType> fastRunTypes = {lockstepSat/*, xbSat, xbBackwardSat*/};
+
+  for(algorithmType algo : fastRunTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_test";
+    benchmark(pathStringsFast, fileName, algorithms);
+  }
 
   std::cout << "Goodbye :)" << std::endl;
 
