@@ -56,10 +56,11 @@ std::list<std::string> getPathStringsAllNoCount() {
   std::list<std::string> resultList = {};
 
   // < 15 minutes
+  /*
   resultList.push_back("ShieldPPPs/PT/shield_s_ppp_001_b_71place.pnml");                      //71
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_b_73place.pnml");                      //73
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_003_a_78place.pnml");                      //78
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79*/
   resultList.push_back("ShieldRVt/PT/shield_t_rv_010_a_83place.pnml");                        //83
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_98place.pnml");                      //98
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_004_a_103place.pnml");                     //103
@@ -132,8 +133,13 @@ std::list<std::string> getPathStringsFast() {
   resultList.push_back("DiscoveryGPU/PT/discovery_07_b_212place.pnml");                       //212
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_003_b_213place.pnml");                     //213
   */
-
   //resultList.push_back("xb_slow.pnml");
+  resultList.push_back("xb_slow100.pnml");
+  resultList.push_back("xb_slow200.pnml");
+  resultList.push_back("xb_slow300.pnml");
+  resultList.push_back("xb_slow400.pnml");
+  resultList.push_back("xb_slow500.pnml");
+  resultList.push_back("xb_slow600.pnml");
 
   return resultList;
 }
@@ -190,9 +196,12 @@ std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int m
     std::cout << "### With pre-processing (fixed point)" << std::endl;
     Graph processedGraph = graphPreprocessingFixedPoint(graph);
 
-    std::cout << "Counting nodes.." << std::endl;
-    long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
-    std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
+
+    std::cout << "Counting with SatCount..:" << std::endl;
+    double nodeCount = processedGraph.nodes.SatCount(processedGraph.cube);
+    std::cout << "Graph size: " << std::to_string(nodeCount) << " nodes" << std::endl;
+    
+
     for(int i = 1 ; i <= runTypes.size() ; i++) {
       grid[row+i].push_back(std::to_string(nodeCount));
     }
@@ -207,9 +216,9 @@ std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int m
       std::cout << "### With no pre-processing" << std::endl;
       Graph processedGraph = graphPreprocessing(graph, 0);
 
-      std::cout << "Counting nodes.." << std::endl;
-      long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
-      std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
+      std::cout << "Counting with SatCount..:" << std::endl;
+      double nodeCount = processedGraph.nodes.SatCount(processedGraph.cube);
+      std::cout << "Graph size: " << std::to_string(nodeCount) << " nodes" << std::endl;
       for(int i = 1 ; i <= runTypes.size() ; i++) {
         grid[row+i].push_back(std::to_string(nodeCount));
       }
@@ -222,9 +231,9 @@ std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int m
       std::pair<Graph, int> result = graphPreprocessingFixedPointWithMax(graph, maxPruning);
       Graph processedGraph = result.first;
 
-      std::cout << "Counting nodes.." << std::endl;
-      long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
-      std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
+      std::cout << "Counting with SatCount..:" << std::endl;
+      double nodeCount = processedGraph.nodes.SatCount(processedGraph.cube);
+      std::cout << "Graph size: " << std::to_string(nodeCount) << " nodes" << std::endl;
       for(int i = 1 ; i <= runTypes.size() ; i++) {
         grid[row+i].push_back(std::to_string(nodeCount));
       }
@@ -240,9 +249,9 @@ std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int m
         std::cout << "### With pre-processing (" << std::to_string(i) << ")" << std::endl;
         processedGraph = graphPreprocessing(graph, i);
 
-        std::cout << "Counting nodes.." << std::endl;
-        long long nodeCount = countNodes(processedGraph.cube.size(), processedGraph.nodes);
-        std::cout << "Graph size: " << nodeCount << " nodes" << std::endl;
+        std::cout << "Counting with SatCount..:" << std::endl;
+        double nodeCount = processedGraph.nodes.SatCount(processedGraph.cube);
+        std::cout << "Graph size: " << std::to_string(nodeCount) << " nodes" << std::endl;
         for(int i = 1 ; i <= runTypes.size() ; i++) {
           grid[row+i].push_back(std::to_string(nodeCount));
         }
@@ -293,17 +302,17 @@ std::tuple<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>, int>
     case lockstepRelUnion:
       sccAndSteps = lockstepRelationUnion(graph);
       break;
+    case xbForwardSat:
+      sccAndSteps = xieBeerelForwardSaturation(graph);
+      break;
+    case xbForwardRelUnion:
+      sccAndSteps = xieBeerelForwardRelationUnion(graph);
+      break;
     case xbSat:
       sccAndSteps = xieBeerelSaturation(graph);
       break;
     case xbRelUnion:
       sccAndSteps = xieBeerelRelationUnion(graph);
-      break;
-    case xbBackwardSat:
-      sccAndSteps = xieBeerelBackwardSaturation(graph);
-      break;
-    case xbBackwardRelUnion:
-      sccAndSteps = xieBeerelBackwardRelationUnion(graph);
       break;
   }
 
@@ -316,6 +325,11 @@ std::tuple<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>, int>
   std::tuple<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>, int> result = {sccList, duration, steps};
   return result;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// CSV
+////////////////////////////////////////////////////////////////////////////////
+
 
 //Writes the grid to a file at fileName.csv
 void writeToCSV(std::string fileName, std::vector<std::vector<std::string>> grid) {
@@ -345,6 +359,56 @@ std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs, int 
   }
   return grid;
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//Pre-processing
+////////////////////////////////////////////////////////////////////////////////
+
+//Sorts the relations by their top and prunes the graph pruningSteps times
+Graph graphPreprocessing(const Graph &graph, int pruningSteps) {
+  Graph resultGraph = graph;
+  resultGraph = sortRelations(resultGraph);
+
+  for(int i = 0; i < pruningSteps; i++) {
+    resultGraph = pruneGraph(resultGraph);
+  }
+
+  double prunedNodes = differenceBdd(graph.nodes, resultGraph.nodes).SatCount(graph.cube);
+  std::cout << "Pruned " << std::to_string(prunedNodes) << " nodes" << std::endl;
+  std::cout << "Finished pre-processing of graph" << std::endl;
+  return resultGraph;
+}
+
+//Sorts the relations by their top and prunes the graph until it has no more 1-node SCCs
+Graph graphPreprocessingFixedPoint(const Graph &graph) {
+  Graph resultGraph = graph;
+  resultGraph = sortRelations(resultGraph);
+
+  resultGraph = fixedPointPruning(resultGraph);
+
+  double prunedNodes = differenceBdd(graph.nodes, resultGraph.nodes).SatCount(graph.cube);
+  std::cout << "Pruned " << std::to_string(prunedNodes) << " nodes" << std::endl;
+  std::cout << "Finished pre-processing of graph" << std::endl;
+  return resultGraph;
+}
+
+//Sorts the relations by their top and prunes the graph until it has no more 1-node SCCs or
+//it has used the maximum number of pruning steps
+std::pair<Graph, int> graphPreprocessingFixedPointWithMax(const Graph &graph, int maxPruning) {
+  Graph resultGraph = graph;
+  resultGraph = sortRelations(resultGraph);
+
+  std::pair<Graph, int> result = fixedPointPruningWithMax(resultGraph, maxPruning);
+
+  double prunedNodes = differenceBdd(graph.nodes, resultGraph.nodes).SatCount(graph.cube);
+  std::cout << "Pruned " << std::to_string(prunedNodes) << " nodes" << std::endl;
+  std::cout << "Finished pre-processing of graph" << std::endl;
+  return result;
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //SCC list verification
@@ -432,50 +496,4 @@ bool sccListCorrectness(const std::list<sylvan::Bdd> sccList1, const std::list<s
     }
   }
   return true;
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
-//Pre-processing
-////////////////////////////////////////////////////////////////////////////////
-//Sorts the relations by their top and prunes the graph pruningSteps times
-Graph graphPreprocessing(const Graph &graph, int pruningSteps) {
-  Graph resultGraph = graph;
-  resultGraph = sortRelations(resultGraph);
-
-  for(int i = 0; i < pruningSteps; i++) {
-    resultGraph = pruneGraph(resultGraph);
-  }
-
-  long long prunedNodes = countNodes(graph.cube.size(), differenceBdd(graph.nodes, resultGraph.nodes));
-  std::cout << "Pruned " << prunedNodes << " nodes" << std::endl;
-  std::cout << "Finished pre-processing of graph" << std::endl;
-  return resultGraph;
-}
-
-//Sorts the relations by their top and prunes the graph until it has no more 1-node SCCs
-Graph graphPreprocessingFixedPoint(const Graph &graph) {
-  Graph resultGraph = graph;
-  resultGraph = sortRelations(resultGraph);
-
-  resultGraph = fixedPointPruning(resultGraph);
-
-  long long prunedNodes = countNodes(graph.cube.size(), differenceBdd(graph.nodes, resultGraph.nodes));
-  std::cout << "Pruned " << prunedNodes << " nodes" << std::endl;
-  std::cout << "Finished pre-processing of graph" << std::endl;
-  return resultGraph;
-}
-
-//Sorts the relations by their top and prunes the graph until it has no more 1-node SCCs or
-//it has used the maximum number of pruning steps
-std::pair<Graph, int> graphPreprocessingFixedPointWithMax(const Graph &graph, int maxPruning) {
-  Graph resultGraph = graph;
-  resultGraph = sortRelations(resultGraph);
-
-  std::pair<Graph, int> result = fixedPointPruningWithMax(resultGraph, maxPruning);
-
-  long long prunedNodes = countNodes(graph.cube.size(), differenceBdd(graph.nodes, resultGraph.nodes));
-  std::cout << "Pruned " << prunedNodes << " nodes" << std::endl;
-  std::cout << "Finished pre-processing of graph" << std::endl;
-  return result;
 }

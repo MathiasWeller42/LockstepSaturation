@@ -1,0 +1,12 @@
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Lockstep saturation;71;66;5212975.000000;123725;312665;0,395711;23746995;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Lockstep saturation;73;68;3260241.000000;170860;462037;0,369797;35194313;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Lockstep saturation;78;57;128000000001.000000;2;1457;0,001373;31443;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Lockstep saturation;79;59;335544320001.000000;2;895;0,002235;18555;
+

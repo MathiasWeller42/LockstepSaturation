@@ -14,23 +14,19 @@
 #include "petriTranslation.h"
 #include "print.h"
 
+//Picks a single assignment in a given nodeSet. It takes the false path in the BDD as much as possible until finding a true leaf,
+// and uses this path as assignment
 sylvan::Bdd pick(const sylvan::Bdd &nodeSet, const sylvan::BddSet &cube) {
 	//Find path in BDD that evaluates to true, and evaluate the decisions into new node
   sylvan::Bdd picked = pickAssignment(nodeSet, cube);
-
-  /*std::cout << "Picking" << std::endl;
-  std::cout << "This node was picked:" << std::endl;
-  printBddAsString(cube.size(), picked);
-  std::cout << ".. From this nodeSet:" << std::endl;
-  printBddAsString(cube.size(), nodeSet);*/
 	return picked;
 }
 
 //LOCKSTEP SATURATION ITERATIVE ##########################################################################
 std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph) {
-  auto start = std::chrono::high_resolution_clock::now();
+  /*auto start = std::chrono::high_resolution_clock::now();
   auto stop = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);*/
 
   int symbolicSteps = 0;
 
@@ -48,12 +44,12 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepSaturation(const Graph &fullGraph
   const std::deque<Relation> relationDeque = fullGraph.relations;
 
   while(!callStack.empty()) {
-    stop = std::chrono::high_resolution_clock::now();
+    /*stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
     if((int)duration.count() > 900000) {
       std::cout << "Took too long " << (int)duration.count() << std::endl;
       return {{},0};
-    }
+    }*/
 
     const sylvan::Bdd nodeSet = callStack.top();
     callStack.pop();
@@ -330,7 +326,7 @@ std::pair<std::list<sylvan::Bdd>, int> lockstepRelationUnion(const Graph &fullGr
   return result;
 }
 
-std::pair<std::list<sylvan::Bdd>, int> xieBeerelSaturation(const Graph &fullGraph) {
+std::pair<std::list<sylvan::Bdd>, int> xieBeerelForwardSaturation(const Graph &fullGraph) {
   int symbolicSteps = 0;
 
   std::stack<sylvan::Bdd> callStack;
@@ -388,12 +384,12 @@ std::pair<std::list<sylvan::Bdd>, int> xieBeerelSaturation(const Graph &fullGrap
     }
   }
 
-  std::cout << "[XBSat] Number of symbolic steps: " << symbolicSteps << std::endl;
+  std::cout << "[xbForwardSat] Number of symbolic steps: " << symbolicSteps << std::endl;
   std::pair<std::list<sylvan::Bdd>, int> result = {sccList, symbolicSteps};
   return result;
 }
 
-std::pair<std::list<sylvan::Bdd>, int> xieBeerelBackwardSaturation(const Graph &fullGraph) {
+std::pair<std::list<sylvan::Bdd>, int> xieBeerelSaturation(const Graph &fullGraph) {
   int symbolicSteps = 0;
 
   std::stack<sylvan::Bdd> callStack;
@@ -452,13 +448,13 @@ std::pair<std::list<sylvan::Bdd>, int> xieBeerelBackwardSaturation(const Graph &
     }
   }
 
-  std::cout << "[XBSatBack] Number of symbolic steps: " << symbolicSteps << std::endl;
+  std::cout << "[xbForwardSatBack] Number of symbolic steps: " << symbolicSteps << std::endl;
   std::pair<std::list<sylvan::Bdd>, int> result = {sccList, symbolicSteps};
   return result;
 }
 
 
-std::pair<std::list<sylvan::Bdd>, int> xieBeerelRelationUnion(const Graph &fullGraph) {
+std::pair<std::list<sylvan::Bdd>, int> xieBeerelForwardRelationUnion(const Graph &fullGraph) {
   int symbolicSteps = 0;
 
   std::stack<sylvan::Bdd> callStack;
@@ -523,7 +519,7 @@ std::pair<std::list<sylvan::Bdd>, int> xieBeerelRelationUnion(const Graph &fullG
   return result;
 }
 
-std::pair<std::list<sylvan::Bdd>, int> xieBeerelBackwardRelationUnion(const Graph &fullGraph) {
+std::pair<std::list<sylvan::Bdd>, int> xieBeerelRelationUnion(const Graph &fullGraph) {
   int symbolicSteps = 0;
 
   std::stack<sylvan::Bdd> callStack;
@@ -602,17 +598,17 @@ std::pair<sylvan::Bdd, int> reachabilityForwardSaturation(const Graph &graph, sy
 
   int symbolicSteps = 0;
 
-  auto start = std::chrono::high_resolution_clock::now();
+  /*auto start = std::chrono::high_resolution_clock::now();
   auto stop = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);*/
 
   while(relFrontI < relationDeque.size()) {
-    stop = std::chrono::high_resolution_clock::now();
+    /*stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
     if((int)duration.count() > 300000) {
       std::cout << "Took too long reachability " << (int)duration.count() << std::endl;
       return {leaf_false(),0};
-    }
+    }*/
 
     sylvan::Bdd relResultFront = differenceBdd(intersectBdd(forwardSet.RelNext(relFront, relFrontCube), nodeSet), forwardSet);
     symbolicSteps++;

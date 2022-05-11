@@ -26,5 +26,6 @@ bool testNodeCountFiveNodes();
 bool testNodeCountTenNodes();
 bool testNodeCountTwentyNodes();
 void testPick();
+void testSatCount();
 
 #endif

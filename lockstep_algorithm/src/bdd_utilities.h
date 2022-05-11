@@ -14,7 +14,12 @@
 #include "graph_creation.h"
 
 
-//inspiration from adapter.h in bdd-benchmarks - tak til Steffan ;)
+/*
+BDD helper functios for common operations
+- Inspiration from adapter.h in bdd-benchmarks - thank you Steffan ;)
+*/
+
+//Basic BDDs
 inline sylvan::Bdd leaf_true()
 { return sylvan::Bdd::bddOne(); }
 
@@ -27,6 +32,7 @@ inline sylvan::Bdd ithvar(int label)
 inline sylvan::Bdd nithvar(int label)
 { return ~sylvan::Bdd::bddVar(label); }
 
+//Set operations
 inline sylvan::Bdd unionBdd(const sylvan::Bdd &lhs, const sylvan::Bdd &rhs)
 { return lhs.Or(rhs); }
 
@@ -36,6 +42,7 @@ inline sylvan::Bdd intersectBdd(const sylvan::Bdd &lhs, const sylvan::Bdd &rhs)
 inline sylvan::Bdd differenceBdd(const sylvan::Bdd &lhs, const sylvan::Bdd &rhs)
 { return lhs.And(!rhs); }
 
+//Assignment
 inline sylvan::Bdd pickAssignment(const sylvan::Bdd &bdd, const sylvan::BddSet &cube) {
   std::vector<bool> realPath = bdd.PickOneCube(cube);
   std::reverse(realPath.begin(), realPath.end());

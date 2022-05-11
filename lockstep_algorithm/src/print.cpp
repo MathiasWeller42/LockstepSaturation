@@ -14,7 +14,16 @@
 //Pretty printing
 ////////////////////////////////////////////////////////////////////////////////
 
-//Main function for printing the binary BDD tree
+/*Main function for printing the binary BDD tree as a tree-structure. 
+ Example of the structure:
+└──x8
+   ├──x5
+   │   ├──x2
+   │   └──x6
+   └──x10
+       ├──x9
+       └──x11
+*/
 void printBdd(const sylvan::Bdd &bdd) {
   __printBdd(" ", bdd, false);
 }
@@ -124,64 +133,7 @@ void printBddListAsString(const int nodes, const std::list<sylvan::Bdd> bdds) {
   }
 }
 
-//Returns the number of nodes in a BDD with even numbered vars from 0 to 2*numVars
-long long countNodes(int numVars, const sylvan::Bdd &bdd) {
-  return -1;
 
-  if(bdd.isTerminal()){
-    if(bdd.isOne()) {
-      return (long long) pow(2, numVars);
-    } else {
-      return 0;
-    }
-  }
-  return __countNodes(-1, 2 * numVars - 2, bdd);
-}
-
-//Helper function for countNodes
-long long __countNodes(long long prevTop, int maxVar, const sylvan::Bdd &bdd) {
-  if(bdd.isTerminal()){
-    if(bdd.isOne()) {
-      return (long long) pow(2, (maxVar - prevTop) / 2);
-    } else {
-      return 0;
-    }
-  }
-
-  long long currentTop = bdd.TopVar();
-  double factor;
-  int exponent;
-  if(prevTop == -1) {
-    exponent = (currentTop) / 2;
-    factor = pow(2, exponent);
-  } else {
-    exponent = (currentTop - prevTop) / 2 - 1;
-    factor = pow(2, exponent);
-  }
-
-  int recResult1 =  __countNodes(currentTop, maxVar, bdd.Then());
-  int recResult2 =  __countNodes(currentTop, maxVar, bdd.Else());
-  int recResults = (recResult1 + recResult2);
-
-  //Check for overflow in addition
-  if(recResults < 0) {
-    return -1;
-  }
-
-  if((int)log2(recResults) + 1 + exponent + 1 >= 64) {
-    return -1;
-  }
-
-  int result = (long long) factor * (recResult1 + recResult2);
-
-  //Check for overflow in multiplication
-  /*if((factor != 0) && (result / factor != recResults)) {
-    return -1;
-  }*/
-
-
-  return result;
-}
 
 //Print a single relation as a string
 void printSingleRelationAsString(const sylvan::Bdd relation) {
@@ -235,8 +187,75 @@ std::list<std::pair<std::string, std::string>> __printRelationsAsString(std::pai
   return nodeList;
 }
 
+
+
+//Prints a map with key,value pairs each on a new line
 void printMap(std::map<std::string, int> map) {
   for(std::pair<std::string, int> place : map) {
     std::cout << "key: " << place.first << ", value: " << place.second << std::endl;
   }
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//Node counting
+////////////////////////////////////////////////////////////////////////////////
+
+
+//Returns the number of nodes in a BDD with even numbered vars from 0 to 2*numVars
+long long countNodes(int numVars, const sylvan::Bdd &bdd) {
+  if(bdd.isTerminal()){
+    if(bdd.isOne()) {
+      return (long long) pow(2, numVars);
+    } else {
+      return 0;
+    }
+  }
+  return __countNodes(-1, 2 * numVars - 2, bdd);
+}
+
+//Helper function for countNodes
+long long __countNodes(long long prevTop, int maxVar, const sylvan::Bdd &bdd) {
+  if(bdd.isTerminal()){
+    if(bdd.isOne()) {
+      return (long long) pow(2, (maxVar - prevTop) / 2);
+    } else {
+      return 0;
+    }
+  }
+
+  long long currentTop = bdd.TopVar();
+  double factor;
+  int exponent;
+  if(prevTop == -1) {
+    exponent = (currentTop) / 2;
+    factor = pow(2, exponent);
+  } else {
+    exponent = (currentTop - prevTop) / 2 - 1;
+    factor = pow(2, exponent);
+  }
+
+  int recResult1 =  __countNodes(currentTop, maxVar, bdd.Then());
+  int recResult2 =  __countNodes(currentTop, maxVar, bdd.Else());
+  int recResults = (recResult1 + recResult2);
+
+  //Check for overflow in addition
+  if(recResults < 0) {
+    return -1;
+  }
+
+  if((int)log2(recResults) + 1 + exponent + 1 >= 64) {
+    return -1;
+  }
+
+  int result = (long long) factor * (recResult1 + recResult2);
+
+  //Check for overflow in multiplication
+  /*if((factor != 0) && (result / factor != recResults)) {
+    return -1;
+  }*/
+
+
+  return result;
 }

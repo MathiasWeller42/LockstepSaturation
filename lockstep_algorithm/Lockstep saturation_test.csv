@@ -1,9 +1,0 @@
-Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;203;228;-1;0;0;-nan;0;
-
-Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;212;224;-1;0;0;-nan;0;
-
-Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
-Lockstep saturation;213;198;-1;0;0;-nan;0;
-

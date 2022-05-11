@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 #include <sylvan.h>
@@ -30,49 +29,60 @@ int main() {
 
   std::cout << "Hello SCC-finding World!" << std::endl;
 
-  std::list<std::string> pathStringsAll = getPathStringsAll();
-  std::list<algorithmType> allRunTypes = {/*xbSat, xbBackwardSat,*/ lockstepSat/*, xbRelUnion, xbBackwardRelUnion, lockstepRelUnion*/};
-
-  /*for(algorithmType algo : allRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_1";
-    benchmark(pathStringsAll, fileName, algorithms);
-  }
-  for(algorithmType algo : allRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_no_pruning_1";
-    benchmark(pathStringsAll, fileName, algorithms, 0);
-  }
-
-  for(algorithmType algo : allRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_2";
-    benchmark(pathStringsAll, fileName, algorithms);
-  }
-  for(algorithmType algo : allRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_no_pruning_2";
-    benchmark(pathStringsAll, fileName, algorithms, 0);
-  }
-
-  for(algorithmType algo : allRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_3";
-    benchmark(pathStringsAll, fileName, algorithms);
-  }
-  for(algorithmType algo : allRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_no_pruning_3";
-    benchmark(pathStringsAll, fileName, algorithms, 0);
-  }*/
 
   std::list<std::string> pathStringsFast = getPathStringsFast();
-  std::list<algorithmType> fastRunTypes = {lockstepSat/*, xbSat, xbBackwardSat*/};
+  std::list<algorithmType> fastRunTypes = {lockstepSat/*, xbSat*/};
 
+  /*for(algorithmType algo : fastRunTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_xb_slow_1";
+    benchmark(pathStringsFast, fileName, algorithms, 0);
+  }
   for(algorithmType algo : fastRunTypes) {
     std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_test";
-    benchmark(pathStringsFast, fileName, algorithms);
+    std::string fileName = algoToString(algo) + "_xb_slow_2";
+    benchmark(pathStringsFast, fileName, algorithms, 0);
+  }
+  for(algorithmType algo : fastRunTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_xb_slow_3";
+    benchmark(pathStringsFast, fileName, algorithms, 0);
+  }*/
+
+  std::list<std::string> pathStringsAll = getPathStringsAllNoCount();
+  std::list<algorithmType> satRunTypes = {xbSat, lockstepSat};
+  std::list<algorithmType> relUnionRunTypes = {xbRelUnion, lockstepRelUnion};
+  std::list<algorithmType> allRunTypes = {xbSat, lockstepSat, xbRelUnion, lockstepRelUnion};
+
+  for(algorithmType algo : satRunTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_large_1";
+    benchmark(pathStringsAll, fileName, algorithms);
+  }
+  for(algorithmType algo : satRunTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_large_no_pruning_1";
+    benchmark(pathStringsAll, fileName, algorithms, 0);
+  }
+  for(algorithmType algo : satRunTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_large_2";
+    benchmark(pathStringsAll, fileName, algorithms);
+  }
+  for(algorithmType algo : satRunTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_large_no_pruning_2";
+    benchmark(pathStringsAll, fileName, algorithms, 0);
+  }
+  for(algorithmType algo : satRunTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_large_3";
+    benchmark(pathStringsAll, fileName, algorithms);
+  }
+  for(algorithmType algo : satRunTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_large_no_pruning_3";
+    benchmark(pathStringsAll, fileName, algorithms, 0);
   }
 
   std::cout << "Goodbye :)" << std::endl;

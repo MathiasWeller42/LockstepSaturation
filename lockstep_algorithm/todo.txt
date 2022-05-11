@@ -1,7 +1,7 @@
 Den mest dank-swaggern todo-liste #WØRF uWu *tips fedora*
 -----------------------------------------------
 TODO 1 : Hvordan laver man pæn pseudo-kode???
-TODO 2 : Sæt node-counting ind i alle versioner af preprocessAndRun
+
 
 TODO i+1 : clean-up, **kommentarer** og læsbarhed (lav et pænt interface)
 
@@ -16,23 +16,11 @@ TODO phi : Profit
 TODO omega : Søvn
 TODO CXXXVII : Få et liv
 
+Møde med Jaco og Andreas:
+- Hvordan skal vi lave kildehenvisninger?
+- Kildehenvisninger på figurer / lave egne figurer?
+- Hvad gør vi bedst med grafer? relativ vs absolut/logaritmisk -> vis dem eksempler
+- Bud på hvorfor 1 SCC-grafer er så meget bedre...
 
-- hvad er vi HELT PRÆCIST garanteret når et PN er 1-safe? behøver ikke tjekke at targets er tomme
-
-----
-Nye ting vi skal snakke med Jaco og Andreas om (efter påske):
-- giv os en nem artikel 1-safe om petri nets plz (mail Jaco om det)
-- Når vi definerer Petri Nets skal der så kunne være flere edges fra et place til en transition?. (bare definer 1-safe PN)
-- skal vi implementere n^2 med/uden saturation? Xie-Beerel (XB) (hvis vi har tid)
-- hvem skal se vores kode? ift. clean-up (lav et pænt interface)
-- Hvor meget skal vi beskrive "processen"/implementationen?
-
-- flere eksempler <- SKAL de være safe (nej - bare beskriv hvad vi gør)? (google)
-- "scale" på eksperimentation - hvor mange resultater, etc.? Best practices...
-- Generel diskussion omkring hvordan vi eksperimenterer
-- pruning - lav et separat eksperiment med pruning?
-
-- reachability phase first
-- MCC categories - kan vi løse nogle af dem?
 -------------------------------------------------
 *Made By Mathias Weller* (Han tager fuldt ansvar) M.I.S.

@@ -1,0 +1,12 @@
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union;71;66;5093654.000000;4404;38052;0,115736;1132824;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union;73;68;3258135.000000;168754;518636;0,325380;41071048;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union;78;57;128000000000.000000;1;466723;0,000002;10773;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union;79;59;335544320000.000000;1;727951;0,000001;8909;
+

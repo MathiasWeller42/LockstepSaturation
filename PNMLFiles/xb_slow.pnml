@@ -28,7 +28,6 @@
 <place id="p_a12"><name><text>p_a12</text></name></place>
 <place id="p_a13"><name><text>p_a13</text></name></place>
 <place id="p_a14"><name><text>p_a14</text></name></place>
-
 <place id="p_a15"><name><text>p_a15</text></name></place>
 <place id="p_a16"><name><text>p_a16</text></name></place>
 <place id="p_a17"><name><text>p_a17</text></name></place>
@@ -186,7 +185,6 @@
 <place id="p_b12"><name><text>p_b12</text></name></place>
 <place id="p_b13"><name><text>p_b13</text></name></place>
 <place id="p_b14"><name><text>p_b14</text></name></place>
-
 <place id="p_b15"><name><text>p_b15</text></name></place>
 <place id="p_b16"><name><text>p_b16</text></name></place>
 <place id="p_b17"><name><text>p_b17</text></name></place>
@@ -344,7 +342,6 @@
 <place id="p_c12"><name><text>p_c12</text></name></place>
 <place id="p_c13"><name><text>p_c13</text></name></place>
 <place id="p_c14"><name><text>p_c14</text></name></place>
-
 <place id="p_c15"><name><text>p_c15</text></name></place>
 <place id="p_c16"><name><text>p_c16</text></name></place>
 <place id="p_c17"><name><text>p_c17</text></name></place>
@@ -501,7 +498,6 @@
 <place id="p_d12"><name><text>p_d12</text></name></place>
 <place id="p_d13"><name><text>p_d13</text></name></place>
 <place id="p_d14"><name><text>p_d14</text></name></place>
-
 <place id="p_d15"><name><text>p_d15</text></name></place>
 <place id="p_d16"><name><text>p_d16</text></name></place>
 <place id="p_d17"><name><text>p_d17</text></name></place>

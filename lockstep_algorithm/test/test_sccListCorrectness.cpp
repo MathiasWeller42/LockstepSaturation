@@ -354,6 +354,35 @@ void testPick() {
 }
 
 
+void testSatCount() {
+  //Graph 1
+  Graph graph1 = graphExample1multRel();
+  double count1 = graph1.nodes.SatCount(graph1.cube);
+  std::cout << "graphExample1oneRel count:" << std::to_string(count1) << std::endl;
+
+  //Graph 2
+  Graph graph2 = graphExample2multRel();
+  double count2 = graph2.nodes.SatCount(graph2.cube);
+  std::cout << "graphExample2multRel count:" << std::to_string(count2) << std::endl;
+
+  //Graph 3
+  Graph graph3 = graphExample3oneRel();
+  double count3 = graph3.nodes.SatCount(graph3.cube);
+  std::cout << "graphExample3oneRel count:" << std::to_string(count3) << std::endl;
+
+  //Graph 4
+  Graph graph4 = fourNodesOneRelation();
+  double count4 = graph4.nodes.SatCount(graph4.cube);
+  std::cout << "fourNodesOneRelation count:" << std::to_string(count4) << std::endl;
+
+  //Graph 5
+  Graph graph5 = nonConnectedGraph();
+  double count5 = graph5.nodes.SatCount(graph5.cube);
+  std::cout << "nonConnectedGraph count:" << std::to_string(count5) << std::endl;
+
+}
+
+
 
 
 

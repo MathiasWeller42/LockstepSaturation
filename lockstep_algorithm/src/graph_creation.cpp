@@ -48,7 +48,7 @@ sylvan::Bdd makeNodes(std::list<std::string> &bitstrings) {
   return resultBdd;
 }
 
-inline sylvan::Bdd makeArc(std::string &bitstringFrom, std::string &bitstringTo) {
+inline sylvan::Bdd makeEdge(std::string &bitstringFrom, std::string &bitstringTo) {
   int nFrom = bitstringFrom.length();
   bool currentBitFrom;
   sylvan::Bdd currentBddFrom;
@@ -81,7 +81,7 @@ Relation makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings
   sylvan::Bdd currentBdd;
   sylvan::Bdd resultBdd = leaf_false();
   for(std::pair<std::string, std::string> currentPair : bitstrings) {
-    currentBdd = makeArc(currentPair.first, currentPair.second);
+    currentBdd = makeEdge(currentPair.first, currentPair.second);
     resultBdd = unionBdd(resultBdd, currentBdd);
   }
   Relation resultRelation = {};
@@ -192,9 +192,9 @@ Graph pruneGraph(const Graph &graph) {
 }
 
 Graph fixedPointPruning(const Graph &graph) {
-  auto start = std::chrono::high_resolution_clock::now();
+  /*auto start = std::chrono::high_resolution_clock::now();
   auto stop = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+  std::chrono::duration<long, std::milli> duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);*/
 
   sylvan::Bdd oldNodes = graph.nodes;
 
@@ -202,13 +202,13 @@ Graph fixedPointPruning(const Graph &graph) {
   int pruningSteps = 1;
 
   while(resultGraph.nodes != oldNodes) {
-    stop = std::chrono::high_resolution_clock::now();
+    /*stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
     if((int)duration.count() > 60000) {
       std::cout << "Took too long pruning " << (int)duration.count() << std::endl;
       resultGraph.nodes = leaf_false();
       return resultGraph;
-    }
+    }*/
 
     oldNodes = resultGraph.nodes;
     resultGraph = pruneGraph(resultGraph);
