@@ -1,0 +1,48 @@
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;11;11;32,000000;1;4;0,250000;25;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;17;22;164,000000;9;54;0,166667;87;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;19;19;512,000000;1;16;0,062500;47;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;22;17;1280,000000;1;27;0,037037;89;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;24;29;1194,000000;189;254;0,744094;35;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;27;27;8192,000000;1;34;0,029412;69;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;28;21;8000,000000;1;34;0,029412;126;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;31;41;15386,000000;1727;4271;0,404355;399;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;34;29;61288,000000;198;929;0,213132;1198;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;35;35;131072,000000;1;50;0,020000;91;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;38;113;43200,000000;75;1539;0,048733;72;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;40;49;321114,000000;59229;75119;0,788469;59;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;41;127;86400,000000;75;1717;0,043681;75;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;41;31;819200,000000;1;73;0,013699;205;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;43;48;3172,000000;55;353;0,155807;367;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Xie-Beerel saturation BDD size;43;43;2097152,000000;1;100;0,010000;113;
+

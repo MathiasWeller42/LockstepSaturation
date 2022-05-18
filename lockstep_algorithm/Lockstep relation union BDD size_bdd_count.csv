@@ -1,0 +1,48 @@
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;11;11;32,000000;1;4;0,250000;33;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;17;22;164,000000;9;42;0,214286;94;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;19;19;512,000000;1;19;0,052632;172;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;22;17;1280,000000;1;33;0,030303;319;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;24;29;1194,000000;189;217;0,870968;188;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;27;27;8192,000000;1;59;0,016949;807;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;28;21;8000,000000;1;94;0,010638;1010;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;31;41;15386,000000;1727;5022;0,343887;1264;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;34;29;61288,000000;198;2033;0,097393;3530;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;35;35;131072,000000;1;204;0,004902;3714;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;38;113;43200,000000;75;2512;0,029857;255;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;40;49;321114,000000;59229;106646;0,555379;778;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;41;127;86400,000000;75;3579;0,020956;296;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;41;31;819200,000000;1;866;0,001155;6978;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;43;43;2097152,000000;1;1152;0,000868;15774;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;43;48;3172,000000;55;427;0,128806;649;
+

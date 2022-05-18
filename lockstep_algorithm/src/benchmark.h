@@ -13,7 +13,11 @@ enum algorithmType
   xbSat,
   xbRelUnion,
   xbForwardSat,
-  xbForwardRelUnion
+  xbForwardRelUnion,
+  lockstepRelUnionBDDSize,
+  lockstepSatBDDSize,
+  xbSatBDDSize,
+  xbRelUnionBDDSize
 };
 //ToString on the runnable function enums
 inline const std::string algoToString(algorithmType runType) {
@@ -31,8 +35,16 @@ inline const std::string algoToString(algorithmType runType) {
       return "Xie-Beerel forward saturation";
     case xbForwardRelUnion:
       return "Xie-Beerel forward relation union";
+    case lockstepSatBDDSize:
+      return "Lockstep saturation BDD size";
+    case lockstepRelUnionBDDSize:
+      return "Lockstep relation union BDD size";
+    case xbSatBDDSize:
+      return "Xie-Beerel saturation BDD size";
+    case xbRelUnionBDDSize:
+      return "Xie-Beerel relation union BDD size";
     default:
-      return "[Unknown Algorithm type]";
+      return "[Unknown algorithm type]";
   }
 }
 
@@ -63,8 +75,7 @@ std::vector<std::vector<std::string>> initCsvGrid(int noOfExperimentGraphs, int 
 
 //Functions returning paths to PNML petri nets
 std::list<std::string> getPathStringsAll();
-std::list<std::string> getPathStringsAllNoCount();
-std::list<std::string> getPathStringsFast();
+std::list<std::string> getPathStringsSlow();
 
 //Correctness of results
 bool sccListCorrectness(const std::list<sylvan::Bdd> sccList1, const std::list<sylvan::Bdd> sccList2);

@@ -8,8 +8,8 @@
 #include "petriTranslation.h"
 #include "benchmark.h"
 #include "print.h"
-#include "../test/graph_examples.h"
 #include "interface.h"
+#include "../test/graph_examples.h"
 #include "../test/test_sccListCorrectness.h"
 
 int main() {
@@ -29,60 +29,13 @@ int main() {
 
   std::cout << "Hello SCC-finding World!" << std::endl;
 
+  std::list<std::string> pathStrings = getPathStringsAll();
+  std::list<algorithmType> runTypes = {xbRelUnionBDDSize};
 
-  std::list<std::string> pathStringsFast = getPathStringsFast();
-  std::list<algorithmType> fastRunTypes = {lockstepSat/*, xbSat*/};
-
-  /*for(algorithmType algo : fastRunTypes) {
+  for(algorithmType algo : runTypes) {
     std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_xb_slow_1";
-    benchmark(pathStringsFast, fileName, algorithms, 0);
-  }
-  for(algorithmType algo : fastRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_xb_slow_2";
-    benchmark(pathStringsFast, fileName, algorithms, 0);
-  }
-  for(algorithmType algo : fastRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_xb_slow_3";
-    benchmark(pathStringsFast, fileName, algorithms, 0);
-  }*/
-
-  std::list<std::string> pathStringsAll = getPathStringsAllNoCount();
-  std::list<algorithmType> satRunTypes = {xbSat, lockstepSat};
-  std::list<algorithmType> relUnionRunTypes = {xbRelUnion, lockstepRelUnion};
-  std::list<algorithmType> allRunTypes = {xbSat, lockstepSat, xbRelUnion, lockstepRelUnion};
-
-  for(algorithmType algo : satRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_large_1";
-    benchmark(pathStringsAll, fileName, algorithms);
-  }
-  for(algorithmType algo : satRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_large_no_pruning_1";
-    benchmark(pathStringsAll, fileName, algorithms, 0);
-  }
-  for(algorithmType algo : satRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_large_2";
-    benchmark(pathStringsAll, fileName, algorithms);
-  }
-  for(algorithmType algo : satRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_large_no_pruning_2";
-    benchmark(pathStringsAll, fileName, algorithms, 0);
-  }
-  for(algorithmType algo : satRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_large_3";
-    benchmark(pathStringsAll, fileName, algorithms);
-  }
-  for(algorithmType algo : satRunTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_large_no_pruning_3";
-    benchmark(pathStringsAll, fileName, algorithms, 0);
+    std::string fileName = algoToString(algo) + "_bdd_count_new";
+    benchmark(pathStrings, fileName, algorithms);
   }
 
   std::cout << "Goodbye :)" << std::endl;

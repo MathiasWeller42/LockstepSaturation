@@ -384,7 +384,38 @@ void testSatCount() {
 
 
 
+void testCountNodes() {
 
+  //Graph 1
+  Graph graph1 = graphExample1multRel();
+  unsigned long long count1 = graph1.nodes.NodeCount();
+  printBdd(graph1.nodes);
+  std::cout << "graphExample1oneRel count:" << std::to_string(count1) << std::endl;
+
+  //Graph 2
+  Graph graph2 = graphExample2multRel();
+  unsigned long long count2 = graph2.nodes.NodeCount();
+  printBdd(graph2.nodes);
+  std::cout << "graphExample2multRel count:" << std::to_string(count2) << std::endl;
+
+  //Graph 3
+  Graph graph3 = graphExample3oneRel();
+  unsigned long long count3 = graph3.nodes.NodeCount();
+  printBdd(graph3.nodes);
+  std::cout << "graphExample3oneRel count:" << std::to_string(count3) << std::endl;
+
+  //Graph 4
+  Graph graph4 = fourNodesOneRelation();
+  unsigned long long count4 = graph4.nodes.NodeCount();
+  printBdd(graph4.nodes);
+  std::cout << "fourNodesOneRelation count:" << std::to_string(count4) << std::endl;
+
+  //Graph 5
+  Graph graph5 = nonConnectedGraph();
+  unsigned long long count5 = graph5.nodes.NodeCount();
+  printBdd(graph5.nodes);
+  std::cout << "nonConnectedGraph count:" << std::to_string(count5) << std::endl;
+}
 
 
 

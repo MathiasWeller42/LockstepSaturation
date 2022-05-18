@@ -35,4 +35,17 @@ std::pair<sylvan::Bdd, int> reachabilityBackwardRelationUnion(const Graph &graph
 //Pick a single node from a nodeSet
 sylvan::Bdd pick(const sylvan::Bdd &nodeSet, const sylvan::BddSet &cube);
 
+
+//BDD counting
+std::pair<std::list<sylvan::Bdd>, int> lockstepRelationUnionBDDSize(const Graph &fullGraph);
+std::pair<std::list<sylvan::Bdd>, int> lockstepSaturationBDDSize(const Graph &fullGraph);
+std::pair<std::list<sylvan::Bdd>, int> xieBeerelSaturationBDDSize(const Graph &fullGraph);
+std::pair<std::list<sylvan::Bdd>, int> xieBeerelRelationUnionBDDSize(const Graph &fullGraph);
+
+std::pair<sylvan::Bdd, unsigned long long> reachabilityBackwardSaturationBDDSize(const Graph &graph, sylvan::Bdd nodes);
+std::pair<sylvan::Bdd, unsigned long long> reachabilityForwardSaturationBDDSize(const Graph &graph, sylvan::Bdd nodes);
+std::pair<sylvan::Bdd, unsigned long long> reachabilityBackwardRelationUnionBDDSize(const Graph &graph, sylvan::Bdd nodes);
+std::pair<sylvan::Bdd, unsigned long long> reachabilityForwardRelationUnionBDDSize(const Graph &graph, sylvan::Bdd nodes);
+
+
 #endif  //LOCKSTEP_H
