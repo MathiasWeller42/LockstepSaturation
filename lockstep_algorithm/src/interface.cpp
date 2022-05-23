@@ -12,10 +12,9 @@
 Takes as input a PNML file containing a 1-safe petri net and an SCC-finding algorithm.
 Finds the SCC's in the Petri Net, in a manner based on the optional arguments.
 Optional arguments:
-- validate (default: true): Whether or not the output should be validated (n^2 time in # of SCCs).
+- pruning (default: -1): Prunes all SCCs of size 1 by default, otherwise runs as many prunings steps as specified.
 - useInitialMarking (default: true): Finds SCCs only in the reachable state-space if true, and looks
 at all (also unreachable) states if false.
-- pruning (default: -1): Prunes all SCCs of size 1 by default, otherwise runs as many prunings steps as specified.
 */
 std::list<sylvan::Bdd> findSCCs(std::string PNMLfileName,
                                 algorithmType algorithm,

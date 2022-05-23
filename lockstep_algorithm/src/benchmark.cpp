@@ -52,14 +52,13 @@ std::list<std::string> getPathStringsAll() {
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_001_b_73place.pnml");                      //73
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_003_a_78place.pnml");                      //78
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_004_a_79place.pnml");                      //79
-  /*
   resultList.push_back("ShieldRVt/PT/shield_t_rv_010_a_83place.pnml");                        //83
   resultList.push_back("ShieldIIPt/PT/shield_t_iip_005_a_98place.pnml");                      //98
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_004_a_103place.pnml");                     //103
   resultList.push_back("ShieldPPPt/PT/shield_t_ppp_005_a_128place.pnml");                     //128
   resultList.push_back("SmartHome/PT/smhome_04_139place.pnml");                               //139
   resultList.push_back("ShieldRVt/PT/shield_t_rv_020_a_163place.pnml");                       //163
-  resultList.push_back("ShieldIIPt/PT/shield_t_iip_010_a_193place.pnml");                     //193*/
+  resultList.push_back("ShieldIIPt/PT/shield_t_iip_010_a_193place.pnml");                     //193
 
   return resultList;
 }
@@ -132,8 +131,8 @@ std::list<std::string> getPathStringsSlow() {
   resultList.push_back("xb_slow200.pnml");
   resultList.push_back("xb_slow300.pnml");
   resultList.push_back("xb_slow400.pnml");
-  resultList.push_back("xb_slow500.pnml");
-  resultList.push_back("xb_slow600.pnml");
+  //resultList.push_back("xb_slow500.pnml");
+  //resultList.push_back("xb_slow600.pnml");
 
   return resultList;
 }
@@ -194,7 +193,7 @@ std::vector<std::vector<std::string>> preprocessAndRun(const Graph &graph, int m
     std::cout << "Counting with SatCount..:" << std::endl;
     double nodeCount = processedGraph.nodes.SatCount(processedGraph.cube);
     std::cout << "Graph size: " << std::to_string(nodeCount) << " nodes" << std::endl;
-    
+
     std::string nodeCountString =  std::to_string(nodeCount);
     std::replace(nodeCountString.begin(), nodeCountString.end(), '.', ',');
 
@@ -333,6 +332,12 @@ std::tuple<std::list<sylvan::Bdd>, std::chrono::duration<long, std::milli>, int>
       break;
     case xbRelUnionBDDSize:
       sccAndSteps = xieBeerelRelationUnionBDDSize(graph);
+      break;
+    case lockstepSatOpt:
+      sccAndSteps = lockstepSaturationOptimized(graph);
+      break;
+    case xbSatOpt:
+      sccAndSteps = xieBeerelSaturationOptimized(graph);
       break;
   }
 
@@ -516,4 +521,67 @@ bool sccListCorrectness(const std::list<sylvan::Bdd> sccList1, const std::list<s
     }
   }
   return true;
+}
+
+void analyzeRelations(std::deque<Relation> relations) {
+  std::list<std::list<bool>> matrix = {};
+
+  std::vector<std::vector<bool>> grid(relations.size(), std::vector<bool>(relations.size()));
+  for (int i = 0; i < relations.size(); i++) {
+      for (int j = 0; j < relations.size(); j++) {
+          Relation relationi = relations[i];
+          Relation relationj = relations[j];
+          if(i == j) {
+              grid[i][j] = false;
+              continue;
+            }
+          //Top is smallest variable and bottom is largest
+          if((relationi.bottom >= relationj.top && relationi.bottom <= relationj.bottom)
+              || (relationi.top >= relationj.top && relationi.top <= relationj.bottom)
+              || (relationj.top >= relationi.top && relationj.top <= relationi.bottom)
+              || (relationj.bottom >= relationi.top && relationj.bottom <= relationi.bottom)) {
+            grid[i][j] = true;
+          } else {
+            grid[i][j] = false;
+          }
+      }
+  }
+  //calculate average out-degree:
+  double matrixsum = 0;
+  for (int i = 0; i < relations.size(); i++) {
+    for (int j = 0; j < relations.size(); j++) {
+      matrixsum += grid[i][j];
+    }
+  }
+  double avgMatrixSum = matrixsum / relations.size();
+  double normOutDegree = avgMatrixSum / relations.size();
+  double normEdges = avgMatrixSum / 2;
+  double density = matrixsum / (relations.size() * (relations.size()-1));
+  //printVectorGrid(grid);
+  std::cout << "Normalized out-degree: " << normOutDegree << std::endl;
+  std::cout << "Normalized number of edges: " << normEdges << std::endl;
+  std::cout << "|V|: " << relations.size() << std::endl;
+  std::cout << "|E|: " << matrixsum/2 << std::endl;
+  std::cout << "Density: " << density << std::endl;
+}
+
+void printVectorGrid(std::vector<std::vector<bool>> grid){
+  for(std::vector<bool> vec : grid) {
+    for(bool b : vec) {
+      if(b) {
+        std::cout << " 1";
+      } else  {
+        std::cout << " 0";
+      }
+    }
+    std::cout<< std::endl;
+  }
+}
+
+void analyzeAllRelations(std::list<std::string> pnmlList) {
+  for(std::string pnml : pnmlList ){
+    Graph graph = PNMLtoGraph(pnml, true);
+    analyzeRelations(graph.relations);
+    std::cout << std::endl;
+  }
 }

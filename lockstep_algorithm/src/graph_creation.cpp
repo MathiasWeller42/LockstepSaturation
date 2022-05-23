@@ -87,7 +87,7 @@ Relation makeRelation(std::list<std::pair<std::string, std::string>> &bitstrings
   Relation resultRelation = {};
   resultRelation.relationBdd = resultBdd;
   resultRelation.top = 0;
-  //resultRelation.bottom = 0;
+  resultRelation.bottom = 0;
   resultRelation.cube = cube;
   return resultRelation;
 }

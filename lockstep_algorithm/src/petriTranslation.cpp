@@ -113,6 +113,7 @@ inline Relation makeRelationFromTransition(Transition transition, std::map<std::
   }
   result.cube = cube;
   result.top = varSet.front();
+  result.bottom = varSet.back();
 
   //Create the relation BDD
   sylvan::Bdd resultBdd = leaf_true();

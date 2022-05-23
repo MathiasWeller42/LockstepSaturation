@@ -25,7 +25,7 @@ struct Relation {
   sylvan::Bdd relationBdd;
   sylvan::BddSet cube;
   int top;
-  //int bottom;
+  int bottom;
   bool operator <(const Relation &relation) const
   {
     return top < relation.top;

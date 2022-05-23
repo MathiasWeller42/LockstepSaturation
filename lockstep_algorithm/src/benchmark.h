@@ -17,7 +17,9 @@ enum algorithmType
   lockstepRelUnionBDDSize,
   lockstepSatBDDSize,
   xbSatBDDSize,
-  xbRelUnionBDDSize
+  xbRelUnionBDDSize,
+  lockstepSatOpt,
+  xbSatOpt
 };
 //ToString on the runnable function enums
 inline const std::string algoToString(algorithmType runType) {
@@ -43,6 +45,10 @@ inline const std::string algoToString(algorithmType runType) {
       return "Xie-Beerel saturation BDD size";
     case xbRelUnionBDDSize:
       return "Xie-Beerel relation union BDD size";
+    case lockstepSatOpt:
+      return "Lockstep saturation optimized";
+    case xbSatOpt:
+      return "Xie-Beerel saturation optimized";
     default:
       return "[Unknown algorithm type]";
   }
@@ -84,5 +90,9 @@ bool sccUnionIsWholeBdd(const std::list<sylvan::Bdd> sccList, const sylvan::Bdd 
 bool containsDuplicateSccs(const std::list<sylvan::Bdd> sccList);
 void validateAlgoSccResults(const std::list<sylvan::Bdd> resultSccList, const Graph originalGraph);
 
+//Relation analysis
+void analyzeRelations(std::deque<Relation> relations);
+void printVectorGrid(std::vector<std::vector<bool>> grid);
+void analyzeAllRelations(std::list<std::string> pnmlList);
 
 #endif //BENCHMARK_H
