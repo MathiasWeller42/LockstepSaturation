@@ -131,8 +131,8 @@ std::list<std::string> getPathStringsSlow() {
   resultList.push_back("xb_slow200.pnml");
   resultList.push_back("xb_slow300.pnml");
   resultList.push_back("xb_slow400.pnml");
-  //resultList.push_back("xb_slow500.pnml");
-  //resultList.push_back("xb_slow600.pnml");
+  resultList.push_back("xb_slow500.pnml");
+  resultList.push_back("xb_slow600.pnml");
 
   return resultList;
 }

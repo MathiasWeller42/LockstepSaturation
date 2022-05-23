@@ -29,16 +29,16 @@ int main() {
 
   std::cout << "Hello SCC-finding World!" << std::endl;
 
-  std::list<std::string> pathStrings = getPathStringsAll();
+  std::list<std::string> pathStrings = getPathStringsSlow();
 
-  std::list<algorithmType> runTypes = {lockstepSat, xbSat};
+  std::list<algorithmType> runTypes = {lockstepSatBDDSize, xbSatBDDSize};
 
-  /*for(algorithmType algo : runTypes) {
-    std::list<algorithmType> algorithms = {algo};
-    std::string fileName = algoToString(algo) + "_new_run_1";
-    benchmark(pathStrings, fileName, algorithms);
-  }
   for(algorithmType algo : runTypes) {
+    std::list<algorithmType> algorithms = {algo};
+    std::string fileName = algoToString(algo) + "_xb_worst";
+    benchmark(pathStrings, fileName, algorithms, 0);
+  }
+  /*for(algorithmType algo : runTypes) {
     std::list<algorithmType> algorithms = {algo};
     std::string fileName = algoToString(algo) + "_new_run_2";
     benchmark(pathStrings, fileName, algorithms);
@@ -49,7 +49,7 @@ int main() {
     benchmark(pathStrings, fileName, algorithms);
   }*/
 
-  analyzeAllRelations(pathStrings);
+  //analyzeAllRelations(pathStrings);
 
   std::cout << "Goodbye :)" << std::endl;
 
