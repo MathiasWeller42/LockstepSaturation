@@ -1,0 +1,12 @@
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel saturation;71;66;5212975.000000;123725;323553;0,382395;23873669;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel saturation;73;68;3260241.000000;170860;435123;0,392671;31930646;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel saturation;78;57;128000000001.000000;2;2160;0,000926;31443;
+
+Algorithm run;Places;Relations;Nodes;SCC's;0 pruning steps (ms);SCC/ms;Symbolic steps;
+Xie-Beerel saturation;79;59;335544320001.000000;2;898;0,002227;18555;
+

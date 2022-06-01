@@ -1,0 +1,75 @@
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;11;11;32,000000;1;10;0,100000;33;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;17;22;164,000000;9;83;0,108434;94;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;19;19;512,000000;1;45;0,022222;172;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;22;17;1280,000000;1;72;0,013889;319;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;24;29;1194,000000;189;327;0,577982;188;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;27;27;8192,000000;1;89;0,011236;807;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;28;21;8000,000000;1;120;0,008333;1010;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;31;41;15386,000000;1727;5783;0,298634;1264;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;34;29;61288,000000;198;2296;0,086237;3530;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;35;35;131072,000000;1;222;0,004505;3714;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;38;113;43200,000000;75;2749;0,027283;255;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;40;49;321114,000000;59229;113700;0,520923;778;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;41;127;86400,000000;75;3383;0,022170;296;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;41;31;819200,000000;1;820;0,001220;6978;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;43;43;2097152,000000;1;1087;0,000920;15774;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;43;48;3172,000000;55;430;0,127907;649;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;45;145;259200,000000;75;4539;0,016523;343;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;45;60;1455374,000000;252641;955723;0,264345;15018;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;53;53;21658,000000;2620;7211;0,363334;1102;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;53;39;32000000,000000;1;13872;0,000072;31468;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;60;45;524288000,000000;1;48783;0,000020;62262;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;71;66;5093654,000000;4404;58735;0,074981;23952;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;73;68;3258135,000000;168754;632473;0,266816;11278;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;78;57;128000000000,000000;1;544662;0,000002;381815;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep relation union BDD size;79;59;335544320000,000000;1;854623;0,000001;451553;
+

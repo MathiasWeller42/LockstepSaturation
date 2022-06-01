@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+<net id="ShieldIIPt-PT-001A" type="http://www.pnml.org/version-2009/grammar/ptnet">
+<name><text>ShieldIIPt-PT-001A</text></name>
+<page id="page">
+<place id="p0"><initialMarking><text>1</text></initialMarking><name><text>p0</text></name></place>
+<place id="p1"><name><text>p1</text></name></place>
+<place id="p2"><name><text>p2</text></name></place>
+<place id="p3"><name><text>p3</text></name></place>
+<place id="p4"><name><text>p4</text></name></place>
+<place id="p5"><name><text>p5</text></name></place>
+<place id="p6"><name><text>p6</text></name></place>
+<place id="p7"><name><text>p7</text></name></place>
+<place id="p8"><name><text>p8</text></name></place>
+<place id="p9"><name><text>p9</text></name></place>
+<place id="p10"><name><text>p10</text></name></place>
+<place id="p11"><name><text>p11</text></name></place>
+<place id="p12"><name><text>p12</text></name></place>
+<place id="p13"><name><text>p13</text></name></place>
+<place id="p14"><name><text>p14</text></name></place>
+<place id="p15"><name><text>p15</text></name></place>
+<place id="p16"><name><text>p16</text></name></place>
+<place id="p17"><name><text>p17</text></name></place>
+<place id="p18"><name><text>p18</text></name></place>
+<place id="p19"><name><text>p19</text></name></place>
+<place id="p20"><name><text>p20</text></name></place>
+<place id="p21"><name><text>p21</text></name></place>
+<transition id="t0"><name><text>t0</text></name></transition>
+<arc id="a0" source="p7" target="t0"/>
+<arc id="a1" source="p9" target="t0"/>
+<arc id="a2" source="t0" target="p5"/>
+<transition id="t1"><name><text>t1</text></name></transition>
+<arc id="a3" source="p0" target="t1"/>
+<arc id="a4" source="t1" target="p1"/>
+<arc id="a5" source="t1" target="p3"/>
+<arc id="a6" source="t1" target="p5"/>
+<arc id="a7" source="t1" target="p10"/>
+<arc id="a8" source="t1" target="p12"/>
+<arc id="a9" source="t1" target="p15"/>
+<arc id="a10" source="t1" target="p17"/>
+<arc id="a11" source="t1" target="p19"/>
+<arc id="a12" source="t1" target="p21"/>
+<transition id="t2"><name><text>t2</text></name></transition>
+<arc id="a13" source="p20" target="t2"/>
+<arc id="a14" source="t2" target="p21"/>
+<transition id="t3"><name><text>t3</text></name></transition>
+<arc id="a15" source="p18" target="t3"/>
+<arc id="a16" source="t3" target="p19"/>
+<transition id="t4"><name><text>t4</text></name></transition>
+<arc id="a17" source="p16" target="t4"/>
+<arc id="a18" source="t4" target="p17"/>
+<transition id="t5"><name><text>t5</text></name></transition>
+<arc id="a19" source="p14" target="t5"/>
+<arc id="a20" source="t5" target="p15"/>
+<transition id="t6"><name><text>t6</text></name></transition>
+<arc id="a21" source="p12" target="t6"/>
+<arc id="a22" source="t6" target="p13"/>
+<transition id="t7"><name><text>t7</text></name></transition>
+<arc id="a23" source="p14" target="t7"/>
+<arc id="a24" source="t7" target="p15"/>
+<transition id="t8"><name><text>t8</text></name></transition>
+<arc id="a25" source="p1" target="t8"/>
+<arc id="a26" source="p18" target="t8"/>
+<arc id="a27" source="t8" target="p2"/>
+<arc id="a28" source="t8" target="p19"/>
+<transition id="t9"><name><text>t9</text></name></transition>
+<arc id="a29" source="p2" target="t9"/>
+<arc id="a30" source="p10" target="t9"/>
+<arc id="a31" source="t9" target="p1"/>
+<arc id="a32" source="t9" target="p11"/>
+<transition id="t10"><name><text>t10</text></name></transition>
+<arc id="a33" source="p8" target="t10"/>
+<arc id="a34" source="p19" target="t10"/>
+<arc id="a35" source="t10" target="p9"/>
+<arc id="a36" source="t10" target="p18"/>
+<transition id="t11"><name><text>t11</text></name></transition>
+<arc id="a37" source="p6" target="t11"/>
+<arc id="a38" source="p15" target="t11"/>
+<arc id="a39" source="t11" target="p7"/>
+<arc id="a40" source="t11" target="p14"/>
+<transition id="t12"><name><text>t12</text></name></transition>
+<arc id="a41" source="p4" target="t12"/>
+<arc id="a42" source="p17" target="t12"/>
+<arc id="a43" source="t12" target="p3"/>
+<arc id="a44" source="t12" target="p16"/>
+<transition id="t13"><name><text>t13</text></name></transition>
+<arc id="a45" source="p5" target="t13"/>
+<arc id="a46" source="p16" target="t13"/>
+<arc id="a47" source="t13" target="p6"/>
+<arc id="a48" source="t13" target="p8"/>
+<arc id="a49" source="t13" target="p17"/>
+<transition id="t14"><name><text>t14</text></name></transition>
+<arc id="a50" source="p13" target="t14"/>
+<arc id="a51" source="p19" target="t14"/>
+<arc id="a52" source="p21" target="t14"/>
+<arc id="a53" source="t14" target="p12"/>
+<arc id="a54" source="t14" target="p18"/>
+<arc id="a55" source="t14" target="p20"/>
+<transition id="t15"><name><text>t15</text></name></transition>
+<arc id="a56" source="p3" target="t15"/>
+<arc id="a57" source="p20" target="t15"/>
+<arc id="a58" source="t15" target="p4"/>
+<arc id="a59" source="t15" target="p21"/>
+<transition id="t16"><name><text>t16</text></name></transition>
+<arc id="a60" source="p11" target="t16"/>
+<arc id="a61" source="p15" target="t16"/>
+<arc id="a62" source="p21" target="t16"/>
+<arc id="a63" source="t16" target="p10"/>
+<arc id="a64" source="t16" target="p14"/>
+<arc id="a65" source="t16" target="p20"/>
+<toolspecific tool="nupn" version="1.1">
+<size places="22" transitions="17" arcs="66"/>
+<structure units="12" root="u0" safe="true">
+<unit id="u0">
+<places>p0</places>
+<subunits>u1 u2 u3 u6 u7 u8 u9 u10 u11</subunits>
+</unit>
+<unit id="u1">
+<places>p1 p2</places>
+<subunits/>
+</unit>
+<unit id="u2">
+<places>p3 p4</places>
+<subunits/>
+</unit>
+<unit id="u3">
+<places>p5</places>
+<subunits>u4 u5</subunits>
+</unit>
+<unit id="u4">
+<places>p6 p7</places>
+<subunits/>
+</unit>
+<unit id="u5">
+<places>p8 p9</places>
+<subunits/>
+</unit>
+<unit id="u6">
+<places>p10 p11</places>
+<subunits/>
+</unit>
+<unit id="u7">
+<places>p12 p13</places>
+<subunits/>
+</unit>
+<unit id="u8">
+<places>p14 p15</places>
+<subunits/>
+</unit>
+<unit id="u9">
+<places>p16 p17</places>
+<subunits/>
+</unit>
+<unit id="u10">
+<places>p18 p19</places>
+<subunits/>
+</unit>
+<unit id="u11">
+<places>p20 p21</places>
+<subunits/>
+</unit>
+</structure>
+</toolspecific>
+</page>
+</net>
+</pnml>

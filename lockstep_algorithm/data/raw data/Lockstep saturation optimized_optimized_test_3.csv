@@ -1,0 +1,96 @@
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;11;11;32,000000;1;2;0,500000;82;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;17;22;164,000000;9;44;0,204545;1991;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;19;19;512,000000;1;5;0,200000;203;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;22;17;1280,000000;1;11;0,090909;371;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;24;29;1194,000000;189;126;1,500000;12685;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;27;27;8192,000000;1;10;0,100000;327;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;28;21;8000,000000;1;17;0,058824;650;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;31;41;15386,000000;1727;3085;0,559806;228774;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;34;29;61288,000000;198;683;0,289898;27230;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;35;35;131072,000000;1;15;0,066667;456;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;38;113;43200,000000;75;781;0,096031;67252;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;40;49;321114,000000;59229;62130;0,953308;6148175;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;41;127;86400,000000;75;915;0,081967;79511;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;41;31;819200,000000;1;32;0,031250;930;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;43;48;3172,000000;55;210;0,261905;11216;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;43;43;2097152,000000;1;28;0,035714;784;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;45;145;259200,000000;75;1161;0,064599;96647;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;45;60;1455374,000000;252641;545356;0,463259;38175762;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;53;53;21658,000000;2620;4346;0,602853;323471;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;53;39;32000000,000000;1;84;0,011905;1796;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;60;45;524288000,000000;1;84;0,011905;1679;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;71;66;5093654,000000;4404;11734;0,375320;675752;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;73;68;3258135,000000;168754;369022;0,457301;24782887;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;78;57;128000000000,000000;1;187;0,005348;3712;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;79;59;335544320000,000000;1;132;0,007576;2704;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;83;83;2199023255552,000000;1;103;0,009709;2110;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;98;73;214748364800000,000000;1;229;0,004367;4184;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;103;75;512000000000000,000000;1;380;0,002632;5617;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;128;93;2048000000000000000,000000;1;1117;0,000895;7500;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;139;159;5307222,000000;9668;85047;0,113678;4542309;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;163;163;2417851639229258349412352,000000;1;535;0,001869;7602;
+
+Algorithm run;Places;Relations;Nodes;SCCs;Running time (ms);SSCs/ms;Symbolic steps;
+Lockstep saturation optimized;193;143;23058430092136939520000000000,000000;1;862;0,001160;12787;
+

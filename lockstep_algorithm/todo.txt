@@ -1,0 +1,26 @@
+Den mest dank-swaggern todo-liste #WØRF uWu *tips fedora*
+-----------------------------------------------
+TODO 1 : Hvordan laver man pæn pseudo-kode???
+
+
+TODO i+1 : clean-up, **kommentarer** og læsbarhed (lav et pænt interface)
+
+TODO j : Husk at tests er en ting...
+
+TODO x : Græd
+TODO y : #Forskning
+TODO z : Græd i Jaco-raklets skød
+
+TODO w : ???
+TODO phi : Profit
+TODO omega : Søvn
+TODO CXXXVII : Få et liv
+
+Møde med Jaco og Andreas:
+- Hvordan skal vi lave kildehenvisninger?
+- Kildehenvisninger på figurer / lave egne figurer?
+- Hvad gør vi bedst med grafer? relativ vs absolut/logaritmisk -> vis dem eksempler
+- Bud på hvorfor 1 SCC-grafer er så meget bedre...
+
+-------------------------------------------------
+*Made By Mathias Weller* (Han tager fuldt ansvar) M.I.S.
